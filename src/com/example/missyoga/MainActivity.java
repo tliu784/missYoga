@@ -90,6 +90,7 @@ public class MainActivity extends Activity {
 		return valid;
 	}
 
+	//use intent to swith the activity
 	private void SwithActivity(Activity currentAct, Activity target) {
 		Intent intent = new Intent(currentAct, target.getClass());
 		startActivity(intent);
