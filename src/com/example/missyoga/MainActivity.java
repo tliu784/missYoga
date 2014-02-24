@@ -78,6 +78,7 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	//check Account information. password and username are "yoga"
 	private boolean checkAccount(String usr, String pass)
 	{
 		boolean valid;
@@ -90,7 +91,7 @@ public class MainActivity extends Activity {
 		return valid;
 	}
 
-	//use intent to swith the activity
+	//use intent tocd swith the activity
 	private void SwithActivity(Activity currentAct, Activity target) {
 		Intent intent = new Intent(currentAct, target.getClass());
 		startActivity(intent);
