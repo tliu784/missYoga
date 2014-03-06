@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.missyoga"
+    package="com.android.myhealthmate"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -28,6 +28,9 @@
          <activity
             android:name="com.android.myhealthmate.SignUp"
             android:label="@string/welcome" ></activity>
+          <activity
+            android:name="com.android.myhealthmate.test"
+            android:label="@string/test" ></activity>
     </application>
 
 </manifest>

@@ -17,6 +17,7 @@ public class MainActivity extends Activity {
 
 	private Button signInButton;
 	private Button signUpButton;
+	private Button test;
 	private EditText username;
 	private EditText password;
 
@@ -29,9 +30,11 @@ public class MainActivity extends Activity {
 		password = (EditText) findViewById(R.id.enterPassword);
 		signInButton = (Button) findViewById(R.id.sign_in);
 		signUpButton = (Button) findViewById(R.id.sign_up);
+		test  = (Button) findViewById(R.id.test);
 		//set the listener for button
 		signInButton.setOnClickListener(getSignInClickListener());
 		signUpButton.setOnClickListener(getSignUpClickListener());
+		test.setOnClickListener(getTestClickListener());
 	}
     //listener for sign up button
 	private OnClickListener getSignUpClickListener() {
@@ -40,6 +43,16 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				SignUp signUpView = new SignUp();
 				SwithActivity(MainActivity.this, signUpView);
+				}
+			};
+	}
+	
+	private OnClickListener getTestClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				test testView = new test();
+				SwithActivity(MainActivity.this, testView);
 				}
 			};
 	}
