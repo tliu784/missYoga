@@ -1,6 +1,6 @@
-package com.example.missyoga;
+package com.android.myhealthmate;
 
-import com.example.missyoga.R;
+import com.android.myhealthmate.*;
 
 import android.os.Bundle;
 import android.app.Activity;
