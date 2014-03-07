@@ -55,4 +55,8 @@ public class FileOperation {
 		}
 		return obj;
 	}
+	
+	public static boolean delete(String src, Context context){
+		return context.deleteFile(src);
+	}
 }

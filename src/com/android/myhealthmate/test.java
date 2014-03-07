@@ -21,7 +21,8 @@ public class test extends Activity {
 
 	private EditText text1;
 	private EditText text2;
-	private Button test;
+	private Button test1;
+	private Button test2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +30,27 @@ public class test extends Activity {
 		setContentView(R.layout.filetest);
 		text1 = (EditText) findViewById(R.id.terry_text1);
 		text2 = (EditText) findViewById(R.id.terry_text2);
-		test  = (Button) findViewById(R.id.terry_test);
-		test.setOnClickListener(getTestClickListener());
+		test1 = (Button) findViewById(R.id.test1);
+		test2 = (Button) findViewById(R.id.test2);
+		test1.setOnClickListener(getTest1ClickListener());
+		test2.setOnClickListener(getTest2ClickListener());
 
 	}
 
-	private OnClickListener getTestClickListener() {
+	private OnClickListener getTest1ClickListener() {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testAge();
+				testSave();
+			}
+		};
+	}
+	
+	private OnClickListener getTest2ClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				testDelete();
 			}
 		};
 	}
@@ -97,6 +109,17 @@ public class test extends Activity {
 		if (savedUser != null) {
 			PopUP(test.this, savedUser.getName());
 		}
+	}
+
+	private void testDelete() {
+		String filename = "filename.obj";
+		String status;
+		if (FileOperation.delete(filename, getApplicationContext())) {
+			status = "yes";
+		} else {
+			status = "no";
+		}
+		PopUP(test.this, status);
 	}
 
 }
