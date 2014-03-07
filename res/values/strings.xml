@@ -9,5 +9,7 @@
     <string name="test">terry test</string>
     <string name="sign_up">Please input your personal information.</string>
     <string name="welcome">Welcome !</string>
-
+    <string name="text1">text 1</string>
+    <string name="text2">text 2</string>
+	<string name="terry_test">terry test</string>
 </resources>
