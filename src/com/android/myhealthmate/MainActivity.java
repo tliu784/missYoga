@@ -83,8 +83,8 @@ public class MainActivity extends Activity {
 
 	protected void AuthorizeAccount(String name, String password) {
 		if (checkAccount(name,password)) {
-			SignIn signInView = new SignIn();
-			SwithActivity(MainActivity.this, signInView);
+			MainPage mainPageView = new MainPage();
+			SwithActivity(MainActivity.this, mainPageView);
 
 		} else{
 			PopUP(MainActivity.this, "The account is not correct! Please try again.");
@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
 	private boolean checkAccount(String usr, String pass)
 	{
 		boolean valid;
-		if (usr.equals("yoga") && pass.equals("yoga")) {
+		if (usr.equals("a") && pass.equals("a")) {
 			valid = true;
 		}
 		else{
