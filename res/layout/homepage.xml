@@ -87,7 +87,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="25dp"
             android:gravity="center"
             android:orientation="vertical" >
 
@@ -114,10 +114,11 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/bp_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text=" TIME "
+                android:text=" 09/11/2014 "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
 
@@ -127,15 +128,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text=" 11:20 AM "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/bp_date"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text=" 09/11/2014 "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
         </LinearLayout>
@@ -193,20 +185,20 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:gravity="center"
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/hr_restrate"
+                android:id="@+id/hr_last"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" REST RATE "
+                android:text=" LAST "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
 
             <TextView
-                android:id="@+id/hr_restrate_content"
+                android:id="@+id/hr_last_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 77 "
@@ -217,20 +209,20 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="40dp"
             android:gravity="center"
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/hr_diastolic"
+                android:id="@+id/hr_average"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" DIASTOLIC "
+                android:text="  AVERAGE "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
 
             <TextView
-                android:id="@+id/hr_diastolic_content"
+                android:id="@+id/hr_average_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 80 "
@@ -244,10 +236,11 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/hr_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text=" TIME "
+                android:text=" 09/11/2014 "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
 
@@ -257,15 +250,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text=" 11:20 AM "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/hr_date"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text=" 09/11/2014 "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
         </LinearLayout>
@@ -339,7 +323,31 @@
                 android:id="@+id/sle_hours_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 4.5 "
+                android:text=" 6.5 "
+                android:textSize="@dimen/msmall_font_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/sle_hours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" EFFICIENCY "
+                android:textColor="@color/grey"
+                android:textSize="@dimen/small_font_size" />
+
+            <TextView
+                android:id="@+id/sle_hours_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 4 "
                 android:textSize="@dimen/msmall_font_size"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -350,10 +358,11 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/sle_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text=" TIME "
+                android:text=" 09/11/2014 "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
 
@@ -363,15 +372,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text=" 11:20 AM "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/sle_date"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text=" 09/11/2014 "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
         </LinearLayout>
@@ -424,7 +424,7 @@
             android:layout_marginBottom="3dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp"
-            android:background="#DF0101" />
+            android:background="#01DF01" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -480,10 +480,11 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/act_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text=" TIME "
+                android:text=" 09/11/2014 "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
 
@@ -493,15 +494,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text=" 11:20 AM "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/act_date"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text=" 09/11/2014 "
                 android:textColor="@color/grey"
                 android:textSize="@dimen/small_font_size" />
         </LinearLayout>
