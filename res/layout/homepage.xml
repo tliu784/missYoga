@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/text_shadow_white"
     tools:context=".MainActivity" >
 
     <LinearLayout
@@ -21,38 +22,40 @@
 
         <TextView
             android:id="@+id/bp"
-            style="@style/btnStyleBeige"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@color/text_shadow_white"
+            android:textColor="@color/grey"
             android:text=" Blood Pressure " />
 
-        
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey" />
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="60sp"
+            android:layout_height="50sp"
+            style="@style/contentfield"
             android:orientation="horizontal"
-            
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:textSize="@dimen/font_size" 
-            android:background="@color/text_shadow_white">
-           	          
+            android:textSize="@dimen/font_size" >
+
             <TextView
-            android:id="@+id/bp_color"
-            style="@style/contentfield"
-            android:layout_width="5dp"
-            android:layout_height="fill_parent"
-            android:paddingLeft="20dp"
-            android:background="#01DF01"
-            />
-            
+                android:id="@+id/bp_color"        
+                android:layout_width="8dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#01DF01" />
+
             <TextView
-            android:id="@+id/bp_content"
-            style="@style/contentfield"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text=" BP " />
-            
+                android:id="@+id/bp_content"
+                style="@style/contentfield"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text=" BP " />
         </LinearLayout>
 
         <TextView

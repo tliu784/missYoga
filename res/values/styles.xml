@@ -16,33 +16,39 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
+
     <style name="btnStyleBeige" parent="@android:style/Widget.Button">
-       <item name="android:textSize">14sp</item>
-       <item name="android:textStyle">bold</item>
-       <item name="android:textColor">#5d6153</item>
-       <item name="android:gravity">left</item>
-       <item name="android:shadowColor">#000000</item>
-       <item name="android:shadowDx">1</item>
-       <item name="android:shadowDy">1</item>
-       <item name="android:shadowRadius">0.6</item>
-       <item name="android:background">@drawable/mainpage_content_title</item>
-       <item name="android:padding">5dip</item>
-   </style>
-   
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#5d6153</item>
+        <item name="android:gravity">left</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+        <item name="android:background">@drawable/mainpage_content_title</item>
+        <item name="android:padding">5dip</item>
+    </style>
+
+    
+    <style name="roundcorner">
+         <item name="android:background">@drawable/round_corner</item>
+    </style>
+    
     <style name="contentfield">
-       <item name="android:textSize">14sp</item>
-       <item name="android:height">50sp</item>
-       <item name="android:textStyle">bold</item>
-       <item name="android:textColor">#5d6153</item>
-       <item name="android:gravity">left</item>
-       <item name="android:shadowColor">#000000</item>
-       <item name="android:shadowDx">1</item>
-       <item name="android:shadowDy">1</item>
-       <item name="android:shadowRadius">0.6</item>
-       <item name="android:background">@color/text_shadow_white</item>
-       <item name="android:padding">5dip</item>
-       <item name="android:paddingBottom">10sp</item>
-   </style>
+        <item name="android:textSize">14sp</item>
+        <item name="android:height">50sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#5d6153</item>
+        <item name="android:gravity">left</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+        <item name="android:background">@color/text_shadow_white</item>
+        <item name="android:padding">5dip</item>
+        <item name="android:paddingBottom">10sp</item>
+    </style>
+
 
 </resources>
