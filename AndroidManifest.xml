@@ -5,14 +5,15 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="16"
         android:targetSdkVersion="16" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_launcher_logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo.Light"
+        >
         <activity
             android:name="com.android.myhealthmate.MainActivity"
             android:label="@string/app_name" >
@@ -33,7 +34,7 @@
             android:label="@string/test" ></activity>
     	<activity
             android:name="com.android.myhealthmate.MainPage"
-            android:label="@string/test" ></activity>
+            android:label="@string/welcome" ></activity>
     </application>
 
 </manifest>
