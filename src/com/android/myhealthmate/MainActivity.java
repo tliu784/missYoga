@@ -2,6 +2,8 @@ package com.android.myhealthmate;
 
 import com.android.myhealthmate.*;
 
+
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -35,7 +38,11 @@ public class MainActivity extends Activity {
 		signInButton.setOnClickListener(getSignInClickListener());
 		signUpButton.setOnClickListener(getSignUpClickListener());
 		test.setOnClickListener(getTestClickListener());
+		
 	}
+	
+	
+	
     //listener for sign up button
 	private OnClickListener getSignUpClickListener() {
 		return new OnClickListener() {
