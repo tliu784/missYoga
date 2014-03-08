@@ -14,7 +14,7 @@
         android:src="@drawable/login_logo"
         android:layout_height="wrap_content"
         android:scaleType="centerInside"
-        android:gravity="center" 
+        android:layout_gravity="center" 
         android:paddingTop="@dimen/login_logo_padding_top"
         android:paddingBottom="@dimen/login_logo_padding_bottom" >
 	</ImageView>
