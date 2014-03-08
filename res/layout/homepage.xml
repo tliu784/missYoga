@@ -502,18 +502,117 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"     
-        android:orientation="vertical"
-        android:background="@drawable/bolder" >
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/font_size" >
 
-          <Button
+        <TextView
+            android:id="@+id/rd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/text_shadow_white"
+            android:drawableLeft="@drawable/ic_dialog_icon_about"
+            android:text=" Reminder "
+            android:textColor="@color/grey" />
+
+        <TextView
+            android:id="@+id/rd_type"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_shadow_white"
+            android:gravity="right"
+            android:text=" medicine "
+            android:textColor="@color/grey" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey" />
+
+    <LinearLayout
+        style="@style/contentfield"
+        android:layout_width="fill_parent"
+        android:layout_height="50sp"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:textSize="@dimen/font_size" >
+
+        <TextView
+            android:id="@+id/act_color"
+            android:layout_width="8dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:background="#DF0101" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/act_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=" TASK "
+                android:textColor="@color/grey"
+                android:textSize="@dimen/small_font_size" />
+
+            <TextView
+                android:id="@+id/act_distance_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=" ASPRIN "
+                android:textSize="@dimen/msmall_font_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/act_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text=" 09/11/2014 "
+                android:textColor="@color/grey"
+                android:textSize="@dimen/small_font_size" />
+
+            <TextView
+                android:id="@+id/act_time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text=" 11:20 AM "
+                android:textColor="@color/grey"
+                android:textSize="@dimen/small_font_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bolder"
+        android:orientation="vertical" >
+
+        <Button
             android:id="@+id/rec"
             android:layout_width="fill_parent"
-            android:layout_height="30dp"          
-            android:clickable="true"
-            android:onClick="toggle_contents"          
-            android:gravity="left"
+            android:layout_height="30dp"
             android:background="@color/light_grey"
+            android:clickable="true"
+            android:gravity="left"
+            android:onClick="toggle_contents"
             android:text=" Recommendation: "
             android:textColor="@color/light_black"
             android:textSize="20dp" />
@@ -527,4 +626,5 @@
             android:textColor="@color/grey"
             android:textSize="18dp" />
     </LinearLayout>
+
 </LinearLayout>
