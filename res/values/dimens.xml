@@ -8,6 +8,6 @@
  	<dimen name="small_font_size">10sp</dimen>
  	<dimen name="msmall_font_size">20sp</dimen>
  	<dimen name="font_size">40sp</dimen>
- 	<dimen name="large_font_size">40sp</dimen>
+ 	<dimen name="large_font_size">60sp</dimen>
      
 </resources>

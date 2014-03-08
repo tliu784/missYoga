@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:textSize="@dimen/font_size" >
+        android:textSize="@dimen/large_font_size" >
 
         <TextView
             android:id="@+id/bp"
@@ -327,7 +327,7 @@
                 android:textSize="@dimen/msmall_font_size"
                 android:textStyle="bold" />
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -499,4 +499,32 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"     
+        android:orientation="vertical"
+        android:background="@drawable/bolder" >
+
+          <Button
+            android:id="@+id/rec"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"          
+            android:clickable="true"
+            android:onClick="toggle_contents"          
+            android:gravity="left"
+            android:background="@color/light_grey"
+            android:text=" Recommendation: "
+            android:textColor="@color/light_black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/rec_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Health is the level of functional or metabolic efficiency of a living organism."
+            android:textColor="@color/grey"
+            android:textSize="18dp" />
+    </LinearLayout>
 </LinearLayout>
