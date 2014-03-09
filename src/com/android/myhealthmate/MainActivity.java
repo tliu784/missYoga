@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
 		textSignUp = (TextView) findViewById(R.id.txt_link_sign_up);
 		//set the listener for button
 		signInButton.setOnClickListener(getSignInClickListener());
-		signInButton.setOnClickListener(getSignUpClickListener());
+		signUpButton.setOnClickListener(getSignUpClickListener());
 		textSignUp.setOnClickListener(getSignUpClickListener());
 
 		test.setOnClickListener(getTestClickListener());
