@@ -7,11 +7,17 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.reflect.Type;
+import java.util.List;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.entity.StringEntity;
+
+import com.android.entity.RecomModel;
+import com.google.gson.Gson;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -23,6 +29,7 @@ public class RestCallHandler {
 	private Activity act;
 	private String url;
 	private String content;
+	private RecomModel recomResponse;
 
 	public RestCallHandler(Activity act, String url, String content) {
 		this.act = act;
@@ -61,6 +68,15 @@ public class RestCallHandler {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
 	}
 
+	private void processResponse(String jsonResponse) {
+		Gson gson = new Gson();
+		RecomModel[] recomArray = gson.fromJson(jsonResponse,RecomModel[].class);
+		for (RecomModel rec : recomArray) {
+			PopUP(act, rec.getRecommendation());
+		}
+
+	}
+
 	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
 		@Override
 		protected String doInBackground(String... urls) {
@@ -71,12 +87,12 @@ public class RestCallHandler {
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
-			PopUP(act, result);
+			processResponse(result);
 		}
 	}
 
 	public void getS() {
-		new HttpAsyncTask().execute("hi");
+		new HttpAsyncTask().execute(url);
 	}
 
 	private static String convertStreamToString(InputStream is)
