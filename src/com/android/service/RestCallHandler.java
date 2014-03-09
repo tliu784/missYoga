@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 public class RestCallHandler {
 
-	private RecomResponseHandler sendToActivity;
+	private RecomResponseHandler callBackActivity;
 	private String url;
 	private String content;
 	
@@ -33,9 +33,19 @@ public class RestCallHandler {
 
 	public RestCallHandler(RecomResponseHandler sendToActivity, String url,
 			String content) {
-		this.sendToActivity = sendToActivity;
+		this.callBackActivity = sendToActivity;
 		this.url = url;
 		this.content = content;
+	}
+	
+	public void handleResponse() {
+		new HttpAsyncTask().execute(url);
+	}
+	
+	private void processResponse(String jsonResponse) {
+		Gson gson = new Gson();
+		RecomModel[] recomArray = gson.fromJson(jsonResponse,RecomModel[].class);
+		callBackActivity.processRecom(recomArray);
 	}
 
 	private String getResponse(String url, String message) {
@@ -60,20 +70,11 @@ public class RestCallHandler {
 
 			Log.d("Status line", "" + resp.getStatusLine().getStatusCode());
 		} catch (Exception e) {
-			return "exception";
+			return null;
 		}
 		return response;
 	}
 
-	private void PopUP(Activity act, String content) {
-		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
-	}
-
-	private void processResponse(String jsonResponse) {
-		Gson gson = new Gson();
-		RecomModel[] recomArray = gson.fromJson(jsonResponse,RecomModel[].class);
-		sendToActivity.processRecom(recomArray);
-	}
 
 	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
 		@Override
@@ -89,9 +90,6 @@ public class RestCallHandler {
 		}
 	}
 
-	public void handleResponse() {
-		new HttpAsyncTask().execute(url);
-	}
 
 	private static String convertStreamToString(InputStream is)
 			throws IOException {

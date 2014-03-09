@@ -44,7 +44,8 @@ public class MainPage extends Activity implements RecomResponseHandler{
 			startActivity(new Intent(this, (new SignUp()).getClass()));
 		}
 		case R.id.action_refrash:
-			// refresh();
+			 refresh();
+
 		case R.id.action_settings:
 			// openSettings();
 			return true;
@@ -53,8 +54,7 @@ public class MainPage extends Activity implements RecomResponseHandler{
 		}
 	}
 
-	public void toggle_contents(View v) {
-		refresh();
+	public void toggle_recom_box(View v) {
 		rec_content.setVisibility(rec_content.isShown() ? View.GONE
 				: View.VISIBLE);
 	}
