@@ -2,6 +2,8 @@ package com.android.myhealthmate;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,6 +18,14 @@ public class MainPage extends Activity {
 		rec_content = (TextView) findViewById(R.id.rec_content);
 		rec_content.setVisibility(View.GONE);
 
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    // Inflate the menu items for use in the action bar
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+	    return super.onCreateOptionsMenu(menu);
 	}
 
 	public void toggle_contents(View v) {

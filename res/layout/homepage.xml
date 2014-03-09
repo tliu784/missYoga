@@ -498,11 +498,17 @@
                 android:textSize="@dimen/small_font_size" />
         </LinearLayout>
     </LinearLayout>
+    
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:textSize="@dimen/font_size" >
@@ -534,24 +540,17 @@
     <LinearLayout
         style="@style/contentfield"
         android:layout_width="fill_parent"
-        android:layout_height="50sp"
+        android:layout_height="70sp"
         android:orientation="horizontal"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:textSize="@dimen/font_size" >
 
-        <TextView
-            android:id="@+id/act_color"
-            android:layout_width="8dp"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"
-            android:background="#DF0101" />
+     
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:orientation="vertical" >
 
             <TextView
@@ -561,7 +560,7 @@
                 android:gravity="center"
                 android:text=" TASK "
                 android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
+                android:textSize="17sp" />
 
             <TextView
                 android:id="@+id/act_distance_content"
@@ -582,26 +581,26 @@
                 android:id="@+id/act_date"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="center"
                 android:text=" 09/11/2014 "
                 android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/act_time"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="center"
                 android:text=" 11:20 AM "
                 android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/bolder"
         android:orientation="vertical" >
 
