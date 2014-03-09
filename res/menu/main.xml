@@ -1,5 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" 
      xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    
+    <item
+        android:id="@+id/action_refrash"
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_refresh"
+        android:title="@string/action_refrash"/>
+    
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="1"
