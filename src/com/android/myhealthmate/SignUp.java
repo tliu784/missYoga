@@ -12,7 +12,7 @@ public class SignUp extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.profile);		
+		setContentView(R.layout.sign_up);		
 		
 	}
 	

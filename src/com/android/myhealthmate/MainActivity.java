@@ -38,7 +38,9 @@ public class MainActivity extends Activity {
 		password = (EditText) findViewById(R.id.enterPassword);
 		signInButton = (Button) findViewById(R.id.sign_in);
 		profileButton = (Button) findViewById(R.id.sign_up);
+		
 		test  = (Button) findViewById(R.id.test);
+		
 		textSignUp = (TextView) findViewById(R.id.txt_link_sign_up);
 		//set the listener for button
 		signInButton.setOnClickListener(getSignInClickListener());
