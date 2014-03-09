@@ -21,7 +21,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	private Button signInButton;
-	private Button signUpButton;
+	private Button profileButton;
 	private Button test;
 	private EditText username;
 	private EditText password;
@@ -37,19 +37,29 @@ public class MainActivity extends Activity {
 		username = (EditText) findViewById(R.id.enterUsername);
 		password = (EditText) findViewById(R.id.enterPassword);
 		signInButton = (Button) findViewById(R.id.sign_in);
-		signUpButton = (Button) findViewById(R.id.sign_up);
+		profileButton = (Button) findViewById(R.id.sign_up);
 		test  = (Button) findViewById(R.id.test);
 		textSignUp = (TextView) findViewById(R.id.txt_link_sign_up);
 		//set the listener for button
 		signInButton.setOnClickListener(getSignInClickListener());
-		signUpButton.setOnClickListener(getSignUpClickListener());
+		
+		profileButton.setOnClickListener(getProfilePageClickListener());
+		
 		textSignUp.setOnClickListener(getSignUpClickListener());
-
+		
 		test.setOnClickListener(getTestClickListener());
 		
 	}
 	
-	
+	private OnClickListener getProfilePageClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Profile profileView = new Profile();
+				SwithActivity(MainActivity.this, profileView);
+				}
+			};
+	}
 
 	private OnClickListener getSignUpClickListener() {
 		return new OnClickListener() {
