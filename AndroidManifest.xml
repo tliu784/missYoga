@@ -41,6 +41,10 @@
             android:name="com.android.myhealthmate.MainPage"
             android:label="@string/welcome" >
         </activity>
+        <activity
+            android:name="com.android.myhealthmate.Profile"
+            android:label="@string/welcome" >
+        </activity>
     </application>
 
 </manifest>
