@@ -69,7 +69,7 @@ public class test extends Activity {
 		// String result = RestCallHandler.getResponse(url, json);
 	
 		try {
-			new RestCallHandler(test.this, url, json).getS();
+//			new RestCallHandler(test.this, url, json).getS();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
