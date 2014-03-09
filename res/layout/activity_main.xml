@@ -18,88 +18,108 @@
         android:paddingTop="@dimen/login_logo_padding_top"
         android:paddingBottom="@dimen/login_logo_padding_bottom" >
 	</ImageView>
-		
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/username" />
-
+        android:paddingLeft="@dimen/login_padding_left_right"
+        android:paddingRight="@dimen/login_padding_left_right"
+        android:orientation="horizontal" 
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        
+        <TextView 
+            android:id="@+id/txt_sign_in"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="@dimen/login_font_size"
+	        android:text="@string/sign_in_txt"/>
+        
+        <TextView 
+            android:id="@+id/txt_link_sign_up"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="@dimen/login_text_size"
+	        android:text="@string/sign_up_link" 
+	        android:layout_alignParentRight="true"
+	        android:textColor="@color/sign_in_textcolor_darkblue"
+	        android:clickable="true"/>
+   </RelativeLayout>
+   
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/login_padding_left_right"
+        android:paddingRight="@dimen/login_padding_left_right"
+        android:paddingBottom="10dp" >
+      
+	     
         <EditText
             android:id="@+id/enterUsername"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="username" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/password" />
-
+            style="@style/loginDialog"
+            android:layout_height="@dimen/login_edittext_height"
+   			android:layout_width="@dimen/login_edittext_width"
+   			android:hint="Email" />
+        <requestFocus />
+        
         <EditText
             android:id="@+id/enterPassword"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="password"
+            style="@style/loginDialog"
+            android:layout_height="@dimen/login_edittext_height"
+   			android:layout_width="@dimen/login_edittext_width"
             android:maxLines="1"
+            android:hint="Password"
             android:password="true" />
-    </LinearLayout>
 
-    <LinearLayout
+	</LinearLayout>
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
+        android:paddingLeft="@dimen/login_padding_left_right"
+        android:paddingRight="@dimen/login_padding_left_right"
+        android:orientation="horizontal" >
+        
+        <CheckBox 
+	        android:id="@+id/cb_remember_me"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="@dimen/login_text_size"
+	        android:text="@string/remember_me"
+	        android:onClick="onCheckboxClicked"/>
 
         <Button
             android:id="@+id/sign_in"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@color/text_shadow_white"
-            android:text="Sign in"
+            android:layout_width="@dimen/signin_btn_width"
+            android:layout_height="@dimen/login_edittext_height"
+            android:layout_alignParentRight="true"
+            android:background="@color/login_btn_blue"
+            android:text="@string/sign_in_txt"
+            android:textColor="@color/sign_in_textcolor_darkblue"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/sign_up"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_weight="1"
-            android:background="@color/text_shadow_white"
-            android:text="Sign up"
-            android:textStyle="bold" />
-    </LinearLayout>
-
+    </RelativeLayout>
+    
+    <!--  test buttons -->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:paddingTop="50dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
+                
+        <Button
+            android:id="@+id/sign_up"
+            android:layout_height="@dimen/login_edittext_height"
+   			android:layout_width="@dimen/login_edittext_width"
+            android:background="@color/login_btn_blue"
+            android:textColor="@color/sign_in_textcolor_darkblue"
+            android:text="@string/create_account"
+            android:gravity="center"
+            android:textStyle="bold" />
+        
         <Button
             android:id="@+id/test"
             android:layout_width="fill_parent"

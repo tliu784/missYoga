@@ -4,14 +4,19 @@
     <string name="app_name">My Health Mate</string>
     <string name="action_settings">Settings</string>
     <string name="action_refrash">Refrash</string>
-    
+    <string name="action_accounts">Accounts</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="sign_in">Congratulations!\nYou pass!</string>
     <string name="test">terry test</string>
     <string name="sign_up">Please input your personal information.</string>
+    <string name="sign_in_txt">sign in</string>
+    <string name="sign_up_link">Create an account</string>
+    <string name="create_account">Create account</string>
     <string name="welcome">Welcome !</string>
     <string name="text1">text 1</string>
     <string name="text2">text 2</string>
+	<string name="remember_me">Remember me</string>
+	<string name="agree_terms">I agree to My Health Mate Terms</string>
 	<string name="terry_test">terry test</string>
 </resources>
