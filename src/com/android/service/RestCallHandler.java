@@ -7,8 +7,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.lang.reflect.Type;
-import java.util.List;
+
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -26,13 +25,15 @@ import android.widget.Toast;
 
 public class RestCallHandler {
 
-	private Activity act;
+	private RecomResponseHandler sendToActivity;
 	private String url;
 	private String content;
-	private RecomModel recomResponse;
+	
 
-	public RestCallHandler(Activity act, String url, String content) {
-		this.act = act;
+
+	public RestCallHandler(RecomResponseHandler sendToActivity, String url,
+			String content) {
+		this.sendToActivity = sendToActivity;
 		this.url = url;
 		this.content = content;
 	}
@@ -71,10 +72,7 @@ public class RestCallHandler {
 	private void processResponse(String jsonResponse) {
 		Gson gson = new Gson();
 		RecomModel[] recomArray = gson.fromJson(jsonResponse,RecomModel[].class);
-		for (RecomModel rec : recomArray) {
-			PopUP(act, rec.getRecommendation());
-		}
-
+		sendToActivity.processRecom(recomArray);
 	}
 
 	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
@@ -91,7 +89,7 @@ public class RestCallHandler {
 		}
 	}
 
-	public void getS() {
+	public void handleResponse() {
 		new HttpAsyncTask().execute(url);
 	}
 
