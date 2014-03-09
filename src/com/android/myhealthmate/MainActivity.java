@@ -25,7 +25,8 @@ public class MainActivity extends Activity {
 	private Button test;
 	private EditText username;
 	private EditText password;
-
+	private TextView textSignUp;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,16 +39,18 @@ public class MainActivity extends Activity {
 		signInButton = (Button) findViewById(R.id.sign_in);
 		signUpButton = (Button) findViewById(R.id.sign_up);
 		test  = (Button) findViewById(R.id.test);
+		textSignUp = (TextView) findViewById(R.id.txt_link_sign_up);
 		//set the listener for button
 		signInButton.setOnClickListener(getSignInClickListener());
-		signUpButton.setOnClickListener(getSignUpClickListener());
+		signInButton.setOnClickListener(getSignUpClickListener());
+		textSignUp.setOnClickListener(getSignUpClickListener());
+
 		test.setOnClickListener(getTestClickListener());
 		
 	}
 	
 	
-	
-    //listener for sign up button
+
 	private OnClickListener getSignUpClickListener() {
 		return new OnClickListener() {
 			@Override
@@ -57,6 +60,7 @@ public class MainActivity extends Activity {
 				}
 			};
 	}
+   
 	
 	private OnClickListener getTestClickListener() {
 		return new OnClickListener() {
@@ -67,6 +71,9 @@ public class MainActivity extends Activity {
 				}
 			};
 	}
+	
+	
+	
 	
     //listener for sign in button
 	private OnClickListener getSignInClickListener() {
@@ -116,7 +123,7 @@ public class MainActivity extends Activity {
 	}
 
 	//use intent tocd swith the activity
-	private void SwithActivity(Activity currentAct, Activity target) {
+	protected void SwithActivity(Activity currentAct, Activity target) {
 		Intent intent = new Intent(currentAct, target.getClass());
 		startActivity(intent);
 	}
