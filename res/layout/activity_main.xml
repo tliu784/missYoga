@@ -116,7 +116,7 @@
    			android:layout_width="@dimen/login_edittext_width"
             android:background="@color/login_btn_blue"
             android:textColor="@color/sign_in_textcolor_darkblue"
-            android:text="@string/create_account"
+            android:text="@string/nicole_test"
             android:gravity="center"
             android:textStyle="bold" />
         
