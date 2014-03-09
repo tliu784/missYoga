@@ -11,5 +11,6 @@
     <string name="welcome">Welcome !</string>
     <string name="text1">text 1</string>
     <string name="text2">text 2</string>
+	<string name="remember_me">Remember me</string>
 	<string name="terry_test">terry test</string>
 </resources>
