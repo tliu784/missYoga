@@ -8,10 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+
 import android.widget.TextView;
 
 public class MainPage extends Activity {
@@ -22,10 +19,8 @@ public class MainPage extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
-
 		rec_content = (TextView) findViewById(R.id.rec_content);
 		rec_content.setVisibility(View.GONE);
-
 	}
 	
 	@Override
@@ -37,23 +32,19 @@ public class MainPage extends Activity {
 	    
 	}
 	
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_settings:
-	            openSettings();
+	       //     openSettings();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-	
-	
-	private void openSettings(){
-		
-	
-	    }
+
 	
 	
 
