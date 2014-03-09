@@ -18,11 +18,13 @@
         android:paddingTop="@dimen/login_logo_padding_top"
         android:paddingBottom="@dimen/login_logo_padding_bottom" >
 	</ImageView>
- 	
+
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:paddingBottom="10dp" >
       
 	     
@@ -45,32 +47,33 @@
 
 	</LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:orientation="horizontal" >
         
         <CheckBox 
-	        android:id="@+id/checkbox_remember_me"
+	        android:id="@+id/cb_remember_me"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:textSize="@dimen/login_text_size"
 	        android:text="@string/remember_me"
 	        android:onClick="onCheckboxClicked"/>
 
         <Button
             android:id="@+id/sign_in"
+            android:layout_width="@dimen/signin_btn_width"
             android:layout_height="@dimen/login_edittext_height"
-   			android:layout_width="@dimen/login_edittext_width"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1"
+            android:layout_alignParentRight="true"
             android:background="@color/login_btn_blue"
-            android:textColor="@color/sign_in_textcolor_darkblue"
             android:text="Sign in"
-            android:layout_gravity="center"
+            android:textColor="@color/sign_in_textcolor_darkblue"
             android:textStyle="bold" />
 
-    </LinearLayout>
-
+    </RelativeLayout>
+   
     <!--  test buttons -->
     <LinearLayout
         android:layout_width="fill_parent"
