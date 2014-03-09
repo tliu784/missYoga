@@ -12,6 +12,7 @@
     <dimen name="login_edittext_height">40dp</dimen>
     <dimen name="login_edittext_width">280dp</dimen>
     <dimen name="signin_btn_width">70dp</dimen>
+    <dimen name="signup_btn_width">150dp</dimen>
     
     <dimen name="login_textbox_padding_bottom">40dp</dimen>
     <dimen name="login_textbox_padding_top">10dp</dimen>

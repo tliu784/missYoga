@@ -95,7 +95,7 @@
             android:layout_height="@dimen/login_edittext_height"
             android:layout_alignParentRight="true"
             android:background="@color/login_btn_blue"
-            android:text="Sign in"
+            android:text="@string/sign_in_txt"
             android:textColor="@color/sign_in_textcolor_darkblue"
             android:textStyle="bold" />
 
@@ -105,7 +105,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingTop="50dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
@@ -115,11 +115,9 @@
             android:id="@+id/sign_up"
             android:layout_height="@dimen/login_edittext_height"
    			android:layout_width="@dimen/login_edittext_width"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1"
             android:background="@color/login_btn_blue"
             android:textColor="@color/sign_in_textcolor_darkblue"
-            android:text="Sign in"
+            android:text="@string/create_account"
             android:gravity="center"
             android:textStyle="bold" />
         
