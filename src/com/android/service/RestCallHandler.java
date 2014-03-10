@@ -44,7 +44,9 @@ public class RestCallHandler {
 	
 	private void processResponse(String jsonResponse) {
 		Gson gson = new Gson();
-		RecomModel[] recomArray = gson.fromJson(jsonResponse,RecomModel[].class);
+		RecomModel[] recomArray = null;
+		if (jsonResponse!=null)
+			recomArray = gson.fromJson(jsonResponse,RecomModel[].class);
 		callBackActivity.processRecom(recomArray);
 	}
 

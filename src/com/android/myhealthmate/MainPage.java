@@ -67,13 +67,17 @@ public class MainPage extends Activity implements RecomResponseHandler{
 		rest.handleResponse();
 	}
 	
-	private void updateRecBox(RecomModel[] recomArray){
-		rec_content.setText("");
-		for (int i=0; i<recomArray.length; i++){
-			rec_content.append(recomArray[i].getRecommendation());
-			if (i<recomArray.length-1){
-				rec_content.append("\n");
+	private void updateRecBox(RecomModel[] recomArray) {
+		if (recomArray != null) {
+			rec_content.setText("");
+			for (int i = 0; i < recomArray.length; i++) {
+				rec_content.append(recomArray[i].getRecommendation());
+				if (i < recomArray.length - 1) {
+					rec_content.append("\n");
+				}
 			}
+		}else{
+			rec_content.setText("Unable to retrieve recommendation");
 		}
 	}
 	
