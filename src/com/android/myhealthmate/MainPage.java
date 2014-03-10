@@ -50,7 +50,7 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		case R.id.action_account: {
 			startActivity(new Intent(this, (new SignUp()).getClass()));
 		}
-		case R.id.action_refrash:
+		case R.id.action_refresh:
 
 			menuItem = item;
 			menuItem.setActionView(R.layout.progressbar);
@@ -96,7 +96,6 @@ public class MainPage extends Activity implements RecomResponseHandler {
 
 	@Override
 	public void processRecom(RecomModel[] recomArray) {
-
 		updateRecBox(recomArray);
 	}
 
