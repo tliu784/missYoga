@@ -45,6 +45,34 @@
             android:name="com.android.myhealthmate.Profile"
             android:label="@string/welcome" >
         </activity>
+        <activity
+            android:name="com.android.myhealthmate.HrDetail"
+            android:label="@string/welcome" >
+        </activity>
+        <activity
+            android:name="com.android.myhealthmate.BpDetail"
+            android:label="@string/welcome" >
+        </activity>
+        <activity
+            android:name="com.android.myhealthmate.ActDetail"
+            android:label="@string/welcome" >
+        </activity>
+        <activity
+            android:name="com.android.myhealthmate.SleDetail"
+            android:label="@string/welcome" >
+        </activity>
+        <activity
+            android:name="com.android.myhealthmate.Reminder"
+            android:label="@string/welcome" >
+        </activity>
+        <activity
+            android:name="com.android.myhealthmate.RecContent"
+            android:label="@string/welcome" >
+        </activity>
+        <activity
+            android:name="com.android.myhealthmate.Settings"
+            android:label="@string/welcome" >
+        </activity>
     </application>
 
 </manifest>

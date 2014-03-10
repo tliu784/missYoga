@@ -11,28 +11,107 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainPage extends Activity implements RecomResponseHandler {
 	private TextView rec_content;
 	private MenuItem menuItem;
+	private LinearLayout hrClickView;
+	private LinearLayout bpClickView;
+	private LinearLayout actClickView;
+	private LinearLayout sleClickView;
+	private LinearLayout rdClickView;
+	private TextView recClickView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
+
+		hrClickView = (LinearLayout) findViewById(R.id.hr);
+		bpClickView = (LinearLayout) findViewById(R.id.bp);
+		actClickView = (LinearLayout) findViewById(R.id.act);
+		sleClickView = (LinearLayout) findViewById(R.id.sle);
+		rdClickView = (LinearLayout) findViewById(R.id.rd);
+		recClickView = (TextView) findViewById(R.id.rec_content);
+
 		rec_content = (TextView) findViewById(R.id.rec_content);
 		rec_content.setVisibility(View.GONE);
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
 				| ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
+
+		hrClickView.setOnClickListener(getHrClickListener());
+		bpClickView.setOnClickListener(getBpClickListener());
+		actClickView.setOnClickListener(getActClickListener());
+		sleClickView.setOnClickListener(getSleClickListener());
+		rdClickView.setOnClickListener(getRdClickListener());
+		recClickView.setOnClickListener(getRecClickListener());
+
+	}
+
+	private OnClickListener getHrClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainPage.this, HrDetail.class));
+			}
+		};
+	}
+
+	private OnClickListener getBpClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainPage.this, BpDetail.class));
+			}
+		};
+	}
+
+	private OnClickListener getActClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainPage.this, ActDetail.class));
+			}
+		};
+	}
+
+	private OnClickListener getSleClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainPage.this, SleDetail.class));
+			}
+		};
+	}
+
+	private OnClickListener getRdClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainPage.this, Reminder.class));
+			}
+		};
+	}
+
+	private OnClickListener getRecClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainPage.this, RecContent.class));
+			}
+		};
 	}
 
 	@Override
@@ -53,7 +132,7 @@ public class MainPage extends Activity implements RecomResponseHandler {
 			return true;
 		}
 		case R.id.action_refresh: {
-			
+
 			menuItem = item;
 			menuItem.setActionView(R.layout.progressbar);
 			menuItem.expandActionView();
@@ -61,11 +140,15 @@ public class MainPage extends Activity implements RecomResponseHandler {
 			return true;
 		}
 		case R.id.action_settings:
-			// openSettings();
+			openSettings();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	private void openSettings() {
+		startActivity(new Intent(MainPage.this, Settings.class));
 	}
 
 	public void toggle_recom_box(View v) {
@@ -89,7 +172,6 @@ public class MainPage extends Activity implements RecomResponseHandler {
 					rec_content.append("\n");
 				}
 			}
-
 		} else {
 			rec_content.setText("Unable to retrieve recommendation");
 		}
