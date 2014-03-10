@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainPage extends Activity implements RecomResponseHandler {
 	private TextView rec_content;
@@ -49,14 +50,16 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		switch (item.getItemId()) {
 		case R.id.action_account: {
 			startActivity(new Intent(this, (new SignUp()).getClass()));
+			return true;
 		}
-		case R.id.action_refresh:
-
+		case R.id.action_refresh: {
+			
 			menuItem = item;
 			menuItem.setActionView(R.layout.progressbar);
 			menuItem.expandActionView();
 			refresh();
-
+			return true;
+		}
 		case R.id.action_settings:
 			// openSettings();
 			return true;
