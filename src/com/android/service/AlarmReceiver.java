@@ -1,8 +1,6 @@
 package com.android.service;
 
 import com.android.myhealthmate.MainPage;
-import com.android.myhealthmate.test;
-
 import com.android.myhealthmate.R;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -31,6 +29,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		ntbuilder.setContentText(notiContent);
 		ntbuilder.setTicker(tickerText);
 		ntbuilder.setSmallIcon(R.drawable.ic_launcher_logo);
+		ntbuilder.setAutoCancel(true);
 		Bitmap bm = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.ic_launcher_logo);
 		ntbuilder.setLargeIcon(bm);
