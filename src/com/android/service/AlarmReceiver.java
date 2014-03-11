@@ -30,6 +30,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		ntbuilder.setTicker(tickerText);
 		ntbuilder.setSmallIcon(R.drawable.ic_launcher_logo);
 		ntbuilder.setAutoCancel(true);
+		ntbuilder.setDefaults(-1);
 		Bitmap bm = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.ic_launcher_logo);
 		ntbuilder.setLargeIcon(bm);
