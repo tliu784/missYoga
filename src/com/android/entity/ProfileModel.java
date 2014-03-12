@@ -7,10 +7,11 @@ import java.util.Date;
 
 
 public class ProfileModel implements Serializable{
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1528113211416967978L;
 	private String name;
 	private Date bday;
 	private int weight;

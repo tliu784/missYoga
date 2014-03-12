@@ -1,8 +1,14 @@
 package com.android.entity;
 
+import java.io.Serializable;
 
 
-public class RecomModel {
+
+public class RecomModel implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3505325605382133867L;
 	private int id;
 	private String recommendation;
 	private String url;

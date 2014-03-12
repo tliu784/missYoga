@@ -63,6 +63,10 @@ public class test extends Activity {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
 	}
 
+	private void testMedRemModle(){
+		
+	}
+	
 	private void testRest() {
 		String url = "http://healthengineherokuappcom.apiary.io/";
 //		String url = "http://1-dot-stayhealthyserver.appspot.com/getReco/123";
