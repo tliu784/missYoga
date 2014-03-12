@@ -25,7 +25,6 @@ public class MainPage extends Activity implements RecomResponseHandler {
 	private LinearLayout actClickView;
 	private LinearLayout sleClickView;
 	private LinearLayout rdClickView;
-	private TextView recClickView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +36,7 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		actClickView = (LinearLayout) findViewById(R.id.act);
 		sleClickView = (LinearLayout) findViewById(R.id.sle);
 		rdClickView = (LinearLayout) findViewById(R.id.rd);
-		recClickView = (TextView) findViewById(R.id.rec_content);
-
+		
 		rec_content = (TextView) findViewById(R.id.rec_content);
 		rec_content.setVisibility(View.GONE);
 
@@ -51,7 +49,7 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		actClickView.setOnClickListener(getActClickListener());
 		sleClickView.setOnClickListener(getSleClickListener());
 		rdClickView.setOnClickListener(getRdClickListener());
-		recClickView.setOnClickListener(getRecClickListener());
+		rec_content.setOnClickListener(getRecClickListener());
 
 	}
 
