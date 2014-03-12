@@ -2,9 +2,11 @@ package com.android.myhealthmate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.android.entity.AccountModel;
+import com.android.entity.MedReminderEvents;
 import com.android.entity.ProfileModel;
 import com.android.myhealthmate.R;
 import com.android.service.AlarmReceiver;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class test extends Activity {
@@ -26,6 +29,7 @@ public class test extends Activity {
 	private EditText text2;
 	private Button test1;
 	private Button test2;
+	private TextView testText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +41,29 @@ public class test extends Activity {
 		test2 = (Button) findViewById(R.id.test2);
 		test1.setOnClickListener(getTest1ClickListener());
 		test2.setOnClickListener(getTest2ClickListener());
-
+		testText = (TextView) findViewById(R.id.terry_test_box);
 	}
 
 	private OnClickListener getTest1ClickListener() {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				PopUP(test.this,"in 5 secs");
-				new AlarmService(getApplicationContext()).SetAlarm();
+				PopUP(test.this, "in 5 secs");
+				Calendar c = Calendar.getInstance();
+				c.add(Calendar.SECOND, 5);
+				Date when = c.getTime();
+//				String title = "Time to take pill";
+//				String detail = "Take your aspirin pill woman";
+				String ticker = "New Health Reminder";
+				MedReminderEvents reminders = createReminders();
+				
+				MedReminderEvents.MedReminderModel reminder=reminders.findbyid(1);
+				String title=reminder.getTitle();
+				String detail=reminder.getDetail();
+				int id = reminder.getId();
+				
+				new AlarmService(getApplicationContext()).setAlarm(when, title,
+						detail, ticker, id);
 			}
 		};
 	}
@@ -54,7 +72,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testDelete();
+				testMedRemModle();
 			}
 		};
 	}
@@ -63,20 +81,36 @@ public class test extends Activity {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
 	}
 
-	private void testMedRemModle(){
-		
+	private MedReminderEvents createReminders(){
+		MedReminderEvents reminders = new MedReminderEvents();
+		Date creationTime = Calendar.getInstance().getTime();
+		String title = "aspirin";
+		String detail = "take 2 pills";
+		int duration = 2;
+		MedReminderEvents.DurationUnit dunit = MedReminderEvents.DurationUnit.Day;
+		int repeat = 5;
+		MedReminderEvents.DurationUnit runit = MedReminderEvents.DurationUnit.Sec;
+		reminders.addReminder(creationTime, title, detail, duration, dunit,
+				repeat, runit);
+		return reminders;
 	}
 	
+	private void testMedRemModle() {
+		
+		testText.setText(createReminders().findbyid(1).toString());
+	}
+
 	private void testRest() {
 		String url = "http://healthengineherokuappcom.apiary.io/";
-//		String url = "http://1-dot-stayhealthyserver.appspot.com/getReco/123";
+		// String url =
+		// "http://1-dot-stayhealthyserver.appspot.com/getReco/123";
 		// String json =
 		// "{\n    \"userinfo\": {\n        \"age\": 45,\n        \"gender\": \"male\",\n        \"height\": 168,\n        \"weight\": [\n            {\n                \"value\": 65.3,    //this is the data of current day\n                \"date\": \"2012-04-24\"\n            },\n            {\n                \"value\": 65.3,    // this should be average of last week\n                \"date\": \"2012-04-17\"    //by defult this should the last 7 days\n            },\n            {\n                \"value\": 65.3,    // this should be average of last month\n                \"date\": \"2012-03-24\"    //by defult this should the last 30 days\n            }\n        ],\n        \"hypertension\" : true,\n        \"diabetes\" : true,\n        \"insomnia\" : true,\n        \"cardio\" : true\n    },\n    \"activities\": [\n        {\n            \"distance\": 500,     //this is the data of current day\n            \"duration\": 7.3,\n            \"date\": \"2012-04-24\",\n            \"startTime\": \"18:20:42Z\",\n            \"steps\": 800\n        },\n        {\n            \"distance\": 1500,  // this is accumulation not average by last week\n            \"duration\": 140,\n            \"date\": \"2012-04-17\",\n            \"startTime\": \"\",    // timestamp should be empty\n            \"steps\": 1700\n        },\n        {\n            \"distance\": 12500, // this is accumulation not average by last month\n            \"duration\": 1430,\n            \"date\": \"2012-03-24\",\n            \"startTime\": \"\",   // timestamp should be empty\n            \"steps\": 49300\n        }\n    ],\n    \"sleep\": [\n        {\n            \"efficiency\": 4,    //this is the data of current day\n            \"date\": \"2012-04-24\",\n            \"startTime\": \"18:25:43Z\",\n            \"minutesAsleep\": 453,\n            \"minutesAwake\": 34,\n            \"awakeningsCount\": 8,\n            \"timeInBed\": 541\n        },\n        {\n            \"efficiency\": 4,   // this is the average of last week\n            \"date\": \"2012-04-17\",\n            \"startTime\": \"\",   // this should be empty\n            \"minutesAsleep\": 453,\n            \"minutesAwake\": 34,\n            \"awakeningsCount\": 8,\n            \"timeInBed\": 541\n        },\n        {\n            \"efficiency\": 4,  // this is the average of last month\n            \"date\": \"2012-03-24\",\n            \"startTime\": \"\",  // this should be empty\n            \"minutesAsleep\": 453,\n            \"minutesAwake\": 34,\n            \"awakeningsCount\": 8,\n            \"timeInBed\": 541\n        }\n    ],\n    \"heartBeats\": [\n        {\n            \"count\": 56,       //this is the data of current day\n            \"date\": \"2012-04-24\",\n            \"time\": \"18:23:43Z\"\n        },\n        {\n            \"count\": 60,       //this is the average of last week\n            \"date\": \"2012-04-17\",\n            \"time\": \"\"\n        },\n        {\n            \"count\": 59,      //this is the average of last month\n            \"date\": \"2012-03-24\",\n            \"time\": \"\"\n        }\n    ],\n    \"bloodPressures\": [\n        {\n            \"systolic\": 100,         //this is the data of current day\n            \"diastolic\": 71,\n            \"date\": \"2012-04-23\",\n            \"time\": \"18:23:43Z\"\n        },\n        {\n            \"systolic\": 100,         //this is the average of last week\n            \"diastolic\": 71,\n            \"date\": \"2012-04-17\",     \n            \"time\": \"\"               // timestamp should be empty\n        },\n        {\n            \"systolic\": 100,         //this is the average of last month\n            \"diastolic\": 71,\n            \"date\": \"2012-03-24\",\n            \"time\": \"\"               // timestamp should be empty\n        }\n    ]\n}";
 		String json = "";
 		// String result = RestCallHandler.getResponse(url, json);
-	
+
 		try {
-//			new RestCallHandler(test.this, url, json).getS();
+			// new RestCallHandler(test.this, url, json).getS();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
