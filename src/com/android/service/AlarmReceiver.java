@@ -15,9 +15,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 		
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		String notiTitle = "Time to take pills";
-		String notiContent = "take that aspirin pill man";
-		String tickerText = "New Health Reminder";
+		String notiTitle = intent.getExtras().getString(AlarmService.titleVar);
+		String notiContent = intent.getExtras().getString(AlarmService.detailVar);
+		String tickerText = intent.getExtras().getString(AlarmService.tickerVar);
+		int id = intent.getExtras().getInt(AlarmService.idVar);
 
 		NotificationManager mNM;
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,	new Intent(context, MainPage.class), 0);
@@ -39,7 +40,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		Notification notification = ntbuilder.build();
 
 
-		mNM.notify(0, notification);
+		mNM.notify(id, notification);
 
 	}
 	

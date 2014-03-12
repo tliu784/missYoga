@@ -13,7 +13,7 @@ public class MedReminderEvents implements Serializable {
 	private int count = 0;
 
 	public enum DurationUnit implements Serializable {
-		Day, Hour, Min;
+		Day, Hour, Min, Sec;
 	}
 
 	private ArrayList<MedReminderModel> reminderList = new ArrayList<MedReminderModel>();
@@ -65,7 +65,7 @@ public class MedReminderEvents implements Serializable {
 			this.nextAlarmTime = addDuration(this.creationTime, repeat, runit);
 		}
 
-		void setNextAlarm() {
+		void setNextTime() {
 			nextAlarmTime = addDuration(nextAlarmTime, duration, dunit);
 		}
 
@@ -74,6 +74,59 @@ public class MedReminderEvents implements Serializable {
 			return new Gson().toJson(this);
 		}
 
+		public String getTitle() {
+			return title;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+		public String getDetail() {
+			return detail;
+		}
+
+		public void setDetail(String detail) {
+			this.detail = detail;
+		}
+
+		public int getDuration() {
+			return duration;
+		}
+
+		public void setDuration(int duration) {
+			this.duration = duration;
+		}
+
+		public DurationUnit getDunit() {
+			return dunit;
+		}
+
+		public void setDunit(DurationUnit dunit) {
+			this.dunit = dunit;
+		}
+
+		public int getRepeat() {
+			return repeat;
+		}
+
+		public void setRepeat(int repeat) {
+			this.repeat = repeat;
+		}
+
+		public DurationUnit getRunit() {
+			return runit;
+		}
+
+		public void setRunit(DurationUnit runit) {
+			this.runit = runit;
+		}
+		
+		
 	}
 
 	private static Date addDuration(Date start, int duration, DurationUnit dunit) {
@@ -89,7 +142,9 @@ public class MedReminderEvents implements Serializable {
 		case Min:
 			cal.add(Calendar.MINUTE, duration);
 			break;
-
+		case Sec:
+			cal.add(Calendar.SECOND, duration);
+			break;
 		}
 
 		return cal.getTime();
