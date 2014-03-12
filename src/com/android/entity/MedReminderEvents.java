@@ -10,31 +10,38 @@ import com.google.gson.Gson;
 public class MedReminderEvents implements Serializable {
 
 	private static final long serialVersionUID = -7670973146662933249L;
+	private int count = 0;
 
-	private enum DurationUnit implements Serializable {
+	public enum DurationUnit implements Serializable {
 		Day, Hour, Min;
 	}
-	
-	private ArrayList<MedReminderModel> reminderList;
-	
+
+	private ArrayList<MedReminderModel> reminderList = new ArrayList<MedReminderModel>();
+
 	public void addReminder(Date creationTime, String title, String detail,
-			int duration, DurationUnit dunit, int repeat, DurationUnit runit){
-		int id=reminderList.size();
-		MedReminderModel newReminder = new MedReminderModel(id, creationTime, title, detail, duration, dunit, repeat, runit);
+			int duration, DurationUnit dunit, int repeat, DurationUnit runit) {
+		count++;
+		int id = count;
+		MedReminderModel newReminder = new MedReminderModel(id, creationTime,
+				title, detail, duration, dunit, repeat, runit);
 		reminderList.add(newReminder);
 	}
-	
-	public void removeReminder(int id){
-		if (id>=0 && id<reminderList.size()){
-			reminderList.remove(id);
-			
-		}
-	}
-	
-	
 
-	class MedReminderModel {
-		
+	public void removeReminder(int id) {
+		reminderList.remove(findbyid(id));
+	}
+
+	public MedReminderModel findbyid(int id) {
+		for (MedReminderModel reminder : reminderList) {
+			if (reminder.id == id) {
+				return reminder;
+			}
+		}
+		return null;
+	}
+
+	public class MedReminderModel {
+		int id;
 		Date creationTime;
 		String title;
 		String detail;
@@ -44,9 +51,10 @@ public class MedReminderEvents implements Serializable {
 		DurationUnit runit;
 		Date nextAlarmTime;
 
-		private MedReminderModel(int id,Date creationTime, String title, String detail,
-				int duration, DurationUnit dunit, int repeat, DurationUnit runit) {
-			
+		private MedReminderModel(int id, Date creationTime, String title,
+				String detail, int duration, DurationUnit dunit, int repeat,
+				DurationUnit runit) {
+			this.id = id;
 			this.creationTime = creationTime;
 			this.title = title;
 			this.detail = detail;
@@ -54,35 +62,36 @@ public class MedReminderEvents implements Serializable {
 			this.dunit = dunit;
 			this.repeat = repeat;
 			this.runit = runit;
-			this.nextAlarmTime=addDuration(this.creationTime,duration,dunit);
+			this.nextAlarmTime = addDuration(this.creationTime, repeat, runit);
 		}
 
 		void setNextAlarm() {
-			nextAlarmTime=addDuration(nextAlarmTime,duration,dunit);
+			nextAlarmTime = addDuration(nextAlarmTime, duration, dunit);
 		}
+
 		@Override
-		public String toString(){
+		public String toString() {
 			return new Gson().toJson(this);
 		}
 
 	}
-	
-	private static Date addDuration(Date start, int duration, DurationUnit dunit){
+
+	private static Date addDuration(Date start, int duration, DurationUnit dunit) {
 		Calendar cal = Calendar.getInstance();
-        cal.setTime(start);
-        switch (dunit){
+		cal.setTime(start);
+		switch (dunit) {
 		case Day:
-			 cal.add(Calendar.DATE, duration); 
+			cal.add(Calendar.DATE, duration);
 			break;
 		case Hour:
-			cal.add(Calendar.HOUR, duration); 
+			cal.add(Calendar.HOUR, duration);
 			break;
 		case Min:
-			cal.add(Calendar.MINUTE, duration); 
+			cal.add(Calendar.MINUTE, duration);
 			break;
-	       		
-        }
-       
-        return cal.getTime();
+
+		}
+
+		return cal.getTime();
 	}
 }

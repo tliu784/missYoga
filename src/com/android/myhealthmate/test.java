@@ -2,9 +2,11 @@ package com.android.myhealthmate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.android.entity.AccountModel;
+import com.android.entity.MedReminderEvents;
 import com.android.entity.ProfileModel;
 import com.android.myhealthmate.R;
 import com.android.service.AlarmReceiver;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class test extends Activity {
@@ -26,6 +29,7 @@ public class test extends Activity {
 	private EditText text2;
 	private Button test1;
 	private Button test2;
+	private TextView testText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class test extends Activity {
 		test2 = (Button) findViewById(R.id.test2);
 		test1.setOnClickListener(getTest1ClickListener());
 		test2.setOnClickListener(getTest2ClickListener());
-
+		testText = (TextView) findViewById(R.id.terry_test_box);
 	}
 
 	private OnClickListener getTest1ClickListener() {
@@ -54,7 +58,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testDelete();
+				testMedRemModle();
 			}
 		};
 	}
@@ -64,7 +68,17 @@ public class test extends Activity {
 	}
 
 	private void testMedRemModle(){
+		MedReminderEvents reminders = new MedReminderEvents();
+		Date creationTime=Calendar.getInstance().getTime();
+		String title="aspirin";
+		String detail="take 2 pills";
+		int duration =2;
+		MedReminderEvents.DurationUnit dunit = MedReminderEvents.DurationUnit.Day;
+		int repeat = 4;
+		MedReminderEvents.DurationUnit runit = MedReminderEvents.DurationUnit.Hour;
+		reminders.addReminder(creationTime, title, detail, duration, dunit, repeat, runit);
 		
+		testText.setText(reminders.findbyid(1).toString());
 	}
 	
 	private void testRest() {
