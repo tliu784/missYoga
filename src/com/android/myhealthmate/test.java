@@ -7,6 +7,8 @@ import java.util.Date;
 import com.android.entity.AccountModel;
 import com.android.entity.ProfileModel;
 import com.android.myhealthmate.R;
+import com.android.service.AlarmReceiver;
+import com.android.service.AlarmService;
 import com.android.service.FileOperation;
 import com.android.service.RestCallHandler;
 
@@ -42,7 +44,8 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testRest();
+				PopUP(test.this,"in 5 secs");
+				new AlarmService(getApplicationContext()).SetAlarm();
 			}
 		};
 	}
@@ -60,6 +63,10 @@ public class test extends Activity {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
 	}
 
+	private void testMedRemModle(){
+		
+	}
+	
 	private void testRest() {
 		String url = "http://healthengineherokuappcom.apiary.io/";
 //		String url = "http://1-dot-stayhealthyserver.appspot.com/getReco/123";

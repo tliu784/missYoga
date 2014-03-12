@@ -18,10 +18,8 @@ import org.apache.http.entity.StringEntity;
 import com.android.entity.RecomModel;
 import com.google.gson.Gson;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 public class RestCallHandler {
 

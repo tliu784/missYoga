@@ -3,16 +3,10 @@ package com.android.entity;
 import java.io.Serializable;
 
 public class AccountModel implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1430163807755003319L;
 	private String username;
 	private String password;
 	private String email;
-	
-	
-	
 	
 	public AccountModel() {
 	
