@@ -56,6 +56,11 @@
         <item name="android:layout_gravity">right</item>
         <item name="android:background">@drawable/rect_text_edit</item>
         <item name="android:textCursorDrawable">@null</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
     </style>
     
     <style name="profile_textview">

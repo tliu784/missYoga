@@ -27,9 +27,12 @@
 	<string name="profile_diabetes">Diabetes</string>
 	<string name="profile_insomnia">Insomnia</string>
 	<string name="profile_cardio">Cardio</string>
-	<string name="profile_no">No</string>
-	<string name="profile_yes">Yes</string>
+	<string name="no">No</string>
+	<string name="yes">Yes</string>
 	<string name="submit">Submit</string>
+	<string name="cancel">Cancel</string>
+	<string name="male">Male</string>
+	<string name="female">Female</string>
 	
 	<string name="terry_test">terry test</string>
 	<string name="nicole_test">Nicole Test</string>
