@@ -13,7 +13,6 @@
     <string name="sign_in_txt">sign in</string>
     <string name="sign_up_link">Create an account</string>
     <string name="create_account">Create account</string>
-    <string name="nicole_test">Nicole Test</string>
     <string name="welcome">Welcome !</string>
     <string name="text1">text 1</string>
     <string name="text2">text 2</string>
@@ -21,9 +20,17 @@
 	<string name="agree_terms">I agree to My Health Mate Terms</string>
 	<string name="profile_name">Name</string>
 	<string name="profile_gender">Gender</string>
-	<string name="profile_age">Age</string>
+	<string name="profile_dob">Date of birth</string>
 	<string name="profile_height">Height</string>
 	<string name="profile_weight">Weight</string>
+	<string name="profile_hypertension">Hypertension</string>
+	<string name="profile_diabetes">Diabetes</string>
+	<string name="profile_insomnia">Insomnia</string>
+	<string name="profile_cardio">Cardio</string>
+	<string name="profile_no">No</string>
+	<string name="profile_yes">Yes</string>
+	<string name="submit">Submit</string>
 	
 	<string name="terry_test">terry test</string>
+	<string name="nicole_test">Nicole Test</string>
 </resources>
