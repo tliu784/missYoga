@@ -168,19 +168,15 @@
             android:id="@+id/profile_submit"
             android:layout_width="@dimen/signin_btn_width"
             android:layout_height="@dimen/login_edittext_height"
-            android:background="@color/login_btn_blue"
             android:text="@string/submit"
-            android:textColor="@color/sign_in_textcolor_darkblue"
-            android:textStyle="bold" />
+            style="@style/btnStyleBlue" />
 
         <Button
             android:id="@+id/sign_in"
             android:layout_width="@dimen/signin_btn_width"
             android:layout_height="@dimen/login_edittext_height"
-            android:background="@color/login_btn_blue"
             android:text="@string/cancel"
-            android:textColor="@color/sign_in_textcolor_darkblue"
-            android:textStyle="bold" />
+            style="@style/btnStyleBlue"/>
 		
     </GridLayout>
     

@@ -27,7 +27,7 @@
  	<dimen name="small_font_size">10sp</dimen>
  	<dimen name="msmall_font_size">20sp</dimen>
  	<dimen name="font_size">40sp</dimen>
- 	<dimen name="large_font_size">60sp</dimen>
+ 	<dimen name="large_font_size">60sp</dimen> 
  	
  	<dimen name="profile_textview_height">30dp</dimen>
     <dimen name="profile_textview_width">100dp</dimen>

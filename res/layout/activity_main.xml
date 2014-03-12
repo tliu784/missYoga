@@ -95,11 +95,8 @@
             android:layout_width="@dimen/signin_btn_width"
             android:layout_height="@dimen/login_edittext_height"
             android:layout_alignParentRight="true"
-            android:background="@color/login_btn_blue"
             android:text="@string/sign_in_txt"
-            android:textColor="@color/sign_in_textcolor_darkblue"
-            android:textStyle="bold" />
-
+            style="@style/btnStyleBlue" />
     </RelativeLayout>
     
     <!--  test buttons -->
