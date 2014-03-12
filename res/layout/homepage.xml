@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/text_shadow_white"
-            android:drawableLeft="@drawable/ic"
+            android:drawableLeft="@drawable/ic_dialog_icon_bp"
             android:text=" Blood Pressure "
             android:textColor="@color/grey" />
 
