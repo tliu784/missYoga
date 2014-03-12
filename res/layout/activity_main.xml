@@ -16,7 +16,9 @@
         android:scaleType="centerInside"
         android:layout_gravity="center" 
         android:paddingTop="@dimen/login_logo_padding_top"
-        android:paddingBottom="@dimen/login_logo_padding_bottom" >
+        android:paddingBottom="@dimen/login_logo_padding_bottom" 
+        android:paddingLeft="@dimen/gen_page_margin_left"
+        android:paddingRight="@dimen/gen_page_margin_left">
 	</ImageView>
 
     <RelativeLayout
