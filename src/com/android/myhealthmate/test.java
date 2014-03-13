@@ -50,21 +50,23 @@ public class test extends Activity {
 			@Override
 			public void onClick(View v) {
 				PopUP(test.this, "in 5 secs");
-				Calendar c = Calendar.getInstance();
-				c.add(Calendar.SECOND, 5);
-				Date when = c.getTime();
+//				Calendar c = Calendar.getInstance();
+//				c.add(Calendar.SECOND, 5);
+//				Date when = c.getTime();
 //				String title = "Time to take pill";
 //				String detail = "Take your aspirin pill woman";
 				String ticker = "New Health Reminder";
 				MedReminderEvents reminders = createReminders();
 				
-				MedReminderModel reminder=reminders.findbyid(2);
-				String title=reminder.getTitle();
-				String detail=reminder.getDetail();
-				int id = reminder.getId();
+//				MedReminderModel reminder=reminders.findbyid(2);
+//				String title=reminder.getTitle();
+//				String detail=reminder.getDetail();
+//				int id = reminder.getId();
+				for (MedReminderModel reminder:reminders.getReminderList()){
+					new AlarmService(getApplicationContext()).setAlarm(reminder.getNextAlarmTime(), reminder.getTitle(),
+							reminder.getDetail(), ticker, reminder.getId());
+				}
 				
-				new AlarmService(getApplicationContext()).setAlarm(when, title,
-						detail, ticker, id);
 			}
 		};
 	}
@@ -90,7 +92,7 @@ public class test extends Activity {
 		String detail = "take 1 pill";
 		int duration = 2;
 		MedReminderEvents.DurationUnit dunit = MedReminderEvents.DurationUnit.Day;
-		int repeat = 5;
+		int repeat = 4;
 		MedReminderEvents.DurationUnit runit = MedReminderEvents.DurationUnit.Hour;
 		reminders.addReminder(creationTime, title, detail, duration, dunit,
 				repeat, runit);
@@ -112,7 +114,7 @@ public class test extends Activity {
 		String detail3 = "take 3 pills";
 		int duration3 = 2;
 		MedReminderEvents.DurationUnit dunit3 = MedReminderEvents.DurationUnit.Day;
-		int repeat3 = 30;
+		int repeat3 = 10;
 		MedReminderEvents.DurationUnit runit3 = MedReminderEvents.DurationUnit.Sec;
 		reminders.addReminder(creationTime3, title3, detail3, duration3, dunit3,
 				repeat3, runit3);

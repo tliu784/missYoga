@@ -61,6 +61,10 @@ public class MedReminderModel implements Comparable<MedReminderModel> {
 		this.detail = detail;
 	}
 
+	public Date getNextAlarmTime() {
+		return nextAlarmTime;
+	}
+
 	public int getDuration() {
 		return duration;
 	}

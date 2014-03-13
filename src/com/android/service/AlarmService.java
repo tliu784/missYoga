@@ -26,7 +26,7 @@ public class AlarmService {
 		intent.putExtra(detailVar, detail);
 		intent.putExtra(tickerVar, ticker);
 		intent.putExtra(idVar, id);
-		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+		PendingIntent pi = PendingIntent.getBroadcast(context, id, intent, 0);
 		long firstTime = when.getTime();
 		am.set(AlarmManager.RTC_WAKEUP, firstTime, pi);
 	}
