@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	private Button signInButton;
-	private Button profileButton;
+	private Button nicoleButton;
 	private Button test;
 	private EditText username;
 	private EditText password;
@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 		username = (EditText) findViewById(R.id.enterUsername);
 		password = (EditText) findViewById(R.id.enterPassword);
 		signInButton = (Button) findViewById(R.id.sign_in);
-		profileButton = (Button) findViewById(R.id.sign_up);
+		nicoleButton = (Button) findViewById(R.id.sign_up);
 		
 		test  = (Button) findViewById(R.id.test);
 		
@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 		//set the listener for button
 		signInButton.setOnClickListener(getSignInClickListener());
 		
-		profileButton.setOnClickListener(getProfilePageClickListener());
+		nicoleButton.setOnClickListener(getNicolePageClickListener());
 		
 		textSignUp.setOnClickListener(getSignUpClickListener());
 		
@@ -48,12 +48,12 @@ public class MainActivity extends Activity {
 		
 	}
 	
-	private OnClickListener getProfilePageClickListener() {
+	private OnClickListener getNicolePageClickListener() {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Profile profileView = new Profile();
-				SwithActivity(MainActivity.this, profileView);
+				SignIn nicoletest = new SignIn();
+				SwithActivity(MainActivity.this, nicoletest);
 				}
 			};
 	}
