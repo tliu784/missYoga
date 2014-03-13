@@ -135,7 +135,7 @@
    			android:layout_width="@dimen/login_edittext_width"
             android:background="@color/login_btn_blue"
             android:textColor="@color/sign_in_textcolor_darkblue"
-            android:text="@string/ben_test"
+            android:text="ben_test"
             android:gravity="center"
             android:textStyle="bold" />
     </LinearLayout>
