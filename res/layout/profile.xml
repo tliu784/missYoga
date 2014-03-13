@@ -6,180 +6,202 @@
     android:layout_height="wrap_content" 
     android:layout_marginTop="@dimen/gen_page_margin_top"
     android:layout_marginLeft="@dimen/gen_page_margin_left"
-    android:layout_marginRight="@dimen/gen_page_margin_right">
+    android:layout_marginRight="@dimen/gen_page_margin_right"
+    android:background="@drawable/textlines" >
  
-    <GridLayout
-        android:layout_width="match_parent"
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:padding="8dip"
-        android:background="@drawable/textlines"
-        android:useDefaultMargins="true" >
- 
-        <TextView
-            android:layout_column="0"
-            android:text="@string/profile_name"
-            style="@style/profile_textview" />
-        <EditText
-            android:id="@+id/txtbox_name"
-            style="@style/profile_edittext" >
-        </EditText>
- 
-        <TextView
-            android:layout_column="0"
-            android:text="@string/profile_gender"
-            style="@style/profile_textview" />
-        <RadioGroup 
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:orientation="horizontal">
-		    <RadioButton 
-		        android:id="@+id/radio_profile_male"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/male"
-		        android:onClick="onRadioButtonClicked"/>
-		    <RadioButton 
-		        android:id="@+id/radio_profile_female"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/female"
-		        android:onClick="onRadioButtonClicked"/>
-		</RadioGroup>
- <!--  
-        <Spinner
-            android:id="@+id/size"
-            android:layout_width="0dip"
-            android:layout_gravity="fill_horizontal" />
- -->
-        <TextView
-            android:layout_column="0"
-            android:text="@string/profile_dob"
-            style="@style/profile_textview" />
-        <EditText
-            android:id="@+id/txtbox_dob"
-            style="@style/profile_edittext" >
-        </EditText>
- 
-        <TextView
-            android:layout_column="0"
-            android:text="@string/profile_height"
-            style="@style/profile_textview" />
-        <EditText
-            android:id="@+id/txtbox_height"
-            style="@style/profile_edittext" >
-        </EditText>
- 
-        <TextView
-            android:layout_column="0"
-            android:text="@string/profile_weight"
-            style="@style/profile_textview" />
-        <EditText
-            android:id="@+id/txtbox_weight"
-            style="@style/profile_edittext" >
-        </EditText>
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/login_padding_left_right"
+        android:paddingRight="@dimen/login_padding_left_right"
+        android:paddingBottom="10dp" >
         
-        <TextView
-            android:layout_column="0"
-            android:text="@string/profile_hypertension"
-            style="@style/profile_textview" />
-       	<RadioGroup 
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:orientation="horizontal">
-		    <RadioButton 
-		        android:id="@+id/radio_profile_hypertension_yes"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/yes"
-		        android:onClick="onRadioButtonClicked"/>
-		    <RadioButton android:id="@+id/radio_profile_hypertension_no"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/no"
-		        android:onClick="onRadioButtonClicked"/>
-		</RadioGroup>
-        
-        <TextView
-            android:layout_column="0"
-            android:text="@string/profile_diabetes"
-            style="@style/profile_textview" />
-        <RadioGroup 
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:orientation="horizontal">
-		    <RadioButton 
-		        android:id="@+id/radio_profile_diabetes_yes"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/yes"
-		        android:onClick="onRadioButtonClicked"/>
-		    <RadioButton 
-		        android:id="@+id/radio_profile_diabetes_no"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/no"
-		        android:onClick="onRadioButtonClicked"/>
-		</RadioGroup>
-		
-        <TextView
-            android:layout_column="0"
-            android:text="@string/profile_insomnia"
-            style="@style/profile_textview" />
-         <RadioGroup 
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:orientation="horizontal">
-		    <RadioButton 
-		        android:id="@+id/radio_profile_insomnia_yes"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/yes"
-		        android:onClick="onRadioButtonClicked"/>
-		    <RadioButton 
-		        android:id="@+id/radio_profile_insomnia_no"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/no"
-		        android:onClick="onRadioButtonClicked"/>
-		</RadioGroup>
-        
-        <TextView
-            android:layout_column="0"
-            android:text="@string/profile_cardio"
-            style="@style/profile_textview" />
-        <RadioGroup 
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:orientation="horizontal">
-		    <RadioButton 
-		        android:id="@+id/radio_profile_cardio_yes"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/yes"
-		        android:onClick="onRadioButtonClicked"/>
-		    <RadioButton 
-		        android:id="@+id/radio_profile_cardio_no"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/no"
-		        android:onClick="onRadioButtonClicked"/>
-		</RadioGroup>
-		
-		<Button
-            android:id="@+id/profile_submit"
-            android:layout_width="@dimen/signin_btn_width"
-            android:layout_height="@dimen/login_edittext_height"
-            android:text="@string/submit"
-            style="@style/btnStyleBlue" />
-
-        <Button
-            android:id="@+id/sign_in"
-            android:layout_width="@dimen/signin_btn_width"
-            android:layout_height="@dimen/login_edittext_height"
-            android:text="@string/cancel"
-            style="@style/btnStyleBlue"/>
-		
-    </GridLayout>
+	    <GridLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:columnCount="2"
+	        android:padding="8dip"
+	        android:useDefaultMargins="true" >
+	 
+	        <TextView
+	            android:layout_column="0"
+	            android:text="@string/profile_name"
+	            style="@style/profile_textview" />
+	        <EditText
+	            android:id="@+id/txtbox_name"
+	            style="@style/profile_edittext" >
+	        </EditText>
+	 
+	        <TextView
+	            android:layout_column="0"
+	            android:text="@string/profile_gender"
+	            style="@style/profile_textview" />
+	        <RadioGroup 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    <RadioButton 
+			        android:id="@+id/radio_profile_male"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/male"
+			        android:onClick="onRadioButtonClicked"/>
+			    <RadioButton 
+			        android:id="@+id/radio_profile_female"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/female"
+			        android:onClick="onRadioButtonClicked"/>
+			</RadioGroup>
+	 <!--  
+	        <Spinner
+	            android:id="@+id/size"
+	            android:layout_width="0dip"
+	            android:layout_gravity="fill_horizontal" />
+	 -->
+	        <TextView
+	            android:layout_column="0"
+	            android:text="@string/profile_dob"
+	            style="@style/profile_textview" />
+	        <EditText
+	            android:id="@+id/txtbox_dob"
+	            style="@style/profile_edittext" >
+	        </EditText>
+	 
+	        <TextView
+	            android:layout_column="0"
+	            android:text="@string/profile_height"
+	            style="@style/profile_textview" />
+	        <EditText
+	            android:id="@+id/txtbox_height"
+	            style="@style/profile_edittext" >
+	        </EditText>
+	 
+	        <TextView
+	            android:layout_column="0"
+	            android:text="@string/profile_weight"
+	            style="@style/profile_textview" />
+	        <EditText
+	            android:id="@+id/txtbox_weight"
+	            style="@style/profile_edittext" >
+	        </EditText>
+	        
+	        <TextView
+	            android:layout_column="0"
+	            android:text="@string/profile_hypertension"
+	            style="@style/profile_textview" />
+	       	<RadioGroup 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    <RadioButton 
+			        android:id="@+id/radio_profile_hypertension_yes"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/yes"
+			        android:onClick="onRadioButtonClicked"/>
+			    <RadioButton android:id="@+id/radio_profile_hypertension_no"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/no"
+			        android:onClick="onRadioButtonClicked"/>
+			</RadioGroup>
+	        
+	        <TextView
+	            android:layout_column="0"
+	            android:text="@string/profile_diabetes"
+	            style="@style/profile_textview" />
+	        <RadioGroup 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    <RadioButton 
+			        android:id="@+id/radio_profile_diabetes_yes"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/yes"
+			        android:onClick="onRadioButtonClicked"/>
+			    <RadioButton 
+			        android:id="@+id/radio_profile_diabetes_no"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/no"
+			        android:onClick="onRadioButtonClicked"/>
+			</RadioGroup>
+			
+	        <TextView
+	            android:layout_column="0"
+	            android:text="@string/profile_insomnia"
+	            style="@style/profile_textview" />
+	         <RadioGroup 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    <RadioButton 
+			        android:id="@+id/radio_profile_insomnia_yes"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/yes"
+			        android:onClick="onRadioButtonClicked"/>
+			    <RadioButton 
+			        android:id="@+id/radio_profile_insomnia_no"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/no"
+			        android:onClick="onRadioButtonClicked"/>
+			</RadioGroup>
+	        
+	        <TextView
+	            android:layout_column="0"
+	            android:text="@string/profile_cardio"
+	            style="@style/profile_textview" />
+	        <RadioGroup 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal">
+			    <RadioButton 
+			        android:id="@+id/radio_profile_cardio_yes"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/yes"
+			        android:onClick="onRadioButtonClicked"/>
+			    <RadioButton 
+			        android:id="@+id/radio_profile_cardio_no"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/no"
+			        android:onClick="onRadioButtonClicked"/>
+			</RadioGroup>
+	    </GridLayout>
+	    
+	    <LinearLayout
+	        android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:orientation="horizontal"
+	        android:paddingBottom="10dp" >	
+	    	<Button
+	            android:id="@+id/profile_submit"
+	            android:layout_width="@dimen/signup_btn_width"
+            	android:layout_height="@dimen/login_edittext_height"
+				android:layout_weight="1"
+			    android:layout_marginLeft="@dimen/gen_page_margin_left"
+    			android:layout_marginRight="@dimen/gen_page_margin_right"
+	            android:text="@string/submit"
+	            style="@style/btnStyleBlue" />
+	
+	        <Button
+	            android:id="@+id/profile_cancel"
+	            android:layout_toRightOf="@+id/profile_submit"
+				android:layout_width="@dimen/signup_btn_width"
+            	android:layout_height="@dimen/login_edittext_height"
+				android:layout_weight="1"
+			    android:layout_marginLeft="@dimen/gen_page_margin_left"
+			    android:layout_marginRight="@dimen/gen_page_margin_right"
+	            android:text="@string/cancel"
+	            style="@style/btnStyleBlue"/>
+	        
+	     </LinearLayout>   
+    </LinearLayout>
     
 </ScrollView>
