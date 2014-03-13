@@ -5,8 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.android.controlmodel.MedReminderEvents;
 import com.android.entity.AccountModel;
-import com.android.entity.MedReminderEvents;
+import com.android.entity.MedReminderModel;
 import com.android.entity.ProfileModel;
 import com.android.myhealthmate.R;
 import com.android.service.AlarmReceiver;
@@ -49,21 +50,23 @@ public class test extends Activity {
 			@Override
 			public void onClick(View v) {
 				PopUP(test.this, "in 5 secs");
-				Calendar c = Calendar.getInstance();
-				c.add(Calendar.SECOND, 5);
-				Date when = c.getTime();
+//				Calendar c = Calendar.getInstance();
+//				c.add(Calendar.SECOND, 5);
+//				Date when = c.getTime();
 //				String title = "Time to take pill";
 //				String detail = "Take your aspirin pill woman";
 				String ticker = "New Health Reminder";
 				MedReminderEvents reminders = createReminders();
 				
-				MedReminderEvents.MedReminderModel reminder=reminders.findbyid(1);
-				String title=reminder.getTitle();
-				String detail=reminder.getDetail();
-				int id = reminder.getId();
+//				MedReminderModel reminder=reminders.findbyid(2);
+//				String title=reminder.getTitle();
+//				String detail=reminder.getDetail();
+//				int id = reminder.getId();
+				for (MedReminderModel reminder:reminders.getReminderList()){
+					new AlarmService(getApplicationContext()).setAlarm(reminder.getNextAlarmTime(), reminder.getTitle(),
+							reminder.getDetail(), ticker, reminder.getId());
+				}
 				
-				new AlarmService(getApplicationContext()).setAlarm(when, title,
-						detail, ticker, id);
 			}
 		};
 	}
@@ -81,23 +84,51 @@ public class test extends Activity {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
 	}
 
-	private MedReminderEvents createReminders(){
+	public MedReminderEvents createReminders(){
 		MedReminderEvents reminders = new MedReminderEvents();
+		//reminder 1
 		Date creationTime = Calendar.getInstance().getTime();
 		String title = "aspirin";
-		String detail = "take 2 pills";
+		String detail = "take 1 pill";
 		int duration = 2;
 		MedReminderEvents.DurationUnit dunit = MedReminderEvents.DurationUnit.Day;
-		int repeat = 5;
-		MedReminderEvents.DurationUnit runit = MedReminderEvents.DurationUnit.Sec;
+		int repeat = 4;
+		MedReminderEvents.DurationUnit runit = MedReminderEvents.DurationUnit.Hour;
 		reminders.addReminder(creationTime, title, detail, duration, dunit,
 				repeat, runit);
+		//reminder 2
+		Date creationTime2 = Calendar.getInstance().getTime();
+		String title2 = "title 2";
+		String detail2 = "take 2 pills";
+		int duration2 = 2;
+		MedReminderEvents.DurationUnit dunit2 = MedReminderEvents.DurationUnit.Day;
+		int repeat2 = 5;
+		MedReminderEvents.DurationUnit runit2 = MedReminderEvents.DurationUnit.Sec;
+		reminders.addReminder(creationTime2, title2, detail2, duration2, dunit2,
+				repeat2, runit2);
+		
+		//reminder 3
+	
+		Date creationTime3 = Calendar.getInstance().getTime();
+		String title3 = "title 3";
+		String detail3 = "take 3 pills";
+		int duration3 = 2;
+		MedReminderEvents.DurationUnit dunit3 = MedReminderEvents.DurationUnit.Day;
+		int repeat3 = 10;
+		MedReminderEvents.DurationUnit runit3 = MedReminderEvents.DurationUnit.Sec;
+		reminders.addReminder(creationTime3, title3, detail3, duration3, dunit3,
+				repeat3, runit3);
 		return reminders;
 	}
 	
 	private void testMedRemModle() {
-		
-		testText.setText(createReminders().findbyid(1).toString());
+		MedReminderEvents reminders=createReminders();
+		String text = "";
+		for (MedReminderModel reminder:reminders.getReminderList()){
+			text+=reminder.toString();
+			text+="\n";
+		}
+		testText.setText(text);
 	}
 
 	private void testRest() {
