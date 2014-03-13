@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 public class Reminder extends Activity {
 
+	private TextView reminderNotes;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,13 +26,32 @@ public class Reminder extends Activity {
 //
         if (linearLayout!=null)
         	linearLayout.addView(valueTV);
-		//addReminderSection();
+		
+        
 	}
 	
-	private void addReminderSection() {
+	private void createNote(){
+		LinearLayout newLinearLayout = new LinearLayout(this);
+		TextView title = new TextView(this);
+		TextView contexnt = new TextView(this);
 		
-	    
-
-	        
+		newLinearLayout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+		newLinearLayout.getChildAt(1);
+		newLinearLayout.setBackgroundResource(R.drawable.bolder);
+	//	newLinearLayout.setOrientation(VERTICAL);
 	}
+	
+	public void ButtonOnClick(View v) {
+	    reminderNotes = (TextView)findViewById(v.getId());
+	    getResources().getIdentifier("ball_red", "drawable", getPackageName());
+	   
+	    toggle_recom_box(v);
+	}
+	
+	
+	public void toggle_recom_box(View v) {
+		reminderNotes.setVisibility(reminderNotes.isShown() ? View.GONE
+				: View.VISIBLE);
+	}
+	
 }

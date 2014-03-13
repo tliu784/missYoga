@@ -121,7 +121,7 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.action_account: {
-			startActivity(new Intent(this, (new SignUp()).getClass()));
+			startActivity(new Intent(this, (new Profile()).getClass()));
 			return true;
 		}
 		case R.id.action_refresh: {
