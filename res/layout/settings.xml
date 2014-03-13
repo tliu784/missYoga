@@ -1,20 +1,122 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/gen_page_margin_left"
+    android:layout_marginRight="@dimen/gen_page_margin_right"
+    android:layout_marginTop="@dimen/gen_page_margin_top"
+    android:background="@drawable/textlines"
+    android:textSize="@dimen/login_font_size"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/gen_page_margin_top"
+        android:paddingBottom="@dimen/gen_page_margin_top"
+        android:paddingLeft="@dimen/gen_page_margin_left"
+        android:paddingRight="@dimen/gen_page_margin_right" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="settings details page" 
-            android:textSize="30dp"
-            android:textColor="@color/dark_grey"/>
+            android:text="@string/profile_name"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nicole Yu"
+            android:textColor="@color/grey"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/gen_page_margin_top"
+        android:paddingBottom="@dimen/gen_page_margin_top"
+        android:paddingLeft="@dimen/gen_page_margin_left"
+        android:paddingRight="@dimen/gen_page_margin_right" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nicoleyu2003@gmail.com"
+            android:textColor="@color/grey"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/gen_page_margin_top"
+        android:paddingBottom="@dimen/gen_page_margin_top"
+        android:paddingLeft="@dimen/gen_page_margin_left"
+        android:paddingRight="@dimen/gen_page_margin_right" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_grey" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/gen_page_margin_top"
+        android:paddingBottom="@dimen/gen_page_margin_top"
+        android:paddingLeft="@dimen/gen_page_margin_left"
+        android:paddingRight="@dimen/gen_page_margin_right" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/account_deactivate"
+            android:textColor="@color/grey"
+            android:textStyle="bold" 
+            android:clickable="true"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

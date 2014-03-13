@@ -33,6 +33,9 @@
 	<string name="cancel">Cancel</string>
 	<string name="male">Male</string>
 	<string name="female">Female</string>
+	<string name="email">Email</string>
+	<string name="account">Account</string>
+	<string name="account_deactivate">Deactivate</string>
 	
 	<string name="terry_test">terry test</string>
 	<string name="nicole_test">Nicole Test</string>
