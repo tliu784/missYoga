@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 	private Button signInButton;
 	private Button nicoleButton;
 	private Button test;
+	private Button benButton;
 	private EditText username;
 	private EditText password;
 	private TextView textSignUp;
@@ -32,8 +33,8 @@ public class MainActivity extends Activity {
 		username = (EditText) findViewById(R.id.enterUsername);
 		password = (EditText) findViewById(R.id.enterPassword);
 		signInButton = (Button) findViewById(R.id.sign_in);
-		nicoleButton = (Button) findViewById(R.id.sign_up);
-		
+		nicoleButton = (Button) findViewById(R.id.nicole);
+		benButton =  (Button) findViewById(R.id.ben);
 		test  = (Button) findViewById(R.id.test);
 		
 		textSignUp = (TextView) findViewById(R.id.txt_link_sign_up);
@@ -46,6 +47,18 @@ public class MainActivity extends Activity {
 		
 		test.setOnClickListener(getTestClickListener());
 		
+		benButton.setOnClickListener(getBenPageClickListener());
+		
+	}
+	
+	private OnClickListener getBenPageClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Reminder benTest = new Reminder();
+				SwithActivity(MainActivity.this, benTest);
+				}
+			};
 	}
 	
 	private OnClickListener getNicolePageClickListener() {

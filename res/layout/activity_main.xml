@@ -112,7 +112,7 @@
 
                 
         <Button
-            android:id="@+id/sign_up"
+            android:id="@+id/nicole"
             android:layout_height="@dimen/login_edittext_height"
    			android:layout_width="@dimen/login_edittext_width"
             android:background="@color/login_btn_blue"
@@ -127,6 +127,16 @@
             android:layout_height="wrap_content"
             android:background="@color/text_shadow_white"
             android:text="test"
+            android:textStyle="bold" />
+        
+         <Button
+            android:id="@+id/ben"
+            android:layout_height="@dimen/login_edittext_height"
+   			android:layout_width="@dimen/login_edittext_width"
+            android:background="@color/login_btn_blue"
+            android:textColor="@color/sign_in_textcolor_darkblue"
+            android:text="@string/ben_test"
+            android:gravity="center"
             android:textStyle="bold" />
     </LinearLayout>
 
