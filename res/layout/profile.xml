@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
+    android:layout_marginTop="@dimen/gen_page_margin_top"
     android:layout_marginLeft="@dimen/gen_page_margin_left"
     android:layout_marginRight="@dimen/gen_page_margin_right">
  
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:columnCount="2"
         android:padding="8dip"
+        android:background="@drawable/textlines"
         android:useDefaultMargins="true" >
  
         <TextView
