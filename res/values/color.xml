@@ -14,4 +14,6 @@
     <color name="light_black">#424242</color>
     <color name="login_btn_blue">#90c5ef</color>
     <color name="sign_in_textcolor_darkblue">#0073cf</color>
+    <color name="green">#01DF01</color>
+    <color name="red">#DF0101</color>
 </resources>
