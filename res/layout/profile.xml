@@ -20,6 +20,7 @@
 	    <GridLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
 	        android:columnCount="2"
 	        android:padding="8dip"
 	        android:useDefaultMargins="true" >
