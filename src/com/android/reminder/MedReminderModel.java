@@ -3,13 +3,11 @@ package com.android.reminder;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-
-import android.util.Log;
-
 import com.google.gson.Gson;
 
-public class MedReminderModel implements Comparable<MedReminderModel>, Serializable {
-	
+public class MedReminderModel implements Comparable<MedReminderModel>,
+		Serializable {
+
 	private static final long serialVersionUID = 1571465180592233361L;
 	private int id;
 	private Date startTime;
@@ -17,17 +15,15 @@ public class MedReminderModel implements Comparable<MedReminderModel>, Serializa
 	private String detail;
 	private int duration;
 	private DurationUnit dunit;
-	private  int repeat;
-	private  DurationUnit runit;
+	private int repeat;
+	private DurationUnit runit;
 	private Date nextAlarmTime;
 	private boolean active = true;
-
 
 	public enum DurationUnit implements Serializable {
 		Day, Hour, Min, Sec;
 	}
 
-	
 	public MedReminderModel(int id, Date startTime, String title,
 			String detail, int duration, DurationUnit dunit, int repeat,
 			DurationUnit runit) {
@@ -49,20 +45,32 @@ public class MedReminderModel implements Comparable<MedReminderModel>, Serializa
 
 	public void setNextTime() {
 		Date now = new Date();
-		Log.d("before set next of "+ title,nextAlarmTime.toString());
 		while (nextAlarmTime.compareTo(now) <= 0) {
-			int i=0;
-			Log.d("while count=",Integer.toString(i++));
 			nextAlarmTime = addDuration(nextAlarmTime, repeat, runit);
 		}
 		autodeactivate();
-		Log.d("after set next of "+ title,nextAlarmTime.toString());
 	}
 
 	private void autodeactivate() {
-		if (nextAlarmTime.compareTo(getEndTime()) > 0) {
-			active = false;
-		}
+		if (duration > 0)
+			if (nextAlarmTime.compareTo(getEndTime()) > 0)
+				active = false;
+	}
+	
+	public void setAlways(){
+		duration=-1;
+	}
+	
+	public boolean isAlawys(){
+		return (duration<=0);
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 
 	public void setActive(boolean isActive) {
