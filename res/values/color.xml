@@ -7,6 +7,7 @@
     <color name="white">#FFFFFF</color>
     <color name="light_grey">#D8D8D8</color>
     <color name="slight_grey">#E6E6E6</color>
+    <color name="inner_grey">#fafafa</color>
     <color name="text_shadow">#7F000000</color>
     <color name="text_shadow_white">#FFFFFF</color>
     <color name="black">#000000</color>

@@ -30,11 +30,10 @@
         <item name="android:padding">5dip</item>
     </style>
 
-    
     <style name="roundcorner">
-         <item name="android:background">@drawable/round_corner</item>
+        <item name="android:background">@drawable/round_corner</item>
     </style>
-    
+
     <style name="contentfield">
         <item name="android:textSize">14sp</item>
         <item name="android:height">50sp</item>
@@ -48,7 +47,7 @@
         <item name="android:padding">5dip</item>
         <item name="android:paddingBottom">10sp</item>
     </style>
-    
+
     <style name="loginDialog">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@android:color/black</item>
@@ -61,39 +60,64 @@
         <item name="android:paddingBottom">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
     </style>
-    
+
     <style name="profile_textview">
-        <item name="android:textSize">@dimen/profile_text_size</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
+
     <style name="profile_edittext">
-        <item name="android:textSize">@dimen/profile_text_size</item>
         <item name="android:textColor">@android:color/black</item>
-        
-        <!--   before user clicking "edit", the underline is transparent, 
+
+        <!--
+        before user clicking "edit", the underline is transparent, 
         which looks like the text box is not editable
         this property should be changed after user clicking "edit"
         <item name="android:background">@android:color/transparent</item>
-         -->
+        -->
         <item name="android:textCursorDrawable">@null</item>
         <item name="android:singleLine">true</item>
         <item name="android:layout_gravity">fill_horizontal</item>
         <item name="android:ems">10</item>
     </style>
-    
+
     <style name="btnStyleBlue" parent="@android:style/Widget.Button">
-       <item name="android:textSize">16sp</item>
-       <item name="android:textStyle">bold</item>
-       <item name="android:textColor">#FFFFFF</item>
-       <item name="android:gravity">center</item>
-       <item name="android:shadowColor">#000000</item>
-       <item name="android:shadowDx">1</item>
-       <item name="android:shadowDy">1</item>
-       <item name="android:shadowRadius">0.6</item>
-       <item name="android:background">@drawable/custom_btn_blue</item>
-       <item name="android:padding">10dip</item>
-   </style>
-    
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+        <item name="android:background">@drawable/custom_btn_blue</item>
+        <item name="android:padding">10dip</item>
+    </style>
+
+    <style name="btnStyleSettings" parent="@android:style/Widget.Button">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.6</item>
+        <item name="android:background">@drawable/custom_btn_blue</item>
+        <item name="android:padding">4dip</item>
+    </style>
+
+    <style name="accountSettingsTextbox">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/rect_text_edit</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
 </resources>

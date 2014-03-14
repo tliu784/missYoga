@@ -30,12 +30,18 @@
 	<string name="no">No</string>
 	<string name="yes">Yes</string>
 	<string name="submit">Submit</string>
+	<string name="save">Save</string>
+	<string name="confirm">Confirm</string>
 	<string name="cancel">Cancel</string>
 	<string name="male">Male</string>
 	<string name="female">Female</string>
 	<string name="email">Email</string>
 	<string name="account">Account</string>
 	<string name="account_deactivate">Deactivate</string>
+	<string name="deactivate_account">Please enter password to deactivate account</string>
+	<string name="btn_deactivate">Deactivate account</string>
+	<string name="settings_change_name">Change name</string>
+	<string name="settings_change_password">Change password</string>
 	
 	<string name="terry_test">terry test</string>
 	<string name="nicole_test">Nicole Test</string>
