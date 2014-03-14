@@ -110,11 +110,7 @@ public class test extends Activity {
 			@Override
 			public void onClick(View v) {
 				String filename = "medreminders.obj";
-//				MedReminderList list = (MedReminderList) FileOperation.read(
-//						filename, getApplicationContext());
-				ArrayList<MedReminderModel> list=reminders.getReminderList();
-				testText.setMovementMethod(new ScrollingMovementMethod());
-				testText.setText(new Gson().toJson(list));
+				testDelete(filename);
 			}
 		};
 	}
