@@ -7,16 +7,14 @@ import android.content.Context;
 
 import com.android.service.FileOperation;
 
-public class MedReminderController  {
-
+public class MedReminderController {
 
 	private static final String FILENAME = "medreminders.obj";
 	private static MedReminderController instance = new MedReminderController();
-	private static boolean initialized=false;
-	private MedReminderList reminderList=new MedReminderList();
+	private static boolean initialized = false;
+	private MedReminderList reminderList = new MedReminderList();
 	private Context context;
 	private AlarmService alarmService;
-	
 
 	protected MedReminderController() {
 
@@ -28,18 +26,16 @@ public class MedReminderController  {
 			alarmService = new AlarmService(context);
 			load();
 		}
-		for (MedReminderModel reminder:reminderList.getReminderList()){
+		for (MedReminderModel reminder : reminderList.getReminderList()) {
 			reminder.setNextTime();
-			if (reminder.isActive()){
+			if (reminder.isActive()) {
 				alarmService.setAlarm(reminder);
 			}
 			sortByNext();
 		}
-		initialized=true;
-		
+		initialized = true;
+
 	}
-	
-	
 
 	public Context getContext() {
 		return context;
@@ -50,9 +46,10 @@ public class MedReminderController  {
 	}
 
 	private void load() {
-		MedReminderList storedEvents = (MedReminderList) FileOperation.read(FILENAME, context);
+		MedReminderList storedEvents = (MedReminderList) FileOperation.read(
+				FILENAME, context);
 		if (storedEvents != null) {
-			reminderList=storedEvents;
+			reminderList = storedEvents;
 		}
 	}
 
@@ -61,12 +58,11 @@ public class MedReminderController  {
 		return instance;
 	}
 
-
-
 	public void addReminder(Date creationTime, String title, String detail,
-			int duration, MedReminderModel.DurationUnit dunit, int repeat, MedReminderModel.DurationUnit runit) {
+			int duration, MedReminderModel.DurationUnit dunit, int repeat,
+			MedReminderModel.DurationUnit runit) {
 		reminderList.incrementalCount();
-		int id =reminderList.getCount();
+		int id = reminderList.getCount();
 		MedReminderModel newReminder = new MedReminderModel(id, creationTime,
 				title, detail, duration, dunit, repeat, runit);
 		reminderList.getReminderList().add(newReminder);
@@ -97,24 +93,30 @@ public class MedReminderController  {
 		save();
 	}
 
-	public void activate(int reminderId){
-		//to be implemented
-	}
-	
-	public void deactivate(int reminderID){
-		//to be implemented
-	}
-	
-	public void postAlarm(int reminderId) {
+	//must call this after update an existing reminder
+	public void activate(int reminderId) {
 		MedReminderModel reminder = findbyid(reminderId);
+		reminder.setActive(true);
 		reminder.setNextTime();
-		sortByNext();
-		
-		
 		if (reminder.isActive()) {
 			alarmService.setAlarm(reminder);
 		}
 	}
-	
+
+	public void deactivate(int reminderId) {
+		MedReminderModel reminder = findbyid(reminderId);
+		reminder.setActive(false);
+		alarmService.cancelAlarm(reminder);
+	}
+
+	public void postAlarm(int reminderId) {
+		MedReminderModel reminder = findbyid(reminderId);
+		reminder.setNextTime();
+		sortByNext();
+
+		if (reminder.isActive()) {
+			alarmService.setAlarm(reminder);
+		}
+	}
 
 }
