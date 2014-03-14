@@ -2,21 +2,24 @@ package com.android.myhealthmate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.android.controlmodel.MedReminderEvents;
 import com.android.entity.AccountModel;
-import com.android.entity.MedReminderModel;
 import com.android.entity.ProfileModel;
 import com.android.myhealthmate.R;
-import com.android.service.AlarmReceiver;
-import com.android.service.AlarmService;
+import com.android.reminder.AlarmService;
+import com.android.reminder.MedReminderController;
+import com.android.reminder.MedReminderList;
+import com.android.reminder.MedReminderModel;
 import com.android.service.FileOperation;
-import com.android.service.RestCallHandler;
+import com.google.gson.Gson;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,6 +34,8 @@ public class test extends Activity {
 	private Button test1;
 	private Button test2;
 	private TextView testText;
+	private MedReminderController reminders;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,30 +48,16 @@ public class test extends Activity {
 		test1.setOnClickListener(getTest1ClickListener());
 		test2.setOnClickListener(getTest2ClickListener());
 		testText = (TextView) findViewById(R.id.terry_test_box);
+
+		
 	}
 
 	private OnClickListener getTest1ClickListener() {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				PopUP(test.this, "in 5 secs");
-//				Calendar c = Calendar.getInstance();
-//				c.add(Calendar.SECOND, 5);
-//				Date when = c.getTime();
-//				String title = "Time to take pill";
-//				String detail = "Take your aspirin pill woman";
-				String ticker = "New Health Reminder";
-				MedReminderEvents reminders = createReminders();
-				
-//				MedReminderModel reminder=reminders.findbyid(2);
-//				String title=reminder.getTitle();
-//				String detail=reminder.getDetail();
-//				int id = reminder.getId();
-				for (MedReminderModel reminder:reminders.getReminderList()){
-					new AlarmService(getApplicationContext()).setAlarm(reminder.getNextAlarmTime(), reminder.getTitle(),
-							reminder.getDetail(), ticker, reminder.getId());
-				}
-				
+				//testReminderController();
+				testReminderController();
 			}
 		};
 	}
@@ -75,7 +66,12 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testMedRemModle();
+				String filename = "medreminders.obj";
+//				MedReminderList list = (MedReminderList) FileOperation.read(
+//						filename, getApplicationContext());
+				ArrayList<MedReminderModel> list=reminders.getReminderList();
+				testText.setMovementMethod(new ScrollingMovementMethod());
+				testText.setText(new Gson().toJson(list));
 			}
 		};
 	}
@@ -83,50 +79,77 @@ public class test extends Activity {
 	private void PopUP(Activity act, String content) {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
 	}
-
-	public MedReminderEvents createReminders(){
-		MedReminderEvents reminders = new MedReminderEvents();
-		//reminder 1
+	
+	private void testReminderController(){
+		testDelete("medreminders.obj");
+		reminders = MedReminderController.getInstance();
+		reminders.init(this.getApplicationContext());
+		addTestReminders(reminders);
+//		MedReminderModel reminder=reminders.findbyid(2);
+//	
+//		new AlarmService(this.getApplicationContext()).setAlarm(reminder);
+		testText.setText(Integer.toString(MedReminderController.getInstance().getReminderList().size()));
+	}
+	
+	private void testAlarm(){
 		Date creationTime = Calendar.getInstance().getTime();
 		String title = "aspirin";
 		String detail = "take 1 pill";
 		int duration = 2;
-		MedReminderEvents.DurationUnit dunit = MedReminderEvents.DurationUnit.Day;
+		MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Day;
 		int repeat = 4;
-		MedReminderEvents.DurationUnit runit = MedReminderEvents.DurationUnit.Hour;
+		MedReminderModel.DurationUnit runit = MedReminderModel.DurationUnit.Sec;
+		MedReminderModel reminder=new MedReminderModel(1,creationTime, title, detail, duration, dunit,
+				repeat, runit);
+		new AlarmService(this.getApplicationContext()).setAlarm(reminder);
+		testText.setText(reminder.toString());
+	}
+
+	public void addTestReminders(MedReminderController reminders) {
+		
+		if (reminders.getReminderList().size()>0)
+			return;
+		// reminder 1
+		Date creationTime = Calendar.getInstance().getTime();
+		String title = "aspirin";
+		String detail = "take 1 pill";
+		int duration = 2;
+		MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Day;
+		int repeat = 4;
+		MedReminderModel.DurationUnit runit = MedReminderModel.DurationUnit.Hour;
 		reminders.addReminder(creationTime, title, detail, duration, dunit,
 				repeat, runit);
-		//reminder 2
+		// reminder 2
 		Date creationTime2 = Calendar.getInstance().getTime();
 		String title2 = "title 2";
 		String detail2 = "take 2 pills";
 		int duration2 = 2;
-		MedReminderEvents.DurationUnit dunit2 = MedReminderEvents.DurationUnit.Day;
+		MedReminderModel.DurationUnit dunit2 = MedReminderModel.DurationUnit.Day;
 		int repeat2 = 5;
-		MedReminderEvents.DurationUnit runit2 = MedReminderEvents.DurationUnit.Sec;
-		reminders.addReminder(creationTime2, title2, detail2, duration2, dunit2,
-				repeat2, runit2);
-		
-		//reminder 3
-	
+		MedReminderModel.DurationUnit runit2 = MedReminderModel.DurationUnit.Sec;
+		reminders.addReminder(creationTime2, title2, detail2, duration2,
+				dunit2, repeat2, runit2);
+
+		// reminder 3
+
 		Date creationTime3 = Calendar.getInstance().getTime();
 		String title3 = "title 3";
 		String detail3 = "take 3 pills";
 		int duration3 = 2;
-		MedReminderEvents.DurationUnit dunit3 = MedReminderEvents.DurationUnit.Day;
+		MedReminderModel.DurationUnit dunit3 = MedReminderModel.DurationUnit.Day;
 		int repeat3 = 10;
-		MedReminderEvents.DurationUnit runit3 = MedReminderEvents.DurationUnit.Sec;
-		reminders.addReminder(creationTime3, title3, detail3, duration3, dunit3,
-				repeat3, runit3);
-		return reminders;
+		MedReminderModel.DurationUnit runit3 = MedReminderModel.DurationUnit.Sec;
+		reminders.addReminder(creationTime3, title3, detail3, duration3,
+				dunit3, repeat3, runit3);
+		
 	}
-	
+
 	private void testMedRemModle() {
-		MedReminderEvents reminders=createReminders();
+	
 		String text = "";
-		for (MedReminderModel reminder:reminders.getReminderList()){
-			text+=reminder.toString();
-			text+="\n";
+		for (MedReminderModel reminder : reminders.getReminderList()) {
+			text += reminder.toString();
+			text += "\n";
 		}
 		testText.setText(text);
 	}
@@ -205,8 +228,8 @@ public class test extends Activity {
 		}
 	}
 
-	private void testDelete() {
-		String filename = "filename.obj";
+	private void testDelete(String filename) {
+
 		String status;
 		if (FileOperation.delete(filename, getApplicationContext())) {
 			status = "yes";

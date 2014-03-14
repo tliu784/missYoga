@@ -1,39 +1,76 @@
-package com.android.entity;
+package com.android.reminder;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.android.controlmodel.MedReminderEvents.DurationUnit;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
-public class MedReminderModel implements Comparable<MedReminderModel> {
-	int id;
-	Date creationTime;
-	String title;
-	String detail;
-	int duration;
-	DurationUnit dunit;
-	int repeat;
-	DurationUnit runit;
-	Date nextAlarmTime;
+public class MedReminderModel implements Comparable<MedReminderModel>, Serializable {
+	
+	private static final long serialVersionUID = 1571465180592233361L;
+	private int id;
+	private Date startTime;
+	private String title;
+	private String detail;
+	private int duration;
+	private DurationUnit dunit;
+	private  int repeat;
+	private  DurationUnit runit;
+	private Date nextAlarmTime;
+	private boolean active = true;
 
-	public MedReminderModel(int id, Date creationTime, String title,
+
+	public enum DurationUnit implements Serializable {
+		Day, Hour, Min, Sec;
+	}
+
+	
+	public MedReminderModel(int id, Date startTime, String title,
 			String detail, int duration, DurationUnit dunit, int repeat,
 			DurationUnit runit) {
 		this.id = id;
-		this.creationTime = creationTime;
+		this.startTime = startTime;
 		this.title = title;
 		this.detail = detail;
 		this.duration = duration;
 		this.dunit = dunit;
 		this.repeat = repeat;
 		this.runit = runit;
-		this.nextAlarmTime = addDuration(this.creationTime, repeat, runit);
+		this.nextAlarmTime = addDuration(this.startTime, repeat, runit);
+
+	}
+
+	public Date getEndTime() {
+		return addDuration(startTime, duration, dunit);
 	}
 
 	public void setNextTime() {
-		nextAlarmTime = addDuration(nextAlarmTime, duration, dunit);
+		Date now = new Date();
+		Log.d("before set next of "+ title,nextAlarmTime.toString());
+		while (nextAlarmTime.compareTo(now) <= 0) {
+			int i=0;
+			Log.d("while count=",Integer.toString(i++));
+			nextAlarmTime = addDuration(nextAlarmTime, repeat, runit);
+		}
+		autodeactivate();
+		Log.d("after set next of "+ title,nextAlarmTime.toString());
+	}
+
+	private void autodeactivate() {
+		if (nextAlarmTime.compareTo(getEndTime()) > 0) {
+			active = false;
+		}
+	}
+
+	public void setActive(boolean isActive) {
+		active = isActive;
+	}
+
+	public boolean isActive() {
+		return active;
 	}
 
 	@Override
