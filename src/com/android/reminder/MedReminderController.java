@@ -3,9 +3,7 @@ package com.android.reminder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-
 import android.content.Context;
-import android.util.Log;
 
 import com.android.service.FileOperation;
 
@@ -110,13 +108,11 @@ public class MedReminderController  {
 	public void postAlarm(int reminderId) {
 		MedReminderModel reminder = findbyid(reminderId);
 		reminder.setNextTime();
-		Log.d("post alarm 1st", reminder.toString());
 		sortByNext();
 		
 		
 		if (reminder.isActive()) {
 			alarmService.setAlarm(reminder);
-			Log.d("post alarm last", reminder.toString());
 		}
 	}
 	
