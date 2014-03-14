@@ -7,10 +7,13 @@
     <color name="white">#FFFFFF</color>
     <color name="light_grey">#D8D8D8</color>
     <color name="slight_grey">#E6E6E6</color>
+    <color name="inner_grey">#fafafa</color>
     <color name="text_shadow">#7F000000</color>
     <color name="text_shadow_white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="light_black">#424242</color>
     <color name="login_btn_blue">#90c5ef</color>
     <color name="sign_in_textcolor_darkblue">#0073cf</color>
+    <color name="green">#01DF01</color>
+    <color name="red">#DF0101</color>
 </resources>

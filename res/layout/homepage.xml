@@ -31,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_dialog_icon_bp"
                 android:text=" Blood Pressure "
-                android:textColor="@color/grey" />
+                android:textStyle="bold"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/bp_unit"
@@ -88,7 +89,8 @@
                     android:gravity="center"
                     android:text=" 115 "
                     android:textSize="@dimen/msmall_font_size"
-                    android:textStyle="bold" />
+                    android:textStyle="bold" 
+                    android:background="#DF0101"/>
             </LinearLayout>
 
             <LinearLayout
@@ -155,7 +157,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_dialog_icon_hr"
                 android:text=" Heart Rate "
-                android:textColor="@color/grey" />
+                android:textStyle="bold"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/hr_unit"
@@ -234,6 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 80 "
+                    android:textColor="@color/red"
                     android:textSize="@dimen/msmall_font_size"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -278,7 +282,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_dialog_icon_sleep"
                 android:text=" Sleep "
-                android:textColor="@color/grey" />
+                android:textStyle="bold"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/sle_unit"
@@ -401,7 +406,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_dialog_icon_activity"
                 android:text=" Activity "
-                android:textColor="@color/grey" />
+                android:textStyle="bold"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/act_unit"
@@ -425,6 +431,7 @@
             android:clickable="true"
             android:orientation="horizontal"
             android:paddingTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/gen_page_margin_bottom"
             android:textSize="@dimen/font_size" >
 
             <TextView

@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/gen_page_margin_left"
-    android:layout_marginRight="@dimen/gen_page_margin_right"
+    android:layout_height="wrap_content" 
     android:layout_marginTop="@dimen/gen_page_margin_top"
-    android:background="@drawable/textlines"
-    android:textSize="@dimen/login_font_size"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin">
+    
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/textlines"
         android:clickable="true"
         android:orientation="vertical"
-        android:paddingTop="@dimen/gen_page_margin_top"
         android:paddingBottom="@dimen/gen_page_margin_top"
         android:paddingLeft="@dimen/gen_page_margin_left"
-        android:paddingRight="@dimen/gen_page_margin_right" >
+        android:paddingRight="@dimen/gen_page_margin_right"
+        android:paddingTop="@dimen/gen_page_margin_top" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,89 +38,317 @@
             android:textColor="@color/grey"
             android:textStyle="bold" />
     </LinearLayout>
+    <!-- change name section -->
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/light_grey" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/inner_textlines"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gen_page_margin_top"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/login_padding_left_right"
+            android:paddingRight="@dimen/login_padding_left_right" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:text="@string/settings_change_name"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/enterfirstname"
+                style="@style/accountSettingsTextbox"
+                android:layout_width="@dimen/settings_edittext_width"
+                android:layout_height="@dimen/settings_edittext_height"
+                android:hint="First name" /> <!-- this should be auto-fill with user first name and editable -->
+
+            <EditText
+                android:id="@+id/enterlastname"
+                style="@style/accountSettingsTextbox"
+                android:layout_width="@dimen/settings_edittext_width"
+                android:layout_height="@dimen/settings_edittext_height"
+                android:hint="Last name"
+                android:maxLines="1" /> <!-- this should be auto-fill with user last name and editable -->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/settings_name_save"
+                style="@style/btnStyleSettings"
+                android:layout_width="@dimen/settings_save_btn_width"
+                android:layout_height="@dimen/settings_save_btn_height"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right"
+                android:layout_weight="1"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/settings_name_cancel"
+                style="@style/btnStyleSettings"
+                android:layout_width="@dimen/settings_save_btn_width"
+                android:layout_height="@dimen/settings_save_btn_height"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right"
+                android:layout_toRightOf="@+id/profile_submit"
+                android:layout_weight="1"
+                android:text="@string/cancel" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- end of change name section -->
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@drawable/textlines"
         android:orientation="vertical"
-        android:paddingTop="@dimen/gen_page_margin_top"
         android:paddingBottom="@dimen/gen_page_margin_top"
         android:paddingLeft="@dimen/gen_page_margin_left"
-        android:paddingRight="@dimen/gen_page_margin_right" >
+        android:paddingRight="@dimen/gen_page_margin_right"
+        android:paddingTop="@dimen/gen_page_margin_top" >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/email"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:clickable="true"
+            android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="nicoleyu2003@gmail.com"
-            android:textColor="@color/grey"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/light_grey" />
+    <!-- change password section -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/inner_textlines"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gen_page_margin_top"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/login_padding_left_right"
+            android:paddingRight="@dimen/login_padding_left_right" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:text="@string/settings_change_password"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/enteroldpwd"
+                style="@style/accountSettingsTextbox"
+                android:layout_width="@dimen/settings_edittext_width"
+                android:layout_height="@dimen/settings_edittext_height"
+                android:hint="Old password"
+                android:maxLines="1"
+                android:password="true" />
+
+            <EditText
+                android:id="@+id/enterpwd"
+                style="@style/accountSettingsTextbox"
+                android:layout_width="@dimen/settings_edittext_width"
+                android:layout_height="@dimen/settings_edittext_height"
+                android:hint="New password"
+                android:maxLines="1"
+                android:password="true" />
+
+            <EditText
+                android:id="@+id/enterpwd2"
+                style="@style/accountSettingsTextbox"
+                android:layout_width="@dimen/settings_edittext_width"
+                android:layout_height="@dimen/settings_edittext_height"
+                android:hint="Re-enter new password"
+                android:maxLines="1"
+                android:password="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/settings_pwd_save"
+                style="@style/btnStyleSettings"
+                android:layout_width="@dimen/settings_save_btn_width"
+                android:layout_height="@dimen/settings_save_btn_height"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right"
+                android:layout_weight="1"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/settings_pwd_cancel"
+                style="@style/btnStyleSettings"
+                android:layout_width="@dimen/settings_save_btn_width"
+                android:layout_height="@dimen/settings_save_btn_height"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right"
+                android:layout_toRightOf="@+id/profile_submit"
+                android:layout_weight="1"
+                android:text="@string/cancel" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- end of change password section -->
+
+
+    <!-- deactivate account -->
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@drawable/textlines"
         android:orientation="vertical"
-        android:paddingTop="@dimen/gen_page_margin_top"
         android:paddingBottom="@dimen/gen_page_margin_top"
         android:paddingLeft="@dimen/gen_page_margin_left"
-        android:paddingRight="@dimen/gen_page_margin_right" >
+        android:paddingRight="@dimen/gen_page_margin_right"
+        android:paddingTop="@dimen/gen_page_margin_top" >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/password"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:clickable="true"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:clickable="true"
+                    android:text="@string/account_deactivate"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nicoleyu2003@gmail.com"
+                android:textColor="@color/grey"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/light_grey" />
+    <!-- deactivate account section -->
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/gen_page_margin_top"
-        android:paddingBottom="@dimen/gen_page_margin_top"
-        android:paddingLeft="@dimen/gen_page_margin_left"
-        android:paddingRight="@dimen/gen_page_margin_right" >
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@drawable/inner_textlines"
+        android:orientation="vertical" >
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gen_page_margin_top"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/login_padding_left_right"
+            android:paddingRight="@dimen/login_padding_left_right" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:text="@string/deactivate_account"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/enterlastname"
+                style="@style/accountSettingsTextbox"
+                android:layout_width="@dimen/settings_edittext_width"
+                android:layout_height="@dimen/settings_edittext_height"
+                android:hint="enter password"
+                android:maxLines="1"
+                android:password="true" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/account"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="@string/account_deactivate"
-            android:textColor="@color/grey"
-            android:textStyle="bold" 
-            android:clickable="true"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+            android:orientation="horizontal" >
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/settings_account_save"
+                style="@style/btnStyleSettings"
+                android:layout_width="@dimen/settings_save_btn_width"
+                android:layout_height="@dimen/settings_save_btn_height"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right"
+                android:layout_weight="1"
+                android:text="@string/confirm" />
+
+            <Button
+                android:id="@+id/settings_account_cancel"
+                style="@style/btnStyleSettings"
+                android:layout_width="@dimen/settings_save_btn_width"
+                android:layout_height="@dimen/settings_save_btn_height"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right"
+                android:layout_toRightOf="@+id/profile_submit"
+                android:layout_weight="1"
+                android:text="@string/cancel" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- end of deactivate account section -->
 
 </LinearLayout>
+</ScrollView>
