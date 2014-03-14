@@ -15,6 +15,10 @@ import com.android.reminder.MedReminderList;
 import com.android.reminder.MedReminderModel;
 import com.android.service.FileOperation;
 import com.google.gson.Gson;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphViewDataInterface;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +28,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,8 +53,46 @@ public class test extends Activity {
 		test1.setOnClickListener(getTest1ClickListener());
 		test2.setOnClickListener(getTest2ClickListener());
 		testText = (TextView) findViewById(R.id.terry_test_box);
-
+		createChart();
 		
+	}
+	
+	private void createChart(){
+		// init example series data
+		GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
+		      new GraphViewData(1, 2.0d)
+		      , new GraphViewData(2, 1.5d)
+		      , new GraphViewData(3, 2.5d)
+		      , new GraphViewData(4, 1.0d)
+		});
+		 
+		GraphView graphView = new LineGraphView(
+		      this // context
+		      , "GraphViewDemo" // heading
+		);
+		graphView.addSeries(exampleSeries); // data
+		 
+		LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
+		layout.addView(graphView);
+	}
+	
+	public class GraphViewData implements GraphViewDataInterface {
+	    private double x,y;
+
+	    public GraphViewData(double x, double y) {
+	        this.x = x;
+	        this.y = y;
+	    }
+
+	    @Override
+	    public double getX() {
+	        return this.x;
+	    }
+
+	    @Override
+	    public double getY() {
+	        return this.y;
+	    }
 	}
 
 	private OnClickListener getTest1ClickListener() {

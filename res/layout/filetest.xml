@@ -95,5 +95,11 @@
 		android:scrollbars = "vertical"
         android:text="@string/text1" >
     </TextView>
+    
+    <LinearLayout
+        android:id="@+id/graph1"
+        android:layout_width="fill_parent"
+        android:layout_height="250dip"
+        android:orientation="vertical" />
 
 </LinearLayout>
