@@ -14,16 +14,20 @@ import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderList;
 import com.android.reminder.MedReminderModel;
 import com.android.service.FileOperation;
+import com.android.trend.ChartHelper;
 import com.google.gson.Gson;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewDataInterface;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
+import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -57,24 +61,42 @@ public class test extends Activity {
 		
 	}
 	
-	private void createChart(){
+	private GraphView createChart(){
 		// init example series data
 		GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
 		      new GraphViewData(1, 2.0d)
 		      , new GraphViewData(2, 1.5d)
 		      , new GraphViewData(3, 2.5d)
 		      , new GraphViewData(4, 1.0d)
+		      , new GraphViewData(5, 1.7d)
+		      , new GraphViewData(6, 2.1d)
+		      , new GraphViewData(7, 1.7d)
 		});
+		
+		
+		int xValue=2;
+		double maxY=2.5;
+		
+		GraphViewData[] vData=new GraphViewData[2];
+		vData[0]=new GraphViewData(xValue, 0);
+		vData[1]=new GraphViewData(xValue, maxY);
+		GraphViewSeries vSeries=new GraphViewSeries("hi",new GraphViewSeriesStyle(Color.rgb(255, 100, 100), 3),vData);
+		
+		
 		 
 		GraphView graphView = new LineGraphView(
 		      this // context
 		      , "GraphViewDemo" // heading
 		);
 		graphView.addSeries(exampleSeries); // data
-		 
+		graphView.addSeries(vSeries); 
 		LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
 		layout.addView(graphView);
+		
+		return graphView;
 	}
+	
+
 	
 	public class GraphViewData implements GraphViewDataInterface {
 	    private double x,y;
@@ -100,7 +122,7 @@ public class test extends Activity {
 			@Override
 			public void onClick(View v) {
 				//testReminderController();
-				testReminderController();
+				testChartHelper();
 			}
 		};
 	}
@@ -117,6 +139,14 @@ public class test extends Activity {
 
 	private void PopUP(Activity act, String content) {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
+	}
+	
+	private void testChartHelper(){
+		int[] data={10,20,30,40,50};
+		int floor=1;
+		int ceiling=100;
+		int[] result=new ChartHelper().scaleToRange(data, floor, ceiling);
+		Log.d("test helper", result.toString());
 	}
 	
 	private void testReminderController(){
