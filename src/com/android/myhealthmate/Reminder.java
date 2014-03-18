@@ -39,7 +39,7 @@ public class Reminder extends Activity {
 	
 	private void createReminderSections(){
 		for (MedReminderModel reminder : mrcInstance.getReminderList()) {
-			ReminderViewController singleReminderSection = new ReminderViewController(reminder,getApplicationContext(),mrcInstance);
+			ReminderViewController singleReminderSection = new ReminderViewController(reminder,getApplicationContext(),mrcInstance,Reminder.this);
 			linearLayout.addView(singleReminderSection.getReminderSection());
 		}
 	}

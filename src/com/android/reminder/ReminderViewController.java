@@ -34,7 +34,7 @@ public class ReminderViewController {
 	private Reminder callbackAct;
 
 	public ReminderViewController(MedReminderModel reminder, Context context,
-			MedReminderController controller) {
+			MedReminderController controller, Reminder reminderAct) {
 		this.reminder = reminder;
 		this.context = context;
 		this.mrcInstance = controller;
@@ -42,29 +42,24 @@ public class ReminderViewController {
 		this.detailSec = new DetailSection();
 		this.editSec = new EditSection();
 		this.reminderSection = new LinearLayout(context);
-		
+		this.callbackAct = reminderAct;
 
 		// call 3 constructors
 		// call 3 set listeners
 		titleSec.setListeners();
 		editSec.setListeners();
 
-
-		reminderSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-				LayoutParams.WRAP_CONTENT));
+		reminderSection.setLayoutParams(new LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		reminderSection.setOrientation(LinearLayout.VERTICAL);
 		reminderSection.addView(titleSec.titleSection);
 		reminderSection.addView(detailSec.detailSection);
 		reminderSection.addView(editSec.editSection);
 	}
-	
-	
 
 	public LinearLayout getReminderSection() {
 		return reminderSection;
 	}
-
-
 
 	class TitleSection {
 		LinearLayout titleSection;
@@ -137,10 +132,9 @@ public class ReminderViewController {
 								.isShown() ? View.GONE : View.VISIBLE);
 						editButton.setVisibility(editButton.isShown() ? View.GONE
 								: View.VISIBLE);
-//						callbackAct.closePrevious(currentDetailSection,
-//								editButton, currentEditSection);
-//				
-						}
+						callbackAct.closePrevious(currentDetailSection,
+								editButton, currentEditSection);
+					}
 				}
 			});
 		}
@@ -371,8 +365,8 @@ public class ReminderViewController {
 			startDate.setBackgroundResource(R.drawable.textlines);
 			startDate.setTextSize(20);
 
-			editDate.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.WRAP_CONTENT));
+			editDate.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			editDate.setHint("yyyymmdd");
 
 			startDateSection.addView(startDate);

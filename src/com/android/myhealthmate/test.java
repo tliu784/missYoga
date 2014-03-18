@@ -145,8 +145,8 @@ public class test extends Activity {
 		int[] data={10,20,30,40,50};
 		int floor=1;
 		int ceiling=100;
-		int[] result=new ChartHelper().scaleToRange(data, floor, ceiling);
-		Log.d("test helper", result.toString());
+//		int[] result=new ChartHelper().scaleToRange(data, floor, ceiling);
+//		Log.d("test helper", result.toString());
 	}
 	
 	private void testReminderController(){
