@@ -35,7 +35,8 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 		this.dunit = dunit;
 		this.repeat = repeat;
 		this.runit = runit;
-		this.nextAlarmTime = addDuration(this.startTime, repeat, runit);
+		this.nextAlarmTime = startTime;
+		setNextTime();
 
 	}
 
@@ -71,6 +72,7 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
+		setNextTime();
 	}
 
 	public void setActive(boolean isActive) {
