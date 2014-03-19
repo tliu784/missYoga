@@ -12,17 +12,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
 		
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		String reminderJSON=intent.getExtras().getString(AlarmService.reminderVar);
-		MedReminderModel reminder = new Gson().fromJson(reminderJSON, MedReminderModel.class);
+		//initialized controller
+		MedReminderController mrc=MedReminderController.getInstance();
+		mrc.init(context);  
+		//get reminder via intent extra variable
+		int id=intent.getExtras().getInt(AlarmService.reminderVar);
+		MedReminderModel reminder=mrc.findbyid(id);
+		
 		NotificationManager mNM;
-		//to be modified with sending intent
-		//need to call putExtras to pass reminder json
-		//receiving activity need to handle history
 		PendingIntent contentIntent = PendingIntent.getActivity(context, reminder.getId(),new Intent(context, MainPage.class), 0);
 		mNM = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -42,8 +45,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		Notification notification = ntbuilder.build();
 		mNM.notify(reminder.getId(), notification);
 		//set next alarm
-		MedReminderController mrc=MedReminderController.getInstance();
-		mrc.init(context); //init and load 
+
 		MedReminderController.getInstance().postAlarm(reminder.getId());
 	
 	}

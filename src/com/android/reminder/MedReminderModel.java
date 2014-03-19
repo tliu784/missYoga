@@ -31,7 +31,7 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 		this.detail="";
 		this.duration=0;
 		this.dunit=DurationUnit.Day;
-		this.repeat=0;
+		this.repeat=1;
 		this.runit=DurationUnit.Day;
 		this.nextAlarmTime = startTime;
 	}
