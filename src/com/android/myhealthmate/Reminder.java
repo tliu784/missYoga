@@ -66,10 +66,8 @@ public class Reminder extends Activity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.add_reminder: {
-			MedReminderModel newnewReminder = mrcInstance.getReminderList().get(0);
 			MedReminderModel newReminder = new MedReminderModel();
-			mrcInstance.addReminder(newReminder.getStartTime(), newReminder.getTitle(), newReminder.getDetail(),
-					newReminder.getDuration(), newReminder.getDunit(), newReminder.getRepeat(), newReminder.getRunit());
+			mrcInstance.addReminder(newReminder);
 			Toast.makeText(Reminder.this, " finish adding reminder", Toast.LENGTH_SHORT).show();
 			
 			ReminderViewController singleReminderSection = new ReminderViewController(newReminder,getApplicationContext(),mrcInstance,Reminder.this);
@@ -142,7 +140,7 @@ public class Reminder extends Activity {
 			return;
 		// reminder 1
 		Date creationTime = Calendar.getInstance().getTime();
-		String title = "aspirin";
+		String title = "title 1";
 		String detail = "take 1 pill";
 		int duration = 2;
 		MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Day;

@@ -34,6 +34,7 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 		this.repeat=1;
 		this.runit=DurationUnit.Day;
 		this.nextAlarmTime = startTime;
+		this.active=false;
 	}
 	
 	public MedReminderModel(int id, Date startTime, String title,
@@ -50,6 +51,11 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 		this.nextAlarmTime = startTime;
 		setNextTime();
 
+	}
+	
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Date getEndTime() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import android.content.Context;
+import android.util.Log;
 
 import com.android.service.FileOperation;
 
@@ -73,11 +74,11 @@ public class MedReminderController {
 	public void addReminder(MedReminderModel reminder) {
 		reminderList.incrementalCount();
 		int id = reminderList.getCount();
-		MedReminderModel newReminder = new MedReminderModel(id,reminder.getStartTime(), reminder.getDetail(),
-				reminder.getDetail(), reminder.getDuration(),reminder.getDunit(), reminder.getRepeat(), reminder.getRunit());
-		reminderList.getReminderList().add(newReminder);
+		reminder.setId(id);
+		reminderList.getReminderList().add(reminder);
 		sortByNext();
-		alarmService.setAlarm(findbyid(newReminder.getId()));
+		if (reminder.isActive())
+			alarmService.setAlarm(findbyid(reminder.getId()));
 	}
 
 	public ArrayList<MedReminderModel> getReminderList() {
@@ -106,10 +107,13 @@ public class MedReminderController {
 	// must call this after update an existing reminder
 	public void activate(int reminderId) {
 		MedReminderModel reminder = findbyid(reminderId);
-		reminder.setActive(true);
-		reminder.setNextTime();
-		if (reminder.isActive()) {
-			alarmService.setAlarm(reminder);
+		Log.d("id", Integer.toString(reminderId));
+		if (reminder != null) {
+			reminder.setActive(true);
+			reminder.setNextTime();
+			if (reminder.isActive()) {
+				alarmService.setAlarm(reminder);
+			}
 		}
 		sortByNext();
 	}
