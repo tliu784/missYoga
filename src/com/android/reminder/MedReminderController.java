@@ -101,12 +101,14 @@ public class MedReminderController {
 		if (reminder.isActive()) {
 			alarmService.setAlarm(reminder);
 		}
+		sortByNext();
 	}
 
 	public void deactivate(int reminderId) {
 		MedReminderModel reminder = findbyid(reminderId);
 		reminder.setActive(false);
 		alarmService.cancelAlarm(reminder);
+		sortByNext();
 	}
 
 	public void postAlarm(int reminderId) {

@@ -57,13 +57,13 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 			if (nextAlarmTime.compareTo(getEndTime()) > 0)
 				active = false;
 	}
-	
-	public void setAlways(){
-		duration=-1;
+
+	public void setAlways() {
+		duration = -1;
 	}
-	
-	public boolean isAlawys(){
-		return (duration<=0);
+
+	public boolean isAlawys() {
+		return (duration <= 0);
 	}
 
 	public Date getStartTime() {
@@ -146,6 +146,10 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 
 	@Override
 	public int compareTo(MedReminderModel anotherReminder) {
+		if (this.active && (!anotherReminder.active))
+			return 1;
+		if (!this.active && anotherReminder.active)
+			return -1;
 		return this.nextAlarmTime.compareTo(anotherReminder.nextAlarmTime);
 	}
 

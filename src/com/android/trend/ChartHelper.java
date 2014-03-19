@@ -23,13 +23,29 @@ public class ChartHelper {
 	}
 	
 	private float getMax(float[] data){
-		float result = 0;
+		float result = -1;
+		if (data.length>0){
+			result = data[0];
+			for (int i=0; i<data.length; i++){
+				if (data[i]>result){
+					result=data[i];
+				}
+			}
+		}
 		return result;
-		
 	}
 	
 	private float getMin(float[] data){
-		float result = 0;
+		float result = -1;
+		if (data.length>0){
+			result = data[0];
+			for (int i=0; i<data.length; i++){
+				if (data[i]<result){
+					result=data[i];
+				}
+			}
+		}
 		return result;
 	}
+	
 }

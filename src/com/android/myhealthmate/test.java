@@ -131,14 +131,24 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String filename = "medreminders.obj";
-				testDelete(filename);
+				displaySavedReminders();
 			}
 		};
 	}
 
 	private void PopUP(Activity act, String content) {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
+	}
+	
+	private void displaySavedReminders(){
+		reminders = MedReminderController.getInstance();
+		reminders.init(this.getApplicationContext());
+		String text="";
+		for (MedReminderModel reminder: reminders.getReminderList()){
+			text+=reminder.toString();
+			text+="\n";
+		}
+		testText.setText(text);
 	}
 	
 	private void testChartHelper(){
