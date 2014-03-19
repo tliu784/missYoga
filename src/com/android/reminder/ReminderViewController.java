@@ -285,7 +285,7 @@ public class ReminderViewController {
 			} else {
 				rdTime.setText("Create date: "
 						+ reminder.getStartTime().toString() + "\n"
-						+ "Durition:" + reminder.getDuration() + " "
+						+ "Duration:" + reminder.getDuration() + " "
 						+ reminder.getDunit().name());
 			}
 		}
