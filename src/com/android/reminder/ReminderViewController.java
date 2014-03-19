@@ -553,7 +553,7 @@ public class ReminderViewController {
 
 			duration.setLayoutParams(new LayoutParams(
 					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-			duration.setText("Durition");
+			duration.setText("Duration");
 			duration.setBackgroundResource(R.drawable.textlines);
 			duration.setTextSize(20);
 
