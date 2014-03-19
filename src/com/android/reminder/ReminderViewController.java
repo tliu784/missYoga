@@ -9,6 +9,8 @@ import java.util.Locale;
 
 import com.android.myhealthmate.R;
 import com.android.myhealthmate.Reminder;
+import com.android.reminder.MedReminderModel.DurationUnit;
+
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.view.Gravity;
@@ -173,10 +175,10 @@ public class ReminderViewController {
 
 			rdTime.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
-			
+
 			rdTime.setBackgroundResource(R.drawable.textlines);
 			rdTime.setTextSize(20);
-			
+
 			setDetailPageContent();
 			detailSection.addView(content);
 			detailSection.addView(rdTime);
@@ -185,20 +187,20 @@ public class ReminderViewController {
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			detailSection.setOrientation(LinearLayout.VERTICAL);
 			detailSection.setVisibility(View.GONE);
-			
+
 		}
-		
-		private void setDetailPageContent(){
+
+		private void setDetailPageContent() {
 			// everyday section in display content section
 			content.setText(reminder.getDetail());
 			if (reminder.isAlawys()) {
 				rdTime.setText("Everyday");
 			} else {
 				rdTime.setText("Create date: "
-						+ reminder.getStartTime().toString() + "\n" + "Durition:"
-						+ reminder.getDuration() + " "
+						+ reminder.getStartTime().toString() + "\n"
+						+ "Durition:" + reminder.getDuration() + " "
 						+ reminder.getDunit().name());
-			}			
+			}
 		}
 
 	}
@@ -271,41 +273,42 @@ public class ReminderViewController {
 			saveButton.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					
-					reminder.setDetail(editNotes.getText().toString());
+					//check all edit text fields 
+				//	if (true) {
+						reminder.setDetail(editNotes.getText().toString());
 
-					String dateStr;
-					dateStr = editDate.getText().toString() + ", "
-							+ editHours.getText().toString() + ":"
-							+ editMins.getText().toString();
+						String dateStr;
+						dateStr = editDate.getText().toString() + ", "
+								+ editHours.getText().toString() + ":"
+								+ editMins.getText().toString();
 
-					try {
-						Date date = dateFormat.parse(dateStr);
-						reminder.setStartTime(date);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						Toast.makeText(callbackAct,
-								"date or time format is incorrect",
-								Toast.LENGTH_SHORT).show();
-						e.printStackTrace();
-					}
+						try {
+							Date date = dateFormat.parse(dateStr);
+							reminder.setStartTime(date);
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							Toast.makeText(callbackAct,
+									"date or time format is incorrect",
+									Toast.LENGTH_SHORT).show();
+							e.printStackTrace();
+						}
 
-					if (!editDuration.getText().toString().equals("")) {
-						int duration = Integer.valueOf(editDuration.getText()
-								.toString());
-						reminder.setDuration(duration);
-					}
-					if (!setRepeatHours.getText().toString().equals("")) {
-						int repeatHours = Integer.valueOf(setRepeatHours
-								.getText().toString());
-						reminder.setRepeat(repeatHours);
-					}
-					mrcInstance.activate(reminder.getId());
+						if (!editDuration.getText().toString().equals("")) {
+							int duration = Integer.valueOf(editDuration
+									.getText().toString());
+							reminder.setDuration(duration);
+						}
+						if (!setRepeatHours.getText().toString().equals("")) {
+							int repeatHours = Integer.valueOf(setRepeatHours
+									.getText().toString());
+							reminder.setRepeat(repeatHours);
+						}
+						mrcInstance.activate(reminder.getId());
 
-					detailSec.setDetailPageContent();
-					detailSec.detailSection.setVisibility(View.VISIBLE);
-					editSec.editSection.setVisibility(View.GONE);
-
+						detailSec.setDetailPageContent();
+						detailSec.detailSection.setVisibility(View.VISIBLE);
+						editSec.editSection.setVisibility(View.GONE);
+				//	}
 				}
 			});
 		}
@@ -319,7 +322,7 @@ public class ReminderViewController {
 								boolean isChecked) {
 							// TODO Auto-generated method stub
 							if (isChecked) {
-								reminder.setRepeat(24);
+								reminder.setAlways();
 								editDuration.setText("");
 								editDuration.setVisibility(View.GONE);
 								dayUnit.setVisibility(View.GONE);
@@ -338,6 +341,7 @@ public class ReminderViewController {
 							// TODO Auto-generated method stub
 							if (isChecked) {
 								reminder.setRepeat(24);
+								reminder.setRunit(DurationUnit.Hour);
 								setRepeatHours.setText("");
 								setRepeatHours.setVisibility(View.GONE);
 								hourUnit.setVisibility(View.GONE);

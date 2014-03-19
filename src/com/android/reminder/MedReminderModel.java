@@ -3,6 +3,9 @@ package com.android.reminder;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 public class MedReminderModel implements Comparable<MedReminderModel>,
@@ -47,6 +50,7 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 	public void setNextTime() {
 		Date now = new Date();
 		while (nextAlarmTime.compareTo(now) <= 0) {
+			Log.d("nextAlarmTime",nextAlarmTime.toString());
 			nextAlarmTime = addDuration(nextAlarmTime, repeat, runit);
 		}
 		autodeactivate();
