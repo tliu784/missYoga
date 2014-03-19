@@ -13,6 +13,7 @@ import com.android.reminder.MedReminderModel.DurationUnit;
 
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
+import android.graphics.Color;
 import android.opengl.Visibility;
 import android.view.Gravity;
 import android.view.View;
@@ -124,6 +125,7 @@ public class ReminderViewController {
 			deleteButton.setGravity(Gravity.RIGHT);
 			deleteButton.setVisibility(View.GONE);
 			deleteButton.setText("Delete");
+		//	deleteButton.setBackgroundColor(Color.BLACK);
 
 			setting.setText("Update Reminder");
 			setting.setTextSize(20);
@@ -132,6 +134,7 @@ public class ReminderViewController {
 			titleSection.addView(reminderTime);
 			titleSection.addView(title);
 			titleSection.addView(editButton);
+			titleSection.addView(deleteButton);
 		}
 
 		public void setTitleContent() {
@@ -176,7 +179,8 @@ public class ReminderViewController {
 				public void onClick(View v) {
 					reminderSection.removeView(titleSec.titleSection);
 					reminderSection.removeView(detailSec.detailSection);
-					reminderSection.removeView(editSec.editSection);					
+					reminderSection.removeView(editSec.editSection);	
+					mrcInstance.removeReminder(reminder.getId());
 				}
 			});
 

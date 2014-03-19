@@ -79,8 +79,8 @@ public class Reminder extends Activity {
 		case R.id.delete_reminder: {
 			String str = "a";
 			for (ReminderViewController reminderController:reminderSectionArray){
-				
-				Toast.makeText(Reminder.this, str+" a", Toast.LENGTH_SHORT).show();
+				str+="a";
+			//	Toast.makeText(Reminder.this, str, Toast.LENGTH_SHORT).show();
 				reminderController.showDeleteButton();
 			}	
 			return true;

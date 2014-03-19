@@ -86,6 +86,7 @@ public class MedReminderController {
 	}
 
 	public void removeReminder(int id) {
+		deactivate(id);
 		reminderList.getReminderList().remove(findbyid(id));
 		sortByNext();
 	}
