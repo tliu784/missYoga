@@ -70,6 +70,16 @@ public class MedReminderController {
 		alarmService.setAlarm(findbyid(newReminder.getId()));
 	}
 
+	public void addReminder(MedReminderModel reminder) {
+		reminderList.incrementalCount();
+		int id = reminderList.getCount();
+		MedReminderModel newReminder = new MedReminderModel(reminder.getId(),reminder.getStartTime(), reminder.getDetail(),
+				reminder.getDetail(), reminder.getDuration(),reminder.getDunit(), reminder.getRepeat(), reminder.getRunit());
+		reminderList.getReminderList().add(newReminder);
+		sortByNext();
+		alarmService.setAlarm(findbyid(newReminder.getId()));
+	}
+
 	public ArrayList<MedReminderModel> getReminderList() {
 		return reminderList.getReminderList();
 	}
@@ -93,7 +103,7 @@ public class MedReminderController {
 		save();
 	}
 
-	//must call this after update an existing reminder
+	// must call this after update an existing reminder
 	public void activate(int reminderId) {
 		MedReminderModel reminder = findbyid(reminderId);
 		reminder.setActive(true);

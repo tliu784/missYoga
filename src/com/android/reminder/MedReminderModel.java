@@ -3,9 +3,6 @@ package com.android.reminder;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-
-import android.util.Log;
-
 import com.google.gson.Gson;
 
 public class MedReminderModel implements Comparable<MedReminderModel>,
@@ -27,6 +24,18 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 		Day, Hour, Min, Sec;
 	}
 
+	public MedReminderModel(){
+		this.id=-1;
+		this.startTime=new Date();
+		this.title="";
+		this.detail="";
+		this.duration=0;
+		this.dunit=DurationUnit.Day;
+		this.repeat=0;
+		this.runit=DurationUnit.Day;
+		this.nextAlarmTime = startTime;
+	}
+	
 	public MedReminderModel(int id, Date startTime, String title,
 			String detail, int duration, DurationUnit dunit, int repeat,
 			DurationUnit runit) {
@@ -50,7 +59,6 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 	public void setNextTime() {
 		Date now = new Date();
 		while (nextAlarmTime.compareTo(now) <= 0) {
-			Log.d("nextAlarmTime",nextAlarmTime.toString());
 			nextAlarmTime = addDuration(nextAlarmTime, repeat, runit);
 		}
 		autodeactivate();
@@ -76,6 +84,7 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
+		this.nextAlarmTime = startTime;
 		setNextTime();
 	}
 
@@ -151,9 +160,9 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 	@Override
 	public int compareTo(MedReminderModel anotherReminder) {
 		if (this.active && (!anotherReminder.active))
-			return 1;
-		if (!this.active && anotherReminder.active)
 			return -1;
+		if (!this.active && anotherReminder.active)
+			return 1;
 		return this.nextAlarmTime.compareTo(anotherReminder.nextAlarmTime);
 	}
 
