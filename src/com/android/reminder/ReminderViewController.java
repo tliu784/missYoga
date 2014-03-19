@@ -13,6 +13,7 @@ import com.android.reminder.MedReminderModel.DurationUnit;
 
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
+import android.opengl.Visibility;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +35,7 @@ public class ReminderViewController {
 	private Context context;
 	private MedReminderController mrcInstance;
 	private Reminder callbackAct;
+	private boolean deleted;
 
 	public ReminderViewController(MedReminderModel reminder, Context context,
 			MedReminderController controller, Reminder reminderAct) {
@@ -45,6 +47,7 @@ public class ReminderViewController {
 		this.editSec = new EditSection();
 		this.reminderSection = new LinearLayout(context);
 		this.callbackAct = reminderAct;
+		this.deleted = false;
 
 		// call 3 constructors
 		// call 3 set listeners
@@ -63,12 +66,24 @@ public class ReminderViewController {
 		return reminderSection;
 	}
 
-	class TitleSection {
+	public void showDeleteButton(){
+		titleSec.deleteButton.setVisibility(View.VISIBLE);
+	}
+	
+	public void createReminder() {
+		titleSec.setting.setText("Create Reminder");
+		detailSec.detailSection.setVisibility(View.GONE);
+		editSec.editSection.setVisibility(View.VISIBLE);
+	}
+
+	public class TitleSection {
 		LinearLayout titleSection;
 		EditText notes;
 		TextView reminderTime;
 		TextView title;
 		TextView editButton;
+		TextView setting;
+		Button deleteButton;
 
 		TitleSection() {
 			// constructor: new all views
@@ -77,6 +92,8 @@ public class ReminderViewController {
 			reminderTime = new TextView(context);
 			title = new TextView(context);
 			editButton = new TextView(context);
+			setting = new TextView(context);
+			deleteButton = new Button(context);
 			init();
 		}
 
@@ -86,36 +103,83 @@ public class ReminderViewController {
 			titleSection.setClickable(true);
 			titleSection.setOrientation(LinearLayout.HORIZONTAL);
 
-			Calendar calendar = GregorianCalendar.getInstance();
-			calendar.setTime(reminder.getNextAlarmTime());
 			reminderTime.setLayoutParams(new LayoutParams(
 					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-			reminderTime.setText(Integer.toString(calendar
-					.get(Calendar.HOUR_OF_DAY))
-					+ ":"
-					+ Integer.toString(calendar.get(Calendar.MINUTE)));
 			reminderTime.setTextSize(20);
 
 			title.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
 					LayoutParams.WRAP_CONTENT));
-			title.setText(reminder.getTitle());
+
 			title.setTextSize(20);
 			title.setPadding(20, 0, 40, 0);
 
 			editButton.setCompoundDrawablesWithIntrinsicBounds(0, 0,
 					R.drawable.ic_action_edit, 0);
-			editButton.setGravity(Gravity.TOP);
+			editButton.setGravity(Gravity.RIGHT);
 			editButton.setClickable(true);
 			editButton.setVisibility(View.GONE);
 
+			deleteButton.setLayoutParams(new LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			deleteButton.setGravity(Gravity.RIGHT);
+			deleteButton.setVisibility(View.GONE);
+			deleteButton.setText("Delete");
+
+			setting.setText("Update Reminder");
+			setting.setTextSize(20);
+
+			setTitleContent();
 			titleSection.addView(reminderTime);
 			titleSection.addView(title);
 			titleSection.addView(editButton);
 		}
 
+		public void setTitleContent() {
+			if (reminder != null) {
+				Calendar calendar = GregorianCalendar.getInstance();
+				calendar.setTime(reminder.getNextAlarmTime());
+
+				reminderTime.setText(Integer.toString(calendar
+						.get(Calendar.HOUR_OF_DAY))
+						+ ":"
+						+ Integer.toString(calendar.get(Calendar.MINUTE)));
+				title.setText(reminder.getTitle());
+			}
+		}
+
+		public void editModeTitle() {
+			if (titleSection.getChildAt(0).equals(reminderTime)) {
+				titleSection.removeView(reminderTime);
+				titleSection.removeView(title);
+				titleSection.removeView(editButton);
+				titleSection.addView(setting);
+			}
+		}
+
+		public void showDetailModeTitle() {
+			if (!titleSection.getChildAt(0).equals(reminderTime)) {
+				titleSection.addView(reminderTime);
+				titleSection.addView(title);
+				titleSection.addView(editButton);
+				titleSection.removeView(setting);
+			}
+		}
+
 		private void setListeners() {
 			editButtonListener();
 			titleSectionListener();
+			deleteButtonListener();
+		}
+
+		private void deleteButtonListener() {
+			deleteButton.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					reminderSection.removeView(titleSec.titleSection);
+					reminderSection.removeView(detailSec.detailSection);
+					reminderSection.removeView(editSec.editSection);					
+				}
+			});
+
 		}
 
 		private void titleSectionListener() {
@@ -126,16 +190,21 @@ public class ReminderViewController {
 				public void onClick(View v) {
 					if (currentDetailSection.isShown()
 							|| currentEditSection.isShown()) {
+						titleSec.showDetailModeTitle();
 						currentDetailSection.setVisibility(View.GONE);
 						editButton.setVisibility(View.GONE);
 						currentEditSection.setVisibility(View.GONE);
 					} else {
-						currentDetailSection.setVisibility(currentDetailSection
-								.isShown() ? View.GONE : View.VISIBLE);
+						if (currentDetailSection.isShown()) {
+							currentDetailSection.setVisibility(View.GONE);
+							titleSec.showDetailModeTitle();
+						} else {
+							currentDetailSection.setVisibility(View.VISIBLE);
+						}
 						editButton.setVisibility(editButton.isShown() ? View.GONE
 								: View.VISIBLE);
 						callbackAct.closePrevious(currentDetailSection,
-								editButton, currentEditSection);
+								editButton, currentEditSection, titleSec);
 					}
 				}
 			});
@@ -147,6 +216,7 @@ public class ReminderViewController {
 			editButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					currentDetailSection.setVisibility(View.GONE);
+					editModeTitle();
 					currentEditSection.setVisibility(View.VISIBLE);
 				}
 			});
@@ -207,7 +277,12 @@ public class ReminderViewController {
 
 	class EditSection {
 		LinearLayout editSection;
-		EditText editNotes;
+		LinearLayout editTitleSection;
+		TextView titleText;
+		EditText editTitle;
+		LinearLayout editDetailSection;
+		TextView detailText;
+		EditText editDetail;
 		LinearLayout startDateSection;
 		TextView startDate;
 		EditText editDate;
@@ -234,7 +309,12 @@ public class ReminderViewController {
 
 		EditSection() {
 			editSection = new LinearLayout(context);
-			editNotes = new EditText(context);
+			editTitleSection = new LinearLayout(context);
+			titleText = new TextView(context);
+			editTitle = new EditText(context);
+			editDetailSection = new LinearLayout(context);
+			detailText = new TextView(context);
+			editDetail = new EditText(context);
 			startDateSection = new LinearLayout(context);
 			startDate = new TextView(context);
 			editDate = new EditText(context);
@@ -273,9 +353,10 @@ public class ReminderViewController {
 			saveButton.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					//check all edit text fields 
-				//	if (true) {
-						reminder.setDetail(editNotes.getText().toString());
+					// check all edit text fields
+					if (true) {
+						reminder.setTitle(editTitle.getText().toString());
+						reminder.setDetail(editDetail.getText().toString());
 
 						String dateStr;
 						dateStr = editDate.getText().toString() + ", "
@@ -306,9 +387,11 @@ public class ReminderViewController {
 						mrcInstance.activate(reminder.getId());
 
 						detailSec.setDetailPageContent();
+						titleSec.setTitleContent();
 						detailSec.detailSection.setVisibility(View.VISIBLE);
 						editSec.editSection.setVisibility(View.GONE);
-				//	}
+						titleSec.showDetailModeTitle();
+					}
 				}
 			});
 		}
@@ -359,9 +442,41 @@ public class ReminderViewController {
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			editSection.setOrientation(LinearLayout.VERTICAL);
 
-			// edit notes
-			editNotes.setLayoutParams(new LayoutParams(
+			// edit title section
+			editTitleSection.setLayoutParams(new LayoutParams(
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			editTitleSection.setOrientation(LinearLayout.HORIZONTAL);
+
+			titleText.setLayoutParams(new LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			titleText.setText("Title");
+			titleText.setBackgroundResource(R.drawable.textlines);
+			titleText.setTextSize(20);
+
+			editTitle.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			editTitle.setHint(reminder.getTitle());
+
+			editTitleSection.addView(titleText);
+			editTitleSection.addView(editTitle);
+
+			// edit detail section
+			editDetailSection.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			editDetailSection.setOrientation(LinearLayout.HORIZONTAL);
+
+			detailText.setLayoutParams(new LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			detailText.setText("Detail");
+			detailText.setBackgroundResource(R.drawable.textlines);
+			detailText.setTextSize(20);
+
+			editDetail.setLayoutParams(new LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			editDetail.setHint(reminder.getDetail());
+
+			editDetailSection.addView(detailText);
+			editDetailSection.addView(editDetail);
 
 			// add start date section in edit content section
 			startDateSection.setLayoutParams(new LayoutParams(
@@ -500,7 +615,8 @@ public class ReminderViewController {
 			buttonSection.addView(cancelButton);
 
 			// add all sections
-			editSection.addView(editNotes);
+			editSection.addView(editTitleSection);
+			editSection.addView(editDetailSection);
 			editSection.addView(startDateSection);
 			editSection.addView(startTimeSection);
 			editSection.addView(startDurationSection);
