@@ -73,7 +73,7 @@ public class MedReminderController {
 	public void addReminder(MedReminderModel reminder) {
 		reminderList.incrementalCount();
 		int id = reminderList.getCount();
-		MedReminderModel newReminder = new MedReminderModel(reminder.getId(),reminder.getStartTime(), reminder.getDetail(),
+		MedReminderModel newReminder = new MedReminderModel(id,reminder.getStartTime(), reminder.getDetail(),
 				reminder.getDetail(), reminder.getDuration(),reminder.getDunit(), reminder.getRepeat(), reminder.getRunit());
 		reminderList.getReminderList().add(newReminder);
 		sortByNext();
