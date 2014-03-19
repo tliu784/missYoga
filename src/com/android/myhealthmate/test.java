@@ -70,16 +70,22 @@ public class test extends Activity {
 	
 	private GraphView createChart(){
 		// init example series data
-		GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
-		      new GraphViewData(1, 2.0d)
-		      , new GraphViewData(2, 1.5d)
-		      , new GraphViewData(3, 2.5d)
-		      , new GraphViewData(4, 1.0d)
-		      , new GraphViewData(5, 1.7d)
-		      , new GraphViewData(6, 2.1d)
-		      , new GraphViewData(7, 1.7d)
-		});
+//		GraphViewSeries exampleSeries = new GraphViewSeries(new GraphViewData[] {
+//		      new GraphViewData(1, 2.0d)
+//		      , new GraphViewData(2, 1.5d)
+//		      , new GraphViewData(3, 2.5d)
+//		      , new GraphViewData(4, 1.0d)
+//		      , new GraphViewData(5, 1.7d)
+//		      , new GraphViewData(6, 2.1d)
+//		      , new GraphViewData(7, 1.7d)
+//		});
+//		
+//		
+//		double[] bpdataraw ={80, 95, 100, 92, 78, 100, 120, 77, 91};
+//		double[] bpdata=ChartHelper.scaleToRange(bpdataraw, 0, 50);
 		
+		GraphViewSeries exampleSeries=new GraphViewSeries(ChartHelper.generateRandomData(48));
+	
 		
 		int xValue=2;
 		double maxY=2.5;
@@ -97,6 +103,10 @@ public class test extends Activity {
 		);
 		graphView.addSeries(exampleSeries); // data
 		graphView.addSeries(vSeries); 
+		graphView.setViewPort(0, 12);
+		graphView.setScrollable(true);
+		// optional - activate scaling / zooming
+		graphView.setScalable(true);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
 		layout.addView(graphView);
 		
@@ -179,8 +189,8 @@ public class test extends Activity {
 	
 	private void testChartHelper(){
 		double[] data={0d,10d,20d,30d,40d,50d};
-		double floor=0d;
-		double ceiling=100d;
+		double floor=35d;
+		double ceiling=45d;
 		double[] result=ChartHelper.scaleToRange(data, floor, ceiling);
 		testText.setText(gson.toJson(result));
 	}
