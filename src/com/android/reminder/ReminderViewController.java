@@ -166,7 +166,6 @@ public class ReminderViewController {
 		private void init() {
 			content.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
-			content.setText(reminder.getDetail());
 			content.setBackgroundResource(R.drawable.textlines);
 			content.setTextSize(20);
 
@@ -174,18 +173,11 @@ public class ReminderViewController {
 
 			rdTime.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
-			if (reminder.isAlawys()) {
-				rdTime.setText("Everyday");
-			} else {
-				rdTime.setText("Create date: "
-						+ reminder.getStartTime().toString()
-								.replace("PDT ", "") + "\n" + "Durition:"
-						+ reminder.getDuration() + " "
-						+ reminder.getDunit().name());
-			}
+			
 			rdTime.setBackgroundResource(R.drawable.textlines);
 			rdTime.setTextSize(20);
-
+			
+			setDetailPageContent();
 			detailSection.addView(content);
 			detailSection.addView(rdTime);
 
@@ -193,7 +185,22 @@ public class ReminderViewController {
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			detailSection.setOrientation(LinearLayout.VERTICAL);
 			detailSection.setVisibility(View.GONE);
+			
 		}
+		
+		private void setDetailPageContent(){
+			// everyday section in display content section
+			content.setText(reminder.getDetail());
+			if (reminder.isAlawys()) {
+				rdTime.setText("Everyday");
+			} else {
+				rdTime.setText("Create date: "
+						+ reminder.getStartTime().toString() + "\n" + "Durition:"
+						+ reminder.getDuration() + " "
+						+ reminder.getDunit().name());
+			}			
+		}
+
 	}
 
 	class EditSection {
@@ -264,13 +271,7 @@ public class ReminderViewController {
 			saveButton.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
-					// ArrayList<EditText> editConponents = new ArrayList();
-					// editConponents.add(editNotes);
-					// editConponents.add(editDate);
-					// editConponents.add(editHours);
-					// editConponents.add(editMins);
-					// editConponents.add(editDuration);
-					// editConponents.add(setRepeatHours);
+					
 					reminder.setDetail(editNotes.getText().toString());
 
 					String dateStr;
@@ -300,6 +301,10 @@ public class ReminderViewController {
 						reminder.setRepeat(repeatHours);
 					}
 					mrcInstance.activate(reminder.getId());
+
+					detailSec.setDetailPageContent();
+					detailSec.detailSection.setVisibility(View.VISIBLE);
+					editSec.editSection.setVisibility(View.GONE);
 
 				}
 			});
