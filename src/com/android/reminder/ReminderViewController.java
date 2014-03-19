@@ -67,12 +67,18 @@ public class ReminderViewController {
 		return reminderSection;
 	}
 
-	public void showDeleteButton(){
-		titleSec.deleteButton.setVisibility(View.VISIBLE);
+	public void toggleDeleteButton(){
+		titleSec.deleteButton.setVisibility(titleSec.deleteButton.isShown() ? View.GONE
+				: View.VISIBLE);
+	}
+	
+	public void hideDeleteButton(){
+		titleSec.deleteButton.setVisibility(View.GONE);
 	}
 	
 	public void createReminder() {
-		titleSec.setting.setText("Create Reminder");
+		titleSec.editModeTitle.setText("Create Reminder");
+		titleSec.editModeTitle();
 		detailSec.detailSection.setVisibility(View.GONE);
 		editSec.editSection.setVisibility(View.VISIBLE);
 	}
@@ -83,7 +89,7 @@ public class ReminderViewController {
 		TextView reminderTime;
 		TextView title;
 		TextView editButton;
-		TextView setting;
+		TextView editModeTitle;
 		Button deleteButton;
 
 		TitleSection() {
@@ -93,7 +99,7 @@ public class ReminderViewController {
 			reminderTime = new TextView(context);
 			title = new TextView(context);
 			editButton = new TextView(context);
-			setting = new TextView(context);
+			editModeTitle = new TextView(context);
 			deleteButton = new Button(context);
 			init();
 		}
@@ -122,13 +128,14 @@ public class ReminderViewController {
 
 			deleteButton.setLayoutParams(new LayoutParams(
 					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		
 			deleteButton.setGravity(Gravity.RIGHT);
 			deleteButton.setVisibility(View.GONE);
 			deleteButton.setText("Delete");
 		//	deleteButton.setBackgroundColor(Color.BLACK);
 
-			setting.setText("Update Reminder");
-			setting.setTextSize(20);
+			editModeTitle.setText("Update Reminder");
+			editModeTitle.setTextSize(20);
 
 			setTitleContent();
 			titleSection.addView(reminderTime);
@@ -155,7 +162,8 @@ public class ReminderViewController {
 				titleSection.removeView(reminderTime);
 				titleSection.removeView(title);
 				titleSection.removeView(editButton);
-				titleSection.addView(setting);
+				titleSection.removeView(deleteButton);
+				titleSection.addView(editModeTitle);
 			}
 		}
 
@@ -164,7 +172,8 @@ public class ReminderViewController {
 				titleSection.addView(reminderTime);
 				titleSection.addView(title);
 				titleSection.addView(editButton);
-				titleSection.removeView(setting);
+				titleSection.addView(deleteButton);
+				titleSection.removeView(editModeTitle);
 			}
 		}
 
@@ -187,11 +196,13 @@ public class ReminderViewController {
 		}
 
 		private void titleSectionListener() {
+			
 			final LinearLayout currentDetailSection = detailSec.detailSection;
 			final LinearLayout currentEditSection = editSec.editSection;
 			titleSection.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					callbackAct.hideAllDeleteButton();
 					if (currentDetailSection.isShown()
 							|| currentEditSection.isShown()) {
 						titleSec.showDetailModeTitle();
@@ -215,10 +226,12 @@ public class ReminderViewController {
 		}
 
 		private void editButtonListener() {
+			
 			final LinearLayout currentDetailSection = detailSec.detailSection;
 			final LinearLayout currentEditSection = editSec.editSection;
 			editButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
+					hideDeleteButton();
 					currentDetailSection.setVisibility(View.GONE);
 					editModeTitle();
 					currentEditSection.setVisibility(View.VISIBLE);
@@ -357,6 +370,7 @@ public class ReminderViewController {
 			saveButton.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View v) {
+					hideDeleteButton();
 					// check all edit text fields
 					if (true) {
 						reminder.setTitle(editTitle.getText().toString());

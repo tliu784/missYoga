@@ -81,7 +81,7 @@ public class Reminder extends Activity {
 			for (ReminderViewController reminderController:reminderSectionArray){
 				str+="a";
 			//	Toast.makeText(Reminder.this, str, Toast.LENGTH_SHORT).show();
-				reminderController.showDeleteButton();
+				reminderController.toggleDeleteButton();
 			}	
 			return true;
 		}
@@ -90,6 +90,11 @@ public class Reminder extends Activity {
 		}
 	}
 
+	public void hideAllDeleteButton(){
+		for (ReminderViewController reminderController:reminderSectionArray){
+			reminderController.hideDeleteButton();
+		}	
+	}
 	
 	private MedReminderController getReminders() {
 		MedReminderController instance = MedReminderController.getInstance();
