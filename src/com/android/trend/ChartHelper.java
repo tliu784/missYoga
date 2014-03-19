@@ -1,29 +1,23 @@
 package com.android.trend;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public class ChartHelper {
 	
-	public float[] scaleToRange(float[] data, float floor, float ceiling){
-		float[] result=new float[data.length];
-		List list=Arrays.asList(data);
-//		int max=Collections.max(list);
-//		int min=Collections.min(list);
-//		int dataRange=max-min;
-		float resultRange=ceiling-floor;
+	public static double[] scaleToRange(double[] data, double floor, double ceiling){
+		double[] result=new double[data.length];
+		double max=getMax(data);
+		double min=getMin(data);
+		double dataRange=max-min;
+		double resultRange=ceiling-floor;
 		if (resultRange!=0){
 			for (int i=0;i<data.length; i++){
-//				result[i]=floor+(data[i]-min)/dataRange*resultRange;
+				result[i]=floor+(data[i]-min)/dataRange*resultRange;
 			}
 		}
-		
 		return result;
 	}
 	
-	private float getMax(float[] data){
-		float result = -1;
+	private static double getMax(double[] data){
+		double result = -1;
 		if (data.length>0){
 			result = data[0];
 			for (int i=0; i<data.length; i++){
@@ -35,8 +29,8 @@ public class ChartHelper {
 		return result;
 	}
 	
-	private float getMin(float[] data){
-		float result = -1;
+	private static double getMin(double[] data){
+		double result = -1;
 		if (data.length>0){
 			result = data[0];
 			for (int i=0; i<data.length; i++){
@@ -47,5 +41,6 @@ public class ChartHelper {
 		}
 		return result;
 	}
+	
 	
 }

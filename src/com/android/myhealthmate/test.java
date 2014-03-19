@@ -42,8 +42,11 @@ public class test extends Activity {
 	private EditText text2;
 	private Button test1;
 	private Button test2;
+	private Button test3;
+	private Button test4;
 	private TextView testText;
 	private MedReminderController reminders;
+	private Gson gson=new Gson();;
 
 
 	@Override
@@ -54,8 +57,12 @@ public class test extends Activity {
 		text2 = (EditText) findViewById(R.id.terry_text2);
 		test1 = (Button) findViewById(R.id.test1);
 		test2 = (Button) findViewById(R.id.test2);
+		test3 = (Button) findViewById(R.id.test3);
+		test4 = (Button) findViewById(R.id.test4);
 		test1.setOnClickListener(getTest1ClickListener());
 		test2.setOnClickListener(getTest2ClickListener());
+		test3.setOnClickListener(getTest3ClickListener());
+		test4.setOnClickListener(getTest4ClickListener());
 		testText = (TextView) findViewById(R.id.terry_test_box);
 		createChart();
 		
@@ -135,6 +142,25 @@ public class test extends Activity {
 			}
 		};
 	}
+	
+	private OnClickListener getTest3ClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//testReminderController();
+				testChartHelper();
+			}
+		};
+	}
+
+	private OnClickListener getTest4ClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				displaySavedReminders();
+			}
+		};
+	}
 
 	private void PopUP(Activity act, String content) {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
@@ -152,11 +178,11 @@ public class test extends Activity {
 	}
 	
 	private void testChartHelper(){
-		int[] data={10,20,30,40,50};
-		int floor=1;
-		int ceiling=100;
-//		int[] result=new ChartHelper().scaleToRange(data, floor, ceiling);
-//		Log.d("test helper", result.toString());
+		double[] data={0d,10d,20d,30d,40d,50d};
+		double floor=0d;
+		double ceiling=100d;
+		double[] result=ChartHelper.scaleToRange(data, floor, ceiling);
+		testText.setText(gson.toJson(result));
 	}
 	
 	private void testReminderController(){
