@@ -16,6 +16,7 @@ import com.android.reminder.MedReminderModel;
 import com.android.service.FileOperation;
 import com.android.trend.ChartHelper;
 import com.google.gson.Gson;
+import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewDataInterface;
 import com.jjoe64.graphview.GraphViewSeries;
@@ -24,6 +25,7 @@ import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -84,7 +86,7 @@ public class test extends Activity {
 //		double[] bpdataraw ={80, 95, 100, 92, 78, 100, 120, 77, 91};
 //		double[] bpdata=ChartHelper.scaleToRange(bpdataraw, 0, 50);
 		
-		GraphViewSeries exampleSeries=new GraphViewSeries(ChartHelper.generateRandomData(48));
+		GraphViewSeries exampleSeries=new GraphViewSeries(ChartHelper.generateRandomData(48,0,1));
 	
 		
 		int xValue=2;
@@ -97,16 +99,20 @@ public class test extends Activity {
 		
 		
 		 
-		GraphView graphView = new LineGraphView(
+//		GraphView graphView = new BarGraphView(
+		LineGraphView graphView = new LineGraphView(
 		      this // context
 		      , "GraphViewDemo" // heading
 		);
+		
 		graphView.addSeries(exampleSeries); // data
 		graphView.addSeries(vSeries); 
-		graphView.setViewPort(0, 12);
-		graphView.setScrollable(true);
+		graphView.setDrawBackground(true);
+		graphView.setBackgroundColor(Color.rgb(166, 195, 255));
+		//graphView.setViewPort(0, 12);
+		//graphView.setScrollable(true);
 		// optional - activate scaling / zooming
-		graphView.setScalable(true);
+	//	graphView.setScalable(true);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
 		layout.addView(graphView);
 		
@@ -167,13 +173,18 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				displaySavedReminders();
+				gotoSleepPage();
 			}
 		};
 	}
 
 	private void PopUP(Activity act, String content) {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
+	}
+	
+	private void gotoSleepPage(){
+		Intent intent = new Intent(test.this, SleDetail.class);
+		startActivity(intent);
 	}
 	
 	private void displaySavedReminders(){
