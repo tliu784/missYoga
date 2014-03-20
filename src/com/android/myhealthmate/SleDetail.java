@@ -2,13 +2,16 @@ package com.android.myhealthmate;
 
 import com.android.trend.ChartHelper;
 import com.jjoe64.graphview.BarGraphView;
+import com.jjoe64.graphview.GraphViewDataInterface;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
+import com.jjoe64.graphview.ValueDependentColor;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,16 +22,31 @@ public class SleDetail extends Activity {
 	private LinearLayout hrSection;
 	private LinearLayout actSection;
 	private int pointCount = 24;
+
+	// styling
 	private int gridColor;
 	private int hrLineColor;
 	private int bpLowColor;
 	private int bpHighColor;
 	private int actBarColor;
 	private int sleepBarColor;
+	private int sleepBarColor1;
+	private int sleepBarColor2;
+	private int sleepBarColor3;
 	private int lineChartThickness;
 	private int barChartThickness;
 	private int lineChartPointRadius;
 	private int chartBackColor;
+	private int hrFloor;
+	private int hrCeiling;
+	private int bplFloor;
+	private int bphFloor;
+	private int bplCeiling;
+	private int bphCeiling;
+	private int actFloor;
+	private int actCeiling;
+	private int sleepFloor;
+	private int sleepCeiling;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +63,31 @@ public class SleDetail extends Activity {
 	}
 
 	private void setUpChartParams() {
+		hrFloor = 41;
+		hrCeiling = 50;
+		bplFloor = 21;
+		bplCeiling = 30;
+		bphFloor = 31;
+		bphCeiling = 40;
+		actFloor = 0;
+		actCeiling = 19;
+		sleepFloor = 0;
+		sleepCeiling = 17;
+
 		gridColor = getResources().getColor(R.color.white);
 		hrLineColor = Color.YELLOW;
 		bpLowColor = Color.rgb(156, 195, 230);
 		bpHighColor = Color.rgb(67, 151, 244);
-		sleepBarColor = Color.rgb(250, 174, 42);
-		actBarColor = Color.rgb(42, 215, 250);
+		actBarColor = Color.rgb(255, 153, 0);
+		sleepBarColor = Color.rgb(42, 215, 250);
+		sleepBarColor1 = Color.rgb(153, 204, 255);
+		sleepBarColor2 = Color.rgb(0, 102, 204);
+		sleepBarColor3 = Color.rgb(0, 0, 204);
+		;
 		lineChartThickness = 3;
 		lineChartPointRadius = 4;
 		barChartThickness = 1;
-		//chartBackColor = Color.CYAN;
+		// chartBackColor = Color.CYAN;
 	}
 
 	private void drawTitle() {
@@ -67,11 +100,11 @@ public class SleDetail extends Activity {
 		GraphViewSeriesStyle bphStyle = new GraphViewSeriesStyle(bpHighColor, lineChartThickness);
 
 		GraphViewSeries exampleSeries = new GraphViewSeries("hr", hrStyple, ChartHelper.generateRandomData(pointCount,
-				41, 50));
+				hrFloor, hrCeiling));
 		GraphViewSeries exampleSeries2 = new GraphViewSeries("bpl", bplStyple, ChartHelper.generateRandomData(
-				pointCount, 31, 40));
+				pointCount, bplFloor, bplCeiling));
 		GraphViewSeries exampleSeries3 = new GraphViewSeries("bph", bphStyle, ChartHelper.generateRandomData(
-				pointCount, 21, 30));
+				pointCount, bphFloor, bphCeiling));
 
 		int xValue = 5;
 		double maxY = 50;
@@ -105,12 +138,28 @@ public class SleDetail extends Activity {
 		);
 
 		GraphViewSeriesStyle actStyle = new GraphViewSeriesStyle(actBarColor, barChartThickness);
-		GraphViewSeriesStyle sleepStyple = new GraphViewSeriesStyle(sleepBarColor, barChartThickness);
-
+		GraphViewSeriesStyle sleepStyle = new GraphViewSeriesStyle(sleepBarColor, barChartThickness);
+		sleepStyle.setValueDependentColor((new ValueDependentColor() {
+			@Override
+			public int get(GraphViewDataInterface data) {
+				int sleepRange = sleepCeiling - sleepFloor;
+				int color = 0;
+				if (data.getY() <= 0.33 * sleepRange) {
+					color = sleepBarColor1;
+				} else {
+					if (data.getY() > 0.66 * sleepRange) {
+						color = sleepBarColor3;
+					} else {
+						color = sleepBarColor2;
+					}
+				}
+				return color;
+			}
+		}));
 		GraphViewSeries exampleSeries = new GraphViewSeries("act", actStyle, ChartHelper.generateRandomDataWithZero(
-				pointCount, 0, 12, 0, 19));
-		GraphViewSeries exampleSeries2 = new GraphViewSeries("sleep", sleepStyple,
-				ChartHelper.generateRandomDataWithZero(pointCount, 12, 12, 0d, 19));
+				pointCount, 12, 12, actFloor, actCeiling));
+		GraphViewSeries exampleSeries2 = new GraphViewSeries("sleep", sleepStyle, ChartHelper.generateSleepData(
+				pointCount, 0, 12, sleepFloor, sleepCeiling));
 		graphView.addSeries(exampleSeries); // data
 		graphView.addSeries(exampleSeries2); // data
 		graphView.setShowHorizontalLabels(false);

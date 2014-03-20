@@ -35,10 +35,31 @@ public class ChartHelper {
 			double ceiling) {
 		double[] y = new double[len];
 		for (int i = 0; i < len; i++) {
-			if (i >= startZero && i < lenZero+startZero)
+			if (i >= startZero && i < lenZero + startZero)
 				y[i] = 0;
 			else
 				y[i] = Math.random();
+		}
+		double[] adjY = scaleToRange(y, floor, ceiling);
+		return createGraphViewData(adjY);
+	}
+
+	public static GraphViewData[] generateSleepData(int len, int startZero, int lenZero, double floor, double ceiling) {
+		double[] y = new double[len];
+		for (int i = 0; i < len; i++) {
+			if (i >= startZero && i < lenZero + startZero)
+				y[i] = 0;
+			else 
+			if (Math.random() <= 0.33) {
+				y[i] = 0.1; //adjust here for better fake chart
+			} else {
+				if (Math.random()>0.66){
+					y[i]=0.7;
+				}else{
+					y[i]=0.4;
+				}
+			}
+
 		}
 		double[] adjY = scaleToRange(y, floor, ceiling);
 		return createGraphViewData(adjY);
