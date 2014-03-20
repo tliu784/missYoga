@@ -89,7 +89,7 @@ public class SleDetail extends Activity {
 		
 		vlineThickness=2;
 		vlineColor=Color.RED;
-		lineChartThickness = 4;
+		lineChartThickness = 3;
 		lineChartPointRadius = 5;
 		barChartThickness = 1;
 		// chartBackColor = Color.CYAN;
