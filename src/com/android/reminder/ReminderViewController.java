@@ -147,10 +147,8 @@ public class ReminderViewController {
 			validButton.setPadding(20, 0, 0, 0);
 			// validButton
 			if (reminder.isActive()) {
-				mrcInstance.deactivate(reminder.getId());
 				validButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_alarms_light, 0, 0, 0);
 			} else {
-				mrcInstance.activate(reminder.getId());
 				validButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_alarms, 0, 0, 0);
 				validButton.setGravity(Gravity.TOP);
 			}
@@ -495,6 +493,11 @@ public class ReminderViewController {
 						editSec.editSection.setVisibility(View.GONE);
 						titleSec.showDetailModeTitle();
 						isNew = false;
+						if (reminder.isActive()) {
+							titleSec.validButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_alarms_light, 0, 0, 0);
+						} else {
+							titleSec.validButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_alarms, 0, 0, 0);							
+						}
 					}
 				}
 			});
