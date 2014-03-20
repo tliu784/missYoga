@@ -33,6 +33,8 @@ public class SleDetail extends Activity {
 	private int sleepBarColor1;
 	private int sleepBarColor2;
 	private int sleepBarColor3;
+	private int vlineColor;
+	private int vlineThickness;
 	private int lineChartThickness;
 	private int barChartThickness;
 	private int lineChartPointRadius;
@@ -83,9 +85,12 @@ public class SleDetail extends Activity {
 		sleepBarColor1 = Color.rgb(153, 204, 255);
 		sleepBarColor2 = Color.rgb(0, 102, 204);
 		sleepBarColor3 = Color.rgb(0, 0, 204);
-		;
-		lineChartThickness = 3;
-		lineChartPointRadius = 4;
+		
+		
+		vlineThickness=2;
+		vlineColor=Color.RED;
+		lineChartThickness = 4;
+		lineChartPointRadius = 5;
 		barChartThickness = 1;
 		// chartBackColor = Color.CYAN;
 	}
@@ -112,13 +117,15 @@ public class SleDetail extends Activity {
 		ChartHelper.GraphViewData[] vData = new ChartHelper.GraphViewData[2];
 		vData[0] = new ChartHelper.GraphViewData(xValue, 0);
 		vData[1] = new ChartHelper.GraphViewData(xValue, maxY);
-		GraphViewSeries vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(Color.rgb(255, 100, 100), 3),
+		GraphViewSeries vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(vlineColor, vlineThickness),
 				vData);
 
 		LineGraphView graphView = new LineGraphView(this, "can't remove stupid title");
 
 		// set background at here
 		graphView.setBackground(hrSection.getBackground());
+		//or use
+//		graphView.setBackgroundResource(R.color.highlight_titleSec_blue);
 		graphView.addSeries(exampleSeries); // data
 		graphView.addSeries(exampleSeries2);
 		graphView.addSeries(exampleSeries3);
