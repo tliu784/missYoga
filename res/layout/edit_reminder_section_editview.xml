@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/testEdit"
+    android:textColor="@color/dark_grey"
+    android:background="@android:color/transparent"
+	android:textSize="20dp"
+	android:padding="5dp"
+    />

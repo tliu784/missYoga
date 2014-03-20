@@ -1,6 +1,11 @@
 package com.android.myhealthmate;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import com.android.entity.RecomModel;
+import com.android.reminder.MedReminderController;
+import com.android.reminder.MedReminderModel;
 import com.android.service.RecomResponseHandler;
 import com.android.service.RestCallHandler;
 
@@ -25,24 +30,36 @@ public class MainPage extends Activity implements RecomResponseHandler {
 	private LinearLayout actClickView;
 	private LinearLayout sleClickView;
 	private LinearLayout rdClickView;
+	private TextView rdTitle;
+	private TextView rdDate;
+	private TextView rdTime;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
 
+		
+
+		
 		hrClickView = (LinearLayout) findViewById(R.id.hr);
 		bpClickView = (LinearLayout) findViewById(R.id.bp);
 		actClickView = (LinearLayout) findViewById(R.id.act);
 		sleClickView = (LinearLayout) findViewById(R.id.sle);
 		rdClickView = (LinearLayout) findViewById(R.id.rd);
-		
+
 		rec_content = (TextView) findViewById(R.id.rec_content);
 		rec_content.setVisibility(View.GONE);
+
+		rdTitle = (TextView) findViewById(R.id.rd_title);
+		rdDate = (TextView) findViewById(R.id.rd_date);
+		rdTime = (TextView) findViewById(R.id.rd_time);
 
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
 				| ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
+
+		updateReminderSection();
 
 		hrClickView.setOnClickListener(getHrClickListener());
 		bpClickView.setOnClickListener(getBpClickListener());
@@ -50,6 +67,44 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		sleClickView.setOnClickListener(getSleClickListener());
 		rdClickView.setOnClickListener(getRdClickListener());
 		rec_content.setOnClickListener(getRecClickListener());
+
+	}
+
+	@Override
+	public void onResume() { // After a pause OR at startup
+		super.onResume();
+		// Refresh your stuff here
+		updateReminderSection();
+	}
+
+	public void updateReminderSection() {
+
+		MedReminderController mrcInstance = MedReminderController.getInstance();
+		mrcInstance.init(getApplicationContext());
+		MedReminderModel reminder = null;
+		if (mrcInstance.getReminderList().size() > 0) {
+			reminder = mrcInstance.getReminderList().get(0); // get the first
+																// reminder
+			if (!reminder.isActive())
+				reminder = null;
+		}
+
+		if (reminder != null) {
+			rdTitle.setText(reminder.getTitle());
+			Calendar calendar = GregorianCalendar.getInstance();
+			calendar.setTime(reminder.getNextAlarmTime());
+
+			rdDate.setText(Integer.toString(calendar.get(Calendar.MONTH)) + "/"
+					+ Integer.toString(calendar.get(Calendar.DAY_OF_MONTH))
+					+ "/" + Integer.toString(calendar.get(Calendar.YEAR)));
+
+			rdTime.setText(Integer.toString(calendar.get(Calendar.HOUR_OF_DAY))
+					+ ":" + Integer.toString(calendar.get(Calendar.MINUTE)));
+		} else {
+			rdTitle.setText("No Task");
+			rdDate.setText("");
+			rdTime.setText("");
+		}
 
 	}
 

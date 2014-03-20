@@ -573,7 +573,6 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/act_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -582,7 +581,7 @@
                     android:textSize="17sp" />
 
                 <TextView
-                    android:id="@+id/act_distance_content"
+                    android:id="@+id/rd_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -597,7 +596,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/act_date"
+                    android:id="@+id/rd_date"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -606,7 +605,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/act_time"
+                    android:id="@+id/rd_time"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

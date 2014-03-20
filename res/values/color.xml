@@ -16,4 +16,6 @@
     <color name="sign_in_textcolor_darkblue">#0073cf</color>
     <color name="green">#01DF01</color>
     <color name="red">#DF0101</color>
+    <color name="highlight_titleSec_blue">#CCFFFF</color>
+    <color name="detail_section_color">#CAD9E9</color>    
 </resources>
