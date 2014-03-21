@@ -1,8 +1,15 @@
 package com.android.myhealthmate;
+import com.android.reminder.AlarmReceiver;
 
+import android.app.AlertDialog.Builder;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
@@ -55,8 +62,24 @@ public class MainActivity extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Reminder benTest = new Reminder();
-				SwithActivity(MainActivity.this, benTest);
+				new AlertDialog.Builder(MainActivity.this)
+			    .setTitle("Delete entry")
+			    .setMessage("Are you sure you want to delete this entry?")
+			    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) { 
+			            // continue with delete
+			        }
+			     })
+			    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) { 
+			            // do nothing
+			        }
+			     })
+			    .setIcon(R.drawable.ic_dialog_icon_about)
+			     .show();
+				
+			//	Reminder benTest = new Reminder();
+			//	SwithActivity(MainActivity.this, benTest);
 				}
 			};
 	}
@@ -145,6 +168,7 @@ public class MainActivity extends Activity {
 	//use intent tocd swith the activity
 	protected void SwithActivity(Activity currentAct, Activity target) {
 		Intent intent = new Intent(currentAct, target.getClass());
+		intent.putExtra(AlarmReceiver.notificationState, false);
 		startActivity(intent);
 	}
 
@@ -154,5 +178,6 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
+	
 }

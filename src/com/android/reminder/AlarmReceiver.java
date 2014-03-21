@@ -16,6 +16,8 @@ import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
 		
+	public static final String notificationState = "notification";
+	
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		//initialized controller
@@ -26,7 +28,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 		MedReminderModel reminder=mrc.findbyid(id);
 		
 		NotificationManager mNM;
-		PendingIntent contentIntent = PendingIntent.getActivity(context, reminder.getId(),new Intent(context, MainPage.class), 0);
+		Intent toActivity = new Intent(context, MainPage.class);
+		toActivity.putExtra(notificationState, true);
+		
+		PendingIntent contentIntent = PendingIntent.getActivity(context, reminder.getId(),toActivity, 0);
 		mNM = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 
