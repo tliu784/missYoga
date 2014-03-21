@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import com.android.entity.RecomModel;
+import com.android.reminder.AlarmReceiver;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
 import com.android.service.RecomResponseHandler;
@@ -11,6 +12,8 @@ import com.android.service.RestCallHandler;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,9 +42,14 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
 
-		
+		 boolean fromNoti =	false;
+		 savedInstanceState = getIntent().getExtras();
+		 fromNoti = savedInstanceState.getBoolean(AlarmReceiver.notificationState);
+		if ( fromNoti == true) {
+			Dialog mainPageDialog = new DialogPopup().onCreateDialog(this);
+			mainPageDialog.show();
+		}
 
-		
 		hrClickView = (LinearLayout) findViewById(R.id.hr);
 		bpClickView = (LinearLayout) findViewById(R.id.bp);
 		actClickView = (LinearLayout) findViewById(R.id.act);
@@ -56,8 +64,8 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		rdTime = (TextView) findViewById(R.id.rd_time);
 
 		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
-				| ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE
+				| ActionBar.DISPLAY_SHOW_CUSTOM);
 
 		updateReminderSection();
 
@@ -95,11 +103,11 @@ public class MainPage extends Activity implements RecomResponseHandler {
 			calendar.setTime(reminder.getNextAlarmTime());
 
 			rdDate.setText(Integer.toString(calendar.get(Calendar.MONTH)) + "/"
-					+ Integer.toString(calendar.get(Calendar.DAY_OF_MONTH))
-					+ "/" + Integer.toString(calendar.get(Calendar.YEAR)));
+					+ Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)) + "/"
+					+ Integer.toString(calendar.get(Calendar.YEAR)));
 
-			rdTime.setText(Integer.toString(calendar.get(Calendar.HOUR_OF_DAY))
-					+ ":" + Integer.toString(calendar.get(Calendar.MINUTE)));
+			rdTime.setText(Integer.toString(calendar.get(Calendar.HOUR_OF_DAY)) + ":"
+					+ Integer.toString(calendar.get(Calendar.MINUTE)));
 		} else {
 			rdTitle.setText("No Task");
 			rdDate.setText("");
@@ -200,8 +208,7 @@ public class MainPage extends Activity implements RecomResponseHandler {
 	}
 
 	public void toggle_recom_box(View v) {
-		rec_content.setVisibility(rec_content.isShown() ? View.GONE
-				: View.VISIBLE);
+		rec_content.setVisibility(rec_content.isShown() ? View.GONE : View.VISIBLE);
 	}
 
 	private void refresh() {
