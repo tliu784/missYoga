@@ -102,9 +102,8 @@ public class SleDetail extends Activity {
 
 	private void moveV(boolean left) {
 		graph.removeSeries(vSeries);
-		ChartHelper.GraphViewData[] vData = new ChartHelper.GraphViewData[2];
-
-		if (currentX < pointCount && !left)
+	
+		if (currentX < (pointCount-1) && !left)
 			currentX++;
 		if (currentX > 0 && left)
 			currentX--;
