@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="chart_grid" type="color">#FFFFFF</item>
+    <item name="chart_hr_line" type="color">#CC0000</item>
+    <item name="chart_bp_low_line" type="color">#CC9966</item>
+    <item name="chart_bp_high_line" type="color">#CCCC66</item>
+    <item name="chart_act_bar" type="color">#FF6600</item>
+    <item name="chart_sleep_bar_low" type="color">#6699FF</item>
+    <item name="chart_sleep_bar_medium" type="color">#0033FF</item>
+    <item name="chart_sleep_bar_high" type="color">#3300CC</item>
+    <item name="chart_v_line" type="color">#FF0066</item>
+    <item name="chart_background" type="color">#00CCFF</item>
+    <item name ="chart_transparent_background" type="bool">true</item>
+    
+    <item name="v_line_thickness" type="integer">2</item>
+    <item name="line_thickness" type="integer">3</item>
+    <item name="bar_thickness" type="integer">1</item>
+    <item name="line_point_radius" type="integer">4</item>
+    <item name="hr_floor" type="integer">41</item>
+    <item name="hr_ceiling" type="integer">50</item>
+    <item name="bpl_floor" type="integer">21</item>
+    <item name="bpl_ceiling" type="integer">30</item>
+    <item name="bph_floor" type="integer">31</item>
+    <item name="bph_ceiling" type="integer">40</item>
+    <item name="act_floor" type="integer">0</item>
+    <item name="act_ceiling" type="integer">19</item>
+    <item name="sleep_floor" type="integer">0</item>
+    <item name="sleep_ceiling" type="integer">17</item>
+    <item name="maxY" type="integer">50</item>
+
+</resources>

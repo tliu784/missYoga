@@ -9,9 +9,7 @@ import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 import com.jjoe64.graphview.ValueDependentColor;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,15 +28,14 @@ public class SleDetail extends Activity {
 	private int bpHighColor;
 	private int actBarColor;
 	private int sleepBarColor;
-	private int sleepBarColor1;
-	private int sleepBarColor2;
-	private int sleepBarColor3;
+	private int sleepBarColorLow;
+	private int sleepBarColorMedium;
+	private int sleepBarColorHigh;
 	private int vlineColor;
 	private int vlineThickness;
 	private int lineChartThickness;
 	private int barChartThickness;
 	private int lineChartPointRadius;
-	private int chartBackColor;
 	private int hrFloor;
 	private int hrCeiling;
 	private int bplFloor;
@@ -49,6 +46,8 @@ public class SleDetail extends Activity {
 	private int actCeiling;
 	private int sleepFloor;
 	private int sleepCeiling;
+	private int maxY;
+	private boolean transparentBack;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,34 +64,34 @@ public class SleDetail extends Activity {
 	}
 
 	private void setUpChartParams() {
-		hrFloor = 41;
-		hrCeiling = 50;
-		bplFloor = 21;
-		bplCeiling = 30;
-		bphFloor = 31;
-		bphCeiling = 40;
-		actFloor = 0;
-		actCeiling = 19;
-		sleepFloor = 0;
-		sleepCeiling = 17;
+		transparentBack=getResources().getBoolean(R.bool.chart_transparent_background);
+		maxY = getResources().getInteger(R.integer.maxY);
+		hrFloor = getResources().getInteger(R.integer.hr_floor);
+		hrCeiling = getResources().getInteger(R.integer.hr_ceiling);
+		bplFloor = getResources().getInteger(R.integer.bpl_floor);
+		bplCeiling = getResources().getInteger(R.integer.bpl_ceiling);
+		bphFloor = getResources().getInteger(R.integer.bph_floor);
+		bphCeiling = getResources().getInteger(R.integer.bph_ceiling);
+		actFloor = getResources().getInteger(R.integer.act_floor);
+		actCeiling = getResources().getInteger(R.integer.act_ceiling);
+		sleepFloor = getResources().getInteger(R.integer.sleep_floor);
+		sleepCeiling = getResources().getInteger(R.integer.sleep_ceiling);
 
-		gridColor = getResources().getColor(R.color.white);
-		hrLineColor = Color.YELLOW;
-		bpLowColor = Color.rgb(156, 195, 230);
-		bpHighColor = Color.rgb(67, 151, 244);
-		actBarColor = Color.rgb(255, 153, 0);
-		sleepBarColor = Color.rgb(42, 215, 250);
-		sleepBarColor1 = Color.rgb(153, 204, 255);
-		sleepBarColor2 = Color.rgb(0, 102, 204);
-		sleepBarColor3 = Color.rgb(0, 0, 204);
-		
-		
-		vlineThickness=2;
-		vlineColor=Color.RED;
-		lineChartThickness = 3;
-		lineChartPointRadius = 5;
-		barChartThickness = 1;
-		// chartBackColor = Color.CYAN;
+		gridColor = getResources().getColor(R.color.chart_grid);
+		hrLineColor = getResources().getColor(R.color.chart_hr_line);
+		bpLowColor = getResources().getColor(R.color.chart_bp_low_line);
+		bpHighColor = getResources().getColor(R.color.chart_bp_high_line);
+		actBarColor = getResources().getColor(R.color.chart_act_bar);
+		sleepBarColorLow = getResources().getColor(R.color.chart_sleep_bar_low);
+		sleepBarColorMedium = getResources().getColor(R.color.chart_sleep_bar_medium);
+		sleepBarColorHigh = getResources().getColor(R.color.chart_sleep_bar_high);
+
+		vlineThickness = getResources().getColor(R.integer.v_line_thickness);
+		vlineColor = getResources().getColor(R.color.chart_v_line);
+		lineChartThickness = getResources().getColor(R.integer.line_thickness);
+		lineChartPointRadius = getResources().getColor(R.integer.line_point_radius);
+		barChartThickness = getResources().getColor(R.integer.bar_thickness);
+
 	}
 
 	private void drawTitle() {
@@ -112,20 +111,18 @@ public class SleDetail extends Activity {
 				pointCount, bphFloor, bphCeiling));
 
 		int xValue = 5;
-		double maxY = 50;
 
 		ChartHelper.GraphViewData[] vData = new ChartHelper.GraphViewData[2];
 		vData[0] = new ChartHelper.GraphViewData(xValue, 0);
 		vData[1] = new ChartHelper.GraphViewData(xValue, maxY);
-		GraphViewSeries vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(vlineColor, vlineThickness),
-				vData);
+		GraphViewSeries vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(vlineColor, vlineThickness), vData);
 
 		LineGraphView graphView = new LineGraphView(this, "can't remove stupid title");
 
-		// set background at here
-		graphView.setBackground(hrSection.getBackground());
-		//or use
-//		graphView.setBackgroundResource(R.color.highlight_titleSec_blue);
+		if (transparentBack)
+			graphView.setBackground(hrSection.getBackground());
+		else
+			graphView.setBackgroundResource(R.color.chart_background);
 		graphView.addSeries(exampleSeries); // data
 		graphView.addSeries(exampleSeries2);
 		graphView.addSeries(exampleSeries3);
@@ -152,12 +149,12 @@ public class SleDetail extends Activity {
 				int sleepRange = sleepCeiling - sleepFloor;
 				int color = 0;
 				if (data.getY() <= 0.33 * sleepRange) {
-					color = sleepBarColor1;
+					color = sleepBarColorLow;
 				} else {
 					if (data.getY() > 0.66 * sleepRange) {
-						color = sleepBarColor3;
+						color = sleepBarColorHigh;
 					} else {
-						color = sleepBarColor2;
+						color = sleepBarColorMedium;
 					}
 				}
 				return color;
@@ -172,7 +169,7 @@ public class SleDetail extends Activity {
 		graphView.setShowHorizontalLabels(false);
 		graphView.setShowVerticalLabels(false);
 		graphView.setManualMaxY(true);
-		graphView.setManualYMaxBound(50);
+		graphView.setManualYMaxBound(maxY);
 		graphView.getGraphViewStyle().setGridColor(gridColor);
 		container.addView(graphView);
 	}
