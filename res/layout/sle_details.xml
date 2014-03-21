@@ -16,7 +16,15 @@
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" >
-
+		<Button
+            android:id="@+id/chart_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="@color/text_shadow_white"
+            android:text="prev"
+            android:textStyle="bold" />
             <TextView
                 android:id="@+id/detail_title_text"
                 android:layout_width="wrap_content"
@@ -25,6 +33,16 @@
                 android:scrollbars="vertical"
                 android:text="@string/text1" >
             </TextView>
+            
+            <Button
+            android:id="@+id/chart_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="@color/text_shadow_white"
+            android:text="next"
+            android:textStyle="bold" />
         </LinearLayout>
     
     <FrameLayout

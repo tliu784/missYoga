@@ -2,6 +2,7 @@ package com.android.myhealthmate;
 
 import com.android.trend.ChartHelper;
 import com.jjoe64.graphview.BarGraphView;
+import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewDataInterface;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
@@ -10,6 +11,9 @@ import com.jjoe64.graphview.ValueDependentColor;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +24,9 @@ public class SleDetail extends Activity {
 	private LinearLayout hrSection;
 	private LinearLayout actSection;
 	private int pointCount = 24;
+
+	private Button prev;
+	private Button next;
 
 	// styling
 	private int gridColor;
@@ -49,56 +56,77 @@ public class SleDetail extends Activity {
 	private int maxY;
 	private boolean transparentBack;
 
+	private int currentX = 0;
+	private GraphViewSeries vSeries;
+	private GraphView graph;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sle_details);
+		setUpChartParams();
+
 		titleSection = (LinearLayout) findViewById(R.id.detail_title_section);
 		hrSection = (LinearLayout) findViewById(R.id.detail_hr_graph);
 		actSection = (LinearLayout) findViewById(R.id.detail_act_graph);
 		titleTextView = (TextView) findViewById(R.id.detail_title_text);
+		prev = (Button) findViewById(R.id.chart_prev);
+		next = (Button) findViewById(R.id.chart_next);
+		prev.setOnClickListener(getPrevClickListener());
+		next.setOnClickListener(getNextClickListener());
 		drawTitle();
-		setUpChartParams();
-		creaHeartChart(hrSection);
+		
+
+		graph=creaHeartChart(hrSection);
 		createActChart(actSection);
+		moveVto(0);
 	}
 
-	private void setUpChartParams() {
-		transparentBack=getResources().getBoolean(R.bool.chart_transparent_background);
-		maxY = getResources().getInteger(R.integer.maxY);
-		hrFloor = getResources().getInteger(R.integer.hr_floor);
-		hrCeiling = getResources().getInteger(R.integer.hr_ceiling);
-		bplFloor = getResources().getInteger(R.integer.bpl_floor);
-		bplCeiling = getResources().getInteger(R.integer.bpl_ceiling);
-		bphFloor = getResources().getInteger(R.integer.bph_floor);
-		bphCeiling = getResources().getInteger(R.integer.bph_ceiling);
-		actFloor = getResources().getInteger(R.integer.act_floor);
-		actCeiling = getResources().getInteger(R.integer.act_ceiling);
-		sleepFloor = getResources().getInteger(R.integer.sleep_floor);
-		sleepCeiling = getResources().getInteger(R.integer.sleep_ceiling);
+	private OnClickListener getNextClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				moveV(false);
+			}
+		};
+	}
 
-		gridColor = getResources().getColor(R.color.chart_grid);
-		hrLineColor = getResources().getColor(R.color.chart_hr_line);
-		bpLowColor = getResources().getColor(R.color.chart_bp_low_line);
-		bpHighColor = getResources().getColor(R.color.chart_bp_high_line);
-		actBarColor = getResources().getColor(R.color.chart_act_bar);
-		sleepBarColorLow = getResources().getColor(R.color.chart_sleep_bar_low);
-		sleepBarColorMedium = getResources().getColor(R.color.chart_sleep_bar_medium);
-		sleepBarColorHigh = getResources().getColor(R.color.chart_sleep_bar_high);
+	private OnClickListener getPrevClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				moveV(true);
+			}
+		};
+	}
 
-		vlineThickness = getResources().getColor(R.integer.v_line_thickness);
-		vlineColor = getResources().getColor(R.color.chart_v_line);
-		lineChartThickness = getResources().getColor(R.integer.line_thickness);
-		lineChartPointRadius = getResources().getColor(R.integer.line_point_radius);
-		barChartThickness = getResources().getColor(R.integer.bar_thickness);
+	private void moveV(boolean left) {
+		graph.removeSeries(vSeries);
+		ChartHelper.GraphViewData[] vData = new ChartHelper.GraphViewData[2];
 
+		if (currentX < pointCount && !left)
+			currentX++;
+		if (currentX > 0 && left)
+			currentX--;
+		moveVto(currentX);
+	}
+
+	private void moveVto(int xValue) {
+		if (vSeries != null) {
+			graph.removeSeries(vSeries);
+		}
+		ChartHelper.GraphViewData[] vData = new ChartHelper.GraphViewData[2];
+		vData[0] = new ChartHelper.GraphViewData(xValue, 0);
+		vData[1] = new ChartHelper.GraphViewData(xValue, maxY);
+		vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(vlineColor, vlineThickness), vData);
+		graph.addSeries(vSeries);
 	}
 
 	private void drawTitle() {
 		titleTextView.setText("testing chart");
 	}
 
-	private void creaHeartChart(LinearLayout container) {
+	private GraphView creaHeartChart(LinearLayout container) {
 		GraphViewSeriesStyle hrStyple = new GraphViewSeriesStyle(hrLineColor, lineChartThickness);
 		GraphViewSeriesStyle bplStyple = new GraphViewSeriesStyle(bpLowColor, lineChartThickness);
 		GraphViewSeriesStyle bphStyle = new GraphViewSeriesStyle(bpHighColor, lineChartThickness);
@@ -110,13 +138,6 @@ public class SleDetail extends Activity {
 		GraphViewSeries exampleSeries3 = new GraphViewSeries("bph", bphStyle, ChartHelper.generateRandomData(
 				pointCount, bphFloor, bphCeiling));
 
-		int xValue = 5;
-
-		ChartHelper.GraphViewData[] vData = new ChartHelper.GraphViewData[2];
-		vData[0] = new ChartHelper.GraphViewData(xValue, 0);
-		vData[1] = new ChartHelper.GraphViewData(xValue, maxY);
-		GraphViewSeries vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(vlineColor, vlineThickness), vData);
-
 		LineGraphView graphView = new LineGraphView(this, "can't remove stupid title");
 
 		if (transparentBack)
@@ -126,7 +147,6 @@ public class SleDetail extends Activity {
 		graphView.addSeries(exampleSeries); // data
 		graphView.addSeries(exampleSeries2);
 		graphView.addSeries(exampleSeries3);
-		graphView.addSeries(vSeries);
 		graphView.setShowHorizontalLabels(false);
 		graphView.setShowVerticalLabels(false);
 		graphView.getGraphViewStyle().setGridColor(gridColor);
@@ -134,6 +154,7 @@ public class SleDetail extends Activity {
 		graphView.setDataPointsRadius(lineChartPointRadius);
 
 		container.addView(graphView);
+		return graphView;
 	}
 
 	public void createActChart(LinearLayout container) {
@@ -172,6 +193,37 @@ public class SleDetail extends Activity {
 		graphView.setManualYMaxBound(maxY);
 		graphView.getGraphViewStyle().setGridColor(gridColor);
 		container.addView(graphView);
+	}
+
+	private void setUpChartParams() {
+		transparentBack = getResources().getBoolean(R.bool.chart_transparent_background);
+		maxY = getResources().getInteger(R.integer.maxY);
+		hrFloor = getResources().getInteger(R.integer.hr_floor);
+		hrCeiling = getResources().getInteger(R.integer.hr_ceiling);
+		bplFloor = getResources().getInteger(R.integer.bpl_floor);
+		bplCeiling = getResources().getInteger(R.integer.bpl_ceiling);
+		bphFloor = getResources().getInteger(R.integer.bph_floor);
+		bphCeiling = getResources().getInteger(R.integer.bph_ceiling);
+		actFloor = getResources().getInteger(R.integer.act_floor);
+		actCeiling = getResources().getInteger(R.integer.act_ceiling);
+		sleepFloor = getResources().getInteger(R.integer.sleep_floor);
+		sleepCeiling = getResources().getInteger(R.integer.sleep_ceiling);
+
+		gridColor = getResources().getColor(R.color.chart_grid);
+		hrLineColor = getResources().getColor(R.color.chart_hr_line);
+		bpLowColor = getResources().getColor(R.color.chart_bp_low_line);
+		bpHighColor = getResources().getColor(R.color.chart_bp_high_line);
+		actBarColor = getResources().getColor(R.color.chart_act_bar);
+		sleepBarColorLow = getResources().getColor(R.color.chart_sleep_bar_low);
+		sleepBarColorMedium = getResources().getColor(R.color.chart_sleep_bar_medium);
+		sleepBarColorHigh = getResources().getColor(R.color.chart_sleep_bar_high);
+
+		vlineThickness = getResources().getColor(R.integer.v_line_thickness);
+		vlineColor = getResources().getColor(R.color.chart_v_line);
+		lineChartThickness = getResources().getColor(R.integer.line_thickness);
+		lineChartPointRadius = getResources().getColor(R.integer.line_point_radius);
+		barChartThickness = getResources().getColor(R.integer.bar_thickness);
+
 	}
 
 }
