@@ -13,6 +13,27 @@ public class ChartHelper {
 		return graphData;
 	}
 
+	public static double getSingleRandomData(double min, double max) {
+		double raw = Math.random();
+		double result = min + raw * (max - min);
+		return result;
+	}
+
+	public static double getSleepRandomData() {
+		double value = 0;
+		if (Math.random() <= 0.33) {
+			value = 10; // adjust here for better fake chart
+		} else {
+			if (Math.random() > 0.66) {
+				value = 70;
+			} else {
+				value = 40;
+			}
+		}
+		return value;
+
+	}
+
 	public static GraphViewData[] createGraphViewData(double[] data, int minX) {
 		// implement a simple x value
 		GraphViewData[] graphData = new GraphViewData[data.length];
@@ -49,14 +70,13 @@ public class ChartHelper {
 		for (int i = 0; i < len; i++) {
 			if (i >= startZero && i < lenZero + startZero)
 				y[i] = 0;
-			else 
-			if (Math.random() <= 0.33) {
-				y[i] = 0.1; //adjust here for better fake chart
+			else if (Math.random() <= 0.33) {
+				y[i] = 0.1; // adjust here for better fake chart
 			} else {
-				if (Math.random()>0.66){
-					y[i]=0.7;
-				}else{
-					y[i]=0.4;
+				if (Math.random() > 0.66) {
+					y[i] = 0.7;
+				} else {
+					y[i] = 0.4;
 				}
 			}
 

@@ -172,7 +172,7 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 		return this.nextAlarmTime.compareTo(anotherReminder.nextAlarmTime);
 	}
 
-	private static Date addDuration(Date start, int duration, DurationUnit dunit) {
+	public static Date addDuration(Date start, int duration, DurationUnit dunit) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(start);
 		switch (dunit) {
