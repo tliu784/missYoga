@@ -1,6 +1,10 @@
 package com.android.myhealthmate;
 
+import com.android.trend.ChartDataController;
+import com.android.trend.ChartDataController.SeriesType;
 import com.android.trend.ChartHelper;
+import com.android.trend.ChartHelper.GraphViewData;
+import com.google.gson.Gson;
 import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewDataInterface;
@@ -11,6 +15,7 @@ import com.jjoe64.graphview.ValueDependentColor;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -56,16 +61,23 @@ public class SleDetail extends Activity {
 	private int maxY;
 	private boolean transparentBack;
 
+	//data
 	private int currentX = 0;
 	private GraphViewSeries vSeries;
-	private GraphView graph;
+	private GraphView heartGraph;
+	private ChartDataController chartData; 
+	private GraphViewData[] hrGraphData;
+	private GraphViewData[] bplGraphData;
+	private GraphViewData[] bphGraphData;
+	private GraphViewData[] actGraphData;
+	private GraphViewData[] sleepGraphData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sle_details);
-		setUpChartParams();
-
+		setUpChartParams(); //must run before setupData
+		
 		titleSection = (LinearLayout) findViewById(R.id.detail_title_section);
 		hrSection = (LinearLayout) findViewById(R.id.detail_hr_graph);
 		actSection = (LinearLayout) findViewById(R.id.detail_act_graph);
@@ -74,12 +86,27 @@ public class SleDetail extends Activity {
 		next = (Button) findViewById(R.id.chart_next);
 		prev.setOnClickListener(getPrevClickListener());
 		next.setOnClickListener(getNextClickListener());
+				
 		drawTitle();
-		
+		setupData();
 
-		graph=creaHeartChart(hrSection);
+		
+		heartGraph=creaHeartChart(hrSection);
 		createActChart(actSection);
 		moveVto(0);
+	}
+	
+	private void setupData(){
+		chartData=new ChartDataController(hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor, actCeiling, sleepFloor, sleepCeiling);
+		//random data for now
+		chartData.createRandomDisplaySet();
+		hrGraphData=chartData.generateGraphData(SeriesType.HR);
+		bplGraphData=chartData.generateGraphData(SeriesType.BPL);
+		bphGraphData=chartData.generateGraphData(SeriesType.BPH);
+		actGraphData=chartData.generateGraphData(SeriesType.ACT);
+		sleepGraphData=chartData.generateGraphData(SeriesType.SLEEP);
+		Log.d("act",new Gson().toJson(actGraphData));
+		Log.d("sleep", new Gson().toJson(sleepGraphData));
 	}
 
 	private OnClickListener getNextClickListener() {
@@ -99,9 +126,13 @@ public class SleDetail extends Activity {
 			}
 		};
 	}
+	
+	private void displayValues(){
+
+	}
 
 	private void moveV(boolean left) {
-		graph.removeSeries(vSeries);
+		heartGraph.removeSeries(vSeries);
 	
 		if (currentX < (pointCount-1) && !left)
 			currentX++;
@@ -112,13 +143,13 @@ public class SleDetail extends Activity {
 
 	private void moveVto(int xValue) {
 		if (vSeries != null) {
-			graph.removeSeries(vSeries);
+			heartGraph.removeSeries(vSeries);
 		}
 		ChartHelper.GraphViewData[] vData = new ChartHelper.GraphViewData[2];
 		vData[0] = new ChartHelper.GraphViewData(xValue, 0);
 		vData[1] = new ChartHelper.GraphViewData(xValue, maxY);
 		vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(vlineColor, vlineThickness), vData);
-		graph.addSeries(vSeries);
+		heartGraph.addSeries(vSeries);
 	}
 
 	private void drawTitle() {
@@ -130,12 +161,10 @@ public class SleDetail extends Activity {
 		GraphViewSeriesStyle bplStyple = new GraphViewSeriesStyle(bpLowColor, lineChartThickness);
 		GraphViewSeriesStyle bphStyle = new GraphViewSeriesStyle(bpHighColor, lineChartThickness);
 
-		GraphViewSeries exampleSeries = new GraphViewSeries("hr", hrStyple, ChartHelper.generateRandomData(pointCount,
-				hrFloor, hrCeiling));
-		GraphViewSeries exampleSeries2 = new GraphViewSeries("bpl", bplStyple, ChartHelper.generateRandomData(
-				pointCount, bplFloor, bplCeiling));
-		GraphViewSeries exampleSeries3 = new GraphViewSeries("bph", bphStyle, ChartHelper.generateRandomData(
-				pointCount, bphFloor, bphCeiling));
+		GraphViewSeries hrSeries = new GraphViewSeries("hr", hrStyple, hrGraphData);
+		GraphViewSeries bplSeries = new GraphViewSeries("bpl", bplStyple, bplGraphData);
+		GraphViewSeries bphSeries = new GraphViewSeries("bph", bphStyle,bphGraphData); 
+				
 
 		LineGraphView graphView = new LineGraphView(this, "can't remove stupid title");
 
@@ -143,9 +172,9 @@ public class SleDetail extends Activity {
 			graphView.setBackground(hrSection.getBackground());
 		else
 			graphView.setBackgroundResource(R.color.chart_background);
-		graphView.addSeries(exampleSeries); // data
-		graphView.addSeries(exampleSeries2);
-		graphView.addSeries(exampleSeries3);
+		graphView.addSeries(hrSeries); // data
+		graphView.addSeries(bplSeries);
+		graphView.addSeries(bphSeries);
 		graphView.setShowHorizontalLabels(false);
 		graphView.setShowVerticalLabels(false);
 		graphView.getGraphViewStyle().setGridColor(gridColor);
@@ -156,7 +185,7 @@ public class SleDetail extends Activity {
 		return graphView;
 	}
 
-	public void createActChart(LinearLayout container) {
+	public GraphView createActChart(LinearLayout container) {
 		BarGraphView graphView = new BarGraphView(this // context
 				, "can't remove stupid title" // heading
 		);
@@ -180,18 +209,22 @@ public class SleDetail extends Activity {
 				return color;
 			}
 		}));
-		GraphViewSeries exampleSeries = new GraphViewSeries("act", actStyle, ChartHelper.generateRandomDataWithZero(
-				pointCount, 12, 12, actFloor, actCeiling));
-		GraphViewSeries exampleSeries2 = new GraphViewSeries("sleep", sleepStyle, ChartHelper.generateSleepData(
-				pointCount, 0, 12, sleepFloor, sleepCeiling));
-		graphView.addSeries(exampleSeries); // data
-		graphView.addSeries(exampleSeries2); // data
+//		GraphViewSeries actSeries = new GraphViewSeries("act", actStyle, ChartHelper.generateRandomDataWithZero(
+//				pointCount, 12, 12, actFloor, actCeiling));
+//		GraphViewSeries sleepSeries = new GraphViewSeries("sleep", sleepStyle, ChartHelper.generateSleepData(
+//				pointCount, 0, 12, sleepFloor, sleepCeiling));
+		
+		GraphViewSeries actSeries = new GraphViewSeries("act", actStyle, actGraphData);
+		GraphViewSeries sleepSeries = new GraphViewSeries("sleep", sleepStyle, sleepGraphData);
+		graphView.addSeries(actSeries); // data
+		graphView.addSeries(sleepSeries); // data
 		graphView.setShowHorizontalLabels(false);
 		graphView.setShowVerticalLabels(false);
 		graphView.setManualMaxY(true);
 		graphView.setManualYMaxBound(maxY);
 		graphView.getGraphViewStyle().setGridColor(gridColor);
 		container.addView(graphView);
+		return graphView;
 	}
 
 	private void setUpChartParams() {
