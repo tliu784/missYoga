@@ -22,12 +22,12 @@ public class ChartHelper {
 	public static double getSleepRandomData() {
 		double value = 0;
 		if (Math.random() <= 0.33) {
-			value = 10; // adjust here for better fake chart
+			value = ChartPointModel.SLEEP_LOW; // adjust here for better fake chart
 		} else {
 			if (Math.random() > 0.66) {
-				value = 70;
+				value = ChartPointModel.SLEEP_HIGH;
 			} else {
-				value = 40;
+				value = ChartPointModel.SLEEP_MED;
 			}
 		}
 		return value;

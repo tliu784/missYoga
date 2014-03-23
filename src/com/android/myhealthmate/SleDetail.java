@@ -4,6 +4,7 @@ import com.android.trend.ChartDataController;
 import com.android.trend.ChartDataController.SeriesType;
 import com.android.trend.ChartHelper;
 import com.android.trend.ChartHelper.GraphViewData;
+import com.android.trend.ChartPointModel;
 import com.google.gson.Gson;
 import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 public class SleDetail extends Activity {
 
 	private TextView titleTextView;
+	private TextView valueTextView;
 	private LinearLayout titleSection;
 	private LinearLayout hrSection;
 	private LinearLayout actSection;
@@ -82,6 +84,7 @@ public class SleDetail extends Activity {
 		hrSection = (LinearLayout) findViewById(R.id.detail_hr_graph);
 		actSection = (LinearLayout) findViewById(R.id.detail_act_graph);
 		titleTextView = (TextView) findViewById(R.id.detail_title_text);
+		valueTextView = (TextView) findViewById(R.id.chart_values);
 		prev = (Button) findViewById(R.id.chart_prev);
 		next = (Button) findViewById(R.id.chart_next);
 		prev.setOnClickListener(getPrevClickListener());
@@ -126,7 +129,10 @@ public class SleDetail extends Activity {
 	}
 	
 	private void displayValues(){
-
+		ChartPointModel currentPoint=chartData.getDisplayDataSet().get(currentX);
+		//to be changed
+		String displayText=new Gson().toJson(currentPoint);
+		valueTextView.setText(displayText);
 	}
 
 	private void moveV(boolean left) {
@@ -148,6 +154,7 @@ public class SleDetail extends Activity {
 		vData[1] = new ChartHelper.GraphViewData(xValue, maxY);
 		vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(vlineColor, vlineThickness), vData);
 		heartGraph.addSeries(vSeries);
+		displayValues();
 	}
 
 	private void drawTitle() {

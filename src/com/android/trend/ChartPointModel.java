@@ -10,6 +10,10 @@ public class ChartPointModel implements Comparable<ChartPointModel>{
 	private double act;
 	private double sleep;
 	private boolean isSleep;
+	public static final double SLEEP_LOW=10;
+	public static final double SLEEP_MED=40;
+	public static final double SLEEP_HIGH=70;
+	
 	
 	
 	public ChartPointModel(Date timestamp, double hr, double bpl, double bph, double act, double sleep, boolean isSleep) {
@@ -21,6 +25,8 @@ public class ChartPointModel implements Comparable<ChartPointModel>{
 		this.sleep = sleep;
 		this.isSleep = isSleep;
 	}
+	
+	
 	
 	public boolean isSleep(){
 		return isSleep;
