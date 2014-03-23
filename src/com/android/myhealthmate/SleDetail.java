@@ -105,8 +105,6 @@ public class SleDetail extends Activity {
 		bphGraphData=chartData.generateGraphData(SeriesType.BPH);
 		actGraphData=chartData.generateGraphData(SeriesType.ACT);
 		sleepGraphData=chartData.generateGraphData(SeriesType.SLEEP);
-		Log.d("act",new Gson().toJson(actGraphData));
-		Log.d("sleep", new Gson().toJson(sleepGraphData));
 	}
 
 	private OnClickListener getNextClickListener() {
