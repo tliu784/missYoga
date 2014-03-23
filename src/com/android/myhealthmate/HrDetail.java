@@ -1,5 +1,8 @@
 package com.android.myhealthmate;
 
+import com.android.trend.RecordList;
+import com.android.trend.RecordModel;
+import com.android.trend.RecordViewSection;
 import com.jjoe64.graphview.GraphView.LegendAlign;
 import com.jjoe64.graphview.GraphViewDataInterface;
 import com.jjoe64.graphview.GraphViewSeries;
@@ -21,48 +24,48 @@ public class HrDetail extends Activity {
 		/*
 		 * init series data
 		 */
-		//bp
+		// bp
 		int num = 7;
 		GraphViewData[] data = new GraphViewData[num];
 		double v = 0;
 		for (int i = 0; i < num; i++) {
-			//30-40
-			data[i] = new GraphViewData(i, Math.floor((Math.random()*10)+30));
+			// 30-40
+			data[i] = new GraphViewData(i, Math.floor((Math.random() * 10) + 30));
 		}
-		GraphViewSeries seriesBp = new GraphViewSeries("Blood pressure",
-				new GraphViewSeriesStyle(Color.rgb(255, 165, 00), 3), data);
+		GraphViewSeries seriesBp = new GraphViewSeries("Blood pressure", new GraphViewSeriesStyle(Color.rgb(255, 165,
+				00), 3), data);
 
-		//hr
+		// hr
 		num = 100;
 		data = new GraphViewData[num];
 		v = 0;
 		for (int i = 0; i < num; i++) {
-			//20-30
-			data[i] = new GraphViewData(i, Math.floor((Math.random()*10)+20));
+			// 20-30
+			data[i] = new GraphViewData(i, Math.floor((Math.random() * 10) + 20));
 		}
 		GraphViewSeries seriesHr = new GraphViewSeries("Heart rate",
 				new GraphViewSeriesStyle(Color.rgb(204, 00, 00), 3), data);
 
-		//sleep
+		// sleep
 		num = 150;
 		data = new GraphViewData[num];
 		v = 0;
 		for (int i = 0; i < num; i++) {
-			//10-20
-			data[i] = new GraphViewData(i, Math.floor((Math.random()*10)+10));
+			// 10-20
+			data[i] = new GraphViewData(i, Math.floor((Math.random() * 10) + 10));
 		}
-		GraphViewSeries seriesSleep = new GraphViewSeries("Sleep",
-				new GraphViewSeriesStyle(Color.rgb(00, 00, 178), 3), data);
+		GraphViewSeries seriesSleep = new GraphViewSeries("Sleep", new GraphViewSeriesStyle(Color.rgb(00, 00, 178), 3),
+				data);
 
-		//activity
+		// activity
 		num = 100;
 		data = new GraphViewData[num];
 		v = 0;
 		for (int i = 0; i < num; i++) {
-			//0-10
-			data[i] = new GraphViewData(i, Math.floor((Math.random()*10)+1));
+			// 0-10
+			data[i] = new GraphViewData(i, Math.floor((Math.random() * 10) + 1));
 		}
-		GraphViewSeries seriesAct = new GraphViewSeries("Activity", 
+		GraphViewSeries seriesAct = new GraphViewSeries("Activity",
 				new GraphViewSeriesStyle(Color.rgb(50, 153, 50), 3), data);
 
 		// graph with dynamically generated horizontal and vertical labels
@@ -82,11 +85,22 @@ public class HrDetail extends Activity {
 		graphView.getGraphViewStyle().setLegendWidth(300);
 
 		// set view port, start=2, size=10
-		graphView.setHorizontalLabels(new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"});
-        graphView.setVerticalLabels(new String[] {"high", "mid", "low"});
+		graphView.setHorizontalLabels(new String[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" });
+		graphView.setVerticalLabels(new String[] { "high", "mid", "low" });
 		graphView.setScalable(true);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.hr_graph1);
 		layout.addView(graphView);
+
+		LinearLayout recordLayout = (LinearLayout) findViewById(R.id.recordTest);
+
+		RecordList recordList = new RecordList();
+		for (RecordModel record : recordList.getRecordList()) {
+			recordLayout.addView(new RecordViewSection(HrDetail.this, record.getType().toString(), record
+					.getTimeStamp(), record.getContent()).getLayout());
+		}
+		
+		
+		// oneRecord.getTitleType().setText("reminder");
 	}
 
 	public class GraphViewData implements GraphViewDataInterface {

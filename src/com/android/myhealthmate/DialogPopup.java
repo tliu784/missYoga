@@ -18,11 +18,8 @@ import android.util.Log;
 public class DialogPopup extends DialogFragment {
 	
 	MedReminderModel reminder = null;
-	// public static final String notificationState = "notification";
 	public Dialog onCreateDialog(Context context) {
-		//boolean fromNoti = savedInstanceState.getBoolean(AlarmReceiver.notificationState);
-		//if (fromNoti == true) {
-			// Where we track the selected items
+	
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			reminder = updateReminderSection(context);
 			// Set the dialog title
