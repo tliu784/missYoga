@@ -30,6 +30,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		NotificationManager mNM;
 		Intent toActivity = new Intent(context, MainPage.class);
 		toActivity.putExtra(notificationState, true);
+		toActivity.putExtra(AlarmService.reminderVar, id);
 		
 		PendingIntent contentIntent = PendingIntent.getActivity(context, reminder.getId(),toActivity, 0);
 		mNM = (NotificationManager) context

@@ -1,5 +1,9 @@
 package com.android.myhealthmate;
 
+import java.util.ArrayList;
+
+import com.android.reminder.MedReminderModel;
+import com.android.reminder.ReminderViewController;
 import com.android.trend.RecordList;
 import com.android.trend.RecordModel;
 import com.android.trend.RecordViewSection;
@@ -12,15 +16,23 @@ import com.jjoe64.graphview.LineGraphView;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 public class HrDetail extends Activity {
+
+	private ArrayList<RecordModel> recordList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hr_details);
 
+		RecordList recordListInstance = RecordList.getInstance();
+		recordListInstance.init(getApplicationContext());
+		recordList = recordListInstance.getRecordList();
 		/*
 		 * init series data
 		 */
@@ -93,15 +105,50 @@ public class HrDetail extends Activity {
 
 		LinearLayout recordLayout = (LinearLayout) findViewById(R.id.recordTest);
 
-		RecordList recordList = new RecordList();
-		for (RecordModel record : recordList.getRecordList()) {
+		
+		for (RecordModel record : recordList) {
 			recordLayout.addView(new RecordViewSection(HrDetail.this, record.getType().toString(), record
 					.getTimeStamp(), record.getContent()).getLayout());
 		}
-		
-		
+
 		// oneRecord.getTitleType().setText("reminder");
 	}
+	
+	public void onResume() { // After a pause OR at startup
+		super.onResume();
+		// Refresh your stuff here
+	
+	}
+
+	// --------------------action bar test below------------------------------
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu items for use in the action bar
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.reminder_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.add_reminder: {
+			MedReminderModel newReminder = new MedReminderModel();
+
+			return true;
+		}
+		case R.id.delete_reminder: {
+
+			return true;
+		}
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	// --------------------action bar test above------------------------------
 
 	public class GraphViewData implements GraphViewDataInterface {
 		private double x, y;

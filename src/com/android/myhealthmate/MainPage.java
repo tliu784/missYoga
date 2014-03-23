@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 
 import com.android.entity.RecomModel;
 import com.android.reminder.AlarmReceiver;
+import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
 import com.android.service.RecomResponseHandler;
@@ -46,8 +47,10 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		 savedInstanceState = getIntent().getExtras();
 		 fromNoti = savedInstanceState.getBoolean(AlarmReceiver.notificationState);
 		if ( fromNoti == true) {
-			Dialog mainPageDialog = new DialogPopup().onCreateDialog(this);
+			int id = savedInstanceState.getInt(AlarmService.reminderVar);
+			Dialog mainPageDialog = new DialogPopup().onCreateDialog(this,id);
 			mainPageDialog.show();
+			
 		}
 
 		hrClickView = (LinearLayout) findViewById(R.id.hr);

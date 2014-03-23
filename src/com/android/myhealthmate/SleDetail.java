@@ -84,7 +84,7 @@ public class SleDetail extends Activity {
 		hrSection = (LinearLayout) findViewById(R.id.detail_hr_graph);
 		actSection = (LinearLayout) findViewById(R.id.detail_act_graph);
 		titleTextView = (TextView) findViewById(R.id.detail_title_text);
-		valueTextView = (TextView) findViewById(R.id.chart_values);
+		//valueTextView = (TextView) findViewById(R.id.chart_values);
 		prev = (Button) findViewById(R.id.chart_prev);
 		next = (Button) findViewById(R.id.chart_next);
 		prev.setOnClickListener(getPrevClickListener());
@@ -154,7 +154,7 @@ public class SleDetail extends Activity {
 		vData[1] = new ChartHelper.GraphViewData(xValue, maxY);
 		vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(vlineColor, vlineThickness), vData);
 		heartGraph.addSeries(vSeries);
-		displayValues();
+	//	displayValues();
 	}
 
 	private void drawTitle() {

@@ -10,6 +10,7 @@ public class RecordModel implements Serializable{
 	private String content;
 	private Date timeStamp;
 	private recordType type;	
+	private boolean miss;
 	
 	public enum recordType implements Serializable {
 		recommendation, note, reminder;
@@ -19,12 +20,14 @@ public class RecordModel implements Serializable{
 		this.content = "There is a record example";
 		this.timeStamp = new Date();
 		this.type = recordType.recommendation;
+		this.miss = true;
 	}
 	
-	public RecordModel(recordType type,Date date,String content){
+	public RecordModel(recordType type,Date date,String content,boolean miss){
 		this.content = content;
 		this.timeStamp = date;
 		this.type = type;
+		this.miss = miss;
 	}
 
 	public String getContent() {

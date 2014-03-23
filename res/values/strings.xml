@@ -44,6 +44,11 @@
 	<string name="btn_deactivate">Deactivate account</string>
 	<string name="settings_change_name">Change name</string>
 	<string name="settings_change_password">Change password</string>
+	<string name="bp">BP:</string>
+	<string name="hr">HR:</string>
+	<string name="sleep">Sleep:</string>
+	<string name="activity">Activity:</string>
+	
 	
 	<string name="terry_test">terry test</string>
 	<string name="nicole_test">Nicole Test</string>
