@@ -48,6 +48,7 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/chart_area"
         android:layout_width="fill_parent"
         android:layout_height="250dip"
         android:orientation="vertical"
@@ -79,122 +80,122 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:textSize="@dimen/large_font_size"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
+        android:paddingRight="10dp"
+        android:textSize="@dimen/large_font_size" >
+
+        <TextView
+            android:id="@+id/chart_textView_hr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_dialog_icon_hr"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="@string/hr"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/chart_values_hr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="88"
+            android:textStyle="bold" >
+        </TextView>
 
         <TextView
             android:id="@+id/chart_textView_bp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:drawableLeft="@drawable/ic_dialog_icon_bp"
-            android:scrollbars="vertical"
             android:gravity="center"
-            android:textStyle="bold"
-            android:text="@string/bp" >
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="@string/bp"
+            android:textStyle="bold" >
         </TextView>
-        
+
         <TextView
             android:id="@+id/chart_values_bp_systolic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="110" >
+            android:text="110"
+            android:textStyle="bold" >
         </TextView>
-        
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="/" >
+            android:text="/"
+            android:textStyle="bold" >
         </TextView>
-        
+
         <TextView
             android:id="@+id/chart_values_bp_diastolic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="160" >
+            android:text="160"
+            android:textStyle="bold" >
         </TextView>
-        
-        <TextView
-            android:id="@+id/chart_textView_hr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:drawableLeft="@drawable/ic_dialog_icon_hr"
-            android:scrollbars="vertical"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="@string/hr" >
-        </TextView>
-        
-        <TextView
-            android:id="@+id/chart_values_hr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="88" >
-        </TextView>
-        
+
         <TextView
             android:id="@+id/chart_textView_sleep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:drawableLeft="@drawable/ic_dialog_icon_sleep"
-            android:scrollbars="vertical"
             android:gravity="center"
-            android:textStyle="bold"
-            android:text="@string/sleep" >
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="@string/sleep"
+            android:textStyle="bold" >
         </TextView>
-        
+
         <TextView
             android:id="@+id/chart_values_sleep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="12" >
+            android:text="12"
+            android:textStyle="bold" >
         </TextView>
-        
+
         <TextView
             android:id="@+id/chart_textView_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:drawableLeft="@drawable/ic_dialog_icon_activity"
-            android:scrollbars="vertical"
             android:gravity="center"
-            android:textStyle="bold"
-            android:text="@string/activity" >
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="@string/activity"
+            android:textStyle="bold" >
         </TextView>
-        
+
         <TextView
             android:id="@+id/chart_values_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="150" >
+            android:text="150"
+            android:textStyle="bold" >
         </TextView>
-        
     </LinearLayout>
+
 </LinearLayout>
