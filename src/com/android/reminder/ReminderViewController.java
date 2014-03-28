@@ -25,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.Toast;
@@ -582,7 +583,7 @@ public class ReminderViewController {
 			startDate.setText("Start Date");
 
 			editDate.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-			editDate.setHint("yyyymmdd");
+			editDate.setHint("dd/mm/yy");
 
 			startDateSection.addView(startDate);
 			startDateSection.addView(editDate);
@@ -617,7 +618,7 @@ public class ReminderViewController {
 			duration.setText("Duration");
 
 			editDuration.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-			editDuration.setHint("number");
+			editDuration.setHint("");
 
 			dayUnit.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			dayUnit.setText("days");
@@ -673,26 +674,29 @@ public class ReminderViewController {
 			setRepeatSection.addView(hourUnit);
 			setRepeatSection.addView(checkboxTFHour);
 			setRepeatSection.addView(tfhours);
+			setRepeatSection.setPadding(0, 0, 0, 10);
 
-			// add save button
-
-			buttonSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			buttonSection.setLayoutParams(new LayoutParams(500, 70));
 			buttonSection.setOrientation(LinearLayout.HORIZONTAL);
 			buttonSection.setGravity(Gravity.RIGHT);
+			buttonSection.setPadding(0, 0, 0, 10);
 
 			saveButton = (Button) ((Activity) context).getLayoutInflater().inflate(
 					R.layout.edit_reminder_section_button, null);
-			saveButton.setWidth(70);
-			saveButton.setHeight(30);
 			saveButton.setText("Save");
-
+			
 			cancelButton = (Button) ((Activity) context).getLayoutInflater().inflate(
 					R.layout.edit_reminder_section_button, null);
 			cancelButton.setText("Cancel");
 			
+			TextView buttonSecBlankView = new TextView(context);
+			buttonSecBlankView.setLayoutParams(new LayoutParams(40, 0));
+			
+			// add save button
 			buttonSection.addView(saveButton);
-			buttonSection.addView(cancelButton);
-
+			buttonSection.addView(buttonSecBlankView);
+			buttonSection.addView(cancelButton);		
+			
 			// add all sections
 
 			editSection.addView(editTitleSection);
