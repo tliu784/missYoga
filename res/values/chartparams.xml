@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="chart_grid" type="color">#ffffff</item>
+    <item name="chart_grid" type="color">#D8D8D8</item>
     <item name="chart_hr_line" type="color">#fa5a6d</item>
     <item name="chart_bp_low_line" type="color">#ffa200</item>
     <item name="chart_bp_high_line" type="color">#0000ff</item>
