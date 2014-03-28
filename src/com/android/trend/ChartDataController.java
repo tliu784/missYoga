@@ -3,9 +3,6 @@ package com.android.trend;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-
-import android.util.Log;
-
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.trend.ChartHelper.GraphViewData;
@@ -155,7 +152,7 @@ public class ChartDataController {
 
 	public void shiftDisplayData(int points) {
 		int newStartIndex = currentDisplayStartIndex;
-		newStartIndex = currentDisplayStartIndex - points;
+		newStartIndex = currentDisplayStartIndex + points;
 		if (newStartIndex>dataset.size()-displaySetLen)
 			newStartIndex=dataset.size()-displaySetLen;
 		if (newStartIndex < 0)

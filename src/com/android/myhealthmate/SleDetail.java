@@ -1,24 +1,13 @@
 package com.android.myhealthmate;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import com.android.trend.ChartDataController;
-import com.android.trend.ChartDataController.SeriesType;
-import com.android.trend.ChartHelper;
-import com.android.trend.ChartHelper.GraphViewData;
 import com.android.trend.ChartPointModel;
-import com.google.gson.Gson;
-import com.jjoe64.graphview.BarGraphView;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GraphViewDataInterface;
-import com.jjoe64.graphview.GraphViewSeries;
-import com.jjoe64.graphview.LineGraphView;
-import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
-import com.jjoe64.graphview.ValueDependentColor;
-
+import com.android.trend.ChartViewController;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,59 +19,23 @@ import android.widget.TextView;
 
 public class SleDetail extends Activity {
 	// date helper
-	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM-dd-yyyy HH:mm ");
+	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM-dd-yyyy HH:mm ", Locale.CANADA);
 
 	// views & buttons
 	private TextView titleTextView;
-	private LinearLayout titleSection;
-	private LinearLayout hrSection;
+		private LinearLayout hrSection;
 	private LinearLayout actSection;
-	private int pointCount = 24;
+	private int pointCount = 0;
 	private FrameLayout chartArea;
 	private Button single_prev;
 	private Button single_next;
 	private Button double_prev;
 	private Button double_next;
 
-	// styling
-	private int gridColor;
-	private int hrLineColor;
-	private int bpLowColor;
-	private int bpHighColor;
-	private int actBarColor;
-	private int sleepBarColor;
-	private int sleepBarColorLow;
-	private int sleepBarColorMedium;
-	private int sleepBarColorHigh;
-	private int vlineColor;
-	private int vlineThickness;
-	private int lineChartThickness;
-	private int barChartThickness;
-	private int lineChartPointRadius;
-	private int hrFloor;
-	private int hrCeiling;
-	private int bplFloor;
-	private int bphFloor;
-	private int bplCeiling;
-	private int bphCeiling;
-	private int actFloor;
-	private int actCeiling;
-	private int sleepFloor;
-	private int sleepCeiling;
-	private int maxY;
-	private boolean transparentBack;
-
-	// data
+	// chart
 	private int currentX = 0;
-	private GraphViewSeries vSeries;
-	private GraphView heartGraph;
-	private GraphView actGraph;
 	private ChartDataController chartData;
-	private GraphViewData[] hrGraphData;
-	private GraphViewData[] bplGraphData;
-	private GraphViewData[] bphGraphData;
-	private GraphViewData[] actGraphData;
-	private GraphViewData[] sleepGraphData;
+	private ChartViewController chartView;
 
 	// on touch event
 	private float lastTouchEventX;
@@ -93,16 +46,21 @@ public class SleDetail extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sle_details);
-		setUpChartParams(); // must run before setupData
-		titleSection = (LinearLayout) findViewById(R.id.detail_title_section);
+	
 		hrSection = (LinearLayout) findViewById(R.id.detail_hr_graph);
 		actSection = (LinearLayout) findViewById(R.id.detail_act_graph);
 		titleTextView = (TextView) findViewById(R.id.detail_title_text);
+		initChart();
 		setupChartListeners();
-		setupChartData();
-		heartGraph = createHeartChart(hrSection);
-		actGraph = createActChart(actSection);
-		moveVto(pointCount-1);
+
+	}
+
+	private void initChart() {
+		if (chartView == null)
+			chartView = new ChartViewController(SleDetail.this, hrSection, actSection);
+		chartData = chartView.getChartDataController();
+		pointCount = chartView.getPointCount();
+		displayValues();
 	}
 
 	private void setupChartListeners() {
@@ -122,9 +80,7 @@ public class SleDetail extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				chartData.shiftDisplayData(-1);
-				refreshChart();
-				moveVto(currentX);
+				shiftChart(-1);
 			}
 		};
 	}
@@ -133,9 +89,7 @@ public class SleDetail extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				chartData.shiftDisplayData(1);
-				refreshChart();
-				moveVto(currentX);
+				shiftChart(1);
 			}
 		};
 	}
@@ -144,7 +98,7 @@ public class SleDetail extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				shiftChart(-24);
 			}
 		};
 	}
@@ -153,37 +107,9 @@ public class SleDetail extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				shiftChart(24);
 			}
 		};
-	}
-
-	private void setupChartData() {
-		chartData = new ChartDataController(hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor,
-				actCeiling, sleepFloor, sleepCeiling);
-
-		// random data for now
-		chartData.createRandomData(36);
-		hrGraphData = chartData.generateGraphData(SeriesType.HR);
-		bplGraphData = chartData.generateGraphData(SeriesType.BPL);
-		bphGraphData = chartData.generateGraphData(SeriesType.BPH);
-		actGraphData = chartData.generateGraphData(SeriesType.ACT);
-		sleepGraphData = chartData.generateGraphData(SeriesType.SLEEP);
-		pointCount=chartData.getDisplaySetLen();
-		if (pointCount>chartData.getDisplayDataSet().size())
-			pointCount=chartData.getDisplayDataSet().size();
-	}
-
-	private void refreshChart() {
-		hrGraphData = chartData.generateGraphData(SeriesType.HR);
-		bplGraphData = chartData.generateGraphData(SeriesType.BPL);
-		bphGraphData = chartData.generateGraphData(SeriesType.BPH);
-		actGraphData = chartData.generateGraphData(SeriesType.ACT);
-		sleepGraphData = chartData.generateGraphData(SeriesType.SLEEP);
-		hrSection.removeAllViews();
-		actSection.removeAllViews();
-		createHeartChart(hrSection);
-		createActChart(actSection);
 	}
 
 	private OnTouchListener getTouchChartListener() {
@@ -225,7 +151,6 @@ public class SleDetail extends Activity {
 
 	private void displayValues() {
 		ChartPointModel currentPoint = chartData.getDisplayDataSet().get(currentX);
-		// to be changed
 		TextView hrText = (TextView) findViewById(R.id.chart_values_hr);
 		TextView bphText = (TextView) findViewById(R.id.chart_values_bp_systolic);
 		TextView bplText = (TextView) findViewById(R.id.chart_values_bp_diastolic);
@@ -266,26 +191,10 @@ public class SleDetail extends Activity {
 		}
 	}
 
-	
-	private void moveV(boolean left) {
-		heartGraph.removeSeries(vSeries);
-
-		if (currentX < (pointCount - 1) && !left)
-			currentX++;
-		if (currentX > 0 && left)
-			currentX--;
-		moveVto(currentX);
-	}
-
-	private void moveVto(int xValue) {
-		if (vSeries != null) {
-			heartGraph.removeSeries(vSeries);
-		}
-		ChartHelper.GraphViewData[] vData = new ChartHelper.GraphViewData[2];
-		vData[0] = new ChartHelper.GraphViewData(xValue, 0);
-		vData[1] = new ChartHelper.GraphViewData(xValue, maxY);
-		vSeries = new GraphViewSeries("hi", new GraphViewSeriesStyle(vlineColor, vlineThickness), vData);
-		heartGraph.addSeries(vSeries);
+	private void shiftChart(int points) {
+		chartData.shiftDisplayData(points);
+		chartView.refreshChart();
+		chartView.moveVto(currentX);
 		displayValues();
 	}
 
@@ -293,106 +202,10 @@ public class SleDetail extends Activity {
 		chartWidth = actSection.getWidth();
 		int newX = (int) (x / chartWidth * pointCount);
 		if (newX >= 0 && newX < pointCount) {
-			moveVto(newX);
+			chartView.moveVto(newX);
 			currentX = newX;
 		}
-	}
-
-	private GraphView createHeartChart(LinearLayout container) {
-		GraphViewSeriesStyle hrStyple = new GraphViewSeriesStyle(hrLineColor, lineChartThickness);
-		GraphViewSeriesStyle bplStyple = new GraphViewSeriesStyle(bpLowColor, lineChartThickness);
-		GraphViewSeriesStyle bphStyle = new GraphViewSeriesStyle(bpHighColor, lineChartThickness);
-
-		GraphViewSeries hrSeries = new GraphViewSeries("hr", hrStyple, hrGraphData);
-		GraphViewSeries bplSeries = new GraphViewSeries("bpl", bplStyple, bplGraphData);
-		GraphViewSeries bphSeries = new GraphViewSeries("bph", bphStyle, bphGraphData);
-
-		LineGraphView graphView = new LineGraphView(this, " ");
-
-		if (transparentBack)
-			graphView.setBackground(hrSection.getBackground());
-		else
-			graphView.setBackgroundResource(R.color.chart_background);
-		graphView.addSeries(hrSeries); // data
-		graphView.addSeries(bplSeries);
-		graphView.addSeries(bphSeries);
-		graphView.setShowHorizontalLabels(false);
-		graphView.setShowVerticalLabels(false);
-		graphView.getGraphViewStyle().setGridColor(gridColor);
-		graphView.setDrawDataPoints(true);
-		graphView.setDataPointsRadius(lineChartPointRadius);
-
-		container.addView(graphView);
-		return graphView;
-	}
-
-	public GraphView createActChart(LinearLayout container) {
-		BarGraphView graphView = new BarGraphView(this // context
-				, "" // heading
-		);
-
-		GraphViewSeriesStyle actStyle = new GraphViewSeriesStyle(actBarColor, barChartThickness);
-		GraphViewSeriesStyle sleepStyle = new GraphViewSeriesStyle(sleepBarColor, barChartThickness);
-		sleepStyle.setValueDependentColor((new ValueDependentColor() {
-			@Override
-			public int get(GraphViewDataInterface data) {
-				int sleepRange = sleepCeiling - sleepFloor;
-				int color = 0;
-				if (data.getY() <= 0.33 * sleepRange) {
-					color = sleepBarColorLow;
-				} else {
-					if (data.getY() > 0.66 * sleepRange) {
-						color = sleepBarColorHigh;
-					} else {
-						color = sleepBarColorMedium;
-					}
-				}
-				return color;
-			}
-		}));
-
-		GraphViewSeries actSeries = new GraphViewSeries("act", actStyle, actGraphData);
-		GraphViewSeries sleepSeries = new GraphViewSeries("sleep", sleepStyle, sleepGraphData);
-		graphView.addSeries(actSeries); // data
-		graphView.addSeries(sleepSeries); // data
-		graphView.setShowHorizontalLabels(false);
-		graphView.setShowVerticalLabels(false);
-		graphView.setManualMaxY(true);
-		graphView.setManualYMaxBound(maxY);
-		graphView.getGraphViewStyle().setGridColor(gridColor);
-		container.addView(graphView);
-		return graphView;
-	}
-
-	private void setUpChartParams() {
-		transparentBack = getResources().getBoolean(R.bool.chart_transparent_background);
-		maxY = getResources().getInteger(R.integer.maxY);
-		hrFloor = getResources().getInteger(R.integer.hr_floor);
-		hrCeiling = getResources().getInteger(R.integer.hr_ceiling);
-		bplFloor = getResources().getInteger(R.integer.bpl_floor);
-		bplCeiling = getResources().getInteger(R.integer.bpl_ceiling);
-		bphFloor = getResources().getInteger(R.integer.bph_floor);
-		bphCeiling = getResources().getInteger(R.integer.bph_ceiling);
-		actFloor = getResources().getInteger(R.integer.act_floor);
-		actCeiling = getResources().getInteger(R.integer.act_ceiling);
-		sleepFloor = getResources().getInteger(R.integer.sleep_floor);
-		sleepCeiling = getResources().getInteger(R.integer.sleep_ceiling);
-
-		gridColor = getResources().getColor(R.color.chart_grid);
-		hrLineColor = getResources().getColor(R.color.chart_hr_line);
-		bpLowColor = getResources().getColor(R.color.chart_bp_low_line);
-		bpHighColor = getResources().getColor(R.color.chart_bp_high_line);
-		actBarColor = getResources().getColor(R.color.chart_act_bar);
-		sleepBarColorLow = getResources().getColor(R.color.chart_sleep_bar_low);
-		sleepBarColorMedium = getResources().getColor(R.color.chart_sleep_bar_medium);
-		sleepBarColorHigh = getResources().getColor(R.color.chart_sleep_bar_high);
-
-		vlineThickness = getResources().getColor(R.integer.v_line_thickness);
-		vlineColor = getResources().getColor(R.color.chart_v_line);
-		lineChartThickness = getResources().getColor(R.integer.line_thickness);
-		lineChartPointRadius = getResources().getColor(R.integer.line_point_radius);
-		barChartThickness = getResources().getColor(R.integer.bar_thickness);
-
+		displayValues();
 	}
 
 }
