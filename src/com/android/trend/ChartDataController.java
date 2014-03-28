@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import android.util.Log;
+
+import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.trend.ChartHelper.GraphViewData;
 
 public class ChartDataController {
@@ -18,6 +22,15 @@ public class ChartDataController {
 	private final int actCeiling;
 	private final int sleepFloor;
 	private final int sleepCeiling;
+	private int displaySetLen = 24; // default 24
+	private int currentDisplayStartIndex = 0;
+
+	private ArrayList<ChartPointModel> dataset = new ArrayList<ChartPointModel>();
+	private ArrayList<ChartPointModel> displayDataSet = new ArrayList<ChartPointModel>();
+
+	public enum SeriesType {
+		HR, BPL, BPH, ACT, SLEEP;
+	}
 
 	public ChartDataController(int hrFloor, int hrCeiling, int bplFloor, int bphFloor, int bplCeiling, int bphCeiling,
 			int actFloor, int actCeiling, int sleepFloor, int sleepCeiling) {
@@ -34,11 +47,12 @@ public class ChartDataController {
 		this.sleepCeiling = sleepCeiling;
 	}
 
-	private ArrayList<ChartPointModel> dataset = new ArrayList<ChartPointModel>();
-	private ArrayList<ChartPointModel> displayDataSet = new ArrayList<ChartPointModel>();
+	public void setDisplaySetLen(int displaySetLen) {
+		this.displaySetLen = displaySetLen;
+	}
 
-	public enum SeriesType {
-		HR, BPL, BPH, ACT, SLEEP;
+	public int getDisplaySetLen() {
+		return displaySetLen;
 	}
 
 	public void sortDisplay() {
@@ -130,29 +144,61 @@ public class ChartDataController {
 		return value;
 	}
 
-	public void createRandomDisplaySet() {
+	private void createDisplaySet() {
 		displayDataSet.clear();
-		int len = 24;
-		Date timestamp = new Date();
+		int endIndex=currentDisplayStartIndex+displaySetLen;
+		if (endIndex>=dataset.size())
+			endIndex=dataset.size();
+		//sublist method endIndex is exclusive
+		displayDataSet=new ArrayList<ChartPointModel>(dataset.subList(currentDisplayStartIndex, endIndex));
+	}
+
+	public void shiftDisplayData(int points) {
+		int newStartIndex = currentDisplayStartIndex;
+		newStartIndex = currentDisplayStartIndex - points;
+		if (newStartIndex>dataset.size()-displaySetLen)
+			newStartIndex=dataset.size()-displaySetLen;
+		if (newStartIndex < 0)
+			newStartIndex = 0;
+		if (dataset.size()>=displaySetLen)
+			displayDataSet= new ArrayList<ChartPointModel> ( dataset.subList(newStartIndex, newStartIndex+displaySetLen));
+		else
+			displayDataSet=dataset;
+		currentDisplayStartIndex=newStartIndex;
+	}
+	
+	public void shiftDisplayToEnd(){
+		currentDisplayStartIndex=dataset.size()-displaySetLen;
+		if (currentDisplayStartIndex<0)
+			currentDisplayStartIndex=0;
+		createDisplaySet();
+	}
+
+	public void createRandomData(int count) {
+		dataset.clear();
 		double hr;
 		double bpl;
 		double bph;
 		double act;
 		double sleep;
-		boolean isSleep;
-		for (int i = 0; i < len; i++) {
+		boolean isSleep = false;
+		Date beginningTime = MedReminderModel.addDuration(new Date(), (0 - count), DurationUnit.Hour);
+		Date timestamp = beginningTime;
+		for (int i = 0; i < count; i++) {
 			// need to adjust time later
 			hr = ChartHelper.getSingleRandomData(70, 140);
 			bpl = ChartHelper.getSingleRandomData(40, 100);
 			bph = ChartHelper.getSingleRandomData(70, 190);
 			act = ChartHelper.getSingleRandomData(10, 200);
 			sleep = ChartHelper.getSleepRandomData();
-			if (i < len / 2)
-				isSleep = false;
-			else
-				isSleep = true;
-			displayDataSet.add(new ChartPointModel(timestamp, hr, bpl, bph, act, sleep, isSleep));
+			if (i % (displaySetLen / 2) == 0) {
+				isSleep = !isSleep;
+			}
+			dataset.add(new ChartPointModel(timestamp, hr, bpl, bph, act, sleep, isSleep));
+			timestamp = MedReminderModel.addDuration(timestamp, 1, DurationUnit.Hour);
 		}
+				
+		shiftDisplayToEnd();
 	}
 
 }

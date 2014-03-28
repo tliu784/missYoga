@@ -1,5 +1,7 @@
 package com.android.myhealthmate;
 
+import java.text.SimpleDateFormat;
+
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartDataController.SeriesType;
 import com.android.trend.ChartHelper;
@@ -27,15 +29,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SleDetail extends Activity {
-	// views
+	// date helper
+	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM-dd-yyyy HH:mm ");
+
+	// views & buttons
 	private TextView titleTextView;
 	private LinearLayout titleSection;
 	private LinearLayout hrSection;
 	private LinearLayout actSection;
 	private int pointCount = 24;
 	private FrameLayout chartArea;
-	private Button prev;
-	private Button next;
+	private Button single_prev;
+	private Button single_next;
+	private Button double_prev;
+	private Button double_next;
 
 	// styling
 	private int gridColor;
@@ -69,6 +76,7 @@ public class SleDetail extends Activity {
 	private int currentX = 0;
 	private GraphViewSeries vSeries;
 	private GraphView heartGraph;
+	private GraphView actGraph;
 	private ChartDataController chartData;
 	private GraphViewData[] hrGraphData;
 	private GraphViewData[] bplGraphData;
@@ -86,54 +94,96 @@ public class SleDetail extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sle_details);
 		setUpChartParams(); // must run before setupData
-
 		titleSection = (LinearLayout) findViewById(R.id.detail_title_section);
 		hrSection = (LinearLayout) findViewById(R.id.detail_hr_graph);
 		actSection = (LinearLayout) findViewById(R.id.detail_act_graph);
-
 		titleTextView = (TextView) findViewById(R.id.detail_title_text);
-		chartArea = (FrameLayout) findViewById(R.id.chart_area);
-		prev = (Button) findViewById(R.id.chart_prev);
-		next = (Button) findViewById(R.id.chart_next);
-		prev.setOnClickListener(getPrevClickListener());
-		next.setOnClickListener(getNextClickListener());
-		chartArea.setOnTouchListener(getTouchChartListener());
-		drawTitle();
-		setupData();
-		heartGraph = creaHeartChart(hrSection);
-		createActChart(actSection);
-
-		moveVto(0);
+		setupChartListeners();
+		setupChartData();
+		heartGraph = createHeartChart(hrSection);
+		actGraph = createActChart(actSection);
+		moveVto(pointCount-1);
 	}
 
-	private void setupData() {
+	private void setupChartListeners() {
+		chartArea = (FrameLayout) findViewById(R.id.chart_area);
+		single_prev = (Button) findViewById(R.id.chart_prev);
+		single_next = (Button) findViewById(R.id.chart_next);
+		double_prev = (Button) findViewById(R.id.chart_double_prev);
+		double_next = (Button) findViewById(R.id.chart_double_next);
+		single_prev.setOnClickListener(getSinglePrevClickListener());
+		single_next.setOnClickListener(getSingleNextClickListener());
+		double_prev.setOnClickListener(getDoublePrevClickListener());
+		double_next.setOnClickListener(getDoubleNextClickListener());
+		chartArea.setOnTouchListener(getTouchChartListener());
+	}
+
+	private OnClickListener getSinglePrevClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				chartData.shiftDisplayData(-1);
+				refreshChart();
+				moveVto(currentX);
+			}
+		};
+	}
+
+	private OnClickListener getSingleNextClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				chartData.shiftDisplayData(1);
+				refreshChart();
+				moveVto(currentX);
+			}
+		};
+	}
+
+	private OnClickListener getDoublePrevClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		};
+	}
+
+	private OnClickListener getDoubleNextClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+			}
+		};
+	}
+
+	private void setupChartData() {
 		chartData = new ChartDataController(hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor,
 				actCeiling, sleepFloor, sleepCeiling);
+
 		// random data for now
-		chartData.createRandomDisplaySet();
+		chartData.createRandomData(36);
 		hrGraphData = chartData.generateGraphData(SeriesType.HR);
 		bplGraphData = chartData.generateGraphData(SeriesType.BPL);
 		bphGraphData = chartData.generateGraphData(SeriesType.BPH);
 		actGraphData = chartData.generateGraphData(SeriesType.ACT);
 		sleepGraphData = chartData.generateGraphData(SeriesType.SLEEP);
+		pointCount=chartData.getDisplaySetLen();
+		if (pointCount>chartData.getDisplayDataSet().size())
+			pointCount=chartData.getDisplayDataSet().size();
 	}
 
-	private OnClickListener getNextClickListener() {
-		return new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				moveV(false);
-			}
-		};
-	}
-
-	private OnClickListener getPrevClickListener() {
-		return new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				moveV(true);
-			}
-		};
+	private void refreshChart() {
+		hrGraphData = chartData.generateGraphData(SeriesType.HR);
+		bplGraphData = chartData.generateGraphData(SeriesType.BPL);
+		bphGraphData = chartData.generateGraphData(SeriesType.BPH);
+		actGraphData = chartData.generateGraphData(SeriesType.ACT);
+		sleepGraphData = chartData.generateGraphData(SeriesType.SLEEP);
+		hrSection.removeAllViews();
+		actSection.removeAllViews();
+		createHeartChart(hrSection);
+		createActChart(actSection);
 	}
 
 	private OnTouchListener getTouchChartListener() {
@@ -186,6 +236,7 @@ public class SleDetail extends Activity {
 		hrText.setText(Integer.toString((int) currentPoint.getHr()));
 		bplText.setText(Integer.toString((int) currentPoint.getBpl()));
 		bphText.setText(Integer.toString((int) currentPoint.getBph()));
+		titleTextView.setText(sdf.format(currentPoint.getTimestamp()));
 		if (currentPoint.isSleep()) {
 			actTitleText.setVisibility(View.GONE);
 			actText.setVisibility(View.GONE);
@@ -215,6 +266,7 @@ public class SleDetail extends Activity {
 		}
 	}
 
+	
 	private void moveV(boolean left) {
 		heartGraph.removeSeries(vSeries);
 
@@ -237,8 +289,7 @@ public class SleDetail extends Activity {
 		displayValues();
 	}
 
-	
-	private void moveVbyTouch(float x){
+	private void moveVbyTouch(float x) {
 		chartWidth = actSection.getWidth();
 		int newX = (int) (x / chartWidth * pointCount);
 		if (newX >= 0 && newX < pointCount) {
@@ -247,11 +298,7 @@ public class SleDetail extends Activity {
 		}
 	}
 
-	private void drawTitle() {
-		titleTextView.setText("testing chart");
-	}
-
-	private GraphView creaHeartChart(LinearLayout container) {
+	private GraphView createHeartChart(LinearLayout container) {
 		GraphViewSeriesStyle hrStyple = new GraphViewSeriesStyle(hrLineColor, lineChartThickness);
 		GraphViewSeriesStyle bplStyple = new GraphViewSeriesStyle(bpLowColor, lineChartThickness);
 		GraphViewSeriesStyle bphStyle = new GraphViewSeriesStyle(bpHighColor, lineChartThickness);

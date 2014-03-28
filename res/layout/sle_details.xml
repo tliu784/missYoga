@@ -18,19 +18,30 @@
         android:paddingRight="10dp" >
 
         <Button
+            android:id="@+id/chart_double_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="@color/text_shadow_white"
+            android:text="@string/chart_double_prev"
+            android:textStyle="bold" />
+
+        <Button
             android:id="@+id/chart_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_weight="1"
             android:background="@color/text_shadow_white"
-            android:text="prev"
+            android:text="@string/chart_prev"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/detail_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:maxLines="2"
             android:scrollbars="vertical"
             android:text="@string/text1" >
@@ -43,7 +54,17 @@
             android:layout_marginLeft="4dp"
             android:layout_weight="1"
             android:background="@color/text_shadow_white"
-            android:text="next"
+            android:text="@string/chart_next"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/chart_double_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:background="@color/text_shadow_white"
+            android:text="@string/chart_double_next"
             android:textStyle="bold" />
     </LinearLayout>
 
