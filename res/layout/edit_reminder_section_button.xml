@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/buttonSample"
-    style="@style/btnStyleBlue"    
-    android:layout_weight="1" 
-    />
+    style="@style/btnStyleBlue"
+    android:layout_width="@dimen/settings_save_btn_width"
+    android:layout_height="@dimen/settings_save_btn_height"
+    android:layout_weight="1" />

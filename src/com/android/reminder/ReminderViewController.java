@@ -16,6 +16,7 @@ import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -61,6 +62,7 @@ public class ReminderViewController {
 		editSec.setListeners();
 
 		reminderSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		reminderSection.setPadding(0, 0, 0, 5);
 		reminderSection.setOrientation(LinearLayout.VERTICAL);
 		reminderSection.addView(titleSec.titleSection);
 		reminderSection.addView(detailSec.detailSection);
@@ -129,14 +131,17 @@ public class ReminderViewController {
 
 			reminderTime.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
 			reminderTime.setGravity(Gravity.CENTER);
-			reminderTime.setTextSize(20);
-			reminderTime.setPadding(20, 0, 0, 0);
-			reminderTime.setTextColor(context.getResources().getColor(R.color.light_black));
+			reminderTime.setTextSize(16);
+			reminderTime.setPadding(10, 0, 0, 0);
+			reminderTime.setTextColor(context.getResources().getColor(R.color.black));
+			reminderTime.setTypeface(null, Typeface.BOLD);
 
 			title.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			title.setGravity(Gravity.CENTER_VERTICAL);
-			title.setPadding(20, 0, 40, 0);
-			title.setTextAppearance(context, R.style.title);
+			title.setPadding(10, 0, 40, 0);
+			title.setTextSize(16);
+			title.setTypeface(null, Typeface.BOLD);
+//			title.setTextAppearance(context, R.style.title);
 
 			contentSection.addView(reminderTime);
 			contentSection.addView(title);
@@ -144,7 +149,7 @@ public class ReminderViewController {
 			// --------------------valid section----------------------
 			validSection.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
 			validSection.setGravity(Gravity.BOTTOM);
-			validButton.setPadding(20, 0, 0, 0);
+			validButton.setPadding(10, 0, 0, 0);
 			// validButton
 			if (reminder.isActive()) {
 				validButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_alarms_light, 0, 0, 0);
@@ -166,16 +171,16 @@ public class ReminderViewController {
 			deleteButton.setVisibility(View.GONE);
 			deleteButton.setClickable(true);
 
-			editModeTitle.setText("Update Reminder");
+			editModeTitle.setText("Edit Reminder");
 			editModeTitle.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-			editModeTitle.setTextSize(30);
+			editModeTitle.setTextSize(20);
 			editModeTitle.setTextColor(Color.WHITE);
 			editModeTitle.setGravity(Gravity.CENTER);
 
 			buttonSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 			buttonSection.setGravity(Gravity.RIGHT);
 			buttonSection.setOrientation(LinearLayout.HORIZONTAL);
-			buttonSection.setPadding(0, 20, 20, 0);
+			buttonSection.setPadding(0, 10, 10, 0);
 
 			buttonSection.addView(editButton);
 			buttonSection.addView(deleteButton);
@@ -290,7 +295,8 @@ public class ReminderViewController {
 
 		@SuppressLint("ResourceAsColor")
 		public void changeTitleBackgroundColorToDefault() {
-			title.setTextColor(R.color.dark_grey);
+			title.setTextColor(R.color.black);
+			title.setTypeface(null, Typeface.BOLD);
 			titleSection.setBackgroundResource(R.drawable.textlines);
 		}
 
@@ -324,15 +330,15 @@ public class ReminderViewController {
 		private void init() {
 			content.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			// content.setBackgroundResource(R.drawable.textlines);
-			content.setTextSize(20);
-			content.setPadding(20, 20, 20, 20);
+			content.setTextSize(16);
+			content.setPadding(20, 10, 10, 10);
 			content.setTextColor(Color.WHITE);
 
 			// everyday section in display content section
 			rdTime.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			// rdTime.setBackgroundResource(R.drawable.textlines);
-			rdTime.setPadding(20, 0, 20, 20);
-			rdTime.setTextSize(20);
+			rdTime.setPadding(20, 0, 10, 10);
+			rdTime.setTextSize(16);
 			rdTime.setTextColor(Color.WHITE);
 
 			setDetailPageContent();
@@ -540,12 +546,11 @@ public class ReminderViewController {
 		}
 
 		private void init() {
-			int editSectionPadding = 10;
 
 			editSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			editSection.setOrientation(LinearLayout.VERTICAL);
 			editSection.setBackgroundResource(R.drawable.edit_reminder_section);
-			editSection.setPadding(editSectionPadding, editSectionPadding, editSectionPadding, editSectionPadding);
+			editSection.setPadding(0, 10, 20, 10);
 
 			// edit title section
 			editTitleSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -593,7 +598,7 @@ public class ReminderViewController {
 
 			colon.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			colon.setText(":");
-			colon.setTextSize(20);
+			colon.setTextSize(16);
 
 			editMins.setLayoutParams(new LayoutParams(R.dimen.login_edittext_width, R.dimen.login_edittext_height));
 			editMins.setHint("mm");
@@ -615,17 +620,21 @@ public class ReminderViewController {
 			editDuration.setHint("number");
 
 			dayUnit.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-			dayUnit.setText("Day");
+			dayUnit.setText("days");
+			dayUnit.setTypeface(null, Typeface.BOLD);
 			// dayUnit.setBackgroundResource(R.drawable.textlines);
-			dayUnit.setTextSize(20);
+			dayUnit.setTextSize(16);
 
 			checkboxForEveryday.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			checkboxForEveryday.setPadding(20, 0, 10, 0);
 			checkboxForEveryday.setFocusable(false);
 
 			everydayUnit.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			everydayUnit.setText("Everyday");
-			everydayUnit.setBackgroundResource(R.drawable.textlines);
-			everydayUnit.setTextSize(20);
+			everydayUnit.setTypeface(null, Typeface.BOLD);
+			everydayUnit.setGravity(Gravity.RIGHT);
+//			everydayUnit.setBackgroundResource(R.drawable.textlines);
+			everydayUnit.setTextSize(16);
 
 			startDurationSection.addView(duration);
 			startDurationSection.addView(editDuration);
@@ -643,17 +652,21 @@ public class ReminderViewController {
 			setRepeatHours.setHint("number");
 
 			hourUnit.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-			hourUnit.setText("Hour");
+			hourUnit.setText("hours");
+			hourUnit.setTypeface(null, Typeface.BOLD);
 			// hourUnit.setBackgroundResource(R.drawable.textlines);
-			hourUnit.setTextSize(20);
+			hourUnit.setTextSize(16);
 
 			checkboxTFHour.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			checkboxTFHour.setPadding(20, 0, 10, 0);
 			checkboxTFHour.setFocusable(false);
 
 			tfhours.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			tfhours.setText("Once");
-			tfhours.setBackgroundResource(R.drawable.textlines);
-			tfhours.setTextSize(20);
+			tfhours.setTypeface(null, Typeface.BOLD);
+			tfhours.setGravity(Gravity.RIGHT);
+//			tfhours.setBackgroundResource(R.drawable.textlines);
+			tfhours.setTextSize(16);
 
 			setRepeatSection.addView(repeat);
 			setRepeatSection.addView(setRepeatHours);
@@ -669,11 +682,14 @@ public class ReminderViewController {
 
 			saveButton = (Button) ((Activity) context).getLayoutInflater().inflate(
 					R.layout.edit_reminder_section_button, null);
+			saveButton.setWidth(70);
+			saveButton.setHeight(30);
 			saveButton.setText("Save");
 
 			cancelButton = (Button) ((Activity) context).getLayoutInflater().inflate(
 					R.layout.edit_reminder_section_button, null);
 			cancelButton.setText("Cancel");
+			
 			buttonSection.addView(saveButton);
 			buttonSection.addView(cancelButton);
 
