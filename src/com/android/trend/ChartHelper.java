@@ -1,7 +1,9 @@
 package com.android.trend;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
@@ -9,8 +11,19 @@ import com.android.trend.RecordModel.recordType;
 import com.jjoe64.graphview.GraphViewDataInterface;
 
 public class ChartHelper {
-	
+
+	public static Date toPreviousWholeHour(Date d) {
+		Calendar c = new GregorianCalendar();
+		c.setTime(d);
+//		if (c.get(Calendar.MINUTE) >= 30)
+//			c.add(Calendar.HOUR, 1);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		return c.getTime();
+	}
+
 	public static void recordListGenerator(ArrayList<RecordModel> recordList) {
+		recordList.clear();
 		Date date = new Date();
 
 		for (int i = 0; i < 100; i++) {
@@ -41,7 +54,8 @@ public class ChartHelper {
 	public static double getSleepRandomData() {
 		double value = 0;
 		if (Math.random() <= 0.33) {
-			value = ChartPointModel.SLEEP_LOW; // adjust here for better fake chart
+			value = ChartPointModel.SLEEP_LOW; // adjust here for better fake
+												// chart
 		} else {
 			if (Math.random() > 0.66) {
 				value = ChartPointModel.SLEEP_HIGH;
@@ -66,19 +80,6 @@ public class ChartHelper {
 		double[] y = new double[len];
 		for (int i = 0; i < len; i++) {
 			y[i] = Math.random();
-		}
-		double[] adjY = scaleToRange(y, floor, ceiling);
-		return createGraphViewData(adjY);
-	}
-
-	public static GraphViewData[] generateRandomDataWithZero(int len, int startZero, int lenZero, double floor,
-			double ceiling) {
-		double[] y = new double[len];
-		for (int i = 0; i < len; i++) {
-			if (i >= startZero && i < lenZero + startZero)
-				y[i] = 0;
-			else
-				y[i] = Math.random();
 		}
 		double[] adjY = scaleToRange(y, floor, ceiling);
 		return createGraphViewData(adjY);
