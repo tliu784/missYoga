@@ -124,7 +124,6 @@
             android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:text="88"
             android:textStyle="bold" >
         </TextView>
 
@@ -147,7 +146,6 @@
             android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:text="110"
             android:textStyle="bold" >
         </TextView>
 
@@ -168,7 +166,6 @@
             android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:text="160"
             android:textStyle="bold" >
         </TextView>
 
@@ -191,7 +188,6 @@
             android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:text="12"
             android:textStyle="bold" >
         </TextView>
 
@@ -214,9 +210,26 @@
             android:gravity="center"
             android:maxLines="1"
             android:scrollbars="vertical"
-            android:text="150"
             android:textStyle="bold" >
         </TextView>
     </LinearLayout>
+    
+    <ScrollView
+        android:id="@+id/scrollHistorySection"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/recordListSection"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/gen_page_margin_top"
+            android:orientation="vertical" >
+            
+        </LinearLayout>
+    </ScrollView>
+    
 
 </LinearLayout>

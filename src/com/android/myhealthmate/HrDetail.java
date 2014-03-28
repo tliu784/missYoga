@@ -1,11 +1,14 @@
 package com.android.myhealthmate;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.reminder.ReminderViewController;
 import com.android.trend.RecordList;
 import com.android.trend.RecordModel;
+import com.android.trend.RecordModel.recordType;
 import com.android.trend.RecordViewSection;
 import com.jjoe64.graphview.GraphView.LegendAlign;
 import com.jjoe64.graphview.GraphViewDataInterface;
@@ -19,20 +22,30 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 public class HrDetail extends Activity {
 
 	private ArrayList<RecordModel> recordList;
+	private LinearLayout recordLayout;
+	private ScrollView scrolView;
+	private RecordList recordListInstance;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hr_details);
 
-		RecordList recordListInstance = RecordList.getInstance();
+		recordListInstance = RecordList.getInstance();
 		recordListInstance.init(getApplicationContext());
 		recordList = recordListInstance.getRecordList();
+
+		recordLayout = (LinearLayout) findViewById(R.id.recordTest);
+		scrolView = (ScrollView) findViewById(R.id.scrollRecordTest);
+
 		/*
 		 * init series data
 		 */
@@ -103,21 +116,45 @@ public class HrDetail extends Activity {
 		LinearLayout layout = (LinearLayout) findViewById(R.id.hr_graph1);
 		layout.addView(graphView);
 
-		LinearLayout recordLayout = (LinearLayout) findViewById(R.id.recordTest);
-
-		
+		// -------------------------------ben scroll
+		// section-------------------------------------
+		recordListGenerator(recordList);
+		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
 			recordLayout.addView(new RecordViewSection(HrDetail.this, record.getType().toString(), record
 					.getTimeStamp(), record.getContent()).getLayout());
 		}
 
-		// oneRecord.getTitleType().setText("reminder");
 	}
-	
+
+	private void scrollHistorySection(Date selectedTime) {
+		// Date testDate = recordList.get(10).getTimeStamp();
+		int[] startEndLong = recordListInstance.getOneHourRecord(selectedTime);
+		// Toast.makeText(HrDetail.this, Integer.toString(startEndLong[0]),
+		// Toast.LENGTH_SHORT).show();
+		scrolView.scrollTo(0, recordLayout.getChildAt(startEndLong[0]).getTop());
+		for (int i = startEndLong[0]; i < startEndLong[0] + startEndLong[2]; i++) {
+			recordLayout.getChildAt(i).setBackgroundResource(R.drawable.highlight_select_title_section);
+		}
+	}
+
 	public void onResume() { // After a pause OR at startup
 		super.onResume();
 		// Refresh your stuff here
-	
+
+	}
+
+	private void recordListGenerator(ArrayList<RecordModel> recordList) {
+		Date date = new Date();
+
+		for (int i = 0; i < 100; i++) {
+			RecordModel record = new RecordModel(recordType.recommendation, date, "this is history record"
+					+ Integer.toString(i), true);
+
+			date = MedReminderModel.addDuration(date, 20, DurationUnit.Min);
+			if (Math.random() > 0.7)
+				recordList.add(record);
+		}
 	}
 
 	// --------------------action bar test below------------------------------
@@ -136,7 +173,7 @@ public class HrDetail extends Activity {
 		switch (item.getItemId()) {
 		case R.id.add_reminder: {
 			MedReminderModel newReminder = new MedReminderModel();
-
+			scrollHistorySection(recordList.get(4).getTimeStamp());
 			return true;
 		}
 		case R.id.delete_reminder: {

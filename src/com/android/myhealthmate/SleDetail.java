@@ -1,11 +1,18 @@
 package com.android.myhealthmate;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import com.android.trend.ChartDataController;
+import com.android.trend.ChartHelper;
 import com.android.trend.ChartPointModel;
 import com.android.trend.ChartViewController;
+import com.android.trend.RecordList;
+import com.android.trend.RecordModel;
+import com.android.trend.RecordViewSection;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -15,6 +22,7 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class SleDetail extends Activity {
@@ -23,7 +31,7 @@ public class SleDetail extends Activity {
 
 	// views & buttons
 	private TextView titleTextView;
-		private LinearLayout hrSection;
+	private LinearLayout hrSection;
 	private LinearLayout actSection;
 	private int pointCount = 0;
 	private FrameLayout chartArea;
@@ -42,17 +50,41 @@ public class SleDetail extends Activity {
 	private boolean scrollingStarted;
 	private int chartWidth;
 
+	// history section
+	private ArrayList<RecordModel> recordList;
+	private LinearLayout recordLayout;
+	private ScrollView scrolView;
+	private RecordList recordListInstance;
+	int[] oldstartEndLong = { 0, 0, 0 };
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sle_details);
-	
+
+		recordLayout = (LinearLayout) findViewById(R.id.recordListSection);
+		scrolView = (ScrollView) findViewById(R.id.scrollHistorySection);
+
 		hrSection = (LinearLayout) findViewById(R.id.detail_hr_graph);
 		actSection = (LinearLayout) findViewById(R.id.detail_act_graph);
 		titleTextView = (TextView) findViewById(R.id.detail_title_text);
 		initChart();
 		setupChartListeners();
+		initHistorySection();
 
+	}
+
+	private void initHistorySection() {
+		recordListInstance = RecordList.getInstance();
+		recordListInstance.init(getApplicationContext());
+		recordList = recordListInstance.getRecordList();
+
+		ChartHelper.recordListGenerator(recordList);
+		recordListInstance.sortByNext();
+		for (RecordModel record : recordList) {
+			recordLayout.addView(new RecordViewSection(SleDetail.this, record.getType().toString(), record
+					.getTimeStamp(), record.getContent()).getLayout());
+		}
 	}
 
 	private void initChart() {
@@ -60,6 +92,7 @@ public class SleDetail extends Activity {
 			chartView = new ChartViewController(SleDetail.this, hrSection, actSection);
 		chartData = chartView.getChartDataController();
 		pointCount = chartView.getPointCount();
+		currentX = pointCount - 1;
 		displayValues();
 	}
 
@@ -196,6 +229,7 @@ public class SleDetail extends Activity {
 		chartView.refreshChart();
 		chartView.moveVto(currentX);
 		displayValues();
+		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
 	}
 
 	private void moveVbyTouch(float x) {
@@ -206,6 +240,24 @@ public class SleDetail extends Activity {
 			currentX = newX;
 		}
 		displayValues();
+		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
+	}
+
+	private void scrollHistorySection(Date selectedTime) {
+		int[] startEndLong = recordListInstance.getOneHourRecord(selectedTime);
+		scrolView.scrollTo(0, recordLayout.getChildAt(startEndLong[0]).getTop());
+
+		if (oldstartEndLong[2] != 0) {
+			for (int i = oldstartEndLong[0]; i < oldstartEndLong[0] + oldstartEndLong[2]; i++) {
+				recordLayout.getChildAt(i).setBackgroundResource(R.drawable.textlines);
+			}
+		}
+
+		for (int i = startEndLong[0]; i < startEndLong[0] + startEndLong[2]; i++) {
+			recordLayout.getChildAt(i).setBackgroundResource(R.drawable.highlight_select_title_section);
+		}
+
+		oldstartEndLong = startEndLong;
 	}
 
 }

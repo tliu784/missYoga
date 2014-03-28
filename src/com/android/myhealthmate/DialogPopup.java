@@ -29,7 +29,7 @@ public class DialogPopup extends DialogFragment {
 	public Dialog onCreateDialog(Context context, int id) {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		reminder = updateReminderSection(context,id);
+		reminder = updateReminderSection(context, id);
 		// Set the dialog title
 		recordListInstance.init(context);
 		builder.setTitle(reminder.getTitle()).setMessage(reminder.getDetail()).setIcon(R.drawable.ic_dialog_icon_about)
@@ -57,7 +57,7 @@ public class DialogPopup extends DialogFragment {
 		recordListInstance.addOneRecord(recordType.reminder, reminder.getNextAlarmTime(), reminder.getDetail(), false);
 	}
 
-	public MedReminderModel updateReminderSection(Context context,int id) {
+	public MedReminderModel updateReminderSection(Context context, int id) {
 		MedReminderModel reminderItem = null;
 		MedReminderController mrcInstance = MedReminderController.getInstance();
 		mrcInstance.init(context);

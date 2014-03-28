@@ -27,6 +27,8 @@ public class RecordViewSection {
 	TextView icon;
 	LinearLayout timeLayout;
 
+	
+	
 	public RecordViewSection(Context context, String type, Date date, String content) {
 		this.contentLayout = new LinearLayout(context);
 		this.line = new TextView(context);
@@ -46,7 +48,6 @@ public class RecordViewSection {
 	}
 
 	private void setFormat() {
-		int padding = 5;
 		layout.setLayoutParams(setLayoutParams(0, 0, 0, 0));
 		layout.setBackgroundResource(R.drawable.textlines);
 		layout.setOrientation(LinearLayout.VERTICAL);
@@ -90,6 +91,8 @@ public class RecordViewSection {
 		layout.addView(titleLayout);
 	}
 
+	
+	
 	private void setLine() {
 		line.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
 		line.setBackgroundColor(context.getResources().getColor(R.color.grey));
@@ -122,7 +125,7 @@ public class RecordViewSection {
 	}
 
 	public void setTime(Date date) {
-		final SimpleDateFormat nextTimeFormat = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
+		final SimpleDateFormat nextTimeFormat = new SimpleDateFormat("MM/dd HH:mm a", Locale.ENGLISH);
 		String dateStr = nextTimeFormat.format(date);
 		this.time.setText(dateStr);
 	}
@@ -142,5 +145,12 @@ public class RecordViewSection {
 	public void setLayout(LinearLayout layout) {
 		this.layout = layout;
 	}
-
+	
+	public void setHighLight(){
+		layout.setBackgroundResource(R.drawable.highlight_select_title_section);
+	}
+	
+	public void disableHighLight(){
+		layout.setBackgroundResource(R.drawable.textlines);
+	}
 }

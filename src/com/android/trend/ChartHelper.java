@@ -1,8 +1,27 @@
 package com.android.trend;
 
+import java.util.ArrayList;
+import java.util.Date;
+
+import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedReminderModel.DurationUnit;
+import com.android.trend.RecordModel.recordType;
 import com.jjoe64.graphview.GraphViewDataInterface;
 
 public class ChartHelper {
+	
+	public static void recordListGenerator(ArrayList<RecordModel> recordList) {
+		Date date = new Date();
+
+		for (int i = 0; i < 100; i++) {
+			RecordModel record = new RecordModel(recordType.recommendation, date, "this is history record"
+					+ Integer.toString(i), true);
+
+			date = MedReminderModel.addDuration(date, -20, DurationUnit.Min);
+			if (Math.random() > 0.7)
+				recordList.add(record);
+		}
+	}
 
 	public static GraphViewData[] createGraphViewData(double[] data) {
 		// implement a simple x value

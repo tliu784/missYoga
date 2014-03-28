@@ -2,12 +2,16 @@ package com.android.trend;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.android.myhealthmate.HrDetail;
 import com.android.reminder.MedReminderList;
 import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.service.FileOperation;
 import com.android.trend.RecordModel.recordType;
 
@@ -25,7 +29,7 @@ public class RecordList implements Serializable {
 	}
 
 	protected RecordList() {
-		
+
 	}
 
 	public void init(Context context) {
@@ -51,13 +55,50 @@ public class RecordList implements Serializable {
 		return instance;
 	}
 
-	public void addOneRecord(recordType type, Date date, String content,boolean miss) {
-		recordList.add(new RecordModel(type, date, content,miss));
+	public void sortByNext() {
+		Collections.sort(recordList);
+		save();
+	}
+
+	public void addOneRecord(recordType type, Date date, String content, boolean miss) {
+		recordList.add(new RecordModel(type, date, content, miss));
 		save();
 	}
 
 	public ArrayList<RecordModel> getRecordList() {
 		return recordList;
+	}
+
+	public int[] getOneHourRecord(Date startTime) {
+		int[] startEndLong = { 0, 0, 0 };
+		int counter = 0;
+		boolean started = false;
+		boolean ended = false;
+		Date afterOneHour = MedReminderModel.addDuration(startTime, 1, DurationUnit.Hour);
+		for (RecordModel record : recordList) {
+			if (record.getTimeStamp().compareTo(startTime) >= 0 && record.getTimeStamp().compareTo(afterOneHour) <= 0) {
+				if (!started) {
+					startEndLong[0] = counter;
+					started = true;
+				}
+			} else if (record.getTimeStamp().compareTo(startTime) < 0) {
+				if (!started)
+					return startEndLong;
+				else {
+					startEndLong[1] = counter - 1;
+					startEndLong[2] = startEndLong[1] - startEndLong[0]+1;
+					return startEndLong;
+				}
+			}
+			counter++;
+		}
+		if (started) {
+			startEndLong[1] = counter - 1;
+			startEndLong[2] = startEndLong[1] - startEndLong[0]+1;
+			return startEndLong;
+		} else {
+			return startEndLong;
+		}
 	}
 
 }
