@@ -23,6 +23,7 @@ public class ChartHelper {
 	}
 
 	public static void recordListGenerator(ArrayList<RecordModel> recordList) {
+		recordList.clear();
 		Date date = new Date();
 
 		for (int i = 0; i < 100; i++) {

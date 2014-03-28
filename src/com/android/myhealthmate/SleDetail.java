@@ -52,6 +52,7 @@ public class SleDetail extends Activity {
 
 	// history section
 	private ArrayList<RecordModel> recordList;
+	private ArrayList<RecordViewSection> recordViewList = new ArrayList<RecordViewSection>();
 	private LinearLayout recordLayout;
 	private ScrollView scrolView;
 	private RecordList recordListInstance;
@@ -82,8 +83,10 @@ public class SleDetail extends Activity {
 		ChartHelper.recordListGenerator(recordList);
 		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
-			recordLayout.addView(new RecordViewSection(SleDetail.this, record.getType().toString(), record
-					.getTimeStamp(), record.getContent()).getLayout());
+			RecordViewSection rvsection=new RecordViewSection(SleDetail.this, record.getType().toString(), record
+					.getTimeStamp(), record.getContent());
+			recordViewList.add(rvsection);
+			recordLayout.addView(rvsection.getLayout());
 		}
 	}
 
@@ -249,12 +252,12 @@ public class SleDetail extends Activity {
 
 		if (oldstartEndLong[2] != 0) {
 			for (int i = oldstartEndLong[0]; i < oldstartEndLong[0] + oldstartEndLong[2]; i++) {
-				recordLayout.getChildAt(i).setBackgroundResource(R.drawable.textlines);
+				recordViewList.get(i).disableHighLight();
 			}
 		}
 
 		for (int i = startEndLong[0]; i < startEndLong[0] + startEndLong[2]; i++) {
-			recordLayout.getChildAt(i).setBackgroundResource(R.drawable.highlight_select_title_section);
+			recordViewList.get(i).setHighLight();
 		}
 
 		oldstartEndLong = startEndLong;
