@@ -179,8 +179,8 @@ public class ChartDataController {
 		double act;
 		double sleep;
 		boolean isSleep = false;
-		Date beginningTime = MedReminderModel.addDuration(new Date(), (0 - count), DurationUnit.Hour);
-		Date timestamp = beginningTime;
+		Date beginningTime = MedReminderModel.addDuration(new Date(), (1 - count), DurationUnit.Hour);
+		Date timestamp = ChartHelper.toPreviousWholeHour(beginningTime);
 		for (int i = 0; i < count; i++) {
 			// need to adjust time later
 			hr = ChartHelper.getSingleRandomData(70, 140);
