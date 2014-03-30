@@ -31,7 +31,7 @@ public class RecordList implements Serializable {
 	protected RecordList() {
 
 	}
-
+	
 	public void init(Context context) {
 		this.context = context;
 		load();
@@ -39,9 +39,11 @@ public class RecordList implements Serializable {
 
 	private void save() {
 		FileOperation.save(recordList, FILENAME, context);
+		
 	}
 
 	private void load() {
+		@SuppressWarnings("unchecked")
 		ArrayList<RecordModel> storedEvents = (ArrayList<RecordModel>) FileOperation.read(FILENAME, context);
 		if (storedEvents != null) {
 			recordList = storedEvents;
@@ -60,11 +62,27 @@ public class RecordList implements Serializable {
 		save();
 	}
 
-	public void addOneRecord(recordType type, Date date, String content, boolean miss) {
-		recordList.add(new RecordModel(type, date, content, miss));
+	public void addOneRecord(recordType type, Date date, String content, String title,boolean miss) {
+		recordList.add(new RecordModel(type, date, content, title,miss));
+		save();
+	}
+	
+	public void addOneRecord(RecordModel record) {
+		recordList.add(record);
+		sortByNext();
 		save();
 	}
 
+	public int getIndexByDate(Date date){
+		int count = 0;
+		for(RecordModel record : recordList){
+			if (record.getTimeStamp().equals(date))
+				return count;
+			count ++;
+		}
+		return -1;
+	}
+	
 	public ArrayList<RecordModel> getRecordList() {
 		return recordList;
 	}
@@ -73,7 +91,7 @@ public class RecordList implements Serializable {
 		int[] startEndLong = { 0, 0, 0 };
 		int counter = 0;
 		boolean started = false;
-		boolean ended = false;
+
 		Date afterOneHour = MedReminderModel.addDuration(startTime, 1, DurationUnit.Hour);
 		for (RecordModel record : recordList) {
 			if (record.getTimeStamp().compareTo(startTime) >= 0 && record.getTimeStamp().compareTo(afterOneHour) <= 0) {

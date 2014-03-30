@@ -48,7 +48,7 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		 fromNoti = savedInstanceState.getBoolean(AlarmReceiver.notificationState);
 		if ( fromNoti == true) {
 			int id = savedInstanceState.getInt(AlarmService.reminderVar);
-			Dialog mainPageDialog = new DialogPopup().onCreateDialog(this,id);
+			Dialog mainPageDialog = new ReminderDialogPopup().onCreateDialog(this,id);
 			mainPageDialog.show();
 			
 		}

@@ -8,6 +8,7 @@ import com.android.reminder.MedReminderModel;
 
 public class RecordModel implements Comparable<RecordModel>, Serializable {
 
+	private String title;
 	private String content;
 	private Date timeStamp;
 	private recordType type;
@@ -18,14 +19,16 @@ public class RecordModel implements Comparable<RecordModel>, Serializable {
 	}
 
 	public RecordModel() {
+		this.title = "Record";
 		this.content = "There is a record example";
 		this.timeStamp = new Date();
 		this.type = recordType.recommendation;
 		this.miss = true;
 	}
 
-	public RecordModel(recordType type, Date date, String content, boolean miss) {
+	public RecordModel(recordType type, Date date, String content,String title , boolean miss) {
 		this.content = content;
+		this.title = title;
 		this.timeStamp = date;
 		this.type = type;
 		this.miss = miss;

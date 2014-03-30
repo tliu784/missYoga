@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import com.android.trend.AddNotePopupDialog;
 import com.android.trend.ChartDataController;
-import com.android.trend.ChartHelper;
 import com.android.trend.ChartPointModel;
 import com.android.trend.ChartViewController;
 import com.android.trend.RecordList;
@@ -14,7 +14,11 @@ import com.android.trend.RecordModel;
 import com.android.trend.RecordViewSection;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,7 +57,7 @@ public class SleDetail extends Activity {
 	// history section
 	private ArrayList<RecordModel> recordList;
 	private ArrayList<RecordViewSection> recordViewList = new ArrayList<RecordViewSection>();
-	private LinearLayout recordLayout;
+	private static LinearLayout recordLayout;
 	private ScrollView scrolView;
 	private RecordList recordListInstance;
 	int[] oldstartEndLong = { 0, 0, 0 };
@@ -74,17 +78,47 @@ public class SleDetail extends Activity {
 		initHistorySection();
 
 	}
+	
+	// --------------------action bar test below------------------------------
+
+		@Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+			// Inflate the menu items for use in the action bar
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.reminder_menu, menu);
+			return super.onCreateOptionsMenu(menu);
+
+		}
+
+		public boolean onOptionsItemSelected(MenuItem item) {
+			// Handle presses on the action bar items
+			switch (item.getItemId()) {
+			case R.id.add_reminder: {
+				Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(SleDetail.this);
+				newNoteDialog.show();
+				return true;
+			}
+			case R.id.delete_reminder: {
+
+				return true;
+			}
+			default:
+				return super.onOptionsItemSelected(item);
+			}
+		}
+
+		// --------------------action bar test above------------------------------
 
 	private void initHistorySection() {
 		recordListInstance = RecordList.getInstance();
 		recordListInstance.init(getApplicationContext());
 		recordList = recordListInstance.getRecordList();
 
-		ChartHelper.recordListGenerator(recordList);
+		//ChartHelper.recordListGenerator(recordList);
 		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
-			RecordViewSection rvsection=new RecordViewSection(SleDetail.this, record.getType().toString(), record
-					.getTimeStamp(), record.getContent());
+			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType().toString(),
+					record.getTimeStamp(), record.getContent());
 			recordViewList.add(rvsection);
 			recordLayout.addView(rvsection.getLayout());
 		}
@@ -244,6 +278,11 @@ public class SleDetail extends Activity {
 		}
 		displayValues();
 		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
+	}
+	
+	
+	public static void addHistorySection(RecordViewSection recordView,int index) {
+		recordLayout.addView(recordView.getLayout(),index);
 	}
 
 	private void scrollHistorySection(Date selectedTime) {

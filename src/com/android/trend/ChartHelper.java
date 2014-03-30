@@ -28,7 +28,7 @@ public class ChartHelper {
 
 		for (int i = 0; i < 100; i++) {
 			RecordModel record = new RecordModel(recordType.recommendation, date, "this is history record"
-					+ Integer.toString(i), true);
+					+ Integer.toString(i),"Reocrd" , true);
 
 			date = MedReminderModel.addDuration(date, -20, DurationUnit.Min);
 			if (Math.random() > 0.7)

@@ -19,7 +19,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 
-public class DialogPopup extends DialogFragment {
+public class ReminderDialogPopup extends DialogFragment {
 
 	private ArrayList<RecordModel> recordList = new ArrayList<RecordModel>();
 	RecordList recordListInstance = RecordList.getInstance();
@@ -50,11 +50,11 @@ public class DialogPopup extends DialogFragment {
 	}
 
 	private void addDoneRecord(MedReminderModel reminder) {
-		recordListInstance.addOneRecord(recordType.reminder, reminder.getNextAlarmTime(), reminder.getDetail(), true);
+		recordListInstance.addOneRecord(recordType.reminder, reminder.getNextAlarmTime(), reminder.getDetail(),reminder.getTitle(), true);
 	}
 
 	private void addMissRecord(MedReminderModel reminder) {
-		recordListInstance.addOneRecord(recordType.reminder, reminder.getNextAlarmTime(), reminder.getDetail(), false);
+		recordListInstance.addOneRecord(recordType.reminder, reminder.getNextAlarmTime(), reminder.getDetail(), reminder.getTitle(), false);
 	}
 
 	public MedReminderModel updateReminderSection(Context context, int id) {
