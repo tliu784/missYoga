@@ -118,7 +118,7 @@ public class SleDetail extends Activity {
 		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
 			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType(),
-					record.getTimeStamp(), record.getContent(),record.isMissed());
+					record.getTimeStamp(), record.getContent(),record.isMissed(), record.getTitle());
 			recordViewList.add(rvsection);
 			recordLayout.addView(rvsection.getLayout());
 		}

@@ -12,8 +12,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class RecordViewSection {
 
@@ -32,13 +35,13 @@ public class RecordViewSection {
 
 	
 	
-	public RecordViewSection(Context context, recordType type, Date date, String content,boolean miss) {
+	public RecordViewSection(Context context, recordType type, Date date, String content,boolean miss, String title) {
 		this.contentLayout = new LinearLayout(context);
 		this.line = new TextView(context);
 		this.layout = new LinearLayout(context);
 		this.type = type;
 		this.titleType = new TextView(context);
-		this.titleType.setText(type.toString());
+		this.titleType.setText(type.toString()+" - "+ title);
 		this.icon = new TextView(context);
 		this.time = new TextView(context);
 		setTime(date);
@@ -56,10 +59,22 @@ public class RecordViewSection {
 		layout.setLayoutParams(setLayoutParams(0, 0, 0, 0));
 		layout.setBackgroundResource(R.drawable.textlines);
 		layout.setOrientation(LinearLayout.VERTICAL);
+		layout.setClickable(true);
 
 		addTitleLayout();
 		setLine();
 		setContentLayout();
+		recordSectionListener();
+	}
+	
+
+	private void recordSectionListener() {
+		layout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(context, "yeah click click", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	private void addTitleLayout() {
