@@ -2,301 +2,296 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/gen_page_margin_top"
+    android:background="@drawable/textlines"
+    android:orientation="vertical" >
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/chart_area_all"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/gen_page_margin_top"
-        android:background="@drawable/textlines"
-        android:orientation="vertical" >
+        android:layout_height="245dip"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <!-- trends chart section -->
 
         <FrameLayout
-            android:id="@+id/chart_area_all"
+            android:id="@+id/chart_area"
             android:layout_width="fill_parent"
-            android:layout_height="245dip"
+            android:layout_height="250dip"
             android:orientation="vertical"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp" >
-
-            <!-- title section -->
-
-            <LinearLayout
-                android:id="@+id/detail_title_section"
-                android:layout_width="fill_parent"
-                android:layout_height="40dip"
-                android:layout_gravity="center_horizontal|top"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
-
-                <Button
-                    android:id="@+id/chart_double_prev"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/text_shadow_white"
-                    android:text="@string/chart_double_prev"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/chart_prev"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/text_shadow_white"
-                    android:text="@string/chart_prev"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/detail_title_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:maxLines="2"
-                    android:scrollbars="vertical"
-                    android:text="@string/text1"
-                    android:textSize="@dimen/profile_text_size"
-                    android:textStyle="bold" >
-                </TextView>
-
-                <Button
-                    android:id="@+id/chart_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/text_shadow_white"
-                    android:text="@string/chart_next"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/chart_double_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@color/text_shadow_white"
-                    android:text="@string/chart_double_next"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- trends chart section -->
-
-            <FrameLayout
-                android:id="@+id/chart_area"
-                android:layout_width="fill_parent"
-                android:layout_height="250dip"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="20dp" >
-
-                <LinearLayout
-                    android:id="@+id/detail_hr_graph"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="horizontal"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="0dp" >
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/detail_act_graph"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="horizontal"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="0dp" >
-                </LinearLayout>
-            </FrameLayout>
-
-            <!-- start time and end time section -->
-
-            <RelativeLayout
-                android:id="@+id/detail_time_section"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|bottom"
-                android:orientation="horizontal"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="@dimen/large_font_size" >
-
-                <TextView
-                    android:id="@+id/detail_start_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginTop="5dp"
-                    android:maxLines="1"
-                    android:scrollbars="vertical"
-                    android:text="@string/text1"
-                    android:textSize="@dimen/profile_text_size" >
-                </TextView>
-
-                <TextView
-                    android:id="@+id/detail_end_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="5dp"
-                    android:maxLines="1"
-                    android:scrollbars="vertical"
-                    android:text="@string/text2"
-                    android:textSize="@dimen/profile_text_size" >
-                </TextView>
-            </RelativeLayout>
-        </FrameLayout>
-        <!-- icon and data section -->
-
-        <LinearLayout
-            android:id="@+id/detail_value_section"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingBottom="5dp"
+            android:paddingTop="20dp" >
+
+            <LinearLayout
+                android:id="@+id/detail_hr_graph"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detail_act_graph"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp" >
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- start time and end time section -->
+
+        <RelativeLayout
+            android:id="@+id/detail_time_section"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:textSize="@dimen/large_font_size" >
 
             <TextView
-                android:id="@+id/chart_textView_hr"
+                android:id="@+id/detail_start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_dialog_icon_hr"
-                android:gravity="center"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="5dp"
                 android:maxLines="1"
                 android:scrollbars="vertical"
-                android:text="@string/hr"
-                android:textStyle="bold" >
+                android:text="@string/text1"
+                android:textSize="@dimen/profile_text_size" >
             </TextView>
 
             <TextView
-                android:id="@+id/chart_values_hr"
+                android:id="@+id/detail_end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
                 android:maxLines="1"
                 android:scrollbars="vertical"
-                android:textStyle="bold" >
+                android:text="@string/text2"
+                android:textSize="@dimen/profile_text_size" >
             </TextView>
+        </RelativeLayout>
 
-            <TextView
-                android:id="@+id/chart_textView_bp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_dialog_icon_bp"
-                android:gravity="center"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:text="@string/bp"
-                android:textStyle="bold" >
-            </TextView>
+        <!-- title section -->
 
-            <TextView
-                android:id="@+id/chart_values_bp_systolic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:textStyle="bold" >
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:text="/"
-                android:textStyle="bold" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/chart_values_bp_diastolic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:textStyle="bold" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/chart_textView_sleep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_dialog_icon_sleep"
-                android:gravity="center"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:text="@string/sleep"
-                android:textStyle="bold" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/chart_values_sleep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:textStyle="bold" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/chart_textView_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_dialog_icon_activity"
-                android:gravity="center"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:text="@string/activity"
-                android:textStyle="bold" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/chart_values_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:textStyle="bold" >
-            </TextView>
-        </LinearLayout>
-
-        <!-- notes section -->
-
-        <ScrollView
-            android:id="@+id/scrollHistorySection"
+        <LinearLayout
+            android:id="@+id/detail_title_section"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="40dip"
+            android:layout_gravity="center_horizontal|top"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
 
-            <LinearLayout
-                android:id="@+id/recordListSection"
-                android:layout_width="fill_parent"
+            <Button
+                android:id="@+id/chart_double_prev"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/gen_page_margin_top"
-                android:orientation="vertical" >
-            </LinearLayout>
-        </ScrollView>
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@color/text_shadow_white"
+                android:text="@string/chart_double_prev"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/chart_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@color/text_shadow_white"
+                android:text="@string/chart_prev"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detail_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:maxLines="2"
+                android:scrollbars="vertical"
+                android:text="@string/text1"
+                android:textSize="@dimen/profile_text_size"
+                android:textStyle="bold" >
+            </TextView>
+
+            <Button
+                android:id="@+id/chart_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@color/text_shadow_white"
+                android:text="@string/chart_next"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/chart_double_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@color/text_shadow_white"
+                android:text="@string/chart_double_next"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+    <!-- icon and data section -->
+
+    <LinearLayout
+        android:id="@+id/detail_value_section"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="@dimen/large_font_size" >
+
+        <TextView
+            android:id="@+id/chart_textView_hr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_dialog_icon_hr"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="@string/hr"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/chart_values_hr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/chart_textView_bp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_dialog_icon_bp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="@string/bp"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/chart_values_bp_systolic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="/"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/chart_values_bp_diastolic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/chart_textView_sleep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_dialog_icon_sleep"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="@string/sleep"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/chart_values_sleep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/chart_textView_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_dialog_icon_activity"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="@string/activity"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/chart_values_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:textStyle="bold" >
+        </TextView>
     </LinearLayout>
+
+    <!-- notes section -->
+
+    <ScrollView
+        android:id="@+id/scrollHistorySection"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/recordListSection"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/gen_page_margin_top"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
