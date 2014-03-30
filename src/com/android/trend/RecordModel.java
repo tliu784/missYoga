@@ -15,14 +15,14 @@ public class RecordModel implements Comparable<RecordModel>, Serializable {
 	private boolean miss;
 
 	public enum recordType implements Serializable {
-		recommendation, note, reminder;
+		Recommendation, Note, Reminder;
 	}
 
 	public RecordModel() {
 		this.title = "Record";
 		this.content = "There is a record example";
 		this.timeStamp = new Date();
-		this.type = recordType.recommendation;
+		this.type = recordType.Recommendation;
 		this.miss = true;
 	}
 
@@ -33,7 +33,15 @@ public class RecordModel implements Comparable<RecordModel>, Serializable {
 		this.type = type;
 		this.miss = miss;
 	}
+	
+	public boolean isMissed(){
+		return miss;
+	}
 
+	public String getTitle() {
+		return title;
+	}
+	
 	public String getContent() {
 		return content;
 	}

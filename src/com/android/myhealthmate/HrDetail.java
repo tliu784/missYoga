@@ -130,8 +130,8 @@ public class HrDetail extends Activity {
 		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
 			
-			RecordViewList.add(new RecordViewSection(getApplicationContext(), record.getType().toString(), record
-					.getTimeStamp(), record.getContent()));
+			RecordViewList.add(new RecordViewSection(getApplicationContext(), record.getType(), record
+					.getTimeStamp(), record.getContent(),record.isMissed()));
 
 		}
 		
@@ -169,7 +169,7 @@ public class HrDetail extends Activity {
 		Date date = new Date();
 
 		for (int i = 0; i < 100; i++) {
-			RecordModel record = new RecordModel(recordType.recommendation, date, "this is history record"
+			RecordModel record = new RecordModel(recordType.Recommendation, date, "this is history record"
 					+ Integer.toString(i), "Record",true);
 
 			date = MedReminderModel.addDuration(date, 20, DurationUnit.Min);

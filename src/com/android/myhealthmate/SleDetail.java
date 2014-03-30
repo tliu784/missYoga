@@ -117,8 +117,8 @@ public class SleDetail extends Activity {
 		//ChartHelper.recordListGenerator(recordList);
 		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
-			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType().toString(),
-					record.getTimeStamp(), record.getContent());
+			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType(),
+					record.getTimeStamp(), record.getContent(),record.isMissed());
 			recordViewList.add(rvsection);
 			recordLayout.addView(rvsection.getLayout());
 		}

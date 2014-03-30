@@ -50,11 +50,11 @@ public class ReminderDialogPopup extends DialogFragment {
 	}
 
 	private void addDoneRecord(MedReminderModel reminder) {
-		recordListInstance.addOneRecord(recordType.reminder, reminder.getNextAlarmTime(), reminder.getDetail(),reminder.getTitle(), true);
+		recordListInstance.addOneRecord(recordType.Reminder, reminder.getNextAlarmTime(), reminder.getDetail(),reminder.getTitle(), false);
 	}
 
 	private void addMissRecord(MedReminderModel reminder) {
-		recordListInstance.addOneRecord(recordType.reminder, reminder.getNextAlarmTime(), reminder.getDetail(), reminder.getTitle(), false);
+		recordListInstance.addOneRecord(recordType.Reminder, reminder.getNextAlarmTime(), reminder.getDetail(), reminder.getTitle(), true);
 	}
 
 	public MedReminderModel updateReminderSection(Context context, int id) {

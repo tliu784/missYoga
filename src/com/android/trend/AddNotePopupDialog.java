@@ -44,9 +44,9 @@ public class AddNotePopupDialog extends DialogFragment {
 				.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						RecordModel record = new RecordModel(recordType.note, editSection.toDate(),editSection.getNoteContent(),editSection.getNoteTitle(), true);
-						RecordViewSection recordView = new RecordViewSection(context, record.getType().toString(),
-								record.getTimeStamp(), record.getContent());
+						RecordModel record = new RecordModel(recordType.Note, editSection.toDate(),editSection.getNoteContent(),editSection.getNoteTitle(), true);
+						RecordViewSection recordView = new RecordViewSection(context, record.getType(),
+								record.getTimeStamp(), record.getContent(),record.isMissed());
 						recordListInstance.addOneRecord(record);
 						if(recordListInstance.getIndexByDate(record.getTimeStamp()) >= 0)
 						SleDetail.addHistorySection(recordView,recordListInstance.getIndexByDate(record.getTimeStamp()));

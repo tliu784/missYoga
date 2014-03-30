@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.android.myhealthmate.R;
+import com.android.trend.RecordModel.recordType;
 
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
@@ -26,15 +27,18 @@ public class RecordViewSection {
 	Context context;
 	TextView icon;
 	LinearLayout timeLayout;
+	recordType type;
+	boolean miss;
 
 	
 	
-	public RecordViewSection(Context context, String type, Date date, String content) {
+	public RecordViewSection(Context context, recordType type, Date date, String content,boolean miss) {
 		this.contentLayout = new LinearLayout(context);
 		this.line = new TextView(context);
 		this.layout = new LinearLayout(context);
+		this.type = type;
 		this.titleType = new TextView(context);
-		this.titleType.setText(type);
+		this.titleType.setText(type.toString());
 		this.icon = new TextView(context);
 		this.time = new TextView(context);
 		setTime(date);
@@ -43,6 +47,7 @@ public class RecordViewSection {
 		this.titleLayout = new LinearLayout(context);
 		this.timeLayout = new LinearLayout(context);
 		this.context = context;
+		this.miss = miss;
 		// TODO Auto-generated constructor stub
 		setFormat();
 	}
@@ -65,7 +70,8 @@ public class RecordViewSection {
 
 		icon.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		icon.setPadding(padding, 0, padding, 0);
-		icon.setBackgroundResource(R.drawable.ic_dialog_icon_about);
+		setIcon();
+		
 
 		titleType.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
@@ -91,6 +97,20 @@ public class RecordViewSection {
 		layout.addView(titleLayout);
 	}
 
+	
+	private void setIcon(){
+		
+		if(type.equals(recordType.Reminder) && miss)
+			icon.setBackgroundResource(R.drawable.ic_action_alarms_dark);
+		else if(type.equals(recordType.Reminder)&& (!miss))
+			icon.setBackgroundResource(R.drawable.ic_action_alarms_light);
+		else if(type.equals(recordType.Note))
+			icon.setBackgroundResource(R.drawable.ic_dialog_icon_about);
+		else if(type.equals(recordType.Recommendation))
+			icon.setBackgroundResource(R.drawable.ic_action_alarms_light);
+	
+	}
+	
 	
 	
 	private void setLine() {
