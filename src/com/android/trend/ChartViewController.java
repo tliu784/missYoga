@@ -140,22 +140,24 @@ public class ChartViewController {
 		hrSeries = new GraphViewSeries("hr", hrStyple, hrGraphData);
 		bplSeries = new GraphViewSeries("bpl", bplStyple, bplGraphData);
 		bphSeries = new GraphViewSeries("bph", bphStyle, bphGraphData);
-		LineGraphView heartGraphView = new LineGraphView(context, " ");
+		LineGraphView graphView = new LineGraphView(context, " ");
+		graphView.setShowVerticalGrid(false);
 		if (transparentBack)
-			heartGraphView.setBackground(hrSection.getBackground());
+			graphView.setBackground(hrSection.getBackground());
 		else
-			heartGraphView.setBackgroundResource(R.color.chart_background);
-		heartGraphView.addSeries(hrSeries); // data
-		heartGraphView.addSeries(bplSeries);
-		heartGraphView.addSeries(bphSeries);
-		heartGraphView.setShowHorizontalLabels(false);
-		heartGraphView.setShowVerticalLabels(false);
-		heartGraphView.getGraphViewStyle().setGridColor(gridColor);
-		heartGraphView.setDrawDataPoints(true);
-		heartGraphView.setDataPointsRadius(lineChartPointRadius);
+			graphView.setBackgroundResource(R.color.chart_background);
+		
+		graphView.addSeries(hrSeries); // data
+		graphView.addSeries(bplSeries);
+		graphView.addSeries(bphSeries);
+		graphView.setShowHorizontalLabels(false);
+		graphView.setShowVerticalLabels(false);
+		graphView.getGraphViewStyle().setGridColor(gridColor);
+		graphView.setDrawDataPoints(true);
+		graphView.setDataPointsRadius(lineChartPointRadius);
 
-		container.addView(heartGraphView);
-		return heartGraphView;
+		container.addView(graphView);
+		return graphView;
 	}
 
 	public GraphView createActChart(LinearLayout container) {
@@ -164,6 +166,7 @@ public class ChartViewController {
 		);
 		actSeries = new GraphViewSeries("act", actStyle, actGraphData);
 		sleepSeries = new GraphViewSeries("sleep", sleepStyle, sleepGraphData);
+		graphView.setShowVerticalGrid(false);
 		graphView.addSeries(actSeries); // data
 		graphView.addSeries(sleepSeries); // data
 		graphView.setShowHorizontalLabels(false);
