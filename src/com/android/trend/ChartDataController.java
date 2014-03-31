@@ -49,7 +49,10 @@ public class ChartDataController {
 	}
 
 	public int getDisplaySetLen() {
-		return displaySetLen;
+		int pointCount = dataset.size();
+		if (pointCount >= displaySetLen)
+			pointCount = displaySetLen;
+		return pointCount;
 	}
 
 	public void sortDisplay() {
@@ -143,31 +146,47 @@ public class ChartDataController {
 
 	private void createDisplaySet() {
 		displayDataSet.clear();
-		int endIndex=currentDisplayStartIndex+displaySetLen;
-		if (endIndex>=dataset.size())
-			endIndex=dataset.size();
-		//sublist method endIndex is exclusive
-		displayDataSet=new ArrayList<ChartPointModel>(dataset.subList(currentDisplayStartIndex, endIndex));
+		int endIndex = currentDisplayStartIndex + displaySetLen;
+		if (endIndex >= dataset.size())
+			endIndex = dataset.size();
+		// sublist method endIndex is exclusive
+		displayDataSet = new ArrayList<ChartPointModel>(dataset.subList(currentDisplayStartIndex, endIndex));
 	}
 
 	public void shiftDisplayData(int points) {
 		int newStartIndex = currentDisplayStartIndex;
 		newStartIndex = currentDisplayStartIndex + points;
-		if (newStartIndex>dataset.size()-displaySetLen)
-			newStartIndex=dataset.size()-displaySetLen;
+		if (newStartIndex > dataset.size() - displaySetLen)
+			newStartIndex = dataset.size() - displaySetLen;
 		if (newStartIndex < 0)
 			newStartIndex = 0;
-		if (dataset.size()>=displaySetLen)
-			displayDataSet= new ArrayList<ChartPointModel> ( dataset.subList(newStartIndex, newStartIndex+displaySetLen));
+		if (dataset.size() >= displaySetLen)
+			displayDataSet = new ArrayList<ChartPointModel>(dataset.subList(newStartIndex, newStartIndex
+					+ displaySetLen));
 		else
-			displayDataSet=dataset;
-		currentDisplayStartIndex=newStartIndex;
+			displayDataSet = dataset;
+		currentDisplayStartIndex = newStartIndex;
 	}
-	
-	public void shiftDisplayToEnd(){
-		currentDisplayStartIndex=dataset.size()-displaySetLen;
-		if (currentDisplayStartIndex<0)
-			currentDisplayStartIndex=0;
+
+	public int shiftDisplayData(Date timestamp, int currentX) {
+		int newX = currentDisplayStartIndex;
+		int nearestIndex = dataset.size() - 1;
+		for (int i = 0; i < dataset.size(); i++) {
+			if (dataset.get(i).getTimestamp().compareTo(timestamp) > 0) {
+				nearestIndex = i - 1;
+				break;
+			}
+		}
+		int points = nearestIndex - currentDisplayStartIndex;
+		shiftDisplayData(points); // currentDisplayStartIndex has been updated
+		newX = nearestIndex - currentDisplayStartIndex;
+		return newX;
+	}
+
+	public void shiftDisplayToEnd() {
+		currentDisplayStartIndex = dataset.size() - displaySetLen;
+		if (currentDisplayStartIndex < 0)
+			currentDisplayStartIndex = 0;
 		createDisplaySet();
 	}
 
@@ -194,7 +213,7 @@ public class ChartDataController {
 			dataset.add(new ChartPointModel(timestamp, hr, bpl, bph, act, sleep, isSleep));
 			timestamp = MedReminderModel.addDuration(timestamp, 1, DurationUnit.Hour);
 		}
-				
+
 		shiftDisplayToEnd();
 	}
 
