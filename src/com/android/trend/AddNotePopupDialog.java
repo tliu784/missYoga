@@ -46,7 +46,7 @@ public class AddNotePopupDialog extends DialogFragment {
 					public void onClick(DialogInterface dialog, int id) {
 						RecordModel record = new RecordModel(recordType.Note, editSection.toDate(),editSection.getNoteContent(),editSection.getNoteTitle(), true);
 						RecordViewSection recordView = new RecordViewSection(context, record.getType(),
-								record.getTimeStamp(), record.getContent(),record.isMissed());
+								record.getTimeStamp(), record.getContent(),record.isMissed(),record.getTitle());
 						recordListInstance.addOneRecord(record);
 						if(recordListInstance.getIndexByDate(record.getTimeStamp()) >= 0)
 						SleDetail.addHistorySection(recordView,recordListInstance.getIndexByDate(record.getTimeStamp()));

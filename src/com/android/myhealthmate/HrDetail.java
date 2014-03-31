@@ -131,7 +131,7 @@ public class HrDetail extends Activity {
 		for (RecordModel record : recordList) {
 			
 			RecordViewList.add(new RecordViewSection(getApplicationContext(), record.getType(), record
-					.getTimeStamp(), record.getContent(),record.isMissed()));
+					.getTimeStamp(), record.getContent(),record.isMissed(), record.getTitle()));
 
 		}
 		
