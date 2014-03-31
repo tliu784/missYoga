@@ -75,8 +75,8 @@ public class RecordViewSection {
 		setIcon();
 		
 
-		titleType.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-
+		titleType.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+		titleType.setGravity(Gravity.CENTER_VERTICAL);
 		titleType.setPadding(padding, 0, padding, 0);
 		titleType.setTextColor(Color.BLACK);
 		titleType.setTypeface(null, Typeface.BOLD);
@@ -85,8 +85,8 @@ public class RecordViewSection {
 		timeLayout.setPadding(padding, 0, padding, 0);
 		timeLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-		time.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
+		time.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		time.setGravity(Gravity.CENTER_VERTICAL);
 		time.setTextColor(context.getResources().getColor(R.color.grey));
 
 		timeLayout.addView(time);
@@ -105,11 +105,11 @@ public class RecordViewSection {
 		if(type.equals(recordType.Reminder) && miss)
 			icon.setBackgroundResource(R.drawable.ic_action_alarms_small);
 		else if(type.equals(recordType.Reminder)&& (!miss))
-			icon.setBackgroundResource(R.drawable.ic_action_alarms_small);
-		else if(type.equals(recordType.Note))
-			icon.setBackgroundResource(R.drawable.ic_dialog_icon_about);
-		else if(type.equals(recordType.Recommendation))
 			icon.setBackgroundResource(R.drawable.ic_action_alarms_light);
+		else if(type.equals(recordType.Note))
+			icon.setBackgroundResource(R.drawable.ic_action_event);
+		else if(type.equals(recordType.Recommendation))
+			icon.setBackgroundResource(R.drawable.ic_action_about);
 	
 	}
 	

@@ -15,8 +15,8 @@ public class ChartHelper {
 	public static Date toPreviousWholeHour(Date d) {
 		Calendar c = new GregorianCalendar();
 		c.setTime(d);
-//		if (c.get(Calendar.MINUTE) >= 30)
-//			c.add(Calendar.HOUR, 1);
+		// if (c.get(Calendar.MINUTE) >= 30)
+		// c.add(Calendar.HOUR, 1);
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
 		return c.getTime();
@@ -27,8 +27,18 @@ public class ChartHelper {
 		Date date = new Date();
 
 		for (int i = 0; i < 100; i++) {
-			RecordModel record = new RecordModel(recordType.Recommendation, date, "this is history record"
-					+ Integer.toString(i),"Reocrd" , true);
+			recordType type = null;
+			double x = Math.random();
+			if (x < 0.3) {
+				type = recordType.Note;
+			} else if (x < 0.6) {
+				type = recordType.Recommendation;
+			} else {
+				type = recordType.Reminder;
+			}
+
+			RecordModel record = new RecordModel(type, date, "this is history record" + Integer.toString(i), "Reocrd",
+					true);
 
 			date = MedReminderModel.addDuration(date, -20, DurationUnit.Min);
 			if (Math.random() > 0.7)
