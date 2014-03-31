@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import com.android.trend.AddNotePopupDialog;
 import com.android.trend.ChartDataController;
+import com.android.trend.ChartHelper;
 import com.android.trend.ChartPointModel;
 import com.android.trend.ChartViewController;
 import com.android.trend.RecordList;
@@ -114,12 +115,13 @@ public class SleDetail extends Activity {
 		recordListInstance.init(getApplicationContext());
 		recordList = recordListInstance.getRecordList();
 
-		//ChartHelper.recordListGenerator(recordList);
+		ChartHelper.recordListGenerator(recordList);
 		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
 			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType(),
 					record.getTimeStamp(), record.getContent(),record.isMissed());
 			recordViewList.add(rvsection);
+			rvsection.getLayout().setOnClickListener(getHistorySectionClickListener());
 			recordLayout.addView(rvsection.getLayout());
 		}
 	}
@@ -218,6 +220,17 @@ public class SleDetail extends Activity {
 
 		};
 	}
+	
+	private OnClickListener getHistorySectionClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				int viewIndex=recordLayout.indexOfChild(v);
+				Date timestamp=recordList.get(viewIndex).getTimeStamp();
+				shiftChart(timestamp);
+			}
+		};
+	}
 
 	private void displayValues() {
 		ChartPointModel currentPoint = chartData.getDisplayDataSet().get(currentX);
@@ -267,6 +280,14 @@ public class SleDetail extends Activity {
 		chartView.moveVto(currentX);
 		displayValues();
 		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
+	}
+	
+	private void shiftChart(Date timestamp){
+		int newX=chartData.shiftDisplayData(timestamp, currentX);
+		chartView.refreshChart();
+		chartView.moveVto(newX);
+		currentX=newX;
+		displayValues();
 	}
 
 	private void moveVbyTouch(float x) {
