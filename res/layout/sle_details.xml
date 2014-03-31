@@ -49,43 +49,7 @@
             </LinearLayout>
         </FrameLayout>
 
-        <!-- start time and end time section -->
-
-        <RelativeLayout
-            android:id="@+id/detail_time_section"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:textSize="@dimen/large_font_size" >
-
-            <TextView
-                android:id="@+id/detail_start_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="5dp"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:text="@string/text1"
-                android:textSize="@dimen/profile_text_size" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/detail_end_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="5dp"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:text="@string/text2"
-                android:textSize="@dimen/profile_text_size" >
-            </TextView>
-        </RelativeLayout>
-
+     
         <!-- title section -->
 
         <LinearLayout
@@ -166,9 +130,11 @@
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:textSize="@dimen/large_font_size" >
+        android:textSize="@dimen/large_font_size"
+         android:background="@drawable/textlines">
 
         <TextView
+            android:layout_marginLeft="15dp"
             android:id="@+id/chart_textView_hr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -191,6 +157,7 @@
         </TextView>
 
         <TextView
+            android:layout_marginLeft="15dp"
             android:id="@+id/chart_textView_bp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -203,7 +170,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/chart_values_bp_systolic"
+            android:id="@+id/chart_values_bp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -213,26 +180,7 @@
         </TextView>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:text="/"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/chart_values_bp_diastolic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
+            android:layout_marginLeft="15dp"
             android:id="@+id/chart_textView_sleep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -255,6 +203,7 @@
         </TextView>
 
         <TextView
+            android:layout_marginLeft="15dp"
             android:id="@+id/chart_textView_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -285,6 +234,8 @@
         android:maxLines="1"
         android:scrollbars="vertical"
         android:text="Event List"
+        android:gravity="center"
+        android:textSize="20dp"
         android:textStyle="bold" >
     </TextView>
 
