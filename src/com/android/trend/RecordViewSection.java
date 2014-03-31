@@ -12,11 +12,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.Gravity;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class RecordViewSection {
 
@@ -51,7 +48,6 @@ public class RecordViewSection {
 		this.timeLayout = new LinearLayout(context);
 		this.context = context;
 		this.miss = miss;
-		// TODO Auto-generated constructor stub
 		setFormat();
 	}
 
@@ -64,18 +60,9 @@ public class RecordViewSection {
 		addTitleLayout();
 		setLine();
 		setContentLayout();
-		recordSectionListener();
 	}
 	
 
-	private void recordSectionListener() {
-		layout.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(context, "yeah click click", Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
 
 	private void addTitleLayout() {
 		int padding = 5;
