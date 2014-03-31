@@ -235,13 +235,15 @@ public class SleDetail extends Activity {
 	private void displayValues() {
 		ChartPointModel currentPoint = chartData.getDisplayDataSet().get(currentX);
 		TextView hrText = (TextView) findViewById(R.id.chart_values_hr);
+		TextView bpHighText = (TextView) findViewById(R.id.chart_values_bp_high);
 		TextView bpText = (TextView) findViewById(R.id.chart_values_bp);
 		TextView actText = (TextView) findViewById(R.id.chart_values_activity);
 		TextView actTitleText = (TextView) findViewById(R.id.chart_textView_activity);
 		TextView sleepText = (TextView) findViewById(R.id.chart_values_sleep);
 		TextView sleepTitleText = (TextView) findViewById(R.id.chart_textView_sleep);
 		hrText.setText(Integer.toString((int) currentPoint.getHr()));
-		bpText.setText(Integer.toString((int) currentPoint.getBpl())+"/"+(Integer.toString((int) currentPoint.getBph())));
+		bpHighText.setText(Integer.toString((int) currentPoint.getBph()));
+		bpText.setText(Integer.toString((int) currentPoint.getBpl()));
 		titleTextView.setText(sdf.format(currentPoint.getTimestamp()));
 		if (currentPoint.isSleep()) {
 			actTitleText.setVisibility(View.GONE);

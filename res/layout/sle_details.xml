@@ -6,13 +6,13 @@
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:layout_marginTop="@dimen/gen_page_margin_top"
-    android:background="@drawable/textlines"
     android:orientation="vertical" >
 
     <FrameLayout
         android:id="@+id/chart_area_all"
         android:layout_width="fill_parent"
-        android:layout_height="245dip"
+        android:layout_height="260dip"
+        android:background="@drawable/textlines"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="5dp"
@@ -49,7 +49,6 @@
             </LinearLayout>
         </FrameLayout>
 
-     
         <!-- title section -->
 
         <LinearLayout
@@ -119,140 +118,180 @@
                 android:text="@string/chart_double_next"
                 android:textStyle="bold" />
         </LinearLayout>
-    </FrameLayout>
-    <!-- icon and data section -->
-
-    <LinearLayout
-        android:id="@+id/detail_value_section"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textSize="@dimen/large_font_size"
-         android:background="@drawable/textlines">
-
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:id="@+id/chart_textView_hr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_dialog_icon_hr"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:text="@string/hr"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/chart_values_hr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:id="@+id/chart_textView_bp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_dialog_icon_bp"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:text="@string/bp"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/chart_values_bp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:id="@+id/chart_textView_sleep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_dialog_icon_sleep"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:text="@string/sleep"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/chart_values_sleep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:id="@+id/chart_textView_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_dialog_icon_activity"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:text="@string/activity"
-            android:textStyle="bold" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/chart_values_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxLines="1"
-            android:scrollbars="vertical"
-            android:textStyle="bold" >
-        </TextView>
-    </LinearLayout>
-
-    <!-- notes section -->
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="35dip"
-        android:maxLines="1"
-        android:scrollbars="vertical"
-        android:text="Event List"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textStyle="bold" >
-    </TextView>
-
-    <ScrollView
-        android:id="@+id/scrollHistorySection"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        <!-- </FrameLayout> -->
+        <!-- icon and data section -->
 
         <LinearLayout
-            android:id="@+id/recordListSection"
+            android:id="@+id/detail_value_section"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/gen_page_margin_top"
-            android:orientation="vertical" >
+            android:layout_gravity="center_horizontal|bottom"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:textSize="@dimen/trends_text_size" >
+
+            <TextView
+                android:id="@+id/chart_textView_hr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:text="@string/hr"
+                android:textColor="@color/chart_hr_line"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/chart_values_hr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:textColor="@color/chart_hr_line"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/chart_textView_bp_high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:text="@string/bp_high"
+                android:textColor="@color/chart_bp_high_line"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/chart_values_bp_high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:textColor="@color/chart_bp_high_line"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/chart_textView_bp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:text="@string/bp"
+                android:textColor="@color/chart_bp_low_line"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/chart_values_bp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:textColor="@color/chart_bp_low_line"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/chart_textView_sleep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:text="@string/sleep"
+                android:textColor="@color/chart_sleep_bar_high"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/chart_values_sleep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:textColor="@color/chart_sleep_bar_high"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/chart_textView_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:text="@string/activity"
+                android:textColor="@color/chart_act_bar"
+                android:textStyle="bold" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/chart_values_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:scrollbars="vertical"
+                android:textColor="@color/chart_act_bar"
+                android:textStyle="bold" >
+            </TextView>
         </LinearLayout>
-    </ScrollView>
+    </FrameLayout>
+    <!-- notes section -->
+
+    <LinearLayout
+        android:id="@+id/history_area"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textlines"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="20dip"
+            android:gravity="center"
+            android:maxLines="1"
+            android:scrollbars="vertical"
+            android:text="Event List"
+            android:textSize="16dp"
+            android:textStyle="bold" >
+        </TextView>
+
+        <ScrollView
+            android:id="@+id/scrollHistorySection"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:id="@+id/recordListSection"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/gen_page_margin_top"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     <item name="chart_grid" type="color">#D8D8D8</item>
     <item name="chart_hr_line" type="color">#fa5a6d</item>
     <item name="chart_bp_low_line" type="color">#ffa200</item>
-    <item name="chart_bp_high_line" type="color">#0000ff</item>
+    <item name="chart_bp_high_line" type="color">#972f97</item>
     <item name="chart_act_bar" type="color">#9eea34</item>
     <item name="chart_sleep_bar_low" type="color">#0000ff</item>
     <item name="chart_sleep_bar_medium" type="color">#0000b1</item>
