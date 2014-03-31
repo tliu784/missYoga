@@ -93,6 +93,7 @@
             android:layout_width="fill_parent"
             android:layout_height="40dip"
             android:layout_gravity="center_horizontal|top"
+            android:background="@android:color/transparent"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" >
@@ -277,6 +278,15 @@
     </LinearLayout>
 
     <!-- notes section -->
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="35dip"
+        android:maxLines="1"
+        android:scrollbars="vertical"
+        android:text="Event List"
+        android:textStyle="bold" >
+    </TextView>
 
     <ScrollView
         android:id="@+id/scrollHistorySection"
