@@ -177,7 +177,8 @@ public class ChartDataController {
 				break;
 			}
 		}
-		int points = nearestIndex - currentDisplayStartIndex;
+		int currentXindex = currentDisplayStartIndex + currentX;
+		int points = nearestIndex - currentXindex;
 		shiftDisplayData(points); // currentDisplayStartIndex has been updated
 		newX = nearestIndex - currentDisplayStartIndex;
 		return newX;
