@@ -116,9 +116,9 @@ public class RecordViewSection {
 	private void setIcon(){
 		
 		if(type.equals(recordType.Reminder) && miss)
-			icon.setBackgroundResource(R.drawable.ic_action_alarms_dark);
+			icon.setBackgroundResource(R.drawable.ic_action_alarms_small);
 		else if(type.equals(recordType.Reminder)&& (!miss))
-			icon.setBackgroundResource(R.drawable.ic_action_alarms_light);
+			icon.setBackgroundResource(R.drawable.ic_action_alarms_small);
 		else if(type.equals(recordType.Note))
 			icon.setBackgroundResource(R.drawable.ic_dialog_icon_about);
 		else if(type.equals(recordType.Recommendation))

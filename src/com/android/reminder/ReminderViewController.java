@@ -459,6 +459,27 @@ public class ReminderViewController {
 			});
 		}
 
+		
+
+		public String getHour(Date date) {
+			final SimpleDateFormat nextTimeFormat = new SimpleDateFormat("HH", Locale.ENGLISH);
+			String dateStr = nextTimeFormat.format(date);
+			return dateStr;
+		}
+		
+		public String getMin(Date date) {
+			final SimpleDateFormat nextTimeFormat = new SimpleDateFormat("mm", Locale.ENGLISH);
+			String dateStr = nextTimeFormat.format(date);
+			return dateStr;
+		}
+		
+		public String getDate(Date date) {
+			final SimpleDateFormat nextTimeFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
+			String dateStr = nextTimeFormat.format(date);
+			return dateStr;
+		}
+
+		
 		private void saveButtonListener() {
 			final SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyyMMdd, HH:mm", Locale.ENGLISH);
 
@@ -582,9 +603,9 @@ public class ReminderViewController {
 
 			startDate.setText("Start Date");
 
-			editDate.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-			editDate.setHint("dd/mm/yy");
-
+			editDate.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));			
+			editDate.setText(getDate(reminder.getNextAlarmTime()));
+			
 			startDateSection.addView(startDate);
 			startDateSection.addView(editDate);
 
@@ -595,14 +616,14 @@ public class ReminderViewController {
 			startTime.setText("Start Time");
 
 			editHours.setLayoutParams(new LayoutParams(R.dimen.login_edittext_width, R.dimen.login_edittext_height));
-			editHours.setHint("hh");
+			editHours.setText(getHour(reminder.getNextAlarmTime()));
 
 			colon.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			colon.setText(":");
 			colon.setTextSize(16);
 
 			editMins.setLayoutParams(new LayoutParams(R.dimen.login_edittext_width, R.dimen.login_edittext_height));
-			editMins.setHint("mm");
+			editMins.setText(getMin(reminder.getNextAlarmTime()));
 
 			startTimeSection.addView(startTime);
 			startTimeSection.addView(editHours);
