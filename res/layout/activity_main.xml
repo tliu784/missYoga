@@ -90,7 +90,8 @@
 	        android:layout_height="wrap_content"
 	        android:textSize="@dimen/login_text_size"
 	        android:text="@string/remember_me"
-	        android:onClick="onCheckboxClicked"/>
+	        android:focusable="false"
+	        />
 
         <Button
             android:id="@+id/sign_in"

@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 		
 		accountController = AccountController.getInstance();
 		accountController.init(getApplicationContext());
-	//	accountController.setTestAccout();
+		accountController.setTestAccout();
 		
 		
 	
