@@ -38,6 +38,7 @@ public class AddNotePopupDialog extends DialogFragment {
 		editSection = new EditSection();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		
 		builder.setView(editSection.getEditSection());
 		builder.setTitle("Add new note").setMessage("Add new message").setIcon(R.drawable.ic_dialog_icon_about)
 		// Set the action buttons

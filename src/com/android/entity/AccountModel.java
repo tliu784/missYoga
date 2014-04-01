@@ -2,14 +2,35 @@ package com.android.entity;
 
 import java.io.Serializable;
 
+import com.android.service.FileOperation;
+
 public class AccountModel implements Serializable{
 	private static final long serialVersionUID = -1430163807755003319L;
 	private String username;
 	private String password;
 	private String email;
+	private boolean remenber;
+	
+	
+	
 	
 	public AccountModel() {
 	
+	}
+	
+	public AccountModel(String username, String password, String email) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.remenber = false;
+	}
+
+	public void setRemenber(boolean remenber){
+		this.remenber = remenber;
+	}
+	
+	public boolean isRemenbered(){
+		return this.remenber;
 	}
 	
 	public AccountModel(String username){

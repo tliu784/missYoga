@@ -1,5 +1,7 @@
 package com.android.myhealthmate;
+import com.android.entity.AccountController;
 import com.android.reminder.AlarmReceiver;
+import com.android.trend.RecordList;
 
 import android.app.AlertDialog.Builder;
 import android.os.Bundle;
@@ -16,9 +18,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class MainActivity extends Activity {
 
@@ -29,6 +34,8 @@ public class MainActivity extends Activity {
 	private EditText username;
 	private EditText password;
 	private TextView textSignUp;
+	private AccountController accountController;
+	private CheckBox remenberMe;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,22 @@ public class MainActivity extends Activity {
 		nicoleButton = (Button) findViewById(R.id.nicole);
 		benButton =  (Button) findViewById(R.id.ben);
 		test  = (Button) findViewById(R.id.test);
+		remenberMe = (CheckBox) findViewById(R.id.cb_remember_me);
+		
+		accountController = AccountController.getInstance();
+		accountController.init(getApplicationContext());
+	//	accountController.setTestAccout();
+		
+		
+	
+		
+		if(accountController.isRemenbered()){
+			username.setText(accountController.getAccount().getUsername());
+			password.setText(accountController.getAccount().getPassword());
+			remenberMe.setChecked(true);
+		}
+		
+		remenberMe.setOnCheckedChangeListener(getRemenberMeCheckBoxListener());
 		
 		textSignUp = (TextView) findViewById(R.id.txt_link_sign_up);
 		//set the listener for button
@@ -56,6 +79,20 @@ public class MainActivity extends Activity {
 		
 		benButton.setOnClickListener(getBenPageClickListener());
 		
+	}
+	
+	
+	private OnCheckedChangeListener getRemenberMeCheckBoxListener() {
+		return new OnCheckedChangeListener() {
+
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if(isChecked)
+				accountController.setRemenber(true);
+				else
+					accountController.setRemenber(false);
+			}
+		};
 	}
 	
 	private OnClickListener getBenPageClickListener() {
@@ -118,10 +155,13 @@ public class MainActivity extends Activity {
 					PopUP(MainActivity.this, "Password cannot be empty");
 				} else {
 					AuthorizeAccount(editTextUsername, editTextPassword);
+					
 				}
 
 			}
 		};
+		
+		
 	}
 
 	private void PopUP(Activity act, String content) {
@@ -142,7 +182,7 @@ public class MainActivity extends Activity {
 	private boolean checkAccount(String usr, String pass)
 	{
 		boolean valid;
-		if (usr.equals("a") && pass.equals("a")) {
+		if (usr.equals(accountController.getAccount().getUsername()) && pass.equals(accountController.getAccount().getPassword())) {
 			valid = true;
 		}
 		else{
