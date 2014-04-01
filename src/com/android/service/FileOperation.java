@@ -1,5 +1,6 @@
 package com.android.service;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,9 +8,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import android.content.Context;
+import android.os.Environment;
 
 public class FileOperation {
-
+	
+	public static final String MY_PATH="/myhealthmate";
 	/**
 	 * save object into file
 	 * 
@@ -31,6 +34,42 @@ public class FileOperation {
 		}
 
 		return true;
+	}
+	
+	public static File createExternalFile(String filename){
+		String root = Environment.getExternalStorageDirectory().toString();
+		File myDir = new File(root + MY_PATH);
+		myDir.mkdirs();
+		File file = new File(myDir, filename);
+		return file;
+	}
+
+	public static File copytoExternal(String internalFile, String externalFile, Context context) {
+		String root = Environment.getExternalStorageDirectory().toString();
+		File myDir = new File(root + MY_PATH);
+		myDir.mkdirs();
+		File file = new File(myDir, externalFile);
+		if (file.exists())
+			file.delete();
+		try {
+			FileInputStream fis = context.openFileInput(internalFile);
+			
+			FileOutputStream fos = new FileOutputStream(file);
+            byte[] buff=new byte[1024];
+            int len;
+            while((len=fis.read(buff))>0){
+                fos.write(buff,0,len);
+            }
+            fis.close();
+            fos.close();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return null;
+		}
+		return file;
+
 	}
 
 	/**
@@ -55,8 +94,8 @@ public class FileOperation {
 		}
 		return obj;
 	}
-	
-	public static boolean delete(String src, Context context){
+
+	public static boolean delete(String src, Context context) {
 		return context.deleteFile(src);
 	}
 }

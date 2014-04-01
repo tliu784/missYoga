@@ -1,5 +1,6 @@
 package com.android.myhealthmate;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +14,10 @@ import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderList;
 import com.android.reminder.MedReminderModel;
+import com.android.service.EmailSender;
 import com.android.service.FileOperation;
+import com.android.summary.ExcelExporter;
+import com.android.trend.ChartDataController;
 import com.android.trend.ChartHelper;
 import com.google.gson.Gson;
 import com.jjoe64.graphview.BarGraphView;
@@ -144,8 +148,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//testReminderController();
-				testChartHelper();
+				testExcel();
 			}
 		};
 	}
@@ -180,6 +183,42 @@ public class test extends Activity {
 
 	private void PopUP(Activity act, String content) {
 		Toast.makeText(act, content, Toast.LENGTH_SHORT).show();
+	}
+	
+	
+	private void testExcel(){
+		int hrFloor;
+		int hrCeiling;
+		int bplFloor;
+		int bphFloor;
+		int bplCeiling;
+		int bphCeiling;
+		int actFloor;
+		int actCeiling;
+		int sleepFloor;
+		int sleepCeiling;
+		hrFloor = this.getResources().getInteger(R.integer.hr_floor);
+		hrCeiling = this.getResources().getInteger(R.integer.hr_ceiling);
+		bplFloor = this.getResources().getInteger(R.integer.bpl_floor);
+		bplCeiling = this.getResources().getInteger(R.integer.bpl_ceiling);
+		bphFloor = this.getResources().getInteger(R.integer.bph_floor);
+		bphCeiling = this.getResources().getInteger(R.integer.bph_ceiling);
+		actFloor = this.getResources().getInteger(R.integer.act_floor);
+		actCeiling = this.getResources().getInteger(R.integer.act_ceiling);
+		sleepFloor = this.getResources().getInteger(R.integer.sleep_floor);
+		sleepCeiling = this.getResources().getInteger(R.integer.sleep_ceiling);
+		
+		
+		ChartDataController chartData = new ChartDataController(hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor, actCeiling, sleepFloor, sleepCeiling);
+		chartData.createRandomData(200);
+		File attachment = new ExcelExporter(chartData).export();
+		EmailSender email=new EmailSender(this);
+		email.setToEmail("benjamin.niu1990@gmail.com");
+		email.setSubject("health record");
+		email.setBodyText("check out the awesome attachment");
+		email.setAttachment(attachment);
+		email.send();
+		
 	}
 	
 	private void gotoSleepPage(){

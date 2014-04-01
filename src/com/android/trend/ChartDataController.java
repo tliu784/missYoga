@@ -29,6 +29,10 @@ public class ChartDataController {
 		HR, BPL, BPH, ACT, SLEEP;
 	}
 
+	public ArrayList<ChartPointModel> getDataset() {
+		return dataset;
+	}
+
 	public ChartDataController(int hrFloor, int hrCeiling, int bplFloor, int bphFloor, int bplCeiling, int bphCeiling,
 			int actFloor, int actCeiling, int sleepFloor, int sleepCeiling) {
 		super();
