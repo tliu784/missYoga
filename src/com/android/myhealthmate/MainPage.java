@@ -2,18 +2,17 @@ package com.android.myhealthmate;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
 import com.android.entity.RecomModel;
 import com.android.reminder.AlarmReceiver;
 import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
-import com.android.service.RecomResponseHandler;
+import com.android.service.ResponseHandler;
 import com.android.service.RestCallHandler;
+import com.google.gson.Gson;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainPage extends Activity implements RecomResponseHandler {
+public class MainPage extends Activity implements ResponseHandler {
 	private TextView rec_content;
 	private MenuItem menuItem;
 	private LinearLayout hrClickView;
@@ -43,14 +42,14 @@ public class MainPage extends Activity implements RecomResponseHandler {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
 
-		 boolean fromNoti =	false;
-		 savedInstanceState = getIntent().getExtras();
-		 fromNoti = savedInstanceState.getBoolean(AlarmReceiver.notificationState);
-		if ( fromNoti == true) {
+		boolean fromNoti = false;
+		savedInstanceState = getIntent().getExtras();
+		fromNoti = savedInstanceState.getBoolean(AlarmReceiver.notificationState);
+		if (fromNoti == true) {
 			int id = savedInstanceState.getInt(AlarmService.reminderVar);
-			Dialog mainPageDialog = new ReminderDialogPopup().onCreateDialog(this,id);
+			Dialog mainPageDialog = new ReminderDialogPopup().onCreateDialog(this, id);
 			mainPageDialog.show();
-			
+
 		}
 
 		hrClickView = (LinearLayout) findViewById(R.id.hr);
@@ -238,7 +237,11 @@ public class MainPage extends Activity implements RecomResponseHandler {
 	}
 
 	@Override
-	public void processRecom(RecomModel[] recomArray) {
+	public void processRecom(String jsonResponse) {
+		Gson gson = new Gson();
+		RecomModel[] recomArray = null;
+		if (jsonResponse != null)
+			recomArray = gson.fromJson(jsonResponse, RecomModel[].class);
 		updateRecBox(recomArray);
 	}
 

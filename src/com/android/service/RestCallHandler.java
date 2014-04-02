@@ -23,13 +23,13 @@ import android.util.Log;
 
 public class RestCallHandler {
 
-	private RecomResponseHandler callBackActivity;
+	private ResponseHandler callBackActivity;
 	private String url;
 	private String content;
 	
 
 
-	public RestCallHandler(RecomResponseHandler sendToActivity, String url,
+	public RestCallHandler(ResponseHandler sendToActivity, String url,
 			String content) {
 		this.callBackActivity = sendToActivity;
 		this.url = url;
@@ -41,11 +41,8 @@ public class RestCallHandler {
 	}
 	
 	private void processResponse(String jsonResponse) {
-		Gson gson = new Gson();
-		RecomModel[] recomArray = null;
-		if (jsonResponse!=null)
-			recomArray = gson.fromJson(jsonResponse,RecomModel[].class);
-		callBackActivity.processRecom(recomArray);
+	
+		callBackActivity.processRecom(jsonResponse);
 	}
 
 	private String getResponse(String url, String message) {
