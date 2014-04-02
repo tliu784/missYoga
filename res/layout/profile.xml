@@ -123,7 +123,9 @@
 
                 <EditText
                     android:id="@+id/txtbox_height"
-                    style="@style/profile_edittext" >
+                    style="@style/profile_edittext"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
                 </EditText>
 
                 <TextView
@@ -137,106 +139,163 @@
                 android:layout_column="0"
                 android:text="@string/profile_weight" />
 
-            <EditText
-                android:id="@+id/txtbox_weight"
-                style="@style/profile_edittext" >
-            </EditText>
+            <ViewSwitcher
+                android:id="@+id/weight_switcher"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <EditText
+                    android:id="@+id/txtbox_weight"
+                    style="@style/profile_edittext"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
+                </EditText>
+
+                <TextView
+                    android:id="@+id/txt_weight"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </ViewSwitcher>
 
             <TextView
                 style="@style/profile_textview"
                 android:layout_column="0"
                 android:text="@string/profile_hypertension" />
 
-            <RadioGroup
-                android:id="@+id/hypertension"
+            <ViewSwitcher
+                android:id="@+id/hypertension_switcher"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:layout_height="fill_parent" >
 
-                <RadioButton
-                    android:id="@+id/radio_profile_hypertension_yes"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/hypertension"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/yes" />
+                    android:orientation="horizontal" >
 
-                <RadioButton
-                    android:id="@+id/radio_profile_hypertension_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radio_profile_hypertension_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/radio_profile_hypertension_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/txt_hypertension"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </ViewSwitcher>
 
             <TextView
                 style="@style/profile_textview"
                 android:layout_column="0"
                 android:text="@string/profile_diabetes" />
 
-            <RadioGroup
-                android:id="@+id/diabetes"
+            <ViewSwitcher
+                android:id="@+id/diabetes_switcher"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:layout_height="fill_parent" >
 
-                <RadioButton
-                    android:id="@+id/radio_profile_diabetes_yes"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/diabetes"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/yes" />
+                    android:orientation="horizontal" >
 
-                <RadioButton
-                    android:id="@+id/radio_profile_diabetes_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radio_profile_diabetes_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/radio_profile_diabetes_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/txt_diabetes"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </ViewSwitcher>
 
             <TextView
                 style="@style/profile_textview"
                 android:layout_column="0"
                 android:text="@string/profile_insomnia" />
 
-            <RadioGroup
-                android:id="@+id/insomnia"
+            <ViewSwitcher
+                android:id="@+id/insomnia_switcher"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:layout_height="fill_parent" >
 
-                <RadioButton
-                    android:id="@+id/radio_profile_insomnia_yes"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/insomnia"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/yes" />
+                    android:orientation="horizontal" >
 
-                <RadioButton
-                    android:id="@+id/radio_profile_insomnia_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radio_profile_insomnia_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/radio_profile_insomnia_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/txt_insomnia"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </ViewSwitcher>
 
             <TextView
                 style="@style/profile_textview"
                 android:layout_column="0"
                 android:text="@string/profile_cardio" />
 
-            <RadioGroup
-                android:id="@+id/cardio"
+            <ViewSwitcher
+                android:id="@+id/cardio_switcher"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:layout_height="fill_parent" >
 
-                <RadioButton
-                    android:id="@+id/radio_profile_cardio_yes"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/cardio"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/yes" />
+                    android:orientation="horizontal" >
 
-                <RadioButton
-                    android:id="@+id/radio_profile_cardio_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radio_profile_cardio_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/radio_profile_cardio_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/txt_cardio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+            </ViewSwitcher>
         </GridLayout>
 
         <LinearLayout

@@ -6,9 +6,14 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.android.entity.AccountController;
+import com.android.reminder.MedReminderModel;
+import com.android.reminder.ReminderViewController;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -38,6 +43,7 @@ public class Profile extends Activity {
 	private boolean newUser = true;
 
 	private Button submit;
+	private Button cancel;
 
 	private RadioGroup genderRadioGroup;
 	private RadioGroup HypertensionRadioGroup;
@@ -66,8 +72,43 @@ public class Profile extends Activity {
 
 		submit = (Button) findViewById(R.id.profile_submit);
 
+		cancel = (Button) findViewById(R.id.profile_cancel);
+
+		if (!accountController.getAccount().isNewUser()) {
+			submit.setVisibility(View.GONE);
+			cancel.setVisibility(View.GONE);
+			switchAllEditToView();
+		}
+
 		submit.setOnClickListener(getSubmitListener());
 
+		cancel.setOnClickListener(getCancelListener());
+
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu items for use in the action bar
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.profile_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+
+	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.edit_profile: {
+			switchAllEditToView();
+			submit.setVisibility(View.VISIBLE);
+			cancel.setVisibility(View.VISIBLE);
+			return true;
+		}
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	private void switchEditToView(int switcherID, int textViewID, String setText) {
@@ -79,20 +120,40 @@ public class Profile extends Activity {
 	}
 
 	private void switchAllEditToView() {
-		//name
+		// name
 		switchEditToView(R.id.name_switcher, R.id.txt_name, accountController.getAccount().getName());
-		//gender
+		// gender
 		if (accountController.getAccount().isGender())
 			switchEditToView(R.id.gender_switcher, R.id.txt_gender, "Male");
 		else
 			switchEditToView(R.id.gender_switcher, R.id.txt_gender, "Female");
-		//birthday
+		// birthday
 		switchEditToView(R.id.dob_switcher, R.id.txt_dob, getDate(accountController.getAccount().getBirthDate()));
-		//height
-		switchEditToView(R.id.height_switcher, R.id.txt_height, getDate(accountController.getAccount().getBirthDate()));
-		//weight
-		//switchEditToView(R.id.height_switcher, R.id.txt_height, getDate(accountController.getAccount().getBirthDate()));
-		
+		// height
+		switchEditToView(R.id.height_switcher, R.id.txt_height, accountController.getAccount().getHeight());
+		// weight
+		switchEditToView(R.id.weight_switcher, R.id.txt_weight, accountController.getAccount().getWeight());
+		// setHypertension
+		if (accountController.getAccount().isHypertension())
+			switchEditToView(R.id.hypertension_switcher, R.id.txt_hypertension, "Yes");
+		else
+			switchEditToView(R.id.hypertension_switcher, R.id.txt_hypertension, "No");
+		// set
+		if (accountController.getAccount().isDiabetes())
+			switchEditToView(R.id.diabetes_switcher, R.id.txt_diabetes, "Yes");
+		else
+			switchEditToView(R.id.diabetes_switcher, R.id.txt_diabetes, "No");
+		//
+		if (accountController.getAccount().isInsomnia())
+			switchEditToView(R.id.insomnia_switcher, R.id.txt_insomnia, "Yes");
+		else
+			switchEditToView(R.id.insomnia_switcher, R.id.txt_insomnia, "No");
+		//
+		if (accountController.getAccount().isCardio())
+			switchEditToView(R.id.cardio_switcher, R.id.txt_cardio, "Yes");
+		else
+			switchEditToView(R.id.cardio_switcher, R.id.txt_cardio, "No");
+
 	}
 
 	private void setHypertension() {
@@ -135,7 +196,7 @@ public class Profile extends Activity {
 
 		int selectedId = cardioRadioGroup.getCheckedRadioButtonId();
 		RadioButton cardioButton = (RadioButton) findViewById(selectedId);
-		if (cardioButton.getText().toString().equals("Yes"))
+		if (cardioButton.getText().toString().equals(R.string.yes))
 			this.accountController.setProfileCaradia(true);
 		else
 			this.accountController.setProfileCaradia(false);
@@ -147,10 +208,10 @@ public class Profile extends Activity {
 
 		int selectedId = genderRadioGroup.getCheckedRadioButtonId();
 		RadioButton radioSexButton = (RadioButton) findViewById(selectedId);
-		if (radioSexButton.getText().toString().equals("Male"))
-			this.accountController.setProfileCaradia(true);
+		if (radioSexButton.getText().toString().equals(R.string.male))
+			this.accountController.setProfileGender(true);
 		else
-			this.accountController.setProfileCaradia(false);
+			this.accountController.setProfileGender(false);
 		Toast.makeText(Profile.this, radioSexButton.getText(), Toast.LENGTH_SHORT).show();
 
 	}
@@ -159,13 +220,12 @@ public class Profile extends Activity {
 
 		this.accountController.setProfileName(nameEditView.getText().toString());
 
-		
 	}
 
 	private void setBirthDay() {
 		birthDate = toDate(birthDateEditView.getText().toString());
 		this.accountController.setProfileBirthDay(birthDate);
-		
+
 	}
 
 	private void setHeight() {
@@ -202,19 +262,33 @@ public class Profile extends Activity {
 		return new OnClickListener() {
 			public void onClick(View v) {
 				setName();
-				// setHeight();
-				// setWeight();
+				setHeight();
+				setWeight();
 				setBirthDay();
 				setGender();
-				// setHypertension();
-				// setCardio();
-				// setInsomnia();
-				// setDiabetes();
+				setHypertension();
+				setCardio();
+				setInsomnia();
+				setDiabetes();
 
+				switchAllEditToView();
+		
+				submit.setVisibility(View.GONE);
+				cancel.setVisibility(View.GONE);
 				accountController.setProfileNewUser(false);
 			}
 		};
 
+	}
+
+	public OnClickListener getCancelListener() {
+		return new OnClickListener() {
+			public void onClick(View v) {
+
+				switchAllEditToView();
+				accountController.setProfileNewUser(false);
+			}
+		};
 	}
 
 }
