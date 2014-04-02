@@ -68,7 +68,6 @@ public class Profile extends Activity {
 		}
 
 		submit.setOnClickListener(getSubmitListener());
-
 		cancel.setOnClickListener(getCancelListener());
 
 	}
@@ -200,7 +199,7 @@ public class Profile extends Activity {
 
 		int selectedId = genderRadioGroup.getCheckedRadioButtonId();
 		RadioButton radioSexButton = (RadioButton) findViewById(selectedId);
-		if (radioSexButton.getText().toString().equals(R.string.male))
+		if (selectedId == R.id.radio_profile_male)
 			this.accountController.setProfileGender(true);
 		else
 			this.accountController.setProfileGender(false);

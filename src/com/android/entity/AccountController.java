@@ -123,7 +123,6 @@ public class AccountController implements Serializable {
 	public void setProfileGender(boolean gender) {
 		this.account.setGender(gender);
 		save();
-
 	}
 
 	public void setProfileNewUser(boolean newUser) {
