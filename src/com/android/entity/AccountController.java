@@ -2,6 +2,7 @@ package com.android.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.android.service.FileOperation;
 import com.android.trend.RecordList;
@@ -9,25 +10,25 @@ import com.android.trend.RecordModel;
 
 import android.content.Context;
 
-public class AccountController implements Serializable{
-	
+public class AccountController implements Serializable {
+
 	private AccountModel account = new AccountModel();
 	private static AccountController instance = null;
 	private static final String FILENAME = "acountInfo.obj";
 	private Context context;
-	
-	public AccountController(){
-		
+
+	public AccountController() {
+
 	}
-	
-	public void setTestAccout(){
+
+	public void setTestAccout() {
 		account.setEmail("ben123@gmail.com");
 		account.setPassword("password");
 		account.setUsername("username");
 		account.setRemenber(false);
 		save();
 	}
-	
+
 	public static AccountController getInstance() {
 		if (instance == null) {
 			instance = new AccountController();
@@ -39,21 +40,21 @@ public class AccountController implements Serializable{
 		this.context = context;
 		load();
 	}
-	
-	public void setRemenber(boolean remenber){
+
+	public void setRemenber(boolean remenber) {
 		this.account.setRemenber(remenber);
 		save();
 	}
-	
-	public boolean isRemenbered(){
+
+	public boolean isRemenbered() {
 		return this.account.isRemenbered();
 	}
-	
+
 	private void save() {
-		FileOperation.save(account, FILENAME, context);	
+		FileOperation.save(account, FILENAME, context);
 	}
-	
-	public void load(){
+
+	public void load() {
 		AccountModel storedEvents = (AccountModel) FileOperation.read(FILENAME, context);
 		if (storedEvents != null) {
 			account = storedEvents;
@@ -69,13 +70,64 @@ public class AccountController implements Serializable{
 		save();
 	}
 
-	public void setAccountPassword(String password){
+	public void setAccountPassword(String password) {
 		this.account.setPassword(password);
 		save();
 	}
-	
-	public void setAccountEmail(String email){
+
+	public void setAccountEmail(String email) {
 		this.account.setEmail(email);
+		save();
+	}
+
+	public void setProfileName(String name) {
+		this.account.setName(name);
+		save();
+	}
+
+	public void setProfileBirthDay(Date birthDay) {
+		this.account.setBirthDate(birthDay);
+		save();
+	}
+
+	public void setProfileHeight(String height) {
+		this.account.setHeight(height);
+		save();
+	}
+
+	public void setProfileWeight(String weight) {
+		this.account.setWeight(weight);
+		save();
+	}
+
+	public void setProfileHypertension(boolean hypertension) {
+		this.account.setHypertension(hypertension);
+		save();
+	}
+
+	public void setProfileDiabets(boolean diabetes) {
+		this.account.setDiabetes(diabetes);
+		save();
+	}
+
+	public void setProfileInsomnia(boolean insomnia) {
+		this.account.setInsomnia(insomnia);
+		save();
+	}
+
+	public void setProfileCaradia(boolean cardio) {
+		this.account.setCardio(cardio);
+		save();
+	}
+
+	public void setProfileGender(boolean gender) {
+		this.account.setGender(gender);
+		save();
+
+	}
+
+	public void setProfileNewUser(boolean newUser) {
+		this.account.setNewUser(newUser);
 		save();
 	}
 
