@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.android.entity.AccountController;
-import com.android.reminder.MedReminderModel;
-import com.android.reminder.ReminderViewController;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -25,22 +23,11 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 public class Profile extends Activity {
-
-	private String name;
 	private EditText nameEditView;
 	private Date birthDate;
 	private EditText birthDateEditView;
-	private String height;
 	private EditText heightEditView;
-	private String weight;
 	private EditText weightEditView;
-	private boolean hypertension = false;
-	private boolean diabetes = false;
-	private boolean insomnia = false;
-	private boolean cardio = false;
-	private boolean gender = false;
-	private boolean remenber = false;
-	private boolean newUser = true;
 
 	private Button submit;
 	private Button cancel;
@@ -85,7 +72,7 @@ public class Profile extends Activity {
 		cancel.setOnClickListener(getCancelListener());
 
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
@@ -95,15 +82,20 @@ public class Profile extends Activity {
 
 	}
 
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.edit_profile: {
+
 			switchAllEditToView();
-			submit.setVisibility(View.VISIBLE);
-			cancel.setVisibility(View.VISIBLE);
+			if (submit.getVisibility() == View.GONE) {
+				submit.setVisibility(View.VISIBLE);
+				cancel.setVisibility(View.VISIBLE);
+			}else{
+				submit.setVisibility(View.GONE);
+				cancel.setVisibility(View.GONE);
+			}
 			return true;
 		}
 		default:
@@ -138,17 +130,17 @@ public class Profile extends Activity {
 			switchEditToView(R.id.hypertension_switcher, R.id.txt_hypertension, "Yes");
 		else
 			switchEditToView(R.id.hypertension_switcher, R.id.txt_hypertension, "No");
-		// set
+		// setDiabetes
 		if (accountController.getAccount().isDiabetes())
 			switchEditToView(R.id.diabetes_switcher, R.id.txt_diabetes, "Yes");
 		else
 			switchEditToView(R.id.diabetes_switcher, R.id.txt_diabetes, "No");
-		//
+		// setInsomnia
 		if (accountController.getAccount().isInsomnia())
 			switchEditToView(R.id.insomnia_switcher, R.id.txt_insomnia, "Yes");
 		else
 			switchEditToView(R.id.insomnia_switcher, R.id.txt_insomnia, "No");
-		//
+		// setCardio
 		if (accountController.getAccount().isCardio())
 			switchEditToView(R.id.cardio_switcher, R.id.txt_cardio, "Yes");
 		else
@@ -272,7 +264,7 @@ public class Profile extends Activity {
 				setDiabetes();
 
 				switchAllEditToView();
-		
+
 				submit.setVisibility(View.GONE);
 				cancel.setVisibility(View.GONE);
 				accountController.setProfileNewUser(false);
@@ -286,6 +278,8 @@ public class Profile extends Activity {
 			public void onClick(View v) {
 
 				switchAllEditToView();
+				submit.setVisibility(View.GONE);
+				cancel.setVisibility(View.GONE);
 				accountController.setProfileNewUser(false);
 			}
 		};

@@ -14,6 +14,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/name_display_sec"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/textlines"
@@ -22,7 +23,8 @@
         android:paddingBottom="@dimen/gen_page_margin_top"
         android:paddingLeft="@dimen/gen_page_margin_left"
         android:paddingRight="@dimen/gen_page_margin_right"
-        android:paddingTop="@dimen/gen_page_margin_top" >
+        android:paddingTop="@dimen/gen_page_margin_top" 
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,6 +34,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/name_display_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nicole Yu"
@@ -41,6 +44,7 @@
     <!-- change name section -->
 
     <LinearLayout
+        android:id = "@+id/name_edit_sec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -116,6 +120,8 @@
     <!-- end of change name section -->
 
     <LinearLayout
+        android:id = "@+id/password_display_sec"
+        android:clickable="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -129,7 +135,6 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:orientation="vertical" >
 
             <TextView
@@ -144,6 +149,7 @@
     <!-- change password section -->
 
     <LinearLayout
+        android:id="@+id/password_edit_sec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -151,8 +157,9 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@drawable/inner_textlines"
-        android:orientation="vertical" >
-
+        android:orientation="vertical"
+         >
+		
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -233,6 +240,8 @@
     <!-- deactivate account -->
 
     <LinearLayout
+        android:id="@+id/email_display_sec"
+        android:clickable="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
@@ -246,7 +255,6 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:orientation="vertical" >
 
             <RelativeLayout
@@ -272,6 +280,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/email_display_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="nicoleyu2003@gmail.com"
@@ -283,6 +292,7 @@
     <!-- deactivate account section -->
 
     <LinearLayout
+        android:id ="@+id/email_edit_sec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -290,7 +300,8 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@drawable/inner_textlines"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -309,7 +320,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/enterlastname"
+                android:id="@+id/enterEmail"
                 style="@style/accountSettingsTextbox"
                 android:layout_width="@dimen/settings_edittext_width"
                 android:layout_height="@dimen/settings_edittext_height"
