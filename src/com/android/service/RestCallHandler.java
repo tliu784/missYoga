@@ -42,7 +42,7 @@ public class RestCallHandler {
 	
 	private void processResponse(String jsonResponse) {
 	
-		callBackActivity.processRecom(jsonResponse);
+		callBackActivity.processResponse(jsonResponse);
 	}
 
 	private String getResponse(String url, String message) {

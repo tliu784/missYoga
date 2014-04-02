@@ -237,7 +237,7 @@ public class MainPage extends Activity implements ResponseHandler {
 	}
 
 	@Override
-	public void processRecom(String jsonResponse) {
+	public void processResponse(String jsonResponse) {
 		Gson gson = new Gson();
 		RecomModel[] recomArray = null;
 		if (jsonResponse != null)
