@@ -4,8 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 
+
 public class RecordModel implements Comparable<RecordModel>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8268118744316524280L;
 	private String title;
 	private String content;
 	private Date timeStamp;
@@ -30,6 +35,14 @@ public class RecordModel implements Comparable<RecordModel>, Serializable {
 		this.timeStamp = date;
 		this.type = type;
 		this.miss = miss;
+	}
+	
+	
+	public boolean contains(String keyword){
+		String titlelower=title.toLowerCase();
+		String contentlower=content.toLowerCase();
+		String key=keyword.toLowerCase();
+		return (titlelower.contains(key)||contentlower.contains(key));
 	}
 	
 	public boolean isMissed(){
