@@ -100,6 +100,22 @@ public class SleDetail extends FragmentActivity {
 		SearchView searchView = (SearchView) searchViewItem.getActionView();
 		searchView.setIconifiedByDefault(true);
 
+		  MenuItemCompat.setOnActionExpandListener(searchViewItem, new MenuItemCompat.OnActionExpandListener(){
+
+		        @Override
+		        public boolean onMenuItemActionCollapse(MenuItem item) {
+		        	displayAllEvent();
+		            return true;
+		        }
+
+		        @Override
+		        public boolean onMenuItemActionExpand(MenuItem item) {
+		          
+		            return true;
+		        }
+
+		    });
+		
 		SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
 			public boolean onQueryTextChange(String newText) {
 				// this is your adapter that will be filtered
@@ -275,7 +291,7 @@ public class SleDetail extends FragmentActivity {
 	private void displayAllEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
-			recordViewList.get(i).getLayout().setVisibility(View.GONE);
+			recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
 			i++;
 		}
 	}
