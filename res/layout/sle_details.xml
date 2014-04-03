@@ -68,7 +68,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:background="@color/text_shadow_white"
+                android:background="@android:color/transparent"
                 android:text="@string/chart_double_prev"
                 android:textStyle="bold" />
 
@@ -79,7 +79,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:background="@color/text_shadow_white"
+                android:background="@android:color/transparent"
                 android:text="@string/chart_prev"
                 android:textStyle="bold" />
 
@@ -88,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:background="@android:color/transparent"
                 android:gravity="center"
                 android:maxLines="2"
                 android:scrollbars="vertical"
@@ -103,7 +104,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:background="@color/text_shadow_white"
+                android:background="@android:color/transparent"
                 android:text="@string/chart_next"
                 android:textStyle="bold" />
 
@@ -114,7 +115,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:background="@color/text_shadow_white"
+                android:background="@android:color/transparent"
                 android:text="@string/chart_double_next"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -280,7 +281,6 @@
                         android:textStyle="bold" >
                     </TextView>
                 </LinearLayout>
-
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
