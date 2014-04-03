@@ -196,7 +196,10 @@ public class test extends Activity {
 	private void testRemoteProfile(){
 		RemoteProfileController rpc=new RemoteProfileController();
 		RemoteRequestModel request = new RemoteRequestModel("terry@gmail.com", "swami@gmail.com");
-		rpc.check_request(request);
+		request.setOwnerName("terry");
+		request.setRequestorName("swami");
+		Log.d("string",gson.toJson(request));
+		//rpc.check_request(request);
 	}
 	
 	private ChartDataController getChartController(int numberOfData){
@@ -278,6 +281,8 @@ public class test extends Activity {
 		data.setEventdata(recordListGenerator(2));
 		
 		Log.d("data",gson.toJson(data));
+		
+		
 	}
 	
 	
