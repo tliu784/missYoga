@@ -12,6 +12,7 @@ import com.android.trend.ChartPointModel;
 import com.android.trend.ChartViewController;
 import com.android.trend.RecordList;
 import com.android.trend.RecordModel;
+import com.android.trend.RecordModel.recordType;
 import com.android.trend.RecordViewSection;
 
 import android.app.Activity;
@@ -88,7 +89,6 @@ public class SleDetail extends FragmentActivity {
 	}
 
 	// --------------------action bar test below------------------------------
-	private SearchView searchView;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,25 +100,27 @@ public class SleDetail extends FragmentActivity {
 		SearchView searchView = (SearchView) searchViewItem.getActionView();
 		searchView.setIconifiedByDefault(true);
 
-		  MenuItemCompat.setOnActionExpandListener(searchViewItem, new MenuItemCompat.OnActionExpandListener(){
+		MenuItemCompat.setOnActionExpandListener(searchViewItem, new MenuItemCompat.OnActionExpandListener() {
 
-		        @Override
-		        public boolean onMenuItemActionCollapse(MenuItem item) {
-		        	displayAllEvent();
-		            return true;
-		        }
+			@Override
+			public boolean onMenuItemActionCollapse(MenuItem item) {
+				displayAllEvent();
+				return true;
+			}
 
-		        @Override
-		        public boolean onMenuItemActionExpand(MenuItem item) {
-		          
-		            return true;
-		        }
+			@Override
+			public boolean onMenuItemActionExpand(MenuItem item) {
 
-		    });
-		
+				return true;
+			}
+
+		});
+
 		SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
 			public boolean onQueryTextChange(String newText) {
 				// this is your adapter that will be filtered
+				
+				searchEventHistory(newText);
 				return true;
 			}
 
@@ -127,6 +129,7 @@ public class SleDetail extends FragmentActivity {
 				// search box.
 				// Toast.makeText(getApplicationContext(), query,
 				// Toast.LENGTH_SHORT).show();
+				displayAllEvent();
 				searchEventHistory(query);
 				return true;
 			}
@@ -292,6 +295,39 @@ public class SleDetail extends FragmentActivity {
 		int i = 0;
 		for (RecordModel record : recordList) {
 			recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
+			i++;
+		}
+	}
+
+	private void displayReminderEvent() {
+		int i = 0;
+		for (RecordModel record : recordList) {
+			if (record.getType().equals(recordType.Reminder))
+				recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
+			else
+				recordViewList.get(i).getLayout().setVisibility(View.GONE);
+			i++;
+		}
+	}
+	
+	private void displayRecommendationEvent() {
+		int i = 0;
+		for (RecordModel record : recordList) {
+			if (record.getType().equals(recordType.Recommendation))
+				recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
+			else
+				recordViewList.get(i).getLayout().setVisibility(View.GONE);
+			i++;
+		}
+	}
+	
+	private void displayNoteEvent() {
+		int i = 0;
+		for (RecordModel record : recordList) {
+			if (record.getType().equals(recordType.Note))
+				recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
+			else
+				recordViewList.get(i).getLayout().setVisibility(View.GONE);
 			i++;
 		}
 	}
