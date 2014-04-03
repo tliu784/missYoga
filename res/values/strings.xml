@@ -44,8 +44,8 @@
 	<string name="btn_deactivate">Deactivate account</string>
 	<string name="settings_change_name">Change name</string>
 	<string name="settings_change_password">Change password</string>
-	<string name="bp">Systolic:</string>
-	<string name="bp_high">Diastolic:</string>
+	<string name="bp">Diastolic:</string>
+	<string name="bp_high">Systolic:</string>
 	<string name="hr">HR:</string>
 	<string name="sleep">Sleep:</string>
 	<string name="activity">Activity:</string>

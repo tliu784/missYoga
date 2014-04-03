@@ -176,73 +176,6 @@
                     android:paddingLeft="20dp" >
 
                     <TextView
-                        android:id="@+id/chart_textView_bp_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_indicator_new_purple"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:scrollbars="vertical"
-                        android:text="@string/bp_high"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" >
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/chart_values_bp_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:scrollbars="vertical"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" >
-                    </TextView>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/detail_value_section_right"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:id="@+id/chart_textView_bp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_indicator_new_orange"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:scrollbars="vertical"
-                        android:text="@string/bp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" >
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/chart_values_bp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:scrollbars="vertical"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" >
-                    </TextView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
                         android:id="@+id/chart_textView_sleep"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -290,6 +223,74 @@
                         android:textStyle="bold" >
                     </TextView>
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detail_value_section_right"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/chart_textView_bp_high"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_indicator_new_purple"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:scrollbars="vertical"
+                        android:text="@string/bp_high"
+                        android:textStyle="bold" >
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/chart_values_bp_high"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" >
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/chart_textView_bp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_indicator_new_orange"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:scrollbars="vertical"
+                        android:text="@string/bp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" >
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/chart_values_bp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:scrollbars="vertical"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" >
+                    </TextView>
+                </LinearLayout>
+
+                <!-- sleep -->
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
