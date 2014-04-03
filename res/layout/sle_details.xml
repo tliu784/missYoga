@@ -286,61 +286,150 @@
     </FrameLayout>
     <!-- notes section -->
 
-    <LinearLayout
-        android:id="@+id/history_area"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/textlines"
-        android:orientation="vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="2dp" >
+   
 
         <LinearLayout
+            android:id="@+id/history_area"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" 
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="25dip"
-                android:paddingLeft="10dp"
-                android:gravity="center"
-                android:maxLines="1"
-                android:scrollbars="vertical"
-                android:text="Event List"
-                android:textSize="16dp"
-                android:textStyle="bold" >
-            </TextView>
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="25dip"
-                android:gravity="right"
-                android:maxLines="1"
-                android:drawableRight="@drawable/ic_action_next_item"
-                android:paddingRight="20dp"
-                android:scrollbars="vertical"        
-                android:textSize="16dp"
-                android:textStyle="bold" >
-            </TextView>
-        </LinearLayout>
-
-        <ScrollView
-            android:id="@+id/scrollHistorySection"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="wrap_content"
+            android:background="@drawable/textlines"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="2dp" >
 
             <LinearLayout
-                android:id="@+id/recordListSection"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/gen_page_margin_top"
-                android:orientation="vertical" >
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dip"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:scrollbars="vertical"
+                    android:text="Event List"
+                    android:textSize="16dp"
+                    android:textStyle="bold" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/category_filter_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dip"
+                    android:gravity="right"
+                    android:maxLines="1"
+                    android:paddingRight="10dp"
+                    android:scrollbars="vertical"
+                    android:textSize="16dp"
+                    android:textStyle="bold" >
+                </TextView>
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+            
+            
+        <GridLayout
+            android:id="@+id/filter_area"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/textlines"
+            android:layout_marginTop="5dp"
+            android:columnCount="7"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone"
+             >
+
+            <TextView
+                android:id="@+id/all_event_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:clickable="true"
+                android:text="ALL "
+                android:textSize="14dp"
+                android:textStyle="bold" >
+            </TextView>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/note_event_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:clickable="true"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:scrollbars="vertical"
+                android:text="NOTES "
+                android:textSize="14dp"
+                android:textStyle="bold" >
+            </TextView>
+
+           <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:background="@color/black" />
+            
+            <TextView
+                android:id="@+id/rec_event_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:clickable="true"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:scrollbars="vertical"
+                android:text="RECOMMENDATION "
+                android:textSize="14dp"
+                android:textStyle="bold" >
+            </TextView>
+
+           <View
+                android:layout_width="1dp"
+                android:layout_height="25dp"
+                android:background="@color/black" />
+           
+            <TextView
+                android:id="@+id/reminder_event_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:clickable="true"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:scrollbars="vertical"
+                android:text="REMINDER"
+                android:textSize="14dp"
+                android:textStyle="bold" >
+            </TextView>
+        </GridLayout>
+   
+
+            <ScrollView
+                android:id="@+id/scrollHistorySection"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <LinearLayout
+                    android:id="@+id/recordListSection"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/gen_page_margin_top"
+                    android:orientation="vertical" >
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
 
 </LinearLayout>

@@ -33,6 +33,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
@@ -71,6 +72,13 @@ public class SleDetail extends FragmentActivity {
 	private ScrollView scrolView;
 	private RecordList recordListInstance;
 	int[] oldstartEndLong = { 0, 0, 0 };
+	private TextView filterAll;
+	private TextView filterReminder;
+	private TextView filterRec;
+	private TextView filterNote;
+	private TextView filterBtn;
+	private GridLayout filterArea;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +91,16 @@ public class SleDetail extends FragmentActivity {
 		hrSection = (LinearLayout) findViewById(R.id.detail_hr_graph);
 		actSection = (LinearLayout) findViewById(R.id.detail_act_graph);
 		titleTextView = (TextView) findViewById(R.id.detail_title_text);
+		
+		filterAll = (TextView) findViewById(R.id.all_event_filter);
+		filterReminder = (TextView) findViewById(R.id.reminder_event_filter);
+		filterRec = (TextView) findViewById(R.id.rec_event_filter);
+		filterNote = (TextView) findViewById(R.id.note_event_filter);
+		filterBtn =  (TextView) findViewById(R.id.category_filter_button);
+		filterArea = (GridLayout) findViewById(R.id.filter_area);
+		
+	
+		
 		initChart();
 		setupChartListeners();
 		initHistorySection();
@@ -165,6 +183,14 @@ public class SleDetail extends FragmentActivity {
 		recordListInstance.init(getApplicationContext());
 		recordList = recordListInstance.getRecordList();
 
+		filterAll.setOnClickListener(getFilterAllClickListener());
+		filterNote.setOnClickListener(getFilterNoteClickListener());
+		filterReminder.setOnClickListener(getFilterReminderClickListener());
+		filterRec.setOnClickListener(getFilterRecClickListener());
+		filterBtn.setOnClickListener(getFilterBtnClickListener());
+		filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
+		
+		
 		ChartHelper.recordListGenerator(recordList);
 		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
@@ -302,7 +328,60 @@ public class SleDetail extends FragmentActivity {
 			i++;
 		}
 	}
+	
+	private OnClickListener getFilterBtnClickListener(){
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(filterArea.getVisibility() == View.GONE){
+					filterArea.setVisibility(View.VISIBLE);
+					filterBtn.setBackgroundResource(R.drawable.ic_action_expand);
+				}
+				else{
+					filterArea.setVisibility(View.GONE);
+					filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
+				}
+				
+			}
+		};
+	}
 
+	private OnClickListener getFilterAllClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				displayAllEvent();
+			}
+		};
+	}
+	
+	private OnClickListener getFilterReminderClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				displayReminderEvent();
+			}
+		};
+	}
+	
+	private OnClickListener getFilterRecClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				displayRecommendationEvent();
+			}
+		};
+	}
+	
+	private OnClickListener getFilterNoteClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				displayNoteEvent();
+			}
+		};
+	}
+	
 	private void displayReminderEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
