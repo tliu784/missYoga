@@ -48,7 +48,7 @@
             </ViewSwitcher>
 
             <TextView
-                style="@style/profile_textview"
+                style="@style/profile_textview_with_radiobtns"
                 android:layout_column="0"
                 android:text="@string/profile_gender" />
 
@@ -59,7 +59,7 @@
 
                 <RadioGroup
                     android:id="@+id/gender"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
 
@@ -67,12 +67,14 @@
                         android:id="@+id/radio_profile_male"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="40dip"
                         android:text="@string/male" />
 
                     <RadioButton
                         android:id="@+id/radio_profile_female"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="40dip"
                         android:text="@string/female" />
                 </RadioGroup>
 
@@ -158,7 +160,7 @@
             </ViewSwitcher>
 
             <TextView
-                style="@style/profile_textview"
+                style="@style/profile_textview_with_radiobtns"
                 android:layout_column="0"
                 android:text="@string/profile_hypertension" />
 
@@ -193,7 +195,7 @@
             </ViewSwitcher>
 
             <TextView
-                style="@style/profile_textview"
+                style="@style/profile_textview_with_radiobtns"
                 android:layout_column="0"
                 android:text="@string/profile_diabetes" />
 
@@ -228,7 +230,7 @@
             </ViewSwitcher>
 
             <TextView
-                style="@style/profile_textview"
+                style="@style/profile_textview_with_radiobtns"
                 android:layout_column="0"
                 android:text="@string/profile_insomnia" />
 
@@ -263,7 +265,7 @@
             </ViewSwitcher>
 
             <TextView
-                style="@style/profile_textview"
+                style="@style/profile_textview_with_radiobtns"
                 android:layout_column="0"
                 android:text="@string/profile_cardio" />
 
