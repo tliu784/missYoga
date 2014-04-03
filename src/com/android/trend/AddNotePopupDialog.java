@@ -159,28 +159,26 @@ public class AddNotePopupDialog extends DialogFragment {
 			startDateSection.addView(editDate);
 
 			// add start date section in edit content section
-			startTimeSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-			startTimeSection.setOrientation(LinearLayout.HORIZONTAL);
+//			startTimeSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+//			startTimeSection.setOrientation(LinearLayout.HORIZONTAL);
+//
+//			startTime.setText("Time: ");
+//			startTime.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+//			
+//			editHours.setText(getHour(date));
+//			editHours.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+//			
+//
+//			colon.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+//			colon.setText(":");
+//			
+//			
+//			editMins.setText(getMin(date));
+//			editMins.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+//			
+//
+//			startTimeSection.addView(startTime);
 
-			startTime.setText("Time: ");
-			startTime.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
-			
-			editHours.setText(getHour(date));
-			editHours.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
-			
-
-			colon.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-			colon.setText(":");
-			
-			
-			editMins.setText(getMin(date));
-			editMins.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
-			
-
-			startTimeSection.addView(startTime);
-			startTimeSection.addView(editHours);
-			startTimeSection.addView(colon);
-			startTimeSection.addView(editMins);
 
 			// add all sections
 
@@ -208,20 +206,8 @@ public class AddNotePopupDialog extends DialogFragment {
 		}
 		
 		
-		public String getHour(Date date) {
-			final SimpleDateFormat nextTimeFormat = new SimpleDateFormat("HH", Locale.ENGLISH);
-			String dateStr = nextTimeFormat.format(date);
-			return dateStr;
-		}
-		
-		public String getMin(Date date) {
-			final SimpleDateFormat nextTimeFormat = new SimpleDateFormat("mm", Locale.ENGLISH);
-			String dateStr = nextTimeFormat.format(date);
-			return dateStr;
-		}
-		
 		public String getDate(Date date) {
-			final SimpleDateFormat nextTimeFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
+			final SimpleDateFormat nextTimeFormat = new SimpleDateFormat("yyyyMMdd HH:mm a", Locale.ENGLISH);
 			String dateStr = nextTimeFormat.format(date);
 			return dateStr;
 		}
