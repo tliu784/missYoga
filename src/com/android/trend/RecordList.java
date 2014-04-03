@@ -6,10 +6,6 @@ import java.util.Collections;
 import java.util.Date;
 
 import android.content.Context;
-import android.util.Log;
-
-import com.android.myhealthmate.HrDetail;
-import com.android.reminder.MedReminderList;
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.service.FileOperation;

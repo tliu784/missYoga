@@ -1,16 +1,13 @@
 package com.android.entity;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
 import com.android.service.FileOperation;
-import com.android.trend.RecordList;
-import com.android.trend.RecordModel;
+
 
 import android.content.Context;
 
-public class AccountController implements Serializable {
+public class AccountController {
 
 	private AccountModel account = new AccountModel();
 	private static AccountController instance = null;

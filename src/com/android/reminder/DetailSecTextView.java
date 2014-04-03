@@ -1,6 +1,5 @@
 package com.android.reminder;
 
-import com.android.myhealthmate.R;
 
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;

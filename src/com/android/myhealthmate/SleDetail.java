@@ -17,6 +17,10 @@ import com.android.trend.RecordViewSection;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.app.ActionBar;
+import android.support.v4.*;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,9 +32,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class SleDetail extends Activity {
+public class SleDetail extends FragmentActivity {
 	// date helper
 	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM-dd-yyyy HH:mm ", Locale.CANADA);
 
@@ -79,36 +85,44 @@ public class SleDetail extends Activity {
 		initHistorySection();
 
 	}
-	
+
 	// --------------------action bar test below------------------------------
+	private SearchView searchView;
 
-		@Override
-		public boolean onCreateOptionsMenu(Menu menu) {
-			// Inflate the menu items for use in the action bar
-			MenuInflater inflater = getMenuInflater();
-			inflater.inflate(R.menu.reminder_menu, menu);
-			return super.onCreateOptionsMenu(menu);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu items for use in the action bar
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.event_menu, menu);
 
+		MenuItem searchViewItem = menu.findItem(R.id.action_search);
+		SearchView searchView = (SearchView) searchViewItem.getActionView();
+		searchView.setIconifiedByDefault(true);
+		
+		
+		return super.onCreateOptionsMenu(menu);
+
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+
+		switch (item.getItemId()) {
+		case R.id.add_note: {
+			Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(SleDetail.this);
+			newNoteDialog.show();
+			return true;
 		}
-
-		public boolean onOptionsItemSelected(MenuItem item) {
-			// Handle presses on the action bar items
-			switch (item.getItemId()) {
-			case R.id.add_reminder: {
-				Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(SleDetail.this);
-				newNoteDialog.show();
-				return true;
-			}
-			case R.id.delete_reminder: {
-
-				return true;
-			}
-			default:
-				return super.onOptionsItemSelected(item);
-			}
+		case R.id.action_search: {
+			Toast.makeText(this, "search search search", Toast.LENGTH_SHORT).show();
+			return true;
 		}
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
-		// --------------------action bar test above------------------------------
+	// --------------------action bar test above------------------------------
 
 	private void initHistorySection() {
 		recordListInstance = RecordList.getInstance();
@@ -119,7 +133,7 @@ public class SleDetail extends Activity {
 		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
 			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType(),
-					record.getTimeStamp(), record.getContent(),record.isMissed(), record.getTitle());
+					record.getTimeStamp(), record.getContent(), record.isMissed(), record.getTitle());
 			recordViewList.add(rvsection);
 			rvsection.getLayout().setOnClickListener(getHistorySectionClickListener());
 			recordLayout.addView(rvsection.getLayout());
@@ -220,13 +234,13 @@ public class SleDetail extends Activity {
 
 		};
 	}
-	
+
 	private OnClickListener getHistorySectionClickListener() {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int viewIndex=recordLayout.indexOfChild(v);
-				Date timestamp=recordList.get(viewIndex).getTimeStamp();
+				int viewIndex = recordLayout.indexOfChild(v);
+				Date timestamp = recordList.get(viewIndex).getTimeStamp();
 				shiftChart(timestamp);
 			}
 		};
@@ -281,12 +295,12 @@ public class SleDetail extends Activity {
 		displayValues();
 		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
 	}
-	
-	private void shiftChart(Date timestamp){
-		int newX=chartData.shiftDisplayData(timestamp, currentX);
+
+	private void shiftChart(Date timestamp) {
+		int newX = chartData.shiftDisplayData(timestamp, currentX);
 		chartView.refreshChart();
 		chartView.moveVto(newX);
-		currentX=newX;
+		currentX = newX;
 		displayValues();
 	}
 
@@ -300,10 +314,9 @@ public class SleDetail extends Activity {
 		displayValues();
 		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
 	}
-	
-	
-	public static void addHistorySection(RecordViewSection recordView,int index) {
-		recordLayout.addView(recordView.getLayout(),index);
+
+	public static void addHistorySection(RecordViewSection recordView, int index) {
+		recordLayout.addView(recordView.getLayout(), index);
 	}
 
 	private void scrollHistorySection(Date selectedTime) {

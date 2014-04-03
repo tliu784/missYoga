@@ -16,8 +16,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.myhealthmate.HrDetail;
 import com.android.myhealthmate.R;
 import com.android.myhealthmate.SleDetail;
 import com.android.reminder.DetailSecTextView;

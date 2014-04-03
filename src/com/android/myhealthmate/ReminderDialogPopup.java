@@ -1,10 +1,7 @@
 package com.android.myhealthmate;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-import com.android.reminder.AlarmReceiver;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
 import com.android.trend.RecordList;
@@ -15,13 +12,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
+
 
 public class ReminderDialogPopup extends DialogFragment {
 
-	private ArrayList<RecordModel> recordList = new ArrayList<RecordModel>();
+	ArrayList<RecordModel> recordList = new ArrayList<RecordModel>();
 	RecordList recordListInstance = RecordList.getInstance();
 
 	MedReminderModel reminder = null;
