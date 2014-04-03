@@ -2,7 +2,6 @@ package com.android.remoteProfile;
 
 import java.util.ArrayList;
 
-import com.android.entity.AccountModel;
 import com.android.trend.ChartPointModel;
 import com.android.trend.RecordModel;
 /**
@@ -14,16 +13,17 @@ import com.android.trend.RecordModel;
 
 
 public class RemoteDataModel {
-	private AccountModel account;
+	private String ownerEmail;
 	private ArrayList<ChartPointModel> healthdata;
 	private ArrayList<RecordModel> eventdata;
 
-	public AccountModel getAccount() {
-		return account;
+
+	public String getOwnerEmail() {
+		return ownerEmail;
 	}
 
-	public void setAccount(AccountModel account) {
-		this.account = account;
+	public void setOwnerEmail(String ownerEmail) {
+		this.ownerEmail = ownerEmail;
 	}
 
 	public ArrayList<ChartPointModel> getHealthdata() {

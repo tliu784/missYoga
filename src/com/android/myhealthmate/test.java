@@ -273,7 +273,7 @@ public class test extends Activity {
 		//account
 		AccountController acc=AccountController.getInstance();
 		acc.setTestAccout();
-		data.setAccount(acc.getAccount());
+		data.setOwnerEmail("terry@gmail.com");
 		//chart data
 		ChartDataController chartData = getChartController(2);
 		data.setHealthdata(chartData.getDataset());
