@@ -16,8 +16,10 @@ import com.android.trend.RecordViewSection;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.os.Bundle;
 import android.app.ActionBar;
+import android.content.Intent;
 import android.support.v4.*;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MenuItemCompat;
@@ -83,6 +85,15 @@ public class SleDetail extends FragmentActivity {
 		initChart();
 		setupChartListeners();
 		initHistorySection();
+		
+		// Get the intent, verify the action and get the query
+		
+	    Intent intent = getIntent();
+	    if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+	      String query = intent.getStringExtra(SearchManager.QUERY);
+	      Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
+	    }
+	    
 
 	}
 
@@ -99,10 +110,27 @@ public class SleDetail extends FragmentActivity {
 		SearchView searchView = (SearchView) searchViewItem.getActionView();
 		searchView.setIconifiedByDefault(true);
 		
-		
+
+
+	    SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+	        public boolean onQueryTextChange(String newText) {
+	            // this is your adapter that will be filtered
+	            return true;
+	        }
+
+	        public boolean onQueryTextSubmit(String query) {
+	            //Here u can get the value "query" which is entered in the search box.
+	        	Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
+	        //	doSearch(query);
+				return true;
+	        }
+	    };
+	    searchView.setOnQueryTextListener(queryTextListener);		
 		return super.onCreateOptionsMenu(menu);
 
 	}
+	
+	
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
@@ -114,7 +142,7 @@ public class SleDetail extends FragmentActivity {
 			return true;
 		}
 		case R.id.action_search: {
-			Toast.makeText(this, "search search search", Toast.LENGTH_SHORT).show();
+		//	Toast.makeText(this, "search search search", Toast.LENGTH_SHORT).show();
 			return true;
 		}
 		default:
