@@ -93,7 +93,7 @@ public class ChartViewController {
 	}
 
 	private void setupChartData() {
-		chartData = new ChartDataController(hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor,
+		chartData = new ChartDataController(context,hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor,
 				actCeiling, sleepFloor, sleepCeiling);
 
 		// random data for now

@@ -3,12 +3,17 @@ package com.android.trend;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+
+import android.content.Context;
+
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
+import com.android.service.FileOperation;
 import com.android.trend.ChartHelper.GraphViewData;
 
 public class ChartDataController {
 
+	private Context context;
 	private final int hrFloor;
 	private final int hrCeiling;
 	private final int bplFloor;
@@ -24,6 +29,8 @@ public class ChartDataController {
 
 	private ArrayList<ChartPointModel> dataset = new ArrayList<ChartPointModel>();
 	private ArrayList<ChartPointModel> displayDataSet = new ArrayList<ChartPointModel>();
+	
+	private static final String filename="chartdataset.obj";
 
 	public enum SeriesType {
 		HR, BPL, BPH, ACT, SLEEP;
@@ -32,8 +39,19 @@ public class ChartDataController {
 	public ArrayList<ChartPointModel> getDataset() {
 		return dataset;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void loadLocalUserData(){
+		ArrayList<ChartPointModel> loadedData= (ArrayList<ChartPointModel>)FileOperation.read(filename, context);
+		if (loadedData!=null)
+			dataset=loadedData;
+	}
+	
+	public void save(){
+		
+	}
 
-	public ChartDataController(int hrFloor, int hrCeiling, int bplFloor, int bphFloor, int bplCeiling, int bphCeiling,
+	public ChartDataController(Context context,int hrFloor, int hrCeiling, int bplFloor, int bphFloor, int bplCeiling, int bphCeiling,
 			int actFloor, int actCeiling, int sleepFloor, int sleepCeiling) {
 		super();
 		this.hrFloor = hrFloor;
@@ -46,6 +64,7 @@ public class ChartDataController {
 		this.actCeiling = actCeiling;
 		this.sleepFloor = sleepFloor;
 		this.sleepCeiling = sleepCeiling;
+		this.context=context;
 	}
 
 	public void setDisplaySetLen(int displaySetLen) {

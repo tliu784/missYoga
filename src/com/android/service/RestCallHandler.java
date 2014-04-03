@@ -8,7 +8,6 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -26,22 +25,19 @@ public class RestCallHandler {
 	private ResponseHandler callBackActivity;
 	private String url;
 	private String content;
-	
 
-
-	public RestCallHandler(ResponseHandler sendToActivity, String url,
-			String content) {
+	public RestCallHandler(ResponseHandler sendToActivity, String url, String content) {
 		this.callBackActivity = sendToActivity;
 		this.url = url;
 		this.content = content;
 	}
-	
+
 	public void handleResponse() {
 		new HttpAsyncTask().execute(url);
 	}
-	
+
 	private void processResponse(String jsonResponse) {
-	
+
 		callBackActivity.processResponse(jsonResponse);
 	}
 
@@ -57,9 +53,9 @@ public class RestCallHandler {
 			HttpResponse resp = hc.execute(post);
 
 			if (resp != null) {
-				if (resp.getStatusLine().getStatusCode() == 201) {
-					is = resp.getEntity().getContent();
-				}
+
+				is = resp.getEntity().getContent();
+
 				if (is != null) {
 					response = convertStreamToString(is);
 				}
@@ -71,7 +67,6 @@ public class RestCallHandler {
 		}
 		return response;
 	}
-
 
 	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
 		@Override
@@ -87,16 +82,13 @@ public class RestCallHandler {
 		}
 	}
 
-
-	private static String convertStreamToString(InputStream is)
-			throws IOException {
+	private static String convertStreamToString(InputStream is) throws IOException {
 		if (is != null) {
 			Writer writer = new StringWriter();
 
 			char[] buffer = new char[1024];
 			try {
-				Reader reader = new BufferedReader(new InputStreamReader(is,
-						"UTF-8"));
+				Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 				int n;
 				while ((n = reader.read(buffer)) != -1) {
 					writer.write(buffer, 0, n);

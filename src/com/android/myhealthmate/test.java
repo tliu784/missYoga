@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.android.entity.AccountController;
 import com.android.entity.AccountModel;
 import com.android.entity.ProfileModel;
 import com.android.myhealthmate.R;
@@ -14,11 +15,17 @@ import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderList;
 import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedReminderModel.DurationUnit;
+import com.android.remoteProfile.RemoteDataModel;
+import com.android.remoteProfile.RemoteProfileController;
+import com.android.remoteProfile.RemoteRequestModel;
 import com.android.service.EmailSender;
 import com.android.service.FileOperation;
 import com.android.summary.ExcelExporter;
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartHelper;
+import com.android.trend.RecordModel;
+import com.android.trend.RecordModel.recordType;
 import com.google.gson.Gson;
 import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
@@ -27,6 +34,7 @@ import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 
+import android.accounts.Account;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -148,7 +156,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testExcel();
+				generateRemoteData();
 			}
 		};
 	}
@@ -166,8 +174,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//testReminderController();
-				testChartHelper();
+				testRemoteProfile();
 			}
 		};
 	}
@@ -186,7 +193,13 @@ public class test extends Activity {
 	}
 	
 	
-	private void testExcel(){
+	private void testRemoteProfile(){
+		RemoteProfileController rpc=new RemoteProfileController();
+		RemoteRequestModel request = new RemoteRequestModel("terry@gmail.com", "swami@gmail.com");
+		rpc.check_request(request);
+	}
+	
+	private ChartDataController getChartController(int numberOfData){
 		int hrFloor;
 		int hrCeiling;
 		int bplFloor;
@@ -209,8 +222,13 @@ public class test extends Activity {
 		sleepCeiling = this.getResources().getInteger(R.integer.sleep_ceiling);
 		
 		
-		ChartDataController chartData = new ChartDataController(hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor, actCeiling, sleepFloor, sleepCeiling);
-		chartData.createRandomData(200);
+		ChartDataController chartData = new ChartDataController(this,hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor, actCeiling, sleepFloor, sleepCeiling);
+		chartData.createRandomData(numberOfData);
+		return chartData;
+	}
+	
+	private void testExcel(){
+		ChartDataController chartData = getChartController(200);
 		File attachment = new ExcelExporter(chartData).export();
 		EmailSender email=new EmailSender(this);
 		email.setToEmail("benjamin.niu1990@gmail.com");
@@ -220,6 +238,49 @@ public class test extends Activity {
 		email.send();
 		
 	}
+	
+	private static ArrayList<RecordModel> recordListGenerator(  int numOfData) {
+		
+		ArrayList<RecordModel> recordList = new ArrayList<RecordModel>();
+		Date date = new Date();
+
+		for (int i = 0; i < numOfData; i++) {
+			recordType type = null;
+			double x = Math.random();
+			if (x < 0.3) {
+				type = recordType.Note;
+			} else if (x < 0.6) {
+				type = recordType.Recommendation;
+			} else {
+				type = recordType.Reminder;
+			}
+
+			RecordModel record = new RecordModel(type, date, "this is history record" + Integer.toString(i), "Reocrd",
+					true);
+
+			date = MedReminderModel.addDuration(date, -20, DurationUnit.Min);
+			if (Math.random() > 0.7)
+				recordList.add(record);
+		}
+		return recordList;
+	}
+	
+	private void generateRemoteData(){
+		RemoteDataModel data = new RemoteDataModel();
+		//account
+		AccountController acc=AccountController.getInstance();
+		acc.setTestAccout();
+		data.setAccount(acc.getAccount());
+		//chart data
+		ChartDataController chartData = getChartController(2);
+		data.setHealthdata(chartData.getDataset());
+		//event data
+		data.setEventdata(recordListGenerator(2));
+		
+		Log.d("data",gson.toJson(data));
+	}
+	
+	
 	
 	private void gotoSleepPage(){
 		Intent intent = new Intent(test.this, SleDetail.class);
