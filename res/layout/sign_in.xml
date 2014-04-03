@@ -1,298 +1,528 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" 
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="@dimen/gen_page_margin_top"
-    android:layout_marginLeft="@dimen/gen_page_margin_left"
-    android:layout_marginRight="@dimen/gen_page_margin_right"
-    android:background="@drawable/textlines">
- 
-    <!-- user data section-->
-	    
-	    <!-- blood pressure -->
-       <LinearLayout      
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:clickable="true"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:textSize="@dimen/large_font_size" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/text_shadow_white"
-            android:drawableLeft="@drawable/ic_dialog_icon_bp"
-            android:text=" Blood Pressure "
-            android:textColor="@color/grey" />
-
-        <TextView
-            android:id="@+id/bp_unit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/text_shadow_white"
-            android:gravity="right"
-            android:text=" mmHg "
-            android:textColor="@color/grey" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/light_grey" />
+    android:paddingBottom="@dimen/gen_page_margin_bottom"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/gen_page_margin_top"
+    tools:context=".MainActivity" >
 
     <LinearLayout
-        android:id="@+id/bp"
-        android:clickable="true"
-        style="@style/contentfield"
-        android:layout_width="fill_parent"
-        android:layout_height="50sp"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:textSize="@dimen/font_size" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/textlines"
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/bp_color"
-            android:layout_width="8dp"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"
-            android:background="#01DF01" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/bp_systolic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text=" SYSTOLIC "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/bp_systolic_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text=" 115 "
-                android:textSize="@dimen/msmall_font_size"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/bp_diastolic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" DIASTOLIC "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/bp_diastolic_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 160 "
-                android:textSize="@dimen/msmall_font_size"
-                android:textStyle="bold" />
-        </LinearLayout>
-
+<!-- BP title -->
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/large_font_size" >
 
             <TextView
-                android:id="@+id/bp_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_dialog_icon_bp"
+                android:text=" Blood Pressure "
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/bp_unit"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text=" 09/11/2014 "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/bp_time"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text=" 11:20 AM "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
+                android:text=" mmHg "
+                android:textColor="@color/grey" />
         </LinearLayout>
-        
-        <!--  heart rate -->
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:textSize="@dimen/font_size" >
 
-        <TextView
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey" />
+
+        <LinearLayout
+            android:id="@+id/bp"
+            style="@style/contentfield"
+            android:layout_width="fill_parent"
+            android:layout_height="50sp"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:textSize="@dimen/font_size" >
+
+<!-- BP bar -->
+            <TextView
+                android:id="@+id/bp_color"
+                android:layout_width="8dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="#01DF01" />
+
+<!-- BP Dia title & data -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/bp_systolic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=" SYSTOLIC "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/bp_systolic_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=" 160 "
+                    android:textSize="@dimen/msmall_font_size"
+                    android:textStyle="bold" 
+                    android:background="#DF0101"/>
+            </LinearLayout>
             
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/text_shadow_white"
-            android:drawableLeft="@drawable/ic_dialog_icon_hr"
-            android:text=" Heart Rate "
-            android:textColor="@color/grey" />
+<!-- BP Sys title & data -->
 
-        <TextView
-            android:id="@+id/hr_unit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/text_shadow_white"
-            android:gravity="right"
-            android:text=" bmp "
-            android:textColor="@color/grey" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/light_grey" />
-
-    <LinearLayout
-        android:id="@+id/hr"
-        android:clickable="true"
-        style="@style/contentfield"
-        android:layout_width="fill_parent"
-        android:layout_height="50sp"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:textSize="@dimen/font_size" >
-
-        <TextView
-            android:id="@+id/hr_color"
-            android:layout_width="8dp"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"
-            android:background="#DF0101" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/hr_last"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" LAST "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
+                android:layout_marginLeft="25dp"
+                android:gravity="center"
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/hr_last_content"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/bp_diastolic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" DIASTOLIC "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/bp_diastolic_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 115 "
+                    android:textSize="@dimen/msmall_font_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+<!-- BP time -->
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text=" 77 "
-                android:textSize="@dimen/msmall_font_size"
-                android:textStyle="bold" />
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/bp_date"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" 09/11/2014 "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/bp_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" 11:20 AM "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/hr_average"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="  AVERAGE "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/hr_average_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 80 "
-                android:textSize="@dimen/msmall_font_size"
-                android:textStyle="bold" />
-        </LinearLayout>
+<!-- HR title-->
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/font_size" >
 
             <TextView
-                android:id="@+id/hr_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_dialog_icon_hr"
+                android:text=" Heart Rate "
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/hr_unit"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:text=" 09/11/2014 "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
-
-            <TextView
-                android:id="@+id/hr_time"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text=" 11:20 AM "
-                android:textColor="@color/grey"
-                android:textSize="@dimen/small_font_size" />
+                android:text=" bmp "
+                android:textColor="@color/grey" />
         </LinearLayout>
-        <!--  sleep -->
-        
-        
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey" />
+
+        <LinearLayout
+            android:id="@+id/hr"
+            style="@style/contentfield"
+            android:layout_width="fill_parent"
+            android:layout_height="50sp"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:textSize="@dimen/font_size" >
+<!-- HR bar -->
+            <TextView
+                android:id="@+id/hr_color"
+                android:layout_width="8dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="#DF0101" />
+            
+<!--  HR title &b data -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/hr_last"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" LAST "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/hr_last_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 77 "
+                    android:textSize="@dimen/msmall_font_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/hr_average"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  AVERAGE "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/hr_average_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 80 "
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/msmall_font_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/hr_date"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" 09/11/2014 "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/hr_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" 11:20 AM "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- sleep -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/font_size" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_dialog_icon_sleep"
+                android:text=" Sleep "
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/sle_unit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text=" hrs "
+                android:textColor="@color/grey" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey" />
+
+        <LinearLayout
+            android:id="@+id/sle"
+            style="@style/contentfield"
+            android:layout_width="fill_parent"
+            android:layout_height="50sp"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:textSize="@dimen/font_size" >
+
+            <TextView
+                android:id="@+id/sle_color"
+                android:layout_width="8dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="#01DF01" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/sle_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" HOURS "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/sle_hours_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 6.5 "
+                    android:textSize="@dimen/msmall_font_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/sle_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" EFFICIENCY "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/sle_hours_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 4 "
+                    android:textSize="@dimen/msmall_font_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/sle_date"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" 09/11/2014 "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/sle_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" 11:20 AM "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+            </LinearLayout>
+        </LinearLayout>
+
         <!-- activity -->
-        
-	</LinearLayout>
-	
-	<!-- reminder -->
-	<LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-	    android:orientation="vertical"
-	    android:background="@drawable/textlines"
-	    android:layout_marginTop="@dimen/gen_page_margin_top"
-	    android:layout_marginLeft="@dimen/gen_page_margin_left"
-	    android:layout_marginRight="@dimen/gen_page_margin_right">
-    
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/font_size" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_dialog_icon_activity"
+                android:text=" Activity "
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/act_unit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text=" km "
+                android:textColor="@color/grey" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey" />
+
+        <LinearLayout
+            android:id="@+id/act"
+            style="@style/contentfield"
+            android:layout_width="fill_parent"
+            android:layout_height="50sp"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+            android:textSize="@dimen/font_size" >
+
+            <TextView
+                android:id="@+id/act_color"
+                android:layout_width="8dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="#01DF01" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/act_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" DISTANCE "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/act_distance_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 4.5 "
+                    android:textSize="@dimen/msmall_font_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/act_calorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" CALORIE "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/bp_diastolic_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 250 "
+                    android:textSize="@dimen/msmall_font_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin" >
+
+                <TextView
+                    android:id="@+id/act_date"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" 09/11/2014 "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+
+                <TextView
+                    android:id="@+id/act_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" 11:20 AM "
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/small_font_size" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-    
-	    
-	</LinearLayout>
- 
-	<!-- recommendation -->
-	<LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-	    android:orientation="vertical"
-	    android:background="@drawable/textlines"
-	    android:layout_marginTop="@dimen/gen_page_margin_top"
-	    android:layout_marginLeft="@dimen/gen_page_margin_left"
-	    android:layout_marginRight="@dimen/gen_page_margin_right">
-	    
-	</LinearLayout>	
+
+
 </LinearLayout>
