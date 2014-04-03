@@ -144,7 +144,7 @@ public class SleDetail extends FragmentActivity {
 
 		switch (item.getItemId()) {
 		case R.id.add_note: {
-			Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(SleDetail.this);
+			Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(SleDetail.this,getCurrentPoint());
 			newNoteDialog.show();
 			return true;
 		}
@@ -291,6 +291,10 @@ public class SleDetail extends FragmentActivity {
 		}
 	}
 
+	public ChartPointModel getCurrentPoint(){
+		return	chartData.getDisplayDataSet().get(currentX);
+	}
+	
 	private void displayAllEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {

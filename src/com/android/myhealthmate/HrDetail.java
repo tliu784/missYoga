@@ -189,8 +189,8 @@ public class HrDetail extends Activity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.add_reminder: {
-			Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(HrDetail.this);
-			newNoteDialog.show();
+		//	Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(HrDetail.this);
+		//	newNoteDialog.show();
 			return true;
 		}
 		case R.id.delete_reminder: {

@@ -27,18 +27,22 @@ public class AddNotePopupDialog extends DialogFragment {
 	private Context context;
 	private EditSection editSection;
 	
-	public Dialog onCreateDialog(final Context context) {
+	public Dialog onCreateDialog(final Context context, ChartPointModel chartPointData) {
 
 		this.context = context;
 		recordListInstance = RecordList.getInstance();
 		recordListInstance.init(context);
 		
-		editSection = new EditSection();
+		editSection = new EditSection(chartPointData);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		
+		String dataStr = "BPH : "+(int) chartPointData.getBph()+
+				"  | BPL : "+(int) chartPointData.getBpl()+
+				"  | HR : "+(int) chartPointData.getHr();
+		
 		builder.setView(editSection.getEditSection());
-		builder.setTitle("Add new note").setMessage("Add new message").setIcon(R.drawable.ic_dialog_icon_about)
+		builder.setTitle("Add new note").setMessage(dataStr).setIcon(R.drawable.ic_dialog_icon_about)
 		// Set the action buttons
 				.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
 					@Override
@@ -70,12 +74,12 @@ public class AddNotePopupDialog extends DialogFragment {
 		EditText editDetail;
 		LinearLayout startDateSection;
 		DetailSecTextView startDate;
-		EditText editDate;
+		TextView editDate;
 		LinearLayout startTimeSection;
 		DetailSecTextView startTime;
-		EditText editHours;
+		TextView editHours;
 		TextView colon;
-		EditText editMins;
+		TextView editMins;
 		EditText test;
 		
 		public LinearLayout getEditSection(){
@@ -90,7 +94,7 @@ public class AddNotePopupDialog extends DialogFragment {
 			return editTitle.getText().toString();
 		}
 
-		EditSection() {
+		EditSection(ChartPointModel chartPointData) {
 			editSection = new LinearLayout(context);
 
 			editTitleSection = new LinearLayout(context);
@@ -101,19 +105,19 @@ public class AddNotePopupDialog extends DialogFragment {
 			editDetail = new EditText(context);
 			startDateSection = new LinearLayout(context);
 			startDate = new DetailSecTextView(context);
-			editDate = new EditText(context);
+			editDate = new TextView(context);
 			startTimeSection = new LinearLayout(context);
 			startTime = new DetailSecTextView(context);
-			editHours = new EditText(context);
+			editHours = new TextView(context);
 			colon = new TextView(context);
-			editMins = new EditText(context);
+			editMins = new TextView(context);
 			test = new EditText(context);
-			init();
+			init(chartPointData);
 		}
 
-		private void init() {
+		private void init(ChartPointModel chartPointData) {
 
-			Date date = new Date();
+			Date date =  chartPointData.getTimestamp();
 			
 
 			editSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -145,10 +149,11 @@ public class AddNotePopupDialog extends DialogFragment {
 			startDateSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			startDateSection.setOrientation(LinearLayout.HORIZONTAL);
 
-			startDate.setText("Start Date");
-
-			editDate.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			startDate.setText("Date: ");
+			editDate.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			
 			editDate.setText(getDate(date));
+			editDate.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
 			startDateSection.addView(startDate);
 			startDateSection.addView(editDate);
@@ -157,17 +162,20 @@ public class AddNotePopupDialog extends DialogFragment {
 			startTimeSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			startTimeSection.setOrientation(LinearLayout.HORIZONTAL);
 
-			startTime.setText("Start Time");
-
-			editHours.setLayoutParams(new LayoutParams(R.dimen.login_edittext_width, R.dimen.login_edittext_height));
+			startTime.setText("Time: ");
+			startTime.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+			
 			editHours.setText(getHour(date));
+			editHours.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+			
 
 			colon.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 			colon.setText(":");
-			colon.setTextSize(16);
-
-			editMins.setLayoutParams(new LayoutParams(R.dimen.login_edittext_width, R.dimen.login_edittext_height));
+			
+			
 			editMins.setText(getMin(date));
+			editMins.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+			
 
 			startTimeSection.addView(startTime);
 			startTimeSection.addView(editHours);
