@@ -3,8 +3,6 @@ package com.android.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.android.service.FileOperation;
-
 public class AccountModel implements Serializable{
 	private static final long serialVersionUID = -1430163807755003319L;
 	private String username;

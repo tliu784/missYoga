@@ -5,7 +5,6 @@ import java.util.Date;
 
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
-import com.android.reminder.ReminderViewController;
 import com.android.trend.AddNotePopupDialog;
 import com.android.trend.RecordList;
 import com.android.trend.RecordModel;
@@ -21,14 +20,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.FileObserver;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 public class HrDetail extends Activity {
 

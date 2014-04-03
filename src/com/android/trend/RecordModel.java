@@ -3,8 +3,6 @@ package com.android.trend;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.android.entity.RecomModel;
-import com.android.reminder.MedReminderModel;
 
 public class RecordModel implements Comparable<RecordModel>, Serializable {
 

@@ -2,18 +2,10 @@ package com.android.myhealthmate;
 
 import com.android.entity.AccountController;
 import com.android.reminder.AlarmReceiver;
-import com.android.trend.RecordList;
-
-import android.app.AlertDialog.Builder;
 import android.os.Bundle;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.DialogFragment;
-import android.text.TextUtils;
+
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
