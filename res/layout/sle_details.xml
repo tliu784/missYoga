@@ -352,8 +352,9 @@
                 android:clickable="true"
                 android:text="ALL "
                 android:textSize="14dp"
-                android:textStyle="bold" >
-            </TextView>
+                android:textStyle="bold" 
+                style="@style/chart_tab_textbox" >           
+                </TextView>
 
             <View
                 android:layout_width="1dp"
