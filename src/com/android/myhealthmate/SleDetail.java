@@ -154,7 +154,7 @@ public class SleDetail extends FragmentActivity {
 	
 	private ArrayAdapter<String> loadUser() {
 		itemList = new ArrayList<String>();
-		for(RemoteRequestModel user : benTestClass.getUserListController().getRemoteUserList())
+		for(RemoteRequestModel user : benTestClass.getUserListController().getMinitoredRemoteUserList())
 			itemList.add(user.getOwnerName());		
 		userList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList);
 		return userList;

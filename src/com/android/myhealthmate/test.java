@@ -198,8 +198,7 @@ public class test extends Activity {
 		RemoteRequestModel request = new RemoteRequestModel("terry@gmail.com", "swami@gmail.com");
 		request.setOwnerName("terry");
 		request.setRequestorName("swami");
-		Log.d("string",gson.toJson(request));
-		//rpc.check_request(request);
+		rpc.approve_request(request);
 	}
 	
 	private ChartDataController getChartController(int numberOfData){

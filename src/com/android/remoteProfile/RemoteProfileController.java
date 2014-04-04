@@ -13,8 +13,8 @@ public class RemoteProfileController implements ResponseHandler {
 	private static final String SEND_REQUEST_URL = "/saveRequest";
 	private static final String APPROVE_REQUEST_URL = "/approveRequest";
 	private static final String CHECK_REQUEST_STATUS_URL = "/checkRequestStatus";
-	private static final String UPLOAD_DATA_URL = "";
-	private static final String DOWNLOAD_DATA_URL = "";
+	private static final String UPLOAD_DATA_URL = "/upload";
+	private static final String DOWNLOAD_DATA_URL = "/download";
 
 	private RemoteDataModel remotedata;
 	private Gson gson;
@@ -55,47 +55,38 @@ public class RemoteProfileController implements ResponseHandler {
 	@Override
 	public void processResponse(String response) {
 
-		Log.d("url", SERVER_URL + CHECK_REQUEST_URL);
-		Log.d("response", response);
 
+	
 		ServerResponseModel serverResponse = gson.fromJson(response, ServerResponseModel.class);
 
 		if (serverResponse.getType()!= null) {
-
+			Log.d("response", response);
 			switch (serverResponse.getType()) {
 			case APPROVE_REQUEST:
 				// do not have to process response
-				Log.d("response", response);
+				Log.d("type","approve_request");
 				break;
 			case CHECK_REQUEST:
-				Log.d("response", response);
-				if (serverResponse.isSuccessful())
-					Log.d("sucess", "yes");
+				Log.d("type","checkt_request");
 				// if response exists, popup requesting approval
 				// if approved, send approve request
 				break;
 			case CHECK_REQUEST_STATUS:
-				Log.d("response", response);
-				if (serverResponse.isSuccessful())
-					Log.d("sucess", "yes");
+				Log.d("type","check_request_status");
 				// if approved==false, do nothing
 				// if approved==true, popup approval notice, download data,
 				// create new remote user
 				break;
 			case DOWNLOAD:
-				Log.d("response", response);
-				if (serverResponse.isSuccessful())
-					Log.d("sucess", "yes");
+				Log.d("type","download");
 				// process payload and save remote user data
 				break;
 			case SEND_REQUEST:
-				
-				Log.d("response", response);
-				if (serverResponse.isSuccessful())
-					Log.d("sucess", "yes");
+				Log.d("type","send_request");
+
 				break;
 			case UPLOAD:
-				Log.d("response", response);
+				Log.d("type","upload");
 
 				// do not have to process response
 				break;
