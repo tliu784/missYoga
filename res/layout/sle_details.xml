@@ -358,6 +358,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="25dp"
+                android:layout_marginLeft="5dp"
                 android:background="@color/black" />
 
             <TextView
@@ -377,6 +378,7 @@
            <View
                 android:layout_width="1dp"
                 android:layout_height="25dp"
+                android:layout_marginLeft="5dp"
                 android:background="@color/black" />
             
             <TextView
@@ -396,6 +398,7 @@
            <View
                 android:layout_width="1dp"
                 android:layout_height="25dp"
+                android:layout_marginLeft="5dp"
                 android:background="@color/black" />
            
             <TextView

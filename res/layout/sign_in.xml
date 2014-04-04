@@ -20,6 +20,67 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/gen_page_margin_top" >
 
+        <!-- tabs -->
+
+        <LinearLayout
+            android:id="@+id/filter_area"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/gen_page_margin_top"
+            android:layout_marginLeft="@dimen/gen_page_margin_left"
+            android:layout_marginRight="@dimen/gen_page_margin_right"
+            android:layout_marginTop="@dimen/gen_page_margin_top"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/history_filter_1week"
+                style="@style/summary_tab_textbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="@string/history_1week" >
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/history_filter_1month"
+                style="@style/summary_tab_textbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/history_1month" >
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/history_filter_3month"
+                style="@style/summary_tab_textbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/history_3month" >
+            </TextView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="310dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/light_grey" />
+
         <!-- HR -->
 
         <TextView

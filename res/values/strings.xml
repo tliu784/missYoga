@@ -58,5 +58,8 @@
     <string name="search_hint">search hint</string>
     <string name="terry_test">terry test</string>
     <string name="nicole_test">Nicole Test</string>
+    <string name="history_1week">One week</string>
+    <string name="history_1month">One month</string>
+    <string name="history_3month">Three months</string>
 
 </resources>
