@@ -61,5 +61,7 @@
     <string name="history_1week">One week</string>
     <string name="history_1month">One month</string>
     <string name="history_3month">Three months</string>
+    <string name="history_share">Share</string>
+    <string name="history_export">Export</string>
 
 </resources>

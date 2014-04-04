@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/gen_page_margin_bottom"
+    android:paddingBottom="@dimen/gen_page_margin_top"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/gen_page_margin_top"
@@ -12,13 +12,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/textlines"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/gen_page_margin_bottom"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/gen_page_margin_top" >
+        android:paddingTop="@dimen/gen_page_margin_top" 
+        android:paddingBottom="@dimen/gen_page_margin_top">
 
         <!-- tabs -->
 
@@ -27,10 +26,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/gen_page_margin_top"
+            android:layout_marginBottom="@dimen/gen_page_margin_bottom"
             android:layout_marginLeft="@dimen/gen_page_margin_left"
             android:layout_marginRight="@dimen/gen_page_margin_right"
-            android:layout_marginTop="@dimen/gen_page_margin_top"
+            android:layout_marginTop="@dimen/gen_page_margin_bottom"
             android:orientation="horizontal" >
 
             <TextView
@@ -88,7 +87,7 @@
             style="@style/summary_title_textbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your average heart rate is: 87" />
+            android:text="Heart Rate" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -126,6 +125,73 @@
                 android:background="@drawable/textview_round_right"
                 android:text="> 90" />
         </LinearLayout>
+
+        <!-- HR data section -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/history_hr_average"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Average: 87" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/history_hr_min"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Min: 67" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/history_hr_max"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Max: 122" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="310dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/light_grey" />
+
         <!-- BP -->
 
         <TextView
@@ -133,7 +199,7 @@
             style="@style/summary_title_textbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your average blood pressure is: 120/80" />
+            android:text="Blood Pressure" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -171,6 +237,65 @@
                 android:background="@drawable/textview_round_right"
                 android:text="> 90" />
         </LinearLayout>
+
+        <!-- BP data section -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/history_bp_average"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Average: 100/119" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/history_bp_min"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Min: 67/90" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/history_bp_max"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Max: 122/156" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="310dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/light_grey" />
+
         <!-- ACTIVITY -->
 
         <TextView
@@ -178,7 +303,7 @@
             style="@style/summary_title_textbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your average activity is: 2000 steps" />
+            android:text="Activity" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -217,6 +342,68 @@
                 android:text="HIGH" />
         </LinearLayout>
 
+        <!-- Activity data section -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/history_act_average"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Average: 1330" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/history_act_min"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Min: 670" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/history_act_max"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Max: 42000" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="310dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:background="@color/light_grey" />
+
         <!-- SLEEP -->
 
         <TextView
@@ -224,7 +411,7 @@
             style="@style/summary_title_textbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your average sleep quality is: GOOD" />
+            android:text="Sleep" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -261,6 +448,94 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/textview_round_right"
                 android:text="GOOD" />
+        </LinearLayout>
+
+        <!-- Sleep data section -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/history_sleep_average"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Average: 7.5" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/history_sleep_min"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Min: 2.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/history_sleep_max"
+                    style="@style/summary_title_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Max: 13.6" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+             android:paddingTop="10dp"
+            android:paddingBottom="20dp" >
+
+            <Button
+                android:id="@+id/history_share"
+                style="@style/btnStyleBlue"
+                android:layout_width="@dimen/signup_btn_width"
+                android:layout_height="@dimen/login_edittext_height"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right" 
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:text="@string/history_share" />
+
+            <Button
+                android:id="@+id/history_export"
+                style="@style/btnStyleBlue"
+                android:layout_width="@dimen/signup_btn_width"
+                android:layout_height="@dimen/login_edittext_height"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginRight="@dimen/gen_page_margin_right" 
+                 android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:layout_toRightOf="@+id/history_share"
+                android:text="@string/history_export" />
         </LinearLayout>
     </LinearLayout>
 
