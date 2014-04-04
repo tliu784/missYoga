@@ -7,6 +7,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.android.remoteProfile.BenTestClass;
+import com.android.remoteProfile.RemoteDataModel;
+import com.android.remoteProfile.RemoteRequestController;
+import com.android.remoteProfile.RemoteRequestModel;
 import com.android.trend.AddNotePopupDialog;
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartHelper;
@@ -88,15 +92,19 @@ public class SleDetail extends FragmentActivity {
 	private TextView filterNote;
 	private TextView filterBtn;
 	private GridLayout filterArea;
-	String[] strings;
+	
 	ArrayList<String> itemList;
 	ArrayAdapter<String> userList;
+	BenTestClass benTestClass;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sle_details);
-
+		
+		benTestClass = new BenTestClass(SleDetail.this);
+		
 		recordLayout = (LinearLayout) findViewById(R.id.recordListSection);
 		scrolView = (ScrollView) findViewById(R.id.scrollHistorySection);
 
@@ -117,6 +125,8 @@ public class SleDetail extends FragmentActivity {
 		initHistorySection();
 	}
 
+	
+	
 	private void initNavigationBar(){
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -124,17 +134,28 @@ public class SleDetail extends FragmentActivity {
 		actionBar.setListNavigationCallbacks(userList, new OnNavigationListener() {
 			// Get the same strings provided for the drop-down's ArrayAdapter
 			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+				refreshPageByUser(userList.getItem(itemPosition).toString());
 				Toast.makeText(SleDetail.this, userList.getItem(itemPosition).toString(), Toast.LENGTH_SHORT).show();
 				return false;
 			}
 		});
 	}
 	
+	private void refreshPageByUser(String name){		
+		RemoteDataModel selectedUserRemoteData = benTestClass.findModelByEmail(benTestClass.getUserListController().getEmailByName(name));
+		chartData.setDataset(selectedUserRemoteData.getHealthdata());
+		chartView.refreshChart();
+		chartView.moveVto(0);
+		refreshHistorySection(selectedUserRemoteData.getEventdata());
+		recordList = selectedUserRemoteData.getEventdata();
+		recordListInstance.setRecordList(recordList);
+		
+	}
+	
 	private ArrayAdapter<String> loadUser() {
-
 		itemList = new ArrayList<String>();
-		itemList.add("Section 1");
-		itemList.add("Section 2");
+		for(RemoteRequestModel user : benTestClass.getUserListController().getRemoteUserList())
+			itemList.add(user.getOwnerName());		
 		userList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList);
 		return userList;
 	}
@@ -188,9 +209,10 @@ public class SleDetail extends FragmentActivity {
 		};
 		searchView.setOnQueryTextListener(queryTextListener);
 		return super.onCreateOptionsMenu(menu);
-
 	}
 
+	
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
 
@@ -224,15 +246,29 @@ public class SleDetail extends FragmentActivity {
 		filterBtn.setOnClickListener(getFilterBtnClickListener());
 		filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
 
-		ChartHelper.recordListGenerator(recordList);
+//		ChartHelper.recordListGenerator(recordList);
+//		recordListInstance.sortByNext();
+//		for (RecordModel record : recordList) {
+//			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType(),
+//					record.getTimeStamp(), record.getContent(), record.isMissed(), record.getTitle());
+//			recordViewList.add(rvsection);
+//			rvsection.getLayout().setOnClickListener(getHistorySectionClickListener());
+//			recordLayout.addView(rvsection.getLayout());
+//		}
+	}
+	
+	public void refreshHistorySection(ArrayList<RecordModel> remoteUserRecordList){
+		recordViewList.clear();
+		recordLayout.removeAllViewsInLayout();
 		recordListInstance.sortByNext();
-		for (RecordModel record : recordList) {
+		for (RecordModel record : remoteUserRecordList) {
 			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType(),
 					record.getTimeStamp(), record.getContent(), record.isMissed(), record.getTitle());
 			recordViewList.add(rvsection);
 			rvsection.getLayout().setOnClickListener(getHistorySectionClickListener());
 			recordLayout.addView(rvsection.getLayout());
 		}
+		
 	}
 
 	private void initChart() {
@@ -354,6 +390,8 @@ public class SleDetail extends FragmentActivity {
 		return chartData.getDisplayDataSet().get(currentX);
 	}
 
+	
+	
 	private void displayAllEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
