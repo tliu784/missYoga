@@ -7,21 +7,24 @@ public class RemoteRequestController {
 	ArrayList<RemoteRequestModel> remoteUserList = new ArrayList<RemoteRequestModel>();
 	
 	
+	
+	
 	public RemoteRequestController(){
 		
-	}
-	
-	public RemoteRequestController(int i){
+		RemoteRequestModel model0 = new RemoteRequestModel("ben@gmail.com" , "ben@gmail.com");
+		model0.setApproved(true);
+		model0.setOwnerName("Ben");
+		remoteUserList.add(model0);
 		
 		RemoteRequestModel model1 = new RemoteRequestModel("terry@gmail.com" , "ben@gmail.com");
 		model1.setApproved(true);
-		model1.setOwnerName("terry");
+		model1.setOwnerName("Terry");
 		
 		remoteUserList.add(model1);
 		
 		RemoteRequestModel model2 = new RemoteRequestModel("nicole@gmail.com" , "ben@gmail.com");
 		model2.setApproved(true);
-		model2.setOwnerName("nicole");
+		model2.setOwnerName("Nicole");
 		remoteUserList.add(model2);		
 		
 	}

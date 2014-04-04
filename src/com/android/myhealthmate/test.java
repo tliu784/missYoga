@@ -156,7 +156,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				generateRemoteData();
+				generateRemoteData("terry@gmail.com");
 			}
 		};
 	}
@@ -268,12 +268,12 @@ public class test extends Activity {
 		return recordList;
 	}
 	
-	public RemoteDataModel generateRemoteData(){
+	public RemoteDataModel generateRemoteData(String email){
 		RemoteDataModel data = new RemoteDataModel();
 		//account
 		AccountController acc=AccountController.getInstance();
 		acc.setTestAccout();
-		data.setOwnerEmail("terry@gmail.com");
+		data.setOwnerEmail(email);
 		//chart data
 		ChartDataController chartData = getChartController(2);
 		data.setHealthdata(chartData.getDataset());
@@ -281,9 +281,7 @@ public class test extends Activity {
 		data.setEventdata(recordListGenerator(2));
 		
 		Log.d("data",gson.toJson(data));
-		return data;
-		
-		
+		return data;		
 	}
 	
 	

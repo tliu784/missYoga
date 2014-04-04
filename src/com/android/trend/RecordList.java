@@ -13,6 +13,10 @@ import com.android.trend.RecordModel.recordType;
 
 public class RecordList implements Serializable {
 
+	public void setRecordList(ArrayList<RecordModel> recordList) {
+		this.recordList = recordList;
+	}
+
 	private static final long serialVersionUID = -3655329975219497567L;
 	private static RecordList instance = null;
 	private static final String FILENAME = "recordList.obj";

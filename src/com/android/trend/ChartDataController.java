@@ -40,6 +40,15 @@ public class ChartDataController {
 		return dataset;
 	}
 	
+	
+	
+	public void setDataset(ArrayList<ChartPointModel> dataset) {
+		this.dataset = dataset;
+		shiftDisplayToEnd();
+	}
+
+
+
 	@SuppressWarnings("unchecked")
 	public void loadLocalUserData(){
 		ArrayList<ChartPointModel> loadedData= (ArrayList<ChartPointModel>)FileOperation.read(filename, context);
