@@ -2,7 +2,9 @@ package com.android.myhealthmate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import com.android.trend.AddNotePopupDialog;
@@ -15,15 +17,20 @@ import com.android.trend.RecordModel;
 import com.android.trend.RecordModel.recordType;
 import com.android.trend.RecordViewSection;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar.OnNavigationListener;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.app.SearchManager;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.PorterDuff.Mode;
 import android.support.v4.*;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MenuItemCompat;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,12 +38,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SearchView;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,7 +88,9 @@ public class SleDetail extends FragmentActivity {
 	private TextView filterNote;
 	private TextView filterBtn;
 	private GridLayout filterArea;
-	
+	String[] strings;
+	ArrayList<String> itemList;
+	ArrayAdapter<String> userList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,19 +103,40 @@ public class SleDetail extends FragmentActivity {
 		hrSection = (LinearLayout) findViewById(R.id.detail_hr_graph);
 		actSection = (LinearLayout) findViewById(R.id.detail_act_graph);
 		titleTextView = (TextView) findViewById(R.id.detail_title_text);
-		
+
 		filterAll = (TextView) findViewById(R.id.all_event_filter);
 		filterReminder = (TextView) findViewById(R.id.reminder_event_filter);
 		filterRec = (TextView) findViewById(R.id.rec_event_filter);
 		filterNote = (TextView) findViewById(R.id.note_event_filter);
-		filterBtn =  (TextView) findViewById(R.id.category_filter_button);
+		filterBtn = (TextView) findViewById(R.id.category_filter_button);
 		filterArea = (GridLayout) findViewById(R.id.filter_area);
-		
-	
-		
+
+		initNavigationBar();	
 		initChart();
 		setupChartListeners();
 		initHistorySection();
+	}
+
+	private void initNavigationBar(){
+		ActionBar actionBar = getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		userList = loadUser();
+		actionBar.setListNavigationCallbacks(userList, new OnNavigationListener() {
+			// Get the same strings provided for the drop-down's ArrayAdapter
+			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+				Toast.makeText(SleDetail.this, userList.getItem(itemPosition).toString(), Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		});
+	}
+	
+	private ArrayAdapter<String> loadUser() {
+
+		itemList = new ArrayList<String>();
+		itemList.add("Section 1");
+		itemList.add("Section 2");
+		userList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList);
+		return userList;
 	}
 
 	// --------------------action bar test below------------------------------
@@ -111,6 +144,7 @@ public class SleDetail extends FragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
+
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.event_menu, menu);
 
@@ -137,7 +171,7 @@ public class SleDetail extends FragmentActivity {
 		SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
 			public boolean onQueryTextChange(String newText) {
 				// this is your adapter that will be filtered
-				
+
 				searchEventHistory(newText);
 				return true;
 			}
@@ -162,7 +196,7 @@ public class SleDetail extends FragmentActivity {
 
 		switch (item.getItemId()) {
 		case R.id.add_note: {
-			Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(SleDetail.this,getCurrentPoint());
+			Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(SleDetail.this, getCurrentPoint());
 			newNoteDialog.show();
 			return true;
 		}
@@ -189,8 +223,7 @@ public class SleDetail extends FragmentActivity {
 		filterRec.setOnClickListener(getFilterRecClickListener());
 		filterBtn.setOnClickListener(getFilterBtnClickListener());
 		filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
-		
-		
+
 		ChartHelper.recordListGenerator(recordList);
 		recordListInstance.sortByNext();
 		for (RecordModel record : recordList) {
@@ -317,10 +350,10 @@ public class SleDetail extends FragmentActivity {
 		}
 	}
 
-	public ChartPointModel getCurrentPoint(){
-		return	chartData.getDisplayDataSet().get(currentX);
+	public ChartPointModel getCurrentPoint() {
+		return chartData.getDisplayDataSet().get(currentX);
 	}
-	
+
 	private void displayAllEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
@@ -328,20 +361,19 @@ public class SleDetail extends FragmentActivity {
 			i++;
 		}
 	}
-	
-	private OnClickListener getFilterBtnClickListener(){
+
+	private OnClickListener getFilterBtnClickListener() {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(filterArea.getVisibility() == View.GONE){
+				if (filterArea.getVisibility() == View.GONE) {
 					filterArea.setVisibility(View.VISIBLE);
 					filterBtn.setBackgroundResource(R.drawable.ic_action_expand);
-				}
-				else{
+				} else {
 					filterArea.setVisibility(View.GONE);
 					filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
 				}
-				
+
 			}
 		};
 	}
@@ -354,7 +386,7 @@ public class SleDetail extends FragmentActivity {
 			}
 		};
 	}
-	
+
 	private OnClickListener getFilterReminderClickListener() {
 		return new OnClickListener() {
 			@Override
@@ -363,7 +395,7 @@ public class SleDetail extends FragmentActivity {
 			}
 		};
 	}
-	
+
 	private OnClickListener getFilterRecClickListener() {
 		return new OnClickListener() {
 			@Override
@@ -372,7 +404,7 @@ public class SleDetail extends FragmentActivity {
 			}
 		};
 	}
-	
+
 	private OnClickListener getFilterNoteClickListener() {
 		return new OnClickListener() {
 			@Override
@@ -381,7 +413,7 @@ public class SleDetail extends FragmentActivity {
 			}
 		};
 	}
-	
+
 	private void displayReminderEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
@@ -392,7 +424,7 @@ public class SleDetail extends FragmentActivity {
 			i++;
 		}
 	}
-	
+
 	private void displayRecommendationEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
@@ -403,7 +435,7 @@ public class SleDetail extends FragmentActivity {
 			i++;
 		}
 	}
-	
+
 	private void displayNoteEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {

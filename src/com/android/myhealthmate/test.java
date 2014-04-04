@@ -268,7 +268,7 @@ public class test extends Activity {
 		return recordList;
 	}
 	
-	private void generateRemoteData(){
+	public RemoteDataModel generateRemoteData(){
 		RemoteDataModel data = new RemoteDataModel();
 		//account
 		AccountController acc=AccountController.getInstance();
@@ -281,6 +281,7 @@ public class test extends Activity {
 		data.setEventdata(recordListGenerator(2));
 		
 		Log.d("data",gson.toJson(data));
+		return data;
 		
 		
 	}
