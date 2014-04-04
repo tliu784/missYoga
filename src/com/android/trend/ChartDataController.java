@@ -45,10 +45,11 @@ public class ChartDataController {
 		ArrayList<ChartPointModel> loadedData= (ArrayList<ChartPointModel>)FileOperation.read(filename, context);
 		if (loadedData!=null)
 			dataset=loadedData;
+		shiftDisplayToEnd();
 	}
 	
 	public void save(){
-		
+		FileOperation.save(dataset, filename, context);
 	}
 
 	public ChartDataController(Context context,int hrFloor, int hrCeiling, int bplFloor, int bphFloor, int bplCeiling, int bphCeiling,
