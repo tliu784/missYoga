@@ -36,11 +36,21 @@ public class RemoteProfileController implements ResponseHandler {
 	}
 
 	public void approve_request(RemoteRequestModel request) {
+		request.setApproved(true);
 		String content = gson.toJson(request);
 		RestCallHandler sendRequest = new RestCallHandler(this, SERVER_URL + APPROVE_REQUEST_URL, content);
 		sendRequest.handleResponse();
 
 	}
+	
+	public void check_request_status(RemoteRequestModel request) {
+		String content = gson.toJson(request);
+		RestCallHandler sendRequest = new RestCallHandler(this, SERVER_URL + CHECK_REQUEST_STATUS_URL, content);
+		sendRequest.handleResponse();
+
+	}
+	
+	
 
 	@Override
 	public void processResponse(String response) {
@@ -56,8 +66,6 @@ public class RemoteProfileController implements ResponseHandler {
 			case APPROVE_REQUEST:
 				// do not have to process response
 				Log.d("response", response);
-				if (serverResponse.isSuccessful())
-					Log.d("sucess", "yes");
 				break;
 			case CHECK_REQUEST:
 				Log.d("response", response);
@@ -81,14 +89,14 @@ public class RemoteProfileController implements ResponseHandler {
 				// process payload and save remote user data
 				break;
 			case SEND_REQUEST:
+				
 				Log.d("response", response);
 				if (serverResponse.isSuccessful())
 					Log.d("sucess", "yes");
 				break;
 			case UPLOAD:
 				Log.d("response", response);
-				if (serverResponse.isSuccessful())
-					Log.d("sucess", "yes");
+
 				// do not have to process response
 				break;
 			default:
