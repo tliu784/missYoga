@@ -1,20 +1,25 @@
 package com.android.myhealthmate;
 
 import com.android.entity.AccountController;
+import com.android.remoteProfile.BenTestClass;
+import com.android.remoteProfile.UserApprovalSection;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Settings extends Activity {
 
+	private LinearLayout settingPage;
 	private LinearLayout nameSec;
 	private LinearLayout nameEditSec;
 	private LinearLayout passwordSec;
@@ -39,7 +44,9 @@ public class Settings extends Activity {
 	private Button passwordCancel;
 	private Button emailSave;
 	private Button emailCancel;
-
+	
+	private BenTestClass benTestClass;
+	private UserApprovalSection userApprovalSection;
 	private AccountController accountController;
 
 	@Override
@@ -47,7 +54,12 @@ public class Settings extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
 		// the display part
+		
+		
+		settingPage = (LinearLayout) findViewById(R.id.setting_page);
+
 		accountController = AccountController.getInstance();
+		accountController.init(Settings.this);
 		nameSec = (LinearLayout) findViewById(R.id.name_display_sec);
 		nameEditSec = (LinearLayout) findViewById(R.id.name_edit_sec);
 		nameDisplayView = (TextView) findViewById(R.id.name_display_view);
@@ -89,6 +101,10 @@ public class Settings extends Activity {
 		emailSave.setOnClickListener(getAccountSaveBtnListener());
 		emailCancel.setOnClickListener(getAccountCancelBtnListener());
 
+		benTestClass= new BenTestClass(Settings.this);
+		userApprovalSection = new UserApprovalSection(Settings.this,benTestClass.getUserListController().getRemoteUserList().get(1));
+		settingPage.addView(userApprovalSection.getLayout());
+		
 	}
 
 	private void PopUp(Activity act, String content) {

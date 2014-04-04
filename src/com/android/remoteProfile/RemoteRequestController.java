@@ -3,10 +3,10 @@ package com.android.remoteProfile;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
+
 
 import com.android.entity.AccountController;
-import com.android.myhealthmate.Settings;
+
 import com.android.service.FileOperation;
 import com.android.service.ResponseHandler;
 import com.android.service.RestCallHandler;
@@ -16,18 +16,19 @@ public class RemoteRequestController {
 
 	ArrayList<RemoteRequestModel> remoteUserList = new ArrayList<RemoteRequestModel>();
 
+
 	private static final String filename = "remoteuserlist.obj";
 	private static RemoteRequestController instance = null;
-	private Settings callbackAct;
+//	private Settings callbackAct;
 	private Context context;
 	private final String accountEmail;
 	private final String accountName;
 	private Gson gson;
 
-	public void init(Settings act) {
-		this.callbackAct = act;
-		this.context = act;
-	}
+//	public void init(Settings act) {
+//		this.callbackAct = act;
+//		this.context = act;
+//	}
 
 	public static RemoteRequestController getInstance() {
 		if (instance == null)
@@ -100,9 +101,16 @@ public class RemoteRequestController {
 		FileOperation.save(remoteUserList, filename, context);
 	}
 
-	public String getEmailByName(String name) {
-		for (RemoteRequestModel requestUser : remoteUserList)
-			if (requestUser.getOwnerName().equals(name))
+
+	
+	
+	
+
+	
+	public String getEmailByName(String name){
+		for(RemoteRequestModel requestUser: remoteUserList)
+			if(requestUser.getOwnerName().equals(name))
+
 				return requestUser.getOwnerEmail();
 		return null;
 	}
