@@ -102,8 +102,8 @@ public class Settings extends Activity {
 		emailCancel.setOnClickListener(getAccountCancelBtnListener());
 
 		benTestClass= new BenTestClass(Settings.this);
-		userApprovalSection = new UserApprovalSection(Settings.this,benTestClass.getUserListController().getRemoteUserList().get(1));
-		settingPage.addView(userApprovalSection.getLayout());
+//		userApprovalSection = new UserApprovalSection(Settings.this,benTestClass.getUserListController().getRemoteUserList().get(1));
+//		settingPage.addView(userApprovalSection.getLayout());
 		
 	}
 
