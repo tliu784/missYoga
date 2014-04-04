@@ -140,7 +140,7 @@ public class MainPage extends Activity implements ResponseHandler {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainPage.this, ActDetail.class));
+				startActivity(new Intent(MainPage.this, SignIn.class));
 			}
 		};
 	}
