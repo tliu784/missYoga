@@ -158,6 +158,7 @@
 
     <style name="summary_title_textbox">
         <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:gravity">left</item>
         <item name="android:paddingLeft">10dp</item>
