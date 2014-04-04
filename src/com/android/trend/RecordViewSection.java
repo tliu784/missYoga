@@ -74,7 +74,6 @@ public class RecordViewSection {
 		icon.setPadding(padding, 0, padding, 0);
 		setIcon();
 		
-
 		titleType.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
 		titleType.setGravity(Gravity.CENTER_VERTICAL);
 		titleType.setPadding(padding, 0, padding, 0);
