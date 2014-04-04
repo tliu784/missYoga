@@ -65,8 +65,8 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
-        <style name="profile_textview_with_radiobtns">
+
+    <style name="profile_textview_with_radiobtns">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:paddingTop">8dp</item>
@@ -130,26 +130,39 @@
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/dark_grey</item>
         <item name="android:textSize">30dp</item>
-        
     </style>
-    
+
     <style name="edit_reminder_section_text">
- 		<item name="android:layout_width">300dp</item>	
- 		<item name="android:layout_height">200dp</item>	
- 		<item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">200dp</item>
+        <item name="android:textColor">@android:color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">25dp</item>
         <item name="android:padding">5dp</item>
         <item name="android:background">@drawable/textlines</item>
     </style>
-    
-    <style name="radioBtnStyle" >
+
+    <style name="radioBtnStyle">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:drawablePadding">20dp</item>
     </style>
+
+    <style name="summary_bar_textbox">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:gravity">center</item>
+    </style>
     
-    
+        <style name="summary_title_textbox">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:gravity">left</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
 
 </resources>
