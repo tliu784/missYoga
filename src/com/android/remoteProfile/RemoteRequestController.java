@@ -3,10 +3,11 @@ package com.android.remoteProfile;
 import java.util.ArrayList;
 
 import android.content.Context;
-
+import android.util.Log;
 
 import com.android.entity.AccountController;
 
+import com.android.myhealthmate.Settings;
 import com.android.service.FileOperation;
 import com.android.service.ResponseHandler;
 import com.android.service.RestCallHandler;
@@ -16,19 +17,18 @@ public class RemoteRequestController {
 
 	ArrayList<RemoteRequestModel> remoteUserList = new ArrayList<RemoteRequestModel>();
 
-
 	private static final String filename = "remoteuserlist.obj";
 	private static RemoteRequestController instance = null;
-//	private Settings callbackAct;
+	private Settings callbackAct;
 	private Context context;
 	private final String accountEmail;
 	private final String accountName;
 	private Gson gson;
 
-//	public void init(Settings act) {
-//		this.callbackAct = act;
-//		this.context = act;
-//	}
+	public void init(Settings act) {
+		this.callbackAct = act;
+		this.context = act;
+	}
 
 	public static RemoteRequestController getInstance() {
 		if (instance == null)
@@ -41,26 +41,31 @@ public class RemoteRequestController {
 		accountEmail = AccountController.getInstance().getAccount().getEmail();
 		accountName = AccountController.getInstance().getAccount().getName();
 		gson = new Gson();
-		load();
-		// RemoteRequestModel model0 = new RemoteRequestModel("ben@gmail.com",
-		// "ben@gmail.com");
-		// model0.setApproved(true);
-		// model0.setOwnerName("Ben");
-		// remoteUserList.add(model0);
-		//
-		// RemoteRequestModel model1 = new RemoteRequestModel("terry@gmail.com",
-		// "ben@gmail.com");
-		// model1.setApproved(true);
-		// model1.setOwnerName("Terry");
-		//
-		// remoteUserList.add(model1);
-		//
-		// RemoteRequestModel model2 = new
-		// RemoteRequestModel("nicole@gmail.com", "ben@gmail.com");
-		// model2.setApproved(true);
-		// model2.setOwnerName("Nicole");
-		// remoteUserList.add(model2);
+		createTestData();
+	//	load();
 
+	}
+
+	public void createTestData() {
+		RemoteRequestModel model0 = new RemoteRequestModel("ben@gmail.com", accountEmail);
+		model0.setApproved(true);
+		model0.setRequestorName("Ben");
+		model0.setOwnerName("Ben");
+		remoteUserList.add(model0);
+
+		RemoteRequestModel model1 = new RemoteRequestModel("terry@gmail.com", accountEmail);
+		model1.setRequestorName("Ben");
+		model1.setApproved(true);
+		model1.setOwnerName("Terry");
+
+		remoteUserList.add(model1);
+
+		RemoteRequestModel model2 = new RemoteRequestModel("nicole@gmail.com", accountEmail);
+		model2.setApproved(true);
+		model2.setRequestorName("Ben");
+		model2.setOwnerName("Nicole");
+		remoteUserList.add(model2);
+		//save();
 	}
 
 	public void send_request(String ownerEmail) {
@@ -93,23 +98,21 @@ public class RemoteRequestController {
 	private void load() {
 		ArrayList<RemoteRequestModel> loaded;
 		loaded = (ArrayList<RemoteRequestModel>) FileOperation.read(filename, context);
-		if (loaded != null)
+		if (loaded != null) {
+		
 			remoteUserList = loaded;
+		}
 	}
 
 	private void save() {
-		FileOperation.save(remoteUserList, filename, context);
+	
+			FileOperation.save(remoteUserList, filename, context);
+		
 	}
 
-
-	
-	
-	
-
-	
-	public String getEmailByName(String name){
-		for(RemoteRequestModel requestUser: remoteUserList)
-			if(requestUser.getOwnerName().equals(name))
+	public String getEmailByName(String name) {
+		for (RemoteRequestModel requestUser : remoteUserList)
+			if (requestUser.getOwnerName().equals(name))
 
 				return requestUser.getOwnerEmail();
 		return null;
@@ -182,11 +185,11 @@ public class RemoteRequestController {
 						if (viewRequests.size() > 0) {
 							for (RemoteRequestModel viewRequest : viewRequests) {
 								remoteUserList.add(viewRequest);
-								//update UI to display new requests
-								//optionally pop up for approval
+								// update UI to display new requests
+								// optionally pop up for approval
 							}
-						}else{
-							//no requests, do nothing
+						} else {
+							// no requests, do nothing
 						}
 
 					}
