@@ -27,6 +27,7 @@ public class BenTestClass {
 		this.context = context;
 		userListController = new RemoteRequestController();
 		userListController.initContext(context);
+		userListController.createTestData();
 		localUserData = generateLoacalData("ben@gmail.com");
 		userDataModelList.add(localUserData);
 		userDataModelList.add(generateRemoteData("terry@gmail.com"));

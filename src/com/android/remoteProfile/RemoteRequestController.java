@@ -3,8 +3,6 @@ package com.android.remoteProfile;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
-
 import com.android.entity.AccountController;
 
 import com.android.myhealthmate.Settings;
@@ -36,7 +34,6 @@ public class RemoteRequestController {
 			accountEmail = AccountController.getInstance().getAccount().getEmail();
 			accountName = AccountController.getInstance().getAccount().getName();
 			gson = new Gson();
-			createTestData();
 			load();
 		}
 		initialized = true;
@@ -53,25 +50,28 @@ public class RemoteRequestController {
 	}
 
 	public void createTestData() {
-		RemoteRequestModel model0 = new RemoteRequestModel("ben@gmail.com", accountEmail);
-		model0.setApproved(true);
-		model0.setRequestorName("Ben");
-		model0.setOwnerName("Ben");
-		remoteUserList.add(model0);
+		remoteUserList.clear();
+		if (remoteUserList.size() == 0) {
+			RemoteRequestModel model0 = new RemoteRequestModel("ben@gmail.com", accountEmail);
+			model0.setApproved(true);
+			model0.setRequestorName("Ben");
+			model0.setOwnerName("Ben");
+			remoteUserList.add(model0);
 
-		RemoteRequestModel model1 = new RemoteRequestModel("terry@gmail.com", accountEmail);
-		model1.setRequestorName("Ben");
-		model1.setApproved(true);
-		model1.setOwnerName("Terry");
+			RemoteRequestModel model1 = new RemoteRequestModel("terry@gmail.com", accountEmail);
+			model1.setRequestorName("Ben");
+			model1.setApproved(true);
+			model1.setOwnerName("Terry");
 
-		remoteUserList.add(model1);
+			remoteUserList.add(model1);
 
-		RemoteRequestModel model2 = new RemoteRequestModel("nicole@gmail.com", accountEmail);
-		model2.setApproved(true);
-		model2.setRequestorName("Ben");
-		model2.setOwnerName("Nicole");
-		remoteUserList.add(model2);
-		save();
+			RemoteRequestModel model2 = new RemoteRequestModel("nicole@gmail.com", accountEmail);
+			model2.setApproved(true);
+			model2.setRequestorName("Ben");
+			model2.setOwnerName("Nicole");
+			remoteUserList.add(model2);
+			save();
+		}
 	}
 
 	public void send_request(String ownerEmail) {
@@ -89,7 +89,6 @@ public class RemoteRequestController {
 	}
 
 	public void check_request() {
-		boolean requestExists = false;
 		RemoteRequestModel request = new RemoteRequestModel();
 		request.setOwnerEmail(accountEmail);
 		request.setOwnerName(accountName);
