@@ -21,13 +21,25 @@ public class RemoteRequestController {
 	private static RemoteRequestController instance = null;
 	private Settings callbackAct;
 	private Context context;
-	private final String accountEmail;
-	private final String accountName;
+	private String accountEmail;
+	private String accountName;
 	private Gson gson;
+	private boolean initialized = false;
 
-	public void init(Settings act) {
+	public void initSettings(Settings act) {
 		this.callbackAct = act;
-		this.context = act;
+	}
+
+	public void initContext(Context context) {
+		if (!initialized) {
+			this.context = context;
+			accountEmail = AccountController.getInstance().getAccount().getEmail();
+			accountName = AccountController.getInstance().getAccount().getName();
+			gson = new Gson();
+			createTestData();
+			load();
+		}
+		initialized = true;
 	}
 
 	public static RemoteRequestController getInstance() {
@@ -37,12 +49,6 @@ public class RemoteRequestController {
 	}
 
 	protected RemoteRequestController() {
-
-		accountEmail = AccountController.getInstance().getAccount().getEmail();
-		accountName = AccountController.getInstance().getAccount().getName();
-		gson = new Gson();
-		createTestData();
-	//	load();
 
 	}
 
@@ -65,7 +71,7 @@ public class RemoteRequestController {
 		model2.setRequestorName("Ben");
 		model2.setOwnerName("Nicole");
 		remoteUserList.add(model2);
-		//save();
+		save();
 	}
 
 	public void send_request(String ownerEmail) {
@@ -99,15 +105,15 @@ public class RemoteRequestController {
 		ArrayList<RemoteRequestModel> loaded;
 		loaded = (ArrayList<RemoteRequestModel>) FileOperation.read(filename, context);
 		if (loaded != null) {
-		
+
 			remoteUserList = loaded;
 		}
 	}
 
 	private void save() {
-	
-			FileOperation.save(remoteUserList, filename, context);
-		
+
+		FileOperation.save(remoteUserList, filename, context);
+
 	}
 
 	public String getEmailByName(String name) {

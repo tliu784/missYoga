@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.android.entity.AccountController;
 import com.android.myhealthmate.R;
-import com.android.myhealthmate.Settings;
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.trend.ChartDataController;
@@ -22,12 +23,10 @@ public class BenTestClass {
 	public Context context;
 	private RecordList recordListInstance;
 	
-	public BenTestClass(Settings settings){
-		this.context = settings;
+	public BenTestClass(Context context){
+		this.context = context;
 		userListController = new RemoteRequestController();
-		userListController.init(settings);
-		
-		
+		userListController.initContext(context);
 		localUserData = generateLoacalData("ben@gmail.com");
 		userDataModelList.add(localUserData);
 		userDataModelList.add(generateRemoteData("terry@gmail.com"));

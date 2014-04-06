@@ -1,19 +1,25 @@
 package com.android.remoteProfile;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author terry
  * Example String:{"requestorName":"swami","ownerEmail":"terry@gmail.com","ownerName":"terry","requestorEmail":"swami@gmail.com","approved":false}
  */
 
-public class RemoteRequestModel {
+public class RemoteRequestModel implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2731652457045482850L;
 	private String ownerEmail;
 	private String requestorEmail;
 	private String ownerName;
 	private String requestorName;
 	private boolean approved;
 
-	public RemoteRequestModel(){
+	public RemoteRequestModel() {
 		
 	}
 	
