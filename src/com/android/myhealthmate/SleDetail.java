@@ -103,7 +103,7 @@ public class SleDetail extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sle_details);
 		
-		benTestClass = new BenTestClass(SleDetail.this);
+	//	benTestClass = new BenTestClass(SleDetail.this);
 		
 		recordLayout = (LinearLayout) findViewById(R.id.recordListSection);
 		scrolView = (ScrollView) findViewById(R.id.scrollHistorySection);

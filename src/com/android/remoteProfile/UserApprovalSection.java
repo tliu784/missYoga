@@ -66,7 +66,7 @@ public class UserApprovalSection {
 		setTextViewFomat(this.name,R.string.profile_name);
 		name.setTypeface(null,Typeface.BOLD);
 		
-		setTextViewFomat(this.nameContent,requestUserModel.getRequestorName());
+		setTextViewFomat(this.nameContent,requestUserModel.getOwnerName());
 			
 		nameLayout.addView(name);
 		nameLayout.addView(nameContent);

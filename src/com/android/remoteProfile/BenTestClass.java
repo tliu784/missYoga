@@ -6,6 +6,7 @@ import java.util.Date;
 import android.content.Context;
 import com.android.entity.AccountController;
 import com.android.myhealthmate.R;
+import com.android.myhealthmate.Settings;
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.trend.ChartDataController;
@@ -21,10 +22,10 @@ public class BenTestClass {
 	public Context context;
 	private RecordList recordListInstance;
 	
-	public BenTestClass(Context context){
-		this.context = context;
+	public BenTestClass(Settings settings){
+		this.context = settings;
 		userListController = new RemoteRequestController();
-//		userListController.init(context);
+		userListController.init(settings);
 		
 		
 		localUserData = generateLoacalData("ben@gmail.com");
