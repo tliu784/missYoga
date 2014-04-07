@@ -3,27 +3,24 @@ package com.android.myhealthmate;
 import com.android.entity.AccountController;
 import com.android.remoteProfile.BenTestClass;
 import com.android.remoteProfile.RemoteRequestModel;
-import com.android.remoteProfile.UserMonitorSection;
 
 import android.app.Activity;
-import android.app.ActionBar.LayoutParams;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class Settings extends Activity {
 
-	private LinearLayout settingPage;
 	private LinearLayout nameSec;
 	private LinearLayout nameEditSec;
 	private LinearLayout passwordSec;
@@ -33,6 +30,7 @@ public class Settings extends Activity {
 	private LinearLayout emailEditSec;
 
 	private GridLayout monitorSection;
+	private GridLayout requestSection;
 
 	private TextView emailDisplayView;
 	private TextView nameDisplayView;
@@ -52,7 +50,6 @@ public class Settings extends Activity {
 	private Button emailCancel;
 
 	private BenTestClass benTestClass;
-	private UserMonitorSection userApprovalSection;
 	private AccountController accountController;
 
 	@Override
@@ -60,8 +57,6 @@ public class Settings extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
 		// the display part
-
-		settingPage = (LinearLayout) findViewById(R.id.setting_page);
 
 		accountController = AccountController.getInstance();
 		accountController.init(Settings.this);
@@ -110,15 +105,58 @@ public class Settings extends Activity {
 		// userApprovalSection = new UserMonitorSection(Settings.this);
 		// userApprovalSection.addNameLayout(benTestClass.getUserListController().getMinitoredRemoteUserList().get(1));
 		monitorSection = (GridLayout) findViewById(R.id.monitor_sec);
+		requestSection = (GridLayout) findViewById(R.id.request_sec);
 
 		int i = 0;
-		for(RemoteRequestModel requestModel : benTestClass.getUserListController().getMinitoredRemoteUserList()){
-			if(i != 0){
+		for (RemoteRequestModel requestModel : benTestClass.getUserListController().getMinitoredRemoteUserList()) {
+			if (i != 0) {
 				addViewInMonitorSec(requestModel);
 			}
-			i ++;
+			i++;
 		}
-	
+
+		for (RemoteRequestModel requestModel : benTestClass.getUserListController().getMinitoredRemoteUserList()) {
+			addViewInRequestSec(requestModel);
+		}
+
+	}
+
+	private void addViewInRequestSec(RemoteRequestModel requestModel) {
+		TextView nameContent = new TextView(this);
+		TextView emailContent = new TextView(this);
+		CheckBox approveStatus = new CheckBox(this);
+
+		nameContent.setText(requestModel.getRequestorName());
+		requestSection.addView(nameContent);
+
+		emailContent.setText(requestModel.getRequestorEmail());
+		requestSection.addView(emailContent);
+
+		if (requestModel.isApproved())
+			approveStatus.setChecked(true);
+		else
+			approveStatus.setChecked(false);
+		approveStatus.setText(R.string.approval);
+		requestSection.addView(approveStatus);
+		checkboxListener(approveStatus, requestModel);
+	}
+
+	private void checkboxListener(CheckBox approveStatus, final RemoteRequestModel requestModel) {
+
+		approveStatus.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if (isChecked) {
+					Toast.makeText(getApplicationContext(), requestModel.getOwnerName(), Toast.LENGTH_SHORT).show();
+					// do something
+					requestModel.setApproved(true);
+				} else {
+					// do something
+					requestModel.setApproved(false);
+				}
+			}
+		});
 	}
 
 	private void addViewInMonitorSec(RemoteRequestModel requestModel) {
@@ -126,30 +164,17 @@ public class Settings extends Activity {
 		TextView emailContent = new TextView(this);
 		TextView status = new TextView(this);
 
-		setNameViewFomat(nameContent, requestModel.getOwnerName());
+		nameContent.setText(requestModel.getOwnerName());
 		monitorSection.addView(nameContent);
 
-		setEmailViewFomat(emailContent, requestModel.getOwnerEmail());
-
+		emailContent.setText(requestModel.getOwnerEmail());
 		monitorSection.addView(emailContent);
 
-		if(requestModel.isApproved())
+		if (requestModel.isApproved())
 			status.setText("Approved");
 		else
 			status.setText("Pending...");
 		monitorSection.addView(status);
-	}
-
-	private void setNameViewFomat(TextView textView, String rRes) {
-		textView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		textView.setTextColor(this.getResources().getColor(R.color.black));
-		textView.setText(rRes);
-	}
-
-	private void setEmailViewFomat(TextView textView, String rRes) {
-		textView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-		textView.setTextColor(this.getResources().getColor(R.color.black));
-		textView.setText(rRes);
 	}
 
 	private void PopUp(Activity act, String content) {

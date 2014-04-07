@@ -39,6 +39,8 @@ public class UserMonitorSection {
 		
 	}
 	
+
+	
 	
 	public void addNameLayout(RemoteRequestModel requestModel){
 		
