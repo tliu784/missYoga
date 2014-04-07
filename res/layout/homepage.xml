@@ -44,7 +44,8 @@
                 android:gravity="right"
                 android:text=" 11:20am 04/07/2014 "
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/trends_text_size" />
+                android:textSize="@dimen/trends_text_size" 
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- BP & HR section -->
@@ -113,7 +114,8 @@
                             android:gravity="center"
                             android:text=" SYSTOLIC "
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" />
+                            android:textSize="@dimen/small_font_size" 
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/bp_systolic_content"
@@ -140,7 +142,8 @@
                             android:gravity="center"
                             android:text="DIASTOLIC"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" />
+                            android:textSize="@dimen/small_font_size" 
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/bp_diastolic_content"
@@ -211,7 +214,8 @@
                             android:gravity="center"
                             android:text=" REST "
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" />
+                            android:textSize="@dimen/small_font_size" 
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/hr_last_content"
@@ -238,7 +242,8 @@
                             android:gravity="center"
                             android:text="AVERAGE"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" />
+                            android:textSize="@dimen/small_font_size" 
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/hr_average_content"
@@ -317,9 +322,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text=" STEPS "
+                            android:text=" DISTANCE "
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" />
+                            android:textSize="@dimen/small_font_size" 
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/act_distance_content"
@@ -346,7 +352,8 @@
                             android:gravity="center"
                             android:text="CALORIES"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" />
+                            android:textSize="@dimen/small_font_size" 
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/act_calories_content"
@@ -417,7 +424,8 @@
                             android:gravity="center"
                             android:text=" DEEP "
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" />
+                            android:textSize="@dimen/small_font_size" 
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/sleep_deep_content"
@@ -444,7 +452,8 @@
                             android:gravity="center"
                             android:text="LIGHT"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" />
+                            android:textSize="@dimen/small_font_size" 
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/sleep_light_content"
@@ -471,7 +480,8 @@
                             android:gravity="center"
                             android:text="AWAKE"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" />
+                            android:textSize="@dimen/small_font_size" 
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/sleep_awake_content"

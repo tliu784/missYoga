@@ -37,12 +37,12 @@ public class AddNotePopupDialog extends DialogFragment {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		
-		String dataStr = "BPH : "+(int) chartPointData.getBph()+
-				"  | BPL : "+(int) chartPointData.getBpl()+
-				"  | HR : "+(int) chartPointData.getHr();
+		String dataStr = "Sys: "+(int) chartPointData.getBph()+
+				"   Dia: "+(int) chartPointData.getBpl()+
+				"   HR: "+(int) chartPointData.getHr();
 		
 		builder.setView(editSection.getEditSection());
-		builder.setTitle("Add new note").setMessage(dataStr).setIcon(R.drawable.ic_dialog_icon_about)
+		builder.setTitle("Add Note").setMessage(dataStr).setIcon(R.drawable.ic_dialog_icon_about)
 		// Set the action buttons
 				.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
 					@Override
