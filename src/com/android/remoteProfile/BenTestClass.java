@@ -9,6 +9,7 @@ import com.android.myhealthmate.R;
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.trend.ChartDataController;
+import com.android.trend.ChartHelper;
 import com.android.trend.RecordList;
 import com.android.trend.RecordModel;
 import com.android.trend.RecordModel.recordType;
@@ -22,14 +23,14 @@ public class BenTestClass {
 	private RecordList recordListInstance;
 	
 	public BenTestClass(Context context){
-		this.context = context;
-		userListController = new RemoteRequestController();
-		userListController.initContext(context);
-		userListController.createTestData();
-		localUserData = generateLoacalData("ben@gmail.com");
-		userDataModelList.add(localUserData);
-		userDataModelList.add(generateRemoteData("terry@gmail.com"));
-		userDataModelList.add(generateRemoteData("nicole@gmail.com"));
+//		this.context = context;
+//		userListController = new RemoteRequestController();
+//		userListController.initContext(context);
+//		userListController.createTestData();
+//		localUserData = generateLoacalData("ben@gmail.com");
+//		userDataModelList.add(localUserData);
+//		userDataModelList.add(generateRemoteData("terry@gmail.com"));
+//		userDataModelList.add(generateRemoteData("nicole@gmail.com"));
 	}
 	
 	public RemoteDataModel findModelByEmail(String email){
@@ -58,45 +59,46 @@ public class BenTestClass {
 		return data;
 	}
 	
-	public RemoteDataModel generateRemoteData(String email){
+	public RemoteDataModel generateRemoteData(String email, String name){
 		RemoteDataModel data = new RemoteDataModel();
 		//account
 		AccountController acc=AccountController.getInstance();
 		acc.setTestAccout();
 		data.setOwnerEmail(email);
+		data.setOwnerName(name);
 		//chart data
-		ChartDataController chartData = getChartController(50);
-		data.setHealthdata(chartData.getDataset());
+		
+		data.setHealthdata(ChartHelper.createRandomData(50));
 		//event data
 		data.setEventdata(recordListGenerator(20));
 		return data;		
 	}
 	
 	private ChartDataController getChartController(int numberOfData){
-		int hrFloor ;
-		int hrCeiling ;
-		int bplFloor ;
-		int bphFloor ;
-		int bplCeiling ;
-		int bphCeiling ;
-		int actFloor ;
-		int actCeiling ;
-		int sleepFloor ;
-		int sleepCeiling ;
-		hrFloor = context.getResources().getInteger(R.integer.hr_floor);
-		hrCeiling = context.getResources().getInteger(R.integer.hr_ceiling);
-		bplFloor = context.getResources().getInteger(R.integer.bpl_floor);
-		bplCeiling = context.getResources().getInteger(R.integer.bpl_ceiling);
-		bphFloor = context.getResources().getInteger(R.integer.bph_floor);
-		bphCeiling = context.getResources().getInteger(R.integer.bph_ceiling);
-		actFloor = context.getResources().getInteger(R.integer.act_floor);
-		actCeiling = context.getResources().getInteger(R.integer.act_ceiling);
-		sleepFloor = context.getResources().getInteger(R.integer.sleep_floor);
-		sleepCeiling = context.getResources().getInteger(R.integer.sleep_ceiling);
+//		int hrFloor ;
+//		int hrCeiling ;
+//		int bplFloor ;
+//		int bphFloor ;
+//		int bplCeiling ;
+//		int bphCeiling ;
+//		int actFloor ;
+//		int actCeiling ;
+//		int sleepFloor ;
+//		int sleepCeiling ;
+//		hrFloor = context.getResources().getInteger(R.integer.hr_floor);
+//		hrCeiling = context.getResources().getInteger(R.integer.hr_ceiling);
+//		bplFloor = context.getResources().getInteger(R.integer.bpl_floor);
+//		bplCeiling = context.getResources().getInteger(R.integer.bpl_ceiling);
+//		bphFloor = context.getResources().getInteger(R.integer.bph_floor);
+//		bphCeiling = context.getResources().getInteger(R.integer.bph_ceiling);
+//		actFloor = context.getResources().getInteger(R.integer.act_floor);
+//		actCeiling = context.getResources().getInteger(R.integer.act_ceiling);
+//		sleepFloor = context.getResources().getInteger(R.integer.sleep_floor);
+//		sleepCeiling = context.getResources().getInteger(R.integer.sleep_ceiling);
 		
 		
 		ChartDataController chartData = ChartDataController.getInstance();
-		chartData.createRandomData(numberOfData);
+//		chartData.createRandomData(numberOfData);
 		return chartData;
 	}
 	

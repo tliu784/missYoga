@@ -87,6 +87,15 @@ public class RemoteDataController {
 		
 	}
 	
+	public RemoteDataModel getDataModelByName(String name){
+		for (RemoteDataModel userData: dataList){
+			if(userData.getOwnerName().equals(name))
+				return userData;
+		}
+		return null;
+	}
+	
+	
 	
 	
 	

@@ -235,32 +235,7 @@ public class ChartDataController {
 		createDisplaySet();
 	}
 
-	public void createRandomData(int count) {
-		dataset.clear();
-		double hr;
-		double bpl;
-		double bph;
-		double act;
-		double sleep;
-		boolean isSleep = false;
-		Date beginningTime = MedReminderModel.addDuration(new Date(), (1 - count), DurationUnit.Hour);
-		Date timestamp = ChartHelper.toPreviousWholeHour(beginningTime);
-		for (int i = 0; i < count; i++) {
-			// need to adjust time later
-			hr = ChartHelper.getSingleRandomData(70, 140);
-			bpl = ChartHelper.getSingleRandomData(40, 100);
-			bph = ChartHelper.getSingleRandomData(70, 190);
-			act = ChartHelper.getSingleRandomData(10, 200);
-			sleep = ChartHelper.getSleepRandomData();
-			if (i % (displaySetLen / 2) == 0) {
-				isSleep = !isSleep;
-			}
-			dataset.add(new ChartPointModel(timestamp, hr, bpl, bph, act, sleep, isSleep));
-			timestamp = MedReminderModel.addDuration(timestamp, 1, DurationUnit.Hour);
-		}
-
-		shiftDisplayToEnd();
-	}
+	
 
 	public int getSleepFloor() {
 		return sleepFloor;

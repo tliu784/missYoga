@@ -6,10 +6,12 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.android.remoteProfile.BenTestClass;
+import com.android.remoteProfile.RemoteDataController;
 import com.android.remoteProfile.RemoteDataModel;
 import com.android.remoteProfile.RemoteRequestModel;
 import com.android.trend.AddNotePopupDialog;
 import com.android.trend.ChartDataController;
+import com.android.trend.ChartHelper;
 import com.android.trend.ChartPointModel;
 import com.android.trend.ChartViewController;
 import com.android.trend.RecordList;
@@ -82,7 +84,7 @@ public class SleDetail extends FragmentActivity {
 	ArrayList<String> itemList;
 	ArrayAdapter<String> userList;
 	BenTestClass benTestClass;
-	
+	RemoteDataController remoteDataController;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,12 +108,27 @@ public class SleDetail extends FragmentActivity {
 		filterBtn = (TextView) findViewById(R.id.category_filter_button);
 		filterArea = (GridLayout) findViewById(R.id.filter_area);
 
+		remoteDataController =  RemoteDataController.getInstance();
+		createTestData();
+		
+		
 		initNavigationBar();	
 		initChart();
 		setupChartListeners();
 		initHistorySection();
 	}
 
+	private void createTestData(){
+		
+		ChartDataController.getInstance().setDataset(ChartHelper.createRandomData(200));
+		ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
+		remoteDataController.init();
+		
+		remoteDataController.getDataList().add(benTestClass.generateRemoteData("terry@gmail", "Terry"));
+		remoteDataController.getDataList().add(benTestClass.generateRemoteData("nicole@gmail", "Nicole"));
+		
+		
+	}
 	
 	
 	private void initNavigationBar(){
@@ -121,15 +138,15 @@ public class SleDetail extends FragmentActivity {
 		actionBar.setListNavigationCallbacks(userList, new OnNavigationListener() {
 			// Get the same strings provided for the drop-down's ArrayAdapter
 			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-				refreshPageByUser(userList.getItem(itemPosition).toString());
+				refreshPageByUserName(userList.getItem(itemPosition).toString());
 				Toast.makeText(SleDetail.this, userList.getItem(itemPosition).toString(), Toast.LENGTH_SHORT).show();
 				return false;
 			}
 		});
 	}
 	
-	private void refreshPageByUser(String name){		
-		RemoteDataModel selectedUserRemoteData = benTestClass.findModelByEmail(benTestClass.getUserListController().getEmailByName(name));
+	private void refreshPageByUserName(String name){		
+		RemoteDataModel selectedUserRemoteData = remoteDataController.getDataModelByName(name);
 		chartData.setDataset(selectedUserRemoteData.getHealthdata());
 		chartView.refreshChart();
 		chartView.moveVto(0);
@@ -141,11 +158,12 @@ public class SleDetail extends FragmentActivity {
 	
 	private ArrayAdapter<String> loadUser() {
 		itemList = new ArrayList<String>();
-		for(RemoteRequestModel user : benTestClass.getUserListController().getMinitoredRemoteUserList())
+		for(RemoteDataModel user : remoteDataController.getDataList())
 			itemList.add(user.getOwnerName());		
 		userList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList);
 		return userList;
 	}
+
 
 	// --------------------action bar test below------------------------------
 

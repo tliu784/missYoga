@@ -192,7 +192,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ChartDataController.getInstance().createRandomData(50);
+//				ChartDataController.getInstance().createRandomData(50);
 				ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
 				RemoteDataController rdc = RemoteDataController.getInstance();
 				rdc.init();
@@ -261,7 +261,7 @@ public class test extends Activity {
 		
 		
 		ChartDataController chartData = ChartDataController.getInstance();
-		chartData.createRandomData(numberOfData);
+//		chartData.createRandomData(numberOfData);
 		return chartData;
 	}
 	

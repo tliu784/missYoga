@@ -87,7 +87,7 @@ public class ChartViewController {
 		chartData = ChartDataController.getInstance();
 
 		// random data for now
-		chartData.createRandomData(100);
+//		chartData.createRandomData(100);
 		hrGraphData = chartData.generateGraphData(SeriesType.HR);
 		bplGraphData = chartData.generateGraphData(SeriesType.BPL);
 		bphGraphData = chartData.generateGraphData(SeriesType.BPH);
