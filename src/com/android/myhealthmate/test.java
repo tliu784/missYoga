@@ -18,7 +18,9 @@ import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.remoteProfile.RemoteDataModel;
 import com.android.remoteProfile.RemoteProfileController;
+import com.android.remoteProfile.RemoteRequestController;
 import com.android.remoteProfile.RemoteRequestModel;
+import com.android.remoteProfile.ServerResponseModel;
 import com.android.service.EmailSender;
 import com.android.service.FileOperation;
 import com.android.summary.ExcelExporter;
@@ -69,7 +71,10 @@ public class test extends Activity {
 		setContentView(R.layout.filetest);
 		text1 = (EditText) findViewById(R.id.terry_text1);
 		text2 = (EditText) findViewById(R.id.terry_text2);
+		text1.setVisibility(View.GONE);
+		text2.setVisibility(View.GONE);
 		test1 = (Button) findViewById(R.id.test1);
+		
 		test2 = (Button) findViewById(R.id.test2);
 		test3 = (Button) findViewById(R.id.test3);
 		test4 = (Button) findViewById(R.id.test4);
@@ -78,7 +83,6 @@ public class test extends Activity {
 		test3.setOnClickListener(getTest3ClickListener());
 		test4.setOnClickListener(getTest4ClickListener());
 		testText = (TextView) findViewById(R.id.terry_test_box);
-		createChart();
 		
 	}
 	
@@ -156,7 +160,10 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				generateRemoteData("terry@gmail.com");
+				RemoteRequestController rpc = RemoteRequestController.getInstance();
+				rpc.initContext(test.this);
+				rpc.getMinitoredRemoteUserList().clear();
+				testRemoteProfile(ServerResponseModel.ResponseType.SEND_REQUEST);
 			}
 		};
 	}
@@ -165,7 +172,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				displaySavedReminders();
+				testRemoteProfile(ServerResponseModel.ResponseType.APPROVE_REQUEST);
 			}
 		};
 	}
@@ -174,7 +181,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testRemoteProfile();
+				testRemoteProfile(ServerResponseModel.ResponseType.CHECK_REQUEST_STATUS);
 			}
 		};
 	}
@@ -193,12 +200,35 @@ public class test extends Activity {
 	}
 	
 	
-	private void testRemoteProfile(){
-		RemoteProfileController rpc=new RemoteProfileController();
-		RemoteRequestModel request = new RemoteRequestModel("terry@gmail.com", "swami@gmail.com");
-		request.setOwnerName("terry");
-		request.setRequestorName("swami");
-		rpc.approve_request(request);
+	private void testRemoteProfile(ServerResponseModel.ResponseType type){
+//		FileOperation.delete("remoteuserlist.obj", test.this);
+		//must initialize fisrt
+		RemoteRequestController rpc = RemoteRequestController.getInstance();
+		switch (type){
+		case APPROVE_REQUEST:
+			RemoteRequestModel approveRequest= rpc.getMinitoredRemoteUserList().get(0);
+			rpc.approve_request(approveRequest);
+			break;
+		case CHECK_REQUEST:
+			rpc.check_request();
+			break;
+		case CHECK_REQUEST_STATUS:
+			RemoteRequestModel remoteRequest= rpc.getMinitoredRemoteUserList().get(0);
+			rpc.check_request_status(remoteRequest);
+			break;
+		case DOWNLOAD:
+			break;
+		case SEND_REQUEST:
+			rpc.send_request("nicoleyu@coffee.com");
+			break;
+		case UPLOAD:
+			break;
+		default:
+			break;
+		
+		}
+		
+
 	}
 	
 	private ChartDataController getChartController(int numberOfData){

@@ -3,6 +3,8 @@ package com.android.remoteProfile;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.android.entity.AccountController;
 
 import com.android.myhealthmate.Settings;
@@ -100,6 +102,23 @@ public class RemoteRequestController {
 
 	}
 
+	public void check_request_status(RemoteRequestModel request) {
+		String content = gson.toJson(request);
+		CheckRequestStatusResponseHandler handler = new CheckRequestStatusResponseHandler(request);
+		String url = ServerConstants.SERVER_URL + ServerConstants.CHECK_REQUEST_STATUS_URL;
+		RestCallHandler checkRequestStatus = new RestCallHandler(handler, url, content);
+		checkRequestStatus.handleResponse();
+	}
+	
+	public void approve_request(RemoteRequestModel request){
+		request.setApproved(true);
+		String content = gson.toJson(request);
+		ApproveRequestResponseHandler handler = new ApproveRequestResponseHandler(request);
+		String url = ServerConstants.SERVER_URL + ServerConstants.APPROVE_REQUEST_URL;
+		RestCallHandler approveRequest = new RestCallHandler(handler, url, content);
+		approveRequest.handleResponse();
+	}
+
 	private void load() {
 		ArrayList<RemoteRequestModel> loaded;
 		loaded = (ArrayList<RemoteRequestModel>) FileOperation.read(filename, context);
@@ -170,6 +189,9 @@ public class RemoteRequestController {
 					if (!ifRequestExist(request))
 						remoteUserList.add(request);
 			// callbackAct.updateUI
+			// testing
+			Log.d("response", gson.toJson(serverResponse.getRequests()));
+			Log.d("list", gson.toJson(remoteUserList));
 		}
 	}
 
@@ -192,6 +214,8 @@ public class RemoteRequestController {
 								remoteUserList.add(viewRequest);
 								// update UI to display new requests
 								// optionally pop up for approval
+								Log.d("response", gson.toJson(serverResponse.getRequests()));
+								Log.d("list", gson.toJson(remoteUserList));
 							}
 						} else {
 							// no requests, do nothing
@@ -200,6 +224,66 @@ public class RemoteRequestController {
 					}
 				}
 		}
+	}
+
+	class CheckRequestStatusResponseHandler implements ResponseHandler {
+
+		private RemoteRequestModel request;
+
+		// make sure pass in the pointer to the request in the remoteUserList;
+		public CheckRequestStatusResponseHandler(RemoteRequestModel request) {
+			this.request = request;
+		}
+
+		@Override
+		public void processResponse(String response) {
+			boolean approved = false;
+			RemoteRequestModel responseRequest = null;
+			ServerResponseModel serverResponse = gson.fromJson(response, ServerResponseModel.class);
+			if (serverResponse.getType() == ServerResponseModel.ResponseType.CHECK_REQUEST_STATUS)
+				if (serverResponse.isSuccessful()) {
+					if (serverResponse.getRequests() != null)
+						responseRequest = serverResponse.getRequests().get(0);
+					if (responseRequest != null)
+						approved = responseRequest.isApproved();
+				}
+			if (approved){
+				//do something tell user request has been approved
+				request.setApproved(approved);
+				Log.d("check status", "approved");
+			}else{
+				//do nothing 
+				Log.d("check status", "not approved");
+			}
+		}
+
+	}
+	
+	class ApproveRequestResponseHandler implements ResponseHandler{
+		private RemoteRequestModel request;
+
+		// make sure pass in the pointer to the request in the remoteUserList;
+		public ApproveRequestResponseHandler(RemoteRequestModel request) {
+			this.request = request;
+			
+		}
+		
+		
+		@Override
+		public void processResponse(String response) {
+			ServerResponseModel serverResponse = gson.fromJson(response, ServerResponseModel.class);
+			if (serverResponse.getType() == ServerResponseModel.ResponseType.APPROVE_REQUEST)
+				if (serverResponse.isSuccessful()){
+					request.setApproved(true);
+					//update UI set approved
+					Log.d("approve request","yeah");
+					Log.d("list",gson.toJson(remoteUserList));
+				}else{
+					request.setApproved(false);
+				}
+			
+		}
+		
 	}
 
 }

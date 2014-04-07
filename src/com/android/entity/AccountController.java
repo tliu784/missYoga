@@ -23,6 +23,7 @@ public class AccountController {
 		account.setPassword("password");
 		account.setUsername("username");
 		account.setRemenber(false);
+		account.setName("nizhibi");
 		save();
 	}
 
