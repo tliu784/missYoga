@@ -59,7 +59,7 @@ public class BenTestClass {
 		return data;
 	}
 	
-	public RemoteDataModel generateRemoteData(String email, String name){
+	public static RemoteDataModel generateRemoteData(String email, String name){
 		RemoteDataModel data = new RemoteDataModel();
 		//account
 		AccountController acc=AccountController.getInstance();

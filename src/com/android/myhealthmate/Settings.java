@@ -4,6 +4,7 @@ import com.android.entity.AccountController;
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.ReminderViewController;
 import com.android.remoteProfile.BenTestClass;
+import com.android.remoteProfile.RemoteRequestController;
 import com.android.remoteProfile.RemoteRequestModel;
 
 import android.app.Activity;
@@ -112,15 +113,11 @@ public class Settings extends Activity {
 		monitorSection = (GridLayout) findViewById(R.id.monitor_sec);
 		requestSection = (GridLayout) findViewById(R.id.request_sec);
 
-		int i = 0;
-		for (RemoteRequestModel requestModel : benTestClass.getUserListController().getMinitoredRemoteUserList()) {
-			if (i != 0) {
+		for (RemoteRequestModel requestModel : RemoteRequestController.getInstance().getMinitoredRemoteUserList()) {
 				addViewInMonitorSec(requestModel);
-			}
-			i++;
 		}
 
-		for (RemoteRequestModel requestModel : benTestClass.getUserListController().getMinitoredRemoteUserList()) {
+		for (RemoteRequestModel requestModel : RemoteRequestController.getInstance().getViewedByRemoteUserList()) {
 			addViewInRequestSec(requestModel);
 		}
 

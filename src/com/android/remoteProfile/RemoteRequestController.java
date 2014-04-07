@@ -54,11 +54,6 @@ public class RemoteRequestController {
 	public void createTestData() {
 		remoteUserList.clear();
 		if (remoteUserList.size() == 0) {
-			RemoteRequestModel model0 = new RemoteRequestModel("ben@gmail.com", accountEmail);
-			model0.setApproved(true);
-			model0.setRequestorName("Ben");
-			model0.setOwnerName("Ben");
-			remoteUserList.add(model0);
 
 			RemoteRequestModel model1 = new RemoteRequestModel("terry@gmail.com", accountEmail);
 			model1.setRequestorName("Ben");
@@ -72,6 +67,21 @@ public class RemoteRequestController {
 			model2.setRequestorName("Ben");
 			model2.setOwnerName("Nicole");
 			remoteUserList.add(model2);
+			
+
+			RemoteRequestModel model3 = new RemoteRequestModel(accountEmail,"terry@gmail.com" );
+			model3.setRequestorName("Terry");
+			model3.setApproved(true);
+			model3.setOwnerName("Ben");
+
+			remoteUserList.add(model3);
+
+			RemoteRequestModel model4 = new RemoteRequestModel(accountEmail , "nicole@gmail.com");
+			model4.setApproved(true);
+			model4.setRequestorName("Nicole");
+			model4.setOwnerName("Ben");
+			remoteUserList.add(model4);
+			
 			save();
 		}
 	}

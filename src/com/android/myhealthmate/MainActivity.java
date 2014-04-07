@@ -3,8 +3,11 @@ package com.android.myhealthmate;
 import com.android.entity.AccountController;
 import com.android.reminder.AlarmReceiver;
 import com.android.reminder.MedReminderController;
+import com.android.remoteProfile.BenTestClass;
+import com.android.remoteProfile.RemoteDataController;
 import com.android.remoteProfile.RemoteRequestController;
 import com.android.trend.ChartDataController;
+import com.android.trend.ChartHelper;
 import com.android.trend.RecordList;
 
 import android.os.Bundle;
@@ -94,6 +97,17 @@ public class MainActivity extends Activity {
 		MedReminderController.getInstance().init(getApplicationContext());
 		AccountController.getInstance().init(getApplicationContext());
 		RemoteRequestController.getInstance().initContext(getApplicationContext());
+		
+		//create requestModel test data
+		RemoteRequestController.getInstance().createTestData();
+		
+		ChartDataController.getInstance().setDataset(ChartHelper.createRandomData(200));
+		ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
+		RemoteDataController.getInstance().init();
+		
+		//create dataModel test data
+		RemoteDataController.getInstance().getDataList().add(BenTestClass.generateRemoteData("terry@gmail", "Terry"));
+		RemoteDataController.getInstance().getDataList().add(BenTestClass.generateRemoteData("nicole@gmail", "Nicole"));
 	}
 
 	private OnCheckedChangeListener getRemenberMeCheckBoxListener() {

@@ -108,7 +108,6 @@ public class SleDetail extends FragmentActivity {
 		filterArea = (GridLayout) findViewById(R.id.filter_area);
 
 		remoteDataController =  RemoteDataController.getInstance();
-		createTestData();
 		
 		
 		initNavigationBar();	
@@ -116,19 +115,6 @@ public class SleDetail extends FragmentActivity {
 		setupChartListeners();
 		initHistorySection();
 	}
-
-	private void createTestData(){
-		
-		ChartDataController.getInstance().setDataset(ChartHelper.createRandomData(200));
-		ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
-		remoteDataController.init();
-		
-		remoteDataController.getDataList().add(benTestClass.generateRemoteData("terry@gmail", "Terry"));
-		remoteDataController.getDataList().add(benTestClass.generateRemoteData("nicole@gmail", "Nicole"));
-		
-		
-	}
-	
 	
 	private void initNavigationBar(){
 		ActionBar actionBar = getActionBar();
