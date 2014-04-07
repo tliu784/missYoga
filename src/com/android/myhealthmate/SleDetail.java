@@ -10,7 +10,6 @@ import com.android.remoteProfile.RemoteDataController;
 import com.android.remoteProfile.RemoteDataModel;
 import com.android.trend.AddNotePopupDialog;
 import com.android.trend.ChartDataController;
-import com.android.trend.ChartHelper;
 import com.android.trend.ChartPointModel;
 import com.android.trend.ChartViewController;
 import com.android.trend.RecordList;

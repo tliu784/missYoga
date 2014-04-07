@@ -1,9 +1,6 @@
 package com.android.myhealthmate;
 
 import com.android.entity.AccountController;
-import com.android.reminder.MedReminderModel;
-import com.android.reminder.ReminderViewController;
-import com.android.remoteProfile.BenTestClass;
 import com.android.remoteProfile.RemoteRequestController;
 import com.android.remoteProfile.RemoteRequestModel;
 
@@ -55,7 +52,6 @@ public class Settings extends Activity {
 	private Button emailSave;
 	private Button emailCancel;
 
-	private BenTestClass benTestClass;
 	private AccountController accountController;
 
 	@Override
@@ -107,12 +103,9 @@ public class Settings extends Activity {
 		emailSave.setOnClickListener(getAccountSaveBtnListener());
 		emailCancel.setOnClickListener(getAccountCancelBtnListener());
 
-		benTestClass = new BenTestClass(Settings.this);
-		// userApprovalSection = new UserMonitorSection(Settings.this);
-		// userApprovalSection.addNameLayout(benTestClass.getUserListController().getMinitoredRemoteUserList().get(1));
 		monitorSection = (GridLayout) findViewById(R.id.monitor_sec);
 		requestSection = (GridLayout) findViewById(R.id.request_sec);
-
+		
 		for (RemoteRequestModel requestModel : RemoteRequestController.getInstance().getMinitoredRemoteUserList()) {
 				addViewInMonitorSec(requestModel);
 		}
