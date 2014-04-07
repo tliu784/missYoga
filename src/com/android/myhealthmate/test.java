@@ -190,7 +190,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				gotoSleepPage();
+				generateRemoteData("terry@gmail.com","terry");
 			}
 		};
 	}
@@ -297,12 +297,13 @@ public class test extends Activity {
 		return recordList;
 	}
 	
-	public RemoteDataModel generateRemoteData(String email){
+	public RemoteDataModel generateRemoteData(String email, String name){
 		RemoteDataModel data = new RemoteDataModel();
 		//account
 		AccountController acc=AccountController.getInstance();
 		acc.setTestAccout();
 		data.setOwnerEmail(email);
+		data.setOwnerName(name);
 		//chart data
 		ChartDataController chartData = getChartController(2);
 		data.setHealthdata(chartData.getDataset());
