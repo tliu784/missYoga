@@ -78,7 +78,7 @@ public class SleDetail extends FragmentActivity {
 	private TextView filterNote;
 	private TextView filterBtn;
 	private GridLayout filterArea;
-	
+
 	ArrayList<String> itemList;
 	ArrayAdapter<String> userList;
 	BenTestClass benTestClass;
@@ -88,10 +88,9 @@ public class SleDetail extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sle_details);
-		
+
 		benTestClass = new BenTestClass(SleDetail.this);
-		
-		
+
 		recordLayout = (LinearLayout) findViewById(R.id.recordListSection);
 		scrolView = (ScrollView) findViewById(R.id.scrollHistorySection);
 
@@ -106,16 +105,15 @@ public class SleDetail extends FragmentActivity {
 		filterBtn = (TextView) findViewById(R.id.category_filter_button);
 		filterArea = (GridLayout) findViewById(R.id.filter_area);
 
-		remoteDataController =  RemoteDataController.getInstance();
-		
-		
-		initNavigationBar();	
+		remoteDataController = RemoteDataController.getInstance();
+
+		initNavigationBar();
 		initChart();
 		setupChartListeners();
 		initHistorySection();
 	}
-	
-	private void initNavigationBar(){
+
+	private void initNavigationBar() {
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		userList = loadUser();
@@ -128,26 +126,27 @@ public class SleDetail extends FragmentActivity {
 			}
 		});
 	}
-	
-	private void refreshPageByUserName(String name){		
+
+	private void refreshPageByUserName(String name) {
 		RemoteDataModel selectedUserRemoteData = remoteDataController.getDataModelByName(name);
 		chartData.setDataset(selectedUserRemoteData.getHealthdata());
 		chartView.refreshChart();
-		chartView.moveVto(0);
 		refreshHistorySection(selectedUserRemoteData.getEventdata());
 		recordList = selectedUserRemoteData.getEventdata();
 		recordListInstance.setRecordList(recordList);
-		
+		currentX = (int) chartData.getDisplaySetLen() / 2;
+		chartView.moveVto(currentX);
+		displayValues();
+		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
 	}
-	
+
 	private ArrayAdapter<String> loadUser() {
 		itemList = new ArrayList<String>();
-		for(RemoteDataModel user : remoteDataController.getDataList())
-			itemList.add(user.getOwnerName());		
+		for (RemoteDataModel user : remoteDataController.getDataList())
+			itemList.add(user.getOwnerName());
 		userList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList);
 		return userList;
 	}
-
 
 	// --------------------action bar test below------------------------------
 
@@ -196,8 +195,6 @@ public class SleDetail extends FragmentActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	
-	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
 
@@ -232,8 +229,8 @@ public class SleDetail extends FragmentActivity {
 		filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
 
 	}
-	
-	public void refreshHistorySection(ArrayList<RecordModel> remoteUserRecordList){
+
+	public void refreshHistorySection(ArrayList<RecordModel> remoteUserRecordList) {
 		recordViewList.clear();
 		recordLayout.removeAllViewsInLayout();
 		recordListInstance.sortByNext();
@@ -244,7 +241,7 @@ public class SleDetail extends FragmentActivity {
 			rvsection.getLayout().setOnClickListener(getHistorySectionClickListener());
 			recordLayout.addView(rvsection.getLayout());
 		}
-		
+
 	}
 
 	private void initChart() {
@@ -366,8 +363,6 @@ public class SleDetail extends FragmentActivity {
 		return chartData.getDisplayDataSet().get(currentX);
 	}
 
-	
-	
 	private void displayAllEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
