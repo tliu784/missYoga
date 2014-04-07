@@ -2,11 +2,9 @@ package com.android.remoteProfile;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.android.entity.AccountController;
-import com.android.remoteProfile.RemoteRequestController.SendRequestResponseHandler;
 import com.android.service.ResponseHandler;
 import com.android.service.RestCallHandler;
 import com.android.trend.ChartDataController;
@@ -18,46 +16,46 @@ public class RemoteDataController {
 	private RemoteRequestController rpc;
 	private ChartDataController cdc;
 	private RecordList rlc;
-	private RemoteDataModel localUserData;	
+	private RemoteDataModel localUserData;
 	private ArrayList<RemoteDataModel> dataList = new ArrayList<RemoteDataModel>();
 	boolean initialized = false;
 	private Gson gson;
-	
-	protected RemoteDataController(){
-	//put init() here after finish all data generation
+
+	protected RemoteDataController() {
+		// put init() here after finish all data generation
 	}
 
-	public static RemoteDataController getInstance(){
+	public static RemoteDataController getInstance() {
 		if (instance == null)
 			instance = new RemoteDataController();
 		return instance;
 	}
-	
-	public void init(){
-		if (!initialized){
-			rpc= RemoteRequestController.getInstance();
-			cdc= ChartDataController.getInstance();
+
+	public void init() {
+		if (!initialized) {
+			rpc = RemoteRequestController.getInstance();
+			cdc = ChartDataController.getInstance();
 			rlc = RecordList.getInstance();
 			loadLocalUserData();
 			gson = new Gson();
 			initialized = true;
 		}
-		
+
 	}
-	
-	private void loadLocalUserData(){
+
+	private void loadLocalUserData() {
 		RemoteDataModel data = new RemoteDataModel();
 		AccountController acc = AccountController.getInstance();
 		data.setOwnerEmail(acc.getAccount().getEmail());
 		data.setOwnerName(acc.getAccount().getName());
 		data.setHealthdata(cdc.getDataset());
 		data.setEventdata(rlc.getRecordList());
-		localUserData=data;
+		localUserData = data;
 		dataList.add(localUserData);
 	}
-	
+
 	public void upload() {
-		
+
 		String content = gson.toJson(localUserData);
 		String url = ServerConstants.SERVER_URL + ServerConstants.UPLOAD_DATA_URL;
 		UploadResponseHandler handler = new UploadResponseHandler();
@@ -65,38 +63,77 @@ public class RemoteDataController {
 		upload.handleResponse();
 	}
 	
+	public void download(RemoteRequestModel request){
+		String content = gson.toJson(request);
+		String url = ServerConstants.SERVER_URL + ServerConstants.DOWNLOAD_DATA_URL;
+		RemoteDataModel data=getDataModelByEmail(request.getOwnerEmail());
+		if (data==null){
+			data=new RemoteDataModel();
+			dataList.add(data);
+		}
+		
+	}
+
 	public RemoteDataModel getLocalUserData() {
 		return localUserData;
 	}
+
 	public ArrayList<RemoteDataModel> getDataList() {
 		return dataList;
 	}
-	
-	class UploadResponseHandler implements ResponseHandler{
+
+	class UploadResponseHandler implements ResponseHandler {
 
 		@Override
 		public void processResponse(String response) {
 			ServerResponseModel serverResponse = gson.fromJson(response, ServerResponseModel.class);
 			if (serverResponse.getType() == ServerResponseModel.ResponseType.UPLOAD)
-				if (serverResponse.isSuccessful()){
-					//upload success
-					Log.d("upload","yeah");
+				if (serverResponse.isSuccessful()) {
+					// upload success
+					Log.d("upload", "yeah");
+				}
+
+		}
+
+	}
+	
+	class DownloadResponseHandler implements ResponseHandler{
+
+		private RemoteDataModel data = null;
+		
+		
+		public DownloadResponseHandler(RemoteDataModel data) {
+			this.data = data;
+		}
+
+		@Override
+		public void processResponse(String response) {
+			ServerResponseModel serverResponse = gson.fromJson(response, ServerResponseModel.class);
+			if (serverResponse.getType() == ServerResponseModel.ResponseType.UPLOAD)
+				if (serverResponse.isSuccessful()) {
+					data=serverResponse.getRemoteData();
+					//call activity to display data
+					Log.d("remote data",gson.toJson(data));
 				}
 			
 		}
 		
 	}
-	
-	public RemoteDataModel getDataModelByName(String name){
-		for (RemoteDataModel userData: dataList){
-			if(userData.getOwnerName().equals(name))
+
+	public RemoteDataModel getDataModelByName(String name) {
+		for (RemoteDataModel userData : dataList) {
+			if (userData.getOwnerName().equalsIgnoreCase(name))
 				return userData;
 		}
 		return null;
 	}
 	
-	
-	
-	
-	
+	public RemoteDataModel getDataModelByEmail(String email) {
+		for (RemoteDataModel userData : dataList) {
+			if (userData.getOwnerEmail().equalsIgnoreCase(email))
+				return userData;
+		}
+		return null;
+	}
+
 }

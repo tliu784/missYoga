@@ -196,7 +196,10 @@ public class test extends Activity {
 				ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
 				RemoteDataController rdc = RemoteDataController.getInstance();
 				rdc.init();
-				rdc.upload();
+	//			rdc.upload();
+				RemoteRequestModel request = new RemoteRequestModel("ben123@gmail.com","terry@123.com");
+				rdc.download(request);
+				
 			}
 		};
 	}
