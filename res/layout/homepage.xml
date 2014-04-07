@@ -30,8 +30,8 @@
                 android:id="@+id/home_health_stats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left"
                 android:drawableLeft="@drawable/ic_stats"
+                android:gravity="left"
                 android:text=" Health Stats"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/msmall_font_size"
@@ -626,18 +626,20 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:background="@drawable/textlines"
         android:orientation="vertical" >
 
-        <Button
+        <TextView
             android:id="@+id/rec"
-            android:gravity="left"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:clickable="true"
-            android:onClick="toggle_recom_box"
             android:drawableLeft="@drawable/ic_rec"
+            android:gravity="left"
+            android:onClick="toggle_recom_box"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:text=" Recommendation "
             android:textColor="@android:color/black"
             android:textSize="@dimen/msmall_font_size"
@@ -656,22 +658,23 @@
     <!-- history section -->
 
     <LinearLayout
+        android:id="@+id/history"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:clickable="true"
         android:background="@drawable/textlines"
+        android:clickable="true"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/home_history"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:layout_margin="5dp"
             android:clickable="true"
             android:drawableLeft="@drawable/ic_history"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:text=" History "
             android:textColor="@android:color/black"
             android:textSize="@dimen/msmall_font_size"
