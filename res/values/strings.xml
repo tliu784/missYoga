@@ -63,8 +63,6 @@
     <string name="history_3month">Three months</string>
     <string name="history_share">Share</string>
     <string name="history_export">Export</string>
-    <string name="monitor_status">Status</string>
-    <string name="approval">Approve</string>
-    
+    <string name="home_tag">Tag</string>
 
 </resources>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/gen_page_margin_top"
+    android:paddingBottom="@dimen/gen_page_margin_bottom"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/gen_page_margin_top"
@@ -12,523 +12,634 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/textlines"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/gen_page_margin_top"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/gen_page_margin_top" >
+        android:orientation="vertical" >
 
-        <!-- tabs -->
+        <!-- current time section -->
 
         <LinearLayout
-            android:id="@+id/filter_area"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:orientation="horizontal">
+                        
+            <TextView
+                android:id="@+id/home_health_stats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text=" Health Stats"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/msmall_font_size" />
+            
+            <TextView
+                android:id="@+id/home_current_time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text=" 11:20am 04/07/2014 "
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/trends_text_size" />
+        </LinearLayout>
+
+        <!-- BP & HR section -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/gen_page_margin_left"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal" >
+
+            <!-- BP -->
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/home_section_box"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin" >
+
+                <!-- bp title -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_dialog_icon_bp"
+                    android:text=" Blood Pressure "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_grey" />
+
+                <!-- bp data -->
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/gen_page_margin_left"
+                        android:layout_marginRight="@dimen/gen_page_margin_right"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/bp_sys"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text=" SYSTOLIC "
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/small_font_size" />
+
+                        <TextView
+                            android:id="@+id/bp_sys_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="165"
+                            android:textSize="@dimen/msmall_font_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/gen_page_margin_right"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/bp_dia"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="DIASTOLIC"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/small_font_size" />
+
+                        <TextView
+                            android:id="@+id/bp_dia_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="115"
+                            android:textSize="@dimen/msmall_font_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- HR -->
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/home_section_box"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin" >
+
+                <!-- HR title -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_dialog_icon_hr"
+                    android:text=" Heart Rate "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_grey" />
+
+                <!-- hr data -->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/gen_page_margin_left"
+                        android:layout_marginRight="@dimen/gen_page_margin_right"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/hr_rest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text=" REST "
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/small_font_size" />
+
+                        <TextView
+                            android:id="@+id/hr_rest_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="78"
+                            android:textSize="@dimen/msmall_font_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/gen_page_margin_right"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/hr_avg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="AVERAGE"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/small_font_size" />
+
+                        <TextView
+                            android:id="@+id/hr_avg_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="90"
+                            android:textSize="@dimen/msmall_font_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Sleep & Activity section -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/gen_page_margin_left"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal" >
+
+            <!-- Activity -->
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/home_section_box"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin" >
+
+                <!-- activity title -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_dialog_icon_activity"
+                    android:text=" Activity "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_grey" />
+
+                <!-- act data -->
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/gen_page_margin_left"
+                        android:layout_marginRight="@dimen/gen_page_margin_right"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/act_steps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text=" STEPS "
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/small_font_size" />
+
+                        <TextView
+                            android:id="@+id/act_step_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="2165"
+                            android:textSize="@dimen/msmall_font_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/gen_page_margin_right"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/act_calories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="CALORIES"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/small_font_size" />
+
+                        <TextView
+                            android:id="@+id/act_calories_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="230"
+                            android:textSize="@dimen/msmall_font_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Sleep -->
+
+            <LinearLayout
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@drawable/home_section_box"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_horizontal_margin" >
+
+                <!-- Sleep title -->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_dialog_icon_sleep"
+                    android:text=" Sleep "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/light_grey" />
+
+                <!-- sleep data -->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="43dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/gen_page_margin_left"
+                        android:layout_marginRight="@dimen/gen_page_margin_right"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/sleep_deep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text=" DEEP "
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/small_font_size" />
+
+                        <TextView
+                            android:id="@+id/sleep_deep_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="3.8"
+                            android:textSize="@dimen/msmall_font_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="43dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/gen_page_margin_right"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/sleep_light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="LIGHT"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/small_font_size" />
+
+                        <TextView
+                            android:id="@+id/sleep_light_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="2.4"
+                            android:textSize="@dimen/msmall_font_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="43dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/gen_page_margin_right"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/sleep_awake"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="AWAKE"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/small_font_size" />
+
+                        <TextView
+                            android:id="@+id/sleep_awake_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="0.5"
+                            android:textSize="@dimen/msmall_font_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <!-- tag section -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/gen_page_margin_left"
             android:layout_marginRight="@dimen/gen_page_margin_right"
             android:layout_marginTop="@dimen/gen_page_margin_bottom"
             android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/history_filter_1week"
-                style="@style/summary_tab_textbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:text="@string/history_1week" >
-            </TextView>
-
-            <View
-                android:layout_width="2dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/gen_page_margin_left"
+            <EditText
+                android:id="@+id/home_tag"
+                style="@style/loginDialog"
+                android:layout_width="@dimen/home_tag_box_width"
+                android:layout_height="@dimen/home_tag_box_height"
                 android:layout_marginRight="@dimen/gen_page_margin_right"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/history_filter_1month"
-                style="@style/summary_tab_textbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/history_1month" >
-            </TextView>
-
-            <View
-                android:layout_width="2dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/gen_page_margin_left"
-                android:layout_marginRight="@dimen/gen_page_margin_right"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/history_filter_3month"
-                style="@style/summary_tab_textbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/history_3month" >
-            </TextView>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="@color/light_grey" />
-
-        <!-- HR -->
-
-        <TextView
-            android:id="@+id/history_hr_txt"
-            style="@style/summary_title_textbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Heart Rate" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp" >
-
-            <TextView
-                android:id="@+id/history_hr_left"
-                style="@style/summary_bar_textbox"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round_left"
-                android:text="&lt; 60" />
-
-            <TextView
-                android:id="@+id/history_hr_mid"
-                style="@style/summary_bar_textbox"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/textview_arrow"
-                android:text="60 - 90" />
-
-            <TextView
-                android:id="@+id/history_hr_right"
-                style="@style/summary_bar_textbox"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round_right"
-                android:text="> 90" />
-        </LinearLayout>
-
-        <!-- HR data section -->
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
-
-                <TextView
-                    android:id="@+id/history_hr_average"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Average: 87" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
-
-                <TextView
-                    android:id="@+id/history_hr_min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Min: 67" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
-
-                <TextView
-                    android:id="@+id/history_hr_max"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max: 122" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="@color/light_grey" />
-
-        <!-- BP -->
-
-        <TextView
-            android:id="@+id/history_bp_txt"
-            style="@style/summary_title_textbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Blood Pressure" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp" >
-
-            <TextView
-                android:id="@+id/history_bp_left"
-                style="@style/summary_bar_textbox"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round_left"
-                android:text="&lt; 60" />
-
-            <TextView
-                android:id="@+id/history_bp_mid"
-                style="@style/summary_bar_textbox"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/textview_arrow"
-                android:text="60 - 90" />
-
-            <TextView
-                android:id="@+id/history_bp_right"
-                style="@style/summary_bar_textbox"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round_right"
-                android:text="> 90" />
-        </LinearLayout>
-
-        <!-- BP data section -->
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/history_bp_average"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Average: 100/119" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/history_bp_min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Min: 67/90" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/history_bp_max"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max: 122/156" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="@color/light_grey" />
-
-        <!-- ACTIVITY -->
-
-        <TextView
-            android:id="@+id/history_act_txt"
-            style="@style/summary_title_textbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Activity" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp" >
-
-            <TextView
-                android:id="@+id/history_act_left"
-                style="@style/summary_bar_textbox"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round_left"
-                android:text="LOW" />
-
-            <TextView
-                android:id="@+id/history_act_mid"
-                style="@style/summary_bar_textbox"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/textview_arrow"
-                android:text="NORMAL" />
-
-            <TextView
-                android:id="@+id/history_act_right"
-                style="@style/summary_bar_textbox"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round_right"
-                android:text="HIGH" />
-        </LinearLayout>
-
-        <!-- Activity data section -->
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
-
-                <TextView
-                    android:id="@+id/history_act_average"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Average: 1330" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/history_act_min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Min: 670" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
-
-                <TextView
-                    android:id="@+id/history_act_max"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max: 42000" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="@color/light_grey" />
-
-        <!-- SLEEP -->
-
-        <TextView
-            android:id="@+id/history_sleep_txt"
-            style="@style/summary_title_textbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sleep" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp" >
-
-            <TextView
-                android:id="@+id/history_sleep_left"
-                style="@style/summary_bar_textbox"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round_left"
-                android:text="BAD" />
-
-            <TextView
-                android:id="@+id/history_sleep_mid"
-                style="@style/summary_bar_textbox"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/textview_arrow"
-                android:text="NORMAL" />
-
-            <TextView
-                android:id="@+id/history_sleep_right"
-                style="@style/summary_bar_textbox"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textview_round_right"
-                android:text="GOOD" />
-        </LinearLayout>
-
-        <!-- Sleep data section -->
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
-
-                <TextView
-                    android:id="@+id/history_sleep_average"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Average: 7.5" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/history_sleep_min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Min: 2.2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp" >
-
-                <TextView
-                    android:id="@+id/history_sleep_max"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max: 13.6" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!--
-     buttons to be adjusted 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-             android:paddingTop="10dp"
-            android:paddingBottom="20dp" >
+                android:layout_marginTop="@dimen/gen_page_margin_top"
+                android:paddingTop="0dp"
+                android:paddingBottom="2dp"
+                android:hint="Tag here" />
+
+            <requestFocus />
 
             <Button
-                android:id="@+id/history_share"
-                style="@style/btnStyleBlue"
-                android:layout_width="@dimen/signup_btn_width"
-                android:layout_height="@dimen/login_edittext_height"
-                android:layout_marginLeft="@dimen/gen_page_margin_left"
-                android:layout_marginRight="@dimen/gen_page_margin_right" 
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:text="@string/history_share" />
-
-            <Button
-                android:id="@+id/history_export"
-                style="@style/btnStyleBlue"
-                android:layout_width="@dimen/signup_btn_width"
-                android:layout_height="@dimen/login_edittext_height"
-                android:layout_marginLeft="@dimen/gen_page_margin_left"
-                android:layout_marginRight="@dimen/gen_page_margin_right" 
-                 android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:layout_toRightOf="@+id/history_share"
-                android:text="@string/history_export" />
+                android:id="@+id/home_tag"
+                style="@style/homeBtnStyle"
+                android:layout_width="@dimen/home_tag_btn_width"
+                android:layout_height="@dimen/home_tag_box_height"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_alignParentRight="true"
+                android:text="@string/home_tag" />
         </LinearLayout>
-        -->
+    </LinearLayout>
+    
+    <!-- reminder section -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/textlines"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/msmall_font_size" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_dialog_icon_about"
+                android:text=" Reminder "
+                android:textColor="@color/grey" />
+
+            <TextView
+                android:id="@+id/rd_type"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text=" medicine "
+                android:textColor="@color/grey" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey" />
+
+        <LinearLayout
+            android:id="@+id/rd"
+            style="@style/contentfield"
+            android:layout_width="fill_parent"
+            android:layout_height="70sp"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:textSize="@dimen/msmall_font_size" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=" TASK "
+                    android:textColor="@color/grey"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/rd_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=" ASPRIN "
+                    android:textSize="@dimen/msmall_font_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/rd_date"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=" 09/11/2014 "
+                    android:textColor="@color/grey"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/rd_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=" 11:20 AM "
+                    android:textColor="@color/grey"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- recommendation section -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/textlines"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/rec"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:background="@color/light_grey"
+            android:clickable="true"
+            android:gravity="left"
+            android:onClick="toggle_recom_box"
+            android:text=" Recommendation: "
+            android:textColor="@color/light_black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/rec_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:text="Health is the level of functional or metabolic efficiency of a living organism."
+            android:textColor="@color/grey"
+            android:textSize="18dp" />
     </LinearLayout>
 
 </LinearLayout>
