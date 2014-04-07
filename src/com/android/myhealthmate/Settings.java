@@ -1,12 +1,17 @@
 package com.android.myhealthmate;
 
 import com.android.entity.AccountController;
+import com.android.reminder.MedReminderModel;
+import com.android.reminder.ReminderViewController;
 import com.android.remoteProfile.BenTestClass;
 import com.android.remoteProfile.RemoteRequestModel;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -119,6 +124,30 @@ public class Settings extends Activity {
 			addViewInRequestSec(requestModel);
 		}
 
+	}
+	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu items for use in the action bar
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.settings_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.send_request: {
+			
+		}
+		case R.id.refresh_request: {		
+			
+		}
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	private void addViewInRequestSec(RemoteRequestModel requestModel) {
