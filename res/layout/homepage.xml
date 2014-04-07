@@ -524,6 +524,7 @@
                 android:layout_width="@dimen/home_tag_btn_width"
                 android:layout_height="@dimen/home_tag_box_height"
                 android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
                 android:paddingBottom="2dp"
                 android:paddingTop="2dp"
                 android:text="@string/home_tag" />
