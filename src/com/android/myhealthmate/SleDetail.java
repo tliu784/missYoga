@@ -8,7 +8,6 @@ import java.util.Locale;
 import com.android.remoteProfile.BenTestClass;
 import com.android.remoteProfile.RemoteDataController;
 import com.android.remoteProfile.RemoteDataModel;
-import com.android.remoteProfile.RemoteRequestModel;
 import com.android.trend.AddNotePopupDialog;
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartHelper;
@@ -203,10 +202,6 @@ public class SleDetail extends FragmentActivity {
 			}
 
 			public boolean onQueryTextSubmit(String query) {
-				// Here u can get the value "query" which is entered in the
-				// search box.
-				// Toast.makeText(getApplicationContext(), query,
-				// Toast.LENGTH_SHORT).show();
 				displayAllEvent();
 				searchEventHistory(query);
 				return true;
@@ -251,15 +246,6 @@ public class SleDetail extends FragmentActivity {
 		filterBtn.setOnClickListener(getFilterBtnClickListener());
 		filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
 
-//		ChartHelper.recordListGenerator(recordList);
-//		recordListInstance.sortByNext();
-//		for (RecordModel record : recordList) {
-//			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType(),
-//					record.getTimeStamp(), record.getContent(), record.isMissed(), record.getTitle());
-//			recordViewList.add(rvsection);
-//			rvsection.getLayout().setOnClickListener(getHistorySectionClickListener());
-//			recordLayout.addView(rvsection.getLayout());
-//		}
 	}
 	
 	public void refreshHistorySection(ArrayList<RecordModel> remoteUserRecordList){
