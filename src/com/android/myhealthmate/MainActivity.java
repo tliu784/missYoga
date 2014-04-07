@@ -29,9 +29,9 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 public class MainActivity extends Activity {
 
 	private Button signInButton;
-	private Button nicoleButton;
-	private Button test;
-	private Button benButton;
+//	private Button nicoleButton;
+//	private Button test;
+//	private Button benButton;
 	private EditText username;
 	private EditText password;
 	private TextView textSignUp;
@@ -48,9 +48,9 @@ public class MainActivity extends Activity {
 		username = (EditText) findViewById(R.id.enterUsername);
 		password = (EditText) findViewById(R.id.enterPassword);
 		signInButton = (Button) findViewById(R.id.sign_in);
-		nicoleButton = (Button) findViewById(R.id.nicole);
-		benButton = (Button) findViewById(R.id.ben);
-		test = (Button) findViewById(R.id.test);
+//		nicoleButton = (Button) findViewById(R.id.nicole);
+//		benButton = (Button) findViewById(R.id.ben);
+//		test = (Button) findViewById(R.id.test);
 		remenberMe = (CheckBox) findViewById(R.id.cb_remember_me);
 
 		accountController = AccountController.getInstance();
@@ -69,13 +69,13 @@ public class MainActivity extends Activity {
 		// set the listener for button
 		signInButton.setOnClickListener(getSignInClickListener());
 
-		nicoleButton.setOnClickListener(getNicolePageClickListener());
-
 		textSignUp.setOnClickListener(getSignUpClickListener());
-
-		test.setOnClickListener(getTestClickListener());
-
-		benButton.setOnClickListener(getBenPageClickListener());
+		
+//		nicoleButton.setOnClickListener(getNicolePageClickListener());
+//
+//		test.setOnClickListener(getTestClickListener());
+//
+//		benButton.setOnClickListener(getBenPageClickListener());
 		initAllDataControllers();
 	}
 
