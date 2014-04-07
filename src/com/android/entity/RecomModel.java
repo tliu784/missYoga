@@ -12,10 +12,14 @@ public class RecomModel implements Serializable{
 	private int id;
 	private String recommendation;
 	private String url;
+	private int severity;
 	
-
-	
-	
+	public int getSeverity() {
+		return severity;
+	}
+	public void setSeverity(int severity) {
+		this.severity = severity;
+	}
 	public int getId() {
 		return id;
 	}

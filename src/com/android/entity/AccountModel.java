@@ -116,7 +116,7 @@ public class AccountModel implements Serializable{
 
 
 
-	public void setRemenber(boolean remenber){
+	public void setRemember(boolean remenber){
 		this.remenber = remenber;
 	}
 	

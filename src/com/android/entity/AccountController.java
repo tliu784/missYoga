@@ -22,8 +22,8 @@ public class AccountController {
 		account.setEmail("ben123@gmail.com");
 		account.setPassword("password");
 		account.setUsername("username");
-		account.setRemenber(false);
-		account.setName("nizhibi");
+		account.setRemember(false);
+		account.setName("Ben");
 		save();
 	}
 
@@ -43,7 +43,7 @@ public class AccountController {
 	}
 
 	public void setRemenber(boolean remenber) {
-		this.account.setRemenber(remenber);
+		this.account.setRemember(remenber);
 		save();
 	}
 
