@@ -35,9 +35,11 @@ public class MainPage extends Activity implements ResponseHandler {
 	private LinearLayout actClickView;
 	private LinearLayout sleClickView;
 	private LinearLayout rdClickView;
+	private TextView historyClickView;
 	private TextView rdTitle;
 	private TextView rdDate;
 	private TextView rdTime;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class MainPage extends Activity implements ResponseHandler {
 		actClickView = (LinearLayout) findViewById(R.id.act);
 		sleClickView = (LinearLayout) findViewById(R.id.sle);
 		rdClickView = (LinearLayout) findViewById(R.id.rd);
+		historyClickView = (TextView) findViewById(R.id.home_history);
 
 		rec_content = (TextView) findViewById(R.id.rec_content);
 		rec_content.setVisibility(View.GONE);
@@ -73,12 +76,13 @@ public class MainPage extends Activity implements ResponseHandler {
 
 		updateReminderSection();
 
-		hrClickView.setOnClickListener(getHrClickListener());
+		hrClickView.setOnClickListener(getTestClickListener());
 		bpClickView.setOnClickListener(getBpClickListener());
 		actClickView.setOnClickListener(getActClickListener());
 		sleClickView.setOnClickListener(getSleClickListener());
 		rdClickView.setOnClickListener(getRdClickListener());
 		rec_content.setOnClickListener(getRecClickListener());
+		historyClickView.setOnClickListener(getHistoryClickListener());
 
 	}
 
@@ -119,6 +123,25 @@ public class MainPage extends Activity implements ResponseHandler {
 		}
 
 	}
+	
+
+	private OnClickListener getTestClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainPage.this, test.class));
+			}
+		};
+	}
+	
+	private OnClickListener getHistoryClickListener(){
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainPage.this, History.class));
+			}
+		};
+	}
 
 	private OnClickListener getHrClickListener() {
 		return new OnClickListener() {
@@ -147,6 +170,7 @@ public class MainPage extends Activity implements ResponseHandler {
 		};
 	}
 
+	
 	private OnClickListener getSleClickListener() {
 		return new OnClickListener() {
 			@Override

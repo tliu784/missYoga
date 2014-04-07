@@ -102,7 +102,7 @@
             style="@style/btnStyleBlue" />
     </RelativeLayout>
     
-    <!--  test buttons -->
+    <!--  
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -140,5 +140,5 @@
             android:gravity="center"
             android:textStyle="bold" />
     </LinearLayout>
-
+test buttons -->
 </LinearLayout>
