@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Context;
-import android.util.Log;
-
 import com.android.entity.AccountController;
 import com.android.myhealthmate.R;
 import com.android.reminder.MedReminderModel;
@@ -97,7 +95,7 @@ public class BenTestClass {
 		sleepCeiling = context.getResources().getInteger(R.integer.sleep_ceiling);
 		
 		
-		ChartDataController chartData = new ChartDataController(context,hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor, actCeiling, sleepFloor, sleepCeiling);
+		ChartDataController chartData = ChartDataController.getInstance();
 		chartData.createRandomData(numberOfData);
 		return chartData;
 	}

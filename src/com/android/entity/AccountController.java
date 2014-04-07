@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.android.service.FileOperation;
 
-
 import android.content.Context;
 
 public class AccountController {
@@ -13,6 +12,7 @@ public class AccountController {
 	private static AccountController instance = null;
 	private static final String FILENAME = "acountInfo.obj";
 	private Context context;
+	private boolean initialized = false;
 
 	public AccountController() {
 
@@ -35,8 +35,11 @@ public class AccountController {
 	}
 
 	public void init(Context context) {
-		this.context = context;
-		load();
+		if (!initialized) {
+			this.context = context;
+			load();
+			initialized = true;
+		}
 	}
 
 	public void setRemenber(boolean remenber) {

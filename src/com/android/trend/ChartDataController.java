@@ -13,24 +13,26 @@ import com.android.trend.ChartHelper.GraphViewData;
 
 public class ChartDataController {
 
+	private static ChartDataController instance = null;
 	private Context context;
-	private final int hrFloor;
-	private final int hrCeiling;
-	private final int bplFloor;
-	private final int bphFloor;
-	private final int bplCeiling;
-	private final int bphCeiling;
-	private final int actFloor;
-	private final int actCeiling;
-	private final int sleepFloor;
-	private final int sleepCeiling;
+	private int hrFloor;
+	private int hrCeiling;
+	private int bplFloor;
+	private int bphFloor;
+	private int bplCeiling;
+	private int bphCeiling;
+	private int actFloor;
+	private int actCeiling;
+	private int sleepFloor;
+	private int sleepCeiling;
 	private int displaySetLen = 24; // default 24
 	private int currentDisplayStartIndex = 0;
+	private boolean initialized = false;
 
 	private ArrayList<ChartPointModel> dataset = new ArrayList<ChartPointModel>();
 	private ArrayList<ChartPointModel> displayDataSet = new ArrayList<ChartPointModel>();
-	
-	private static final String filename="chartdataset.obj";
+
+	private static final String filename = "chartdataset.obj";
 
 	public enum SeriesType {
 		HR, BPL, BPH, ACT, SLEEP;
@@ -39,42 +41,51 @@ public class ChartDataController {
 	public ArrayList<ChartPointModel> getDataset() {
 		return dataset;
 	}
-	
-	
-	
+
 	public void setDataset(ArrayList<ChartPointModel> dataset) {
 		this.dataset = dataset;
 		shiftDisplayToEnd();
 	}
 
-
-
 	@SuppressWarnings("unchecked")
-	public void loadLocalUserData(){
-		ArrayList<ChartPointModel> loadedData= (ArrayList<ChartPointModel>)FileOperation.read(filename, context);
-		if (loadedData!=null)
-			dataset=loadedData;
+	public void loadLocalUserData() {
+		ArrayList<ChartPointModel> loadedData = (ArrayList<ChartPointModel>) FileOperation.read(filename, context);
+		if (loadedData != null)
+			dataset = loadedData;
 		shiftDisplayToEnd();
 	}
-	
-	public void save(){
+
+	public void save() {
 		FileOperation.save(dataset, filename, context);
 	}
 
-	public ChartDataController(Context context,int hrFloor, int hrCeiling, int bplFloor, int bphFloor, int bplCeiling, int bphCeiling,
-			int actFloor, int actCeiling, int sleepFloor, int sleepCeiling) {
-		super();
-		this.hrFloor = hrFloor;
-		this.hrCeiling = hrCeiling;
-		this.bplFloor = bplFloor;
-		this.bphFloor = bphFloor;
-		this.bplCeiling = bplCeiling;
-		this.bphCeiling = bphCeiling;
-		this.actFloor = actFloor;
-		this.actCeiling = actCeiling;
-		this.sleepFloor = sleepFloor;
-		this.sleepCeiling = sleepCeiling;
-		this.context=context;
+	protected ChartDataController() {
+
+	}
+
+	public static ChartDataController getInstance() {
+		if (instance == null)
+			instance = new ChartDataController();
+		return instance;
+	}
+
+	public void init(Context context, int hrFloor, int hrCeiling, int bplFloor, int bphFloor, int bplCeiling,
+			int bphCeiling, int actFloor, int actCeiling, int sleepFloor, int sleepCeiling) {
+		if (!initialized) {
+			this.hrFloor = hrFloor;
+			this.hrCeiling = hrCeiling;
+			this.bplFloor = bplFloor;
+			this.bphFloor = bphFloor;
+			this.bplCeiling = bplCeiling;
+			this.bphCeiling = bphCeiling;
+			this.actFloor = actFloor;
+			this.actCeiling = actCeiling;
+			this.sleepFloor = sleepFloor;
+			this.sleepCeiling = sleepCeiling;
+			this.context = context;
+			loadLocalUserData();
+			initialized = true;
+		}
 	}
 
 	public void setDisplaySetLen(int displaySetLen) {
@@ -249,6 +260,14 @@ public class ChartDataController {
 		}
 
 		shiftDisplayToEnd();
+	}
+
+	public int getSleepFloor() {
+		return sleepFloor;
+	}
+
+	public int getSleepCeiling() {
+		return sleepCeiling;
 	}
 
 }

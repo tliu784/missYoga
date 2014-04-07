@@ -32,16 +32,7 @@ public class ChartViewController {
 	private int lineChartThickness;
 	private int barChartThickness;
 	private int lineChartPointRadius;
-	private int hrFloor;
-	private int hrCeiling;
-	private int bplFloor;
-	private int bphFloor;
-	private int bplCeiling;
-	private int bphCeiling;
-	private int actFloor;
-	private int actCeiling;
-	private int sleepFloor;
-	private int sleepCeiling;
+
 	private int maxY;
 	private boolean transparentBack;
 
@@ -93,8 +84,7 @@ public class ChartViewController {
 	}
 
 	private void setupChartData() {
-		chartData = new ChartDataController(context,hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor,
-				actCeiling, sleepFloor, sleepCeiling);
+		chartData = ChartDataController.getInstance();
 
 		// random data for now
 		chartData.createRandomData(100);
@@ -181,16 +171,6 @@ public class ChartViewController {
 	private void setUpChartParams() {
 		transparentBack = context.getResources().getBoolean(R.bool.chart_transparent_background);
 		maxY = context.getResources().getInteger(R.integer.maxY);
-		hrFloor = context.getResources().getInteger(R.integer.hr_floor);
-		hrCeiling = context.getResources().getInteger(R.integer.hr_ceiling);
-		bplFloor = context.getResources().getInteger(R.integer.bpl_floor);
-		bplCeiling = context.getResources().getInteger(R.integer.bpl_ceiling);
-		bphFloor = context.getResources().getInteger(R.integer.bph_floor);
-		bphCeiling = context.getResources().getInteger(R.integer.bph_ceiling);
-		actFloor = context.getResources().getInteger(R.integer.act_floor);
-		actCeiling = context.getResources().getInteger(R.integer.act_ceiling);
-		sleepFloor = context.getResources().getInteger(R.integer.sleep_floor);
-		sleepCeiling = context.getResources().getInteger(R.integer.sleep_ceiling);
 
 		gridColor = context.getResources().getColor(R.color.chart_grid);
 		hrLineColor = context.getResources().getColor(R.color.chart_hr_line);
@@ -217,7 +197,7 @@ public class ChartViewController {
 		sleepStyle.setValueDependentColor((new ValueDependentColor() {
 			@Override
 			public int get(GraphViewDataInterface data) {
-				int sleepRange = sleepCeiling - sleepFloor;
+				int sleepRange = chartData.getSleepCeiling() - chartData.getSleepFloor();
 				int color = 0;
 				if (data.getY() <= 0.33 * sleepRange) {
 					color = sleepBarColorLow;

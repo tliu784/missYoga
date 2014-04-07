@@ -21,6 +21,7 @@ public class RecordList implements Serializable {
 	private static RecordList instance = null;
 	private static final String FILENAME = "recordList.obj";
 	private Context context;
+	private boolean initialized = false;
 
 	private ArrayList<RecordModel> recordList = new ArrayList<RecordModel>();
 
@@ -31,15 +32,19 @@ public class RecordList implements Serializable {
 	protected RecordList() {
 
 	}
-	
+
 	public void init(Context context) {
-		this.context = context;
-		load();
+		if (!initialized) {
+			this.context = context;
+			load();
+			initialized = true;
+		}
+
 	}
 
 	private void save() {
 		FileOperation.save(recordList, FILENAME, context);
-		
+
 	}
 
 	private void load() {
@@ -62,27 +67,27 @@ public class RecordList implements Serializable {
 		save();
 	}
 
-	public void addOneRecord(recordType type, Date date, String content, String title,boolean miss) {
-		recordList.add(new RecordModel(type, date, content, title,miss));
+	public void addOneRecord(recordType type, Date date, String content, String title, boolean miss) {
+		recordList.add(new RecordModel(type, date, content, title, miss));
 		save();
 	}
-	
+
 	public void addOneRecord(RecordModel record) {
 		recordList.add(record);
 		sortByNext();
 		save();
 	}
 
-	public int getIndexByDate(Date date){
+	public int getIndexByDate(Date date) {
 		int count = 0;
-		for(RecordModel record : recordList){
+		for (RecordModel record : recordList) {
 			if (record.getTimeStamp().equals(date))
 				return count;
-			count ++;
+			count++;
 		}
 		return -1;
 	}
-	
+
 	public ArrayList<RecordModel> getRecordList() {
 		return recordList;
 	}
@@ -104,7 +109,7 @@ public class RecordList implements Serializable {
 					return startEndLong;
 				else {
 					startEndLong[1] = counter - 1;
-					startEndLong[2] = startEndLong[1] - startEndLong[0]+1;
+					startEndLong[2] = startEndLong[1] - startEndLong[0] + 1;
 					return startEndLong;
 				}
 			}
@@ -112,7 +117,7 @@ public class RecordList implements Serializable {
 		}
 		if (started) {
 			startEndLong[1] = counter - 1;
-			startEndLong[2] = startEndLong[1] - startEndLong[0]+1;
+			startEndLong[2] = startEndLong[1] - startEndLong[0] + 1;
 			return startEndLong;
 		} else {
 			return startEndLong;

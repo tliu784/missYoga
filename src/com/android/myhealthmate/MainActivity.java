@@ -2,6 +2,11 @@ package com.android.myhealthmate;
 
 import com.android.entity.AccountController;
 import com.android.reminder.AlarmReceiver;
+import com.android.reminder.MedReminderController;
+import com.android.remoteProfile.RemoteRequestController;
+import com.android.trend.ChartDataController;
+import com.android.trend.RecordList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -68,7 +73,27 @@ public class MainActivity extends Activity {
 		test.setOnClickListener(getTestClickListener());
 
 		benButton.setOnClickListener(getBenPageClickListener());
+		initAllDataControllers();
+	}
 
+	private void initAllDataControllers() {
+		int hrFloor = this.getResources().getInteger(R.integer.hr_floor);
+		int hrCeiling = this.getResources().getInteger(R.integer.hr_ceiling);
+		int bplFloor = this.getResources().getInteger(R.integer.bpl_floor);
+		int bplCeiling = this.getResources().getInteger(R.integer.bpl_ceiling);
+		int bphFloor = this.getResources().getInteger(R.integer.bph_floor);
+		int bphCeiling = this.getResources().getInteger(R.integer.bph_ceiling);
+		int actFloor = this.getResources().getInteger(R.integer.act_floor);
+		int actCeiling = this.getResources().getInteger(R.integer.act_ceiling);
+		int sleepFloor = this.getResources().getInteger(R.integer.sleep_floor);
+		int sleepCeiling = this.getResources().getInteger(R.integer.sleep_ceiling);
+
+		ChartDataController.getInstance().init(getApplicationContext(), hrFloor, hrCeiling, bplFloor, bphFloor,
+				bplCeiling, bphCeiling, actFloor, actCeiling, sleepFloor, sleepCeiling);
+		RecordList.getInstance().init(getApplicationContext());
+		MedReminderController.getInstance().init(getApplicationContext());
+		AccountController.getInstance().init(getApplicationContext());
+		RemoteRequestController.getInstance().initContext(getApplicationContext());
 	}
 
 	private OnCheckedChangeListener getRemenberMeCheckBoxListener() {
@@ -131,16 +156,16 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-//				String editTextUsername = username.getText().toString();
-//				String editTextPassword = password.getText().toString();
-//				if (TextUtils.isEmpty(editTextUsername)) {
-//					PopUP(MainActivity.this, "Username cannot be empty");
-//				} else if (TextUtils.isEmpty(editTextPassword)) {
-//					PopUP(MainActivity.this, "Password cannot be empty");
-//				} else {
-//					AuthorizeAccount(editTextUsername, editTextPassword);
-//
-//				}
+				// String editTextUsername = username.getText().toString();
+				// String editTextPassword = password.getText().toString();
+				// if (TextUtils.isEmpty(editTextUsername)) {
+				// PopUP(MainActivity.this, "Username cannot be empty");
+				// } else if (TextUtils.isEmpty(editTextPassword)) {
+				// PopUP(MainActivity.this, "Password cannot be empty");
+				// } else {
+				// AuthorizeAccount(editTextUsername, editTextPassword);
+				//
+				// }
 
 				MainPage mainPageView = new MainPage();
 				SwithActivity(MainActivity.this, mainPageView);

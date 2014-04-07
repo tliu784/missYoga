@@ -254,7 +254,7 @@ public class test extends Activity {
 		sleepCeiling = this.getResources().getInteger(R.integer.sleep_ceiling);
 		
 		
-		ChartDataController chartData = new ChartDataController(this,hrFloor, hrCeiling, bplFloor, bphFloor, bplCeiling, bphCeiling, actFloor, actCeiling, sleepFloor, sleepCeiling);
+		ChartDataController chartData = ChartDataController.getInstance();
 		chartData.createRandomData(numberOfData);
 		return chartData;
 	}
