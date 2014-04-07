@@ -16,6 +16,7 @@ import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderList;
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
+import com.android.remoteProfile.RemoteDataController;
 import com.android.remoteProfile.RemoteDataModel;
 import com.android.remoteProfile.RemoteProfileController;
 import com.android.remoteProfile.RemoteRequestController;
@@ -26,6 +27,7 @@ import com.android.service.FileOperation;
 import com.android.summary.ExcelExporter;
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartHelper;
+import com.android.trend.RecordList;
 import com.android.trend.RecordModel;
 import com.android.trend.RecordModel.recordType;
 import com.google.gson.Gson;
@@ -190,7 +192,11 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				generateRemoteData("terry@gmail.com","terry");
+				ChartDataController.getInstance().createRandomData(50);
+				ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
+				RemoteDataController rdc = RemoteDataController.getInstance();
+				rdc.init();
+				rdc.upload();
 			}
 		};
 	}
