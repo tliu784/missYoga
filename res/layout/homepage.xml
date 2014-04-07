@@ -157,12 +157,12 @@
 
             <LinearLayout
                 android:id="@+id/hr"
-                android:clickable="true"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/gen_page_margin_left"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:background="@drawable/home_section_box"
+                android:clickable="true"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -363,12 +363,12 @@
 
             <LinearLayout
                 android:id="@+id/sle"
-                android:clickable="true"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/gen_page_margin_left"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:background="@drawable/home_section_box"
+                android:clickable="true"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -542,7 +542,9 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_dialog_icon_about"
                 android:text=" Reminder "
-                android:textColor="@color/grey" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/msmall_font_size"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/rd_type"
@@ -629,15 +631,15 @@
 
         <Button
             android:id="@+id/rec"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:background="@color/light_grey"
-            android:clickable="true"
             android:gravity="left"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
             android:onClick="toggle_recom_box"
-            android:text=" Recommendation: "
-            android:textColor="@color/light_black"
-            android:textSize="20dp" />
+            android:text=" Recommendation "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/msmall_font_size"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/rec_content"
@@ -646,8 +648,31 @@
             android:layout_margin="5dp"
             android:clickable="true"
             android:text="Health is the level of functional or metabolic efficiency of a living organism."
-            android:textColor="@color/grey"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <!-- history section -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:background="@drawable/textlines"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/home_history"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:text=" History "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/msmall_font_size"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>
