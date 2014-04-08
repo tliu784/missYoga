@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 
 public class RemoteDataController {
 	private static RemoteDataController instance = null;
-	private RemoteRequestController rpc;
+	private RemoteRequestController rpc; //to be implemented
 	private ChartDataController cdc;
 	private RecordList rlc;
 	private RemoteDataModel localUserData;
@@ -71,7 +71,9 @@ public class RemoteDataController {
 			data=new RemoteDataModel();
 			dataList.add(data);
 		}
-		
+		DownloadResponseHandler handler = new DownloadResponseHandler(data);
+		RestCallHandler download = new RestCallHandler(handler, url, content);
+		download.handleResponse();
 	}
 
 	public RemoteDataModel getLocalUserData() {
@@ -109,7 +111,7 @@ public class RemoteDataController {
 		@Override
 		public void processResponse(String response) {
 			ServerResponseModel serverResponse = gson.fromJson(response, ServerResponseModel.class);
-			if (serverResponse.getType() == ServerResponseModel.ResponseType.UPLOAD)
+			if (serverResponse.getType() == ServerResponseModel.ResponseType.DOWNLOAD)
 				if (serverResponse.isSuccessful()) {
 					data=serverResponse.getRemoteData();
 					//call activity to display data

@@ -195,7 +195,7 @@ public class test extends Activity {
 				RemoteDataController rdc = RemoteDataController.getInstance();
 				rdc.init();
 	//			rdc.upload();
-				RemoteRequestModel request = new RemoteRequestModel("ben123@gmail.com","terry@123.com");
+				RemoteRequestModel request = new RemoteRequestModel("ben123@gmail.com","terry123@gmail.com");
 				rdc.download(request);
 				
 			}

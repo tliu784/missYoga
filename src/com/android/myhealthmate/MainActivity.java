@@ -92,7 +92,8 @@ public class MainActivity extends Activity {
 		RemoteRequestController.getInstance().createTestData();
 		
 		ChartDataController.getInstance().setDataset(ChartHelper.createRandomData(200));
-		ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
+//		ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
+		RecordList.getInstance().setRecordList(BenTestClass.recordListGenerator(50));
 		RemoteDataController.getInstance().init();
 		
 		//create dataModel test data
