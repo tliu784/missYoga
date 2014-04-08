@@ -102,7 +102,7 @@ public class SleDetail extends FragmentActivity {
 		filterReminder = (TextView) findViewById(R.id.reminder_event_filter);
 		filterRec = (TextView) findViewById(R.id.rec_event_filter);
 		filterNote = (TextView) findViewById(R.id.note_event_filter);
-		filterBtn = (TextView) findViewById(R.id.category_filter_button);
+//		filterBtn = (TextView) findViewById(R.id.category_filter_button);
 		filterArea = (GridLayout) findViewById(R.id.filter_area);
 
 		remoteDataController = RemoteDataController.getInstance();
@@ -225,8 +225,8 @@ public class SleDetail extends FragmentActivity {
 		filterNote.setOnClickListener(getFilterNoteClickListener());
 		filterReminder.setOnClickListener(getFilterReminderClickListener());
 		filterRec.setOnClickListener(getFilterRecClickListener());
-		filterBtn.setOnClickListener(getFilterBtnClickListener());
-		filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
+//		filterBtn.setOnClickListener(getFilterBtnClickListener());
+//		filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
 
 	}
 
@@ -371,21 +371,21 @@ public class SleDetail extends FragmentActivity {
 		}
 	}
 
-	private OnClickListener getFilterBtnClickListener() {
-		return new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (filterArea.getVisibility() == View.GONE) {
-					filterArea.setVisibility(View.VISIBLE);
-					filterBtn.setBackgroundResource(R.drawable.ic_action_expand);
-				} else {
-					filterArea.setVisibility(View.GONE);
-					filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
-				}
-
-			}
-		};
-	}
+//	private OnClickListener getFilterBtnClickListener() {
+//		return new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				if (filterArea.getVisibility() == View.GONE) {
+//					filterArea.setVisibility(View.VISIBLE);
+//					filterBtn.setBackgroundResource(R.drawable.ic_action_expand);
+//				} else {
+//					filterArea.setVisibility(View.GONE);
+//					filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
+//				}
+//
+//			}
+//		};
+//	}
 
 	private OnClickListener getFilterAllClickListener() {
 		return new OnClickListener() {

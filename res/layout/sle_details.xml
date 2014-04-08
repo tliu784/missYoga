@@ -281,43 +281,42 @@
                     </TextView>
                 </LinearLayout>
             </LinearLayout>
-                    </LinearLayout>
-            <!-- tag section -->
+        </LinearLayout>
+        <!-- tag section -->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="@dimen/gen_page_margin_left"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/gen_page_margin_left"
+            android:layout_marginRight="@dimen/gen_page_margin_right"
+            android:layout_marginTop="@dimen/gen_page_margin_bottom"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/trends_tag"
+                style="@style/loginDialog"
+                android:layout_width="@dimen/trends_tag_box_width"
+                android:layout_height="@dimen/home_tag_box_height"
                 android:layout_marginRight="@dimen/gen_page_margin_right"
-                android:layout_marginTop="@dimen/gen_page_margin_bottom"
-                android:orientation="horizontal" >
+                android:layout_marginTop="@dimen/gen_page_margin_top"
+                android:hint="Tag here"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:paddingBottom="2dp"
+                android:paddingTop="0dp" />
 
-                <EditText
-                    android:id="@+id/trends_tag"
-                    style="@style/loginDialog"
-                    android:layout_width="@dimen/trends_tag_box_width"
-                    android:layout_height="@dimen/home_tag_box_height"
-                    android:layout_marginRight="@dimen/gen_page_margin_right"
-                    android:layout_marginTop="@dimen/gen_page_margin_top"
-                    android:hint="Tag here"
-                    android:paddingBottom="2dp"
-                    android:paddingTop="0dp" />
-
-                <requestFocus />
-
-                <Button
-                    android:id="@+id/trends_tag"
-                    style="@style/homeBtnStyle"
-                    android:layout_width="@dimen/trends_tag_btn_width"
-                    android:layout_height="@dimen/home_tag_box_height"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:paddingTop="2dp"
-                    android:text="@string/home_tag" />
-            </LinearLayout>
-
+            <Button
+                android:id="@+id/trends_tag"
+                style="@style/homeBtnStyle"
+                android:layout_width="@dimen/trends_tag_btn_width"
+                android:layout_height="@dimen/home_tag_box_height"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:text="@string/home_tag" />
+        </LinearLayout>
     </FrameLayout>
     <!-- notes section -->
 
@@ -332,7 +331,7 @@
         android:paddingTop="2dp" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
@@ -343,6 +342,7 @@
                 android:maxLines="1"
                 android:paddingLeft="10dp"
                 android:scrollbars="vertical"
+                android:paddingTop="5dp"
                 android:text="Event List"
                 android:textSize="16dp"
                 android:textStyle="bold" >
@@ -359,94 +359,98 @@
                 android:textSize="16dp"
                 android:textStyle="bold" >
             </TextView>
+
+            <!-- filters -->
+
+            <GridLayout
+                android:id="@+id/filter_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="5dp"
+                android:columnCount="7"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    android:id="@+id/all_event_filter"
+                    style="@style/chart_tab_textbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="8dp"
+                    android:text="ALL "
+                    android:textSize="16dp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/note_event_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/ic_action_event"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="8dp"
+                    android:scrollbars="vertical"
+                    android:text=""
+                    android:textSize="14dp"
+                    android:textStyle="bold" >
+                </TextView>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/rec_event_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/ic_rec"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="8dp"
+                    android:scrollbars="vertical"
+                    android:text=""
+                    android:textSize="14dp"
+                    android:textStyle="bold" >
+                </TextView>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/reminder_event_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/ic_action_alarms_small"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="8dp"
+                    android:scrollbars="vertical"
+                    android:text=""
+                    android:textSize="14dp"
+                    android:textStyle="bold" >
+                </TextView>
+            </GridLayout>
         </LinearLayout>
-
-        <GridLayout
-            android:id="@+id/filter_area"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/textlines"
-            android:columnCount="7"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:visibility="gone" >
-
-            <TextView
-                android:id="@+id/all_event_filter"
-                style="@style/chart_tab_textbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:gravity="center"
-                android:maxLines="1"
-                android:paddingLeft="8dp"
-                android:text="ALL "
-                android:textSize="14dp"
-                android:textStyle="bold" >
-            </TextView>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/note_event_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:gravity="center"
-                android:maxLines="1"
-                android:paddingLeft="8dp"
-                android:scrollbars="vertical"
-                android:text="NOTES "
-                android:textSize="14dp"
-                android:textStyle="bold" >
-            </TextView>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/rec_event_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:gravity="center"
-                android:maxLines="1"
-                android:paddingLeft="8dp"
-                android:scrollbars="vertical"
-                android:text="RECOMMENDATION "
-                android:textSize="14dp"
-                android:textStyle="bold" >
-            </TextView>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="5dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/reminder_event_filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:gravity="center"
-                android:maxLines="1"
-                android:paddingLeft="8dp"
-                android:scrollbars="vertical"
-                android:text="REMINDER"
-                android:textSize="14dp"
-                android:textStyle="bold" >
-            </TextView>
-        </GridLayout>
 
         <ScrollView
             android:id="@+id/scrollHistorySection"
