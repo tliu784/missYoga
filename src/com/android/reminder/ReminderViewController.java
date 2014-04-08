@@ -311,7 +311,7 @@ public class ReminderViewController {
 		}
 	}
 
-	class DetailSection {
+	public class DetailSection {
 		private LinearLayout detailSection;
 		TextView content;
 		TextView rdTime;
@@ -362,7 +362,7 @@ public class ReminderViewController {
 
 	}
 
-	class EditSection {
+	public class EditSection {
 		LinearLayout editSection;
 		LinearLayout editTitleSection;
 		DetailSecTextView titleText;
@@ -572,7 +572,6 @@ public class ReminderViewController {
 			// edit title section
 			editTitleSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			editTitleSection.setOrientation(LinearLayout.HORIZONTAL);
-
 			titleText.setText("Title");
 
 			editTitle.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -626,7 +625,6 @@ public class ReminderViewController {
 			startTimeSection.addView(editMins);
 
 			// add reminder duration time section in edit content section
-
 			startDurationSection
 					.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			startDurationSection.setOrientation(LinearLayout.HORIZONTAL);
@@ -714,7 +712,6 @@ public class ReminderViewController {
 			buttonSection.addView(cancelButton);		
 			
 			// add all sections
-
 			editSection.addView(editTitleSection);
 			editSection.addView(editDetailSection);
 			editSection.addView(startDateSection);

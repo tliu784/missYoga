@@ -38,7 +38,7 @@ public class RecordViewSection {
 		this.layout = new LinearLayout(context);
 		this.type = type;
 		this.titleType = new TextView(context);
-		this.titleType.setText(type.toString()+" - "+ title);
+		this.titleType.setText(type.toString()+title);
 		this.icon = new TextView(context);
 		this.time = new TextView(context);
 		setTime(date);
