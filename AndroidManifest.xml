@@ -87,6 +87,10 @@
             android:name="com.android.myhealthmate.Settings"
             android:label="@string/welcome" >
         </activity>
+        <activity
+            android:name="com.android.myhealthmate.History"
+            android:label="@string/welcome" >
+        </activity>
     </application>
 
 </manifest>
