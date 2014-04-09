@@ -34,6 +34,7 @@ public class RemoteEngineController implements ResponseHandler {
 		userinfo.setDiabetes(true);
 		userinfo.setHypertension(true);
 		userinfo.setInsomnia(true);
+		userinfo.setHeight(175);
 		
 		for (int i=0; i<7; i++){
 			ActData act = new ActData(timestamp, 40);

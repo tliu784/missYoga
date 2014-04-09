@@ -108,8 +108,17 @@ public class EngineInputModel {
 		String gender;
 		boolean hypertension;
 		boolean insomnia;
+		int height;
 		ArrayList<WeightData> weight = new ArrayList<WeightData>();
 		
+		
+		
+		public int getHeight() {
+			return height;
+		}
+		public void setHeight(int height) {
+			this.height = height;
+		}
 		public int getAge() {
 			return age;
 		}
