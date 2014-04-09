@@ -11,6 +11,7 @@ import com.android.entity.AccountController;
 import com.android.entity.AccountModel;
 import com.android.entity.ProfileModel;
 import com.android.myhealthmate.R;
+import com.android.recommendation.RemoteEngineController;
 import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
@@ -172,7 +173,9 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testRemoteProfile(ServerResponseModel.ResponseType.APPROVE_REQUEST);
+				RemoteEngineController rec = new RemoteEngineController();
+				Log.d("input",gson.toJson(rec.generateInput()));
+				rec.getRecommendation(rec.generateInput());
 			}
 		};
 	}
