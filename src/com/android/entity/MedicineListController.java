@@ -17,6 +17,7 @@ public class MedicineListController {
 
 	protected MedicineListController() {
 
+		
 	}
 
 	public void init(Context appcontext) {

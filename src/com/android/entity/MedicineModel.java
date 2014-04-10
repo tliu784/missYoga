@@ -24,6 +24,7 @@ public class MedicineModel implements Comparable<MedicineModel>,Serializable {
 	}
 
 	public MedicineModel(){
+		
 		this.id=-1;
 		this.startTime=new Date();
 		this.title="";

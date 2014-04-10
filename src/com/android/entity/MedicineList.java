@@ -15,6 +15,7 @@ public class MedicineList implements Serializable{
 	
 	public void incrementalCount() {
 		count++;
+		
 	}
 	public ArrayList<MedicineModel> getMedicineList() {
 		return medicineList;
