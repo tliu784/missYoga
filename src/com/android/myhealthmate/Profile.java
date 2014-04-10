@@ -91,7 +91,7 @@ public class Profile extends Activity {
 			if (submit.getVisibility() == View.GONE) {
 				submit.setVisibility(View.VISIBLE);
 				cancel.setVisibility(View.VISIBLE);
-			}else{
+			} else {
 				submit.setVisibility(View.GONE);
 				cancel.setVisibility(View.GONE);
 			}

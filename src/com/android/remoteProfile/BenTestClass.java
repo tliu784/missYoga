@@ -6,8 +6,8 @@ import java.util.Date;
 import android.content.Context;
 import com.android.entity.AccountController;
 import com.android.myhealthmate.R;
-import com.android.reminder.MedReminderModel;
-import com.android.reminder.MedReminderModel.DurationUnit;
+import com.android.reminder.MedicineModel;
+import com.android.reminder.MedicineModel.DurationUnit;
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartHelper;
 import com.android.trend.RecordList;
@@ -127,7 +127,7 @@ public class BenTestClass {
 				record = new RecordModel(type, date,getRandomRecordText(type), "", true);
 			}
 
-			date = MedReminderModel.addDuration(date, -20, DurationUnit.Min);
+			date = MedicineModel.addDuration(date, -20, DurationUnit.Min);
 			if (Math.random() > 0.7)
 				recordList.add(record);
 		}

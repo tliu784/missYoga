@@ -7,7 +7,7 @@ import com.android.entity.TestingJson;
 import com.android.reminder.AlarmReceiver;
 import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
-import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedicineModel;
 import com.android.service.ResponseHandler;
 import com.android.service.RestCallHandler;
 import com.google.gson.Gson;
@@ -96,7 +96,7 @@ public class MainPage extends Activity implements ResponseHandler {
 
 		MedReminderController mrcInstance = MedReminderController.getInstance();
 		mrcInstance.init(getApplicationContext());
-		MedReminderModel reminder = null;
+		MedicineModel reminder = null;
 		if (mrcInstance.getReminderList().size() > 0) {
 			reminder = mrcInstance.getReminderList().get(0); // get the first
 																// reminder

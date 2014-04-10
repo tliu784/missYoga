@@ -14,8 +14,8 @@ import com.android.myhealthmate.R;
 import com.android.recommendation.RemoteEngineController;
 import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
-import com.android.reminder.MedReminderModel;
-import com.android.reminder.MedReminderModel.DurationUnit;
+import com.android.reminder.MedicineModel;
+import com.android.reminder.MedicineModel.DurationUnit;
 import com.android.remoteProfile.RemoteDataController;
 import com.android.remoteProfile.RemoteDataModel;
 import com.android.remoteProfile.RemoteRequestController;
@@ -298,7 +298,7 @@ public class test extends Activity {
 			RecordModel record = new RecordModel(type, date, "this is history record" + Integer.toString(i), "Reocrd",
 					true);
 
-			date = MedReminderModel.addDuration(date, -20, DurationUnit.Min);
+			date = MedicineModel.addDuration(date, -20, DurationUnit.Min);
 			if (Math.random() > 0.7)
 				recordList.add(record);
 		}
@@ -333,7 +333,7 @@ public class test extends Activity {
 		reminders = MedReminderController.getInstance();
 		reminders.init(this.getApplicationContext());
 		String text="";
-		for (MedReminderModel reminder: reminders.getReminderList()){
+		for (MedicineModel reminder: reminders.getReminderList()){
 			text+=reminder.toString();
 			text+="\n";
 		}
@@ -364,10 +364,10 @@ public class test extends Activity {
 		String title = "aspirin";
 		String detail = "take 1 pill";
 		int duration = 7;
-		MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Sec;
+		MedicineModel.DurationUnit dunit = MedicineModel.DurationUnit.Sec;
 		int repeat = 4;
-		MedReminderModel.DurationUnit runit = MedReminderModel.DurationUnit.Sec;
-		MedReminderModel reminder=new MedReminderModel(10,creationTime, title, detail, duration, dunit,
+		MedicineModel.DurationUnit runit = MedicineModel.DurationUnit.Sec;
+		MedicineModel reminder=new MedicineModel(10,creationTime, title, detail, duration, dunit,
 				repeat, runit);
 		MedReminderController mrc = MedReminderController.getInstance();
 		mrc.getReminderList().clear();
@@ -384,9 +384,9 @@ public class test extends Activity {
 		String title = "aspirin";
 		String detail = "take 1 pill";
 		int duration = 2;
-		MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Day;
+		MedicineModel.DurationUnit dunit = MedicineModel.DurationUnit.Day;
 		int repeat = 4;
-		MedReminderModel.DurationUnit runit = MedReminderModel.DurationUnit.Hour;
+		MedicineModel.DurationUnit runit = MedicineModel.DurationUnit.Hour;
 		reminders.addReminder(creationTime, title, detail, duration, dunit,
 				repeat, runit);
 		// reminder 2
@@ -394,9 +394,9 @@ public class test extends Activity {
 		String title2 = "title 2";
 		String detail2 = "take 2 pills";
 		int duration2 = 2;
-		MedReminderModel.DurationUnit dunit2 = MedReminderModel.DurationUnit.Day;
+		MedicineModel.DurationUnit dunit2 = MedicineModel.DurationUnit.Day;
 		int repeat2 = 5;
-		MedReminderModel.DurationUnit runit2 = MedReminderModel.DurationUnit.Sec;
+		MedicineModel.DurationUnit runit2 = MedicineModel.DurationUnit.Sec;
 		reminders.addReminder(creationTime2, title2, detail2, duration2,
 				dunit2, repeat2, runit2);
 
@@ -406,9 +406,9 @@ public class test extends Activity {
 		String title3 = "title 3";
 		String detail3 = "take 3 pills";
 		int duration3 = 2;
-		MedReminderModel.DurationUnit dunit3 = MedReminderModel.DurationUnit.Day;
+		MedicineModel.DurationUnit dunit3 = MedicineModel.DurationUnit.Day;
 		int repeat3 = 10;
-		MedReminderModel.DurationUnit runit3 = MedReminderModel.DurationUnit.Sec;
+		MedicineModel.DurationUnit runit3 = MedicineModel.DurationUnit.Sec;
 		reminders.addReminder(creationTime3, title3, detail3, duration3,
 				dunit3, repeat3, runit3);
 		
@@ -417,7 +417,7 @@ public class test extends Activity {
 	private void testMedRemModle() {
 	
 		String text = "";
-		for (MedReminderModel reminder : reminders.getReminderList()) {
+		for (MedicineModel reminder : reminders.getReminderList()) {
 			text += reminder.toString();
 			text += "\n";
 		}

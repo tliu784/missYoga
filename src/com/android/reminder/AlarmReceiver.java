@@ -21,7 +21,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		mrc.init(context);
 		// get reminder via intent extra variable
 		int id = intent.getExtras().getInt(AlarmService.reminderVar);
-		MedReminderModel reminder = mrc.findbyid(id);
+		MedicineModel reminder = mrc.findbyid(id);
 
 		NotificationManager mNM;
 		Intent toActivity = new Intent(context, MainPage.class);

@@ -3,8 +3,8 @@ package com.android.myhealthmate;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.android.reminder.MedReminderModel;
-import com.android.reminder.MedReminderModel.DurationUnit;
+import com.android.reminder.MedicineModel;
+import com.android.reminder.MedicineModel.DurationUnit;
 import com.android.trend.AddNotePopupDialog;
 import com.android.trend.RecordList;
 import com.android.trend.RecordModel;
@@ -168,7 +168,7 @@ public class HrDetail extends Activity {
 			RecordModel record = new RecordModel(recordType.Recommendation, date, "this is history record"
 					+ Integer.toString(i), "Record",true);
 
-			date = MedReminderModel.addDuration(date, 20, DurationUnit.Min);
+			date = MedicineModel.addDuration(date, 20, DurationUnit.Min);
 			if (Math.random() > 0.7)
 				recordList.add(record);
 		}

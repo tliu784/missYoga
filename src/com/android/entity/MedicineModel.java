@@ -1,12 +1,11 @@
-package com.android.reminder;
+package com.android.entity;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import com.google.gson.Gson;
 
-public class MedReminderModel implements Comparable<MedReminderModel>,
-		Serializable {
+public class MedicineModel implements Comparable<MedicineModel>,Serializable {
 
 	private static final long serialVersionUID = 1571465180592233361L;
 	private int id;
@@ -24,7 +23,7 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 		Day, Hour, Min, Sec;
 	}
 
-	public MedReminderModel(){
+	public MedicineModel(){
 		this.id=-1;
 		this.startTime=new Date();
 		this.title="";
@@ -37,7 +36,7 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 		this.active=false;
 	}
 	
-	public MedReminderModel(int id, Date startTime, String title,
+	public MedicineModel(int id, Date startTime, String title,
 			String detail, int duration, DurationUnit dunit, int repeat,
 			DurationUnit runit) {
 		this.id = id;
@@ -164,7 +163,7 @@ public class MedReminderModel implements Comparable<MedReminderModel>,
 	}
 
 	@Override
-	public int compareTo(MedReminderModel anotherReminder) {
+	public int compareTo(MedicineModel anotherReminder) {
 		if (this.active && (!anotherReminder.active))
 			return -1;
 		if (!this.active && anotherReminder.active)

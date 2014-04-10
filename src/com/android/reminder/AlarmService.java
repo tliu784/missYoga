@@ -15,7 +15,7 @@ public class AlarmService {
 		this.context = context;
 	}
 
-	public void setAlarm(MedReminderModel reminder) {
+	public void setAlarm(MedicineModel reminder) {
 		AlarmManager am = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		Intent intent = new Intent(context, AlarmReceiver.class);
@@ -26,7 +26,7 @@ public class AlarmService {
 		am.set(AlarmManager.RTC_WAKEUP, firstTime, pi);
 	}
 	
-	public void cancelAlarm(MedReminderModel reminder){
+	public void cancelAlarm(MedicineModel reminder){
 		AlarmManager am = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		Intent intent = new Intent(context, AlarmReceiver.class);
