@@ -173,9 +173,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				RemoteEngineController rec = new RemoteEngineController();
-				Log.d("input",gson.toJson(rec.generateInput()));
-				rec.getRecommendation(rec.generateInput());
+				testAlarm();
 			}
 		};
 	}
@@ -365,13 +363,15 @@ public class test extends Activity {
 		Date creationTime = Calendar.getInstance().getTime();
 		String title = "aspirin";
 		String detail = "take 1 pill";
-		int duration = 2;
-		MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Day;
+		int duration = 7;
+		MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Sec;
 		int repeat = 4;
 		MedReminderModel.DurationUnit runit = MedReminderModel.DurationUnit.Sec;
-		MedReminderModel reminder=new MedReminderModel(1,creationTime, title, detail, duration, dunit,
+		MedReminderModel reminder=new MedReminderModel(10,creationTime, title, detail, duration, dunit,
 				repeat, runit);
-		new AlarmService(this.getApplicationContext()).setAlarm(reminder);
+		MedReminderController mrc = MedReminderController.getInstance();
+		mrc.getReminderList().clear();
+		mrc.addReminder(reminder);
 		testText.setText(reminder.toString());
 	}
 
