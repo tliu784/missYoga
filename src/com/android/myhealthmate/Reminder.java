@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.reminder.MedReminderController;
-import com.android.reminder.MedicineModel;
+import com.android.reminder.MedReminderModel;
 import com.android.reminder.ReminderViewController;
 import com.android.reminder.ReminderViewController.TitleSection;
 
@@ -53,7 +53,7 @@ public class Reminder extends Activity {
 	}
 
 	private void createReminderSections() {
-		for (MedicineModel reminder : mrcInstance.getReminderList()) {
+		for (MedReminderModel reminder : mrcInstance.getReminderList()) {
 			ReminderViewController singleReminderSection = new ReminderViewController(reminder, Reminder.this,
 					mrcInstance, Reminder.this);
 			reminderSectionArray.add(singleReminderSection);
@@ -66,7 +66,7 @@ public class Reminder extends Activity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.add_reminder: {
-			MedicineModel newReminder = new MedicineModel();
+			MedReminderModel newReminder = new MedReminderModel();
 			mrcInstance.addReminder(newReminder);
 			ReminderViewController singleReminderSection = new ReminderViewController(newReminder, Reminder.this,
 					mrcInstance, Reminder.this);
@@ -130,9 +130,9 @@ public class Reminder extends Activity {
 		String title = "aspirin";
 		String detail = "take 1 pill";
 		int duration = 2;
-		MedicineModel.DurationUnit dunit = MedicineModel.DurationUnit.Day;
+		MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Day;
 		int repeat = 4;
-		MedicineModel.DurationUnit runit = MedicineModel.DurationUnit.Hour;
+		MedReminderModel.DurationUnit runit = MedReminderModel.DurationUnit.Hour;
 		reminders.addReminder(creationTime, title, detail, duration, dunit, repeat, runit);
 	}
 
@@ -145,18 +145,18 @@ public class Reminder extends Activity {
 		String title = "Aspirin";
 		String detail = "Take 1 pill";
 		int duration = 1;
-		MedicineModel.DurationUnit dunit = MedicineModel.DurationUnit.Day;
+		MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Day;
 		int repeat = 4;
-		MedicineModel.DurationUnit runit = MedicineModel.DurationUnit.Hour;
+		MedReminderModel.DurationUnit runit = MedReminderModel.DurationUnit.Hour;
 		reminders.addReminder(creationTime, title, detail, duration, dunit, repeat, runit);
 		// reminder 2
 		Date creationTime2 = Calendar.getInstance().getTime();
 		String title2 = "Kanamycin";
 		String detail2 = "Take 2 pills";
 		int duration2 = 2;
-		MedicineModel.DurationUnit dunit2 = MedicineModel.DurationUnit.Day;
+		MedReminderModel.DurationUnit dunit2 = MedReminderModel.DurationUnit.Day;
 		int repeat2 = 5;
-		MedicineModel.DurationUnit runit2 = MedicineModel.DurationUnit.Day;
+		MedReminderModel.DurationUnit runit2 = MedReminderModel.DurationUnit.Day;
 		reminders.addReminder(creationTime2, title2, detail2, duration2, dunit2, repeat2, runit2);
 
 		// reminder 3
@@ -165,9 +165,9 @@ public class Reminder extends Activity {
 		String title3 = "Qsymia";
 		String detail3 = "Take 3 pills";
 		int duration3 = 3;
-		MedicineModel.DurationUnit dunit3 = MedicineModel.DurationUnit.Day;
+		MedReminderModel.DurationUnit dunit3 = MedReminderModel.DurationUnit.Day;
 		int repeat3 = 10;
-		MedicineModel.DurationUnit runit3 = MedicineModel.DurationUnit.Day;
+		MedReminderModel.DurationUnit runit3 = MedReminderModel.DurationUnit.Day;
 		reminders.addReminder(creationTime3, title3, detail3, duration3, dunit3, repeat3, runit3);
 
 	}

@@ -6,8 +6,8 @@ import java.util.Date;
 
 import android.content.Context;
 
-import com.android.reminder.MedicineModel;
-import com.android.reminder.MedicineModel.DurationUnit;
+import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.service.FileOperation;
 import com.android.trend.ChartHelper.GraphViewData;
 

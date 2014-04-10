@@ -3,7 +3,7 @@ package com.android.myhealthmate;
 import java.util.ArrayList;
 
 import com.android.reminder.MedReminderController;
-import com.android.reminder.MedicineModel;
+import com.android.reminder.MedReminderModel;
 import com.android.trend.RecordList;
 import com.android.trend.RecordModel;
 import com.android.trend.RecordModel.recordType;
@@ -20,7 +20,7 @@ public class ReminderDialogPopup extends DialogFragment {
 	ArrayList<RecordModel> recordList = new ArrayList<RecordModel>();
 	RecordList recordListInstance = RecordList.getInstance();
 
-	MedicineModel reminder = null;
+	MedReminderModel reminder = null;
 
 	public Dialog onCreateDialog(Context context, int id) {
 
@@ -45,16 +45,16 @@ public class ReminderDialogPopup extends DialogFragment {
 		return builder.create();
 	}
 
-	private void addDoneRecord(MedicineModel reminder) {
+	private void addDoneRecord(MedReminderModel reminder) {
 		recordListInstance.addOneRecord(recordType.Reminder, reminder.getNextAlarmTime(), reminder.getDetail(),reminder.getTitle(), false);
 	}
 
-	private void addMissRecord(MedicineModel reminder) {
+	private void addMissRecord(MedReminderModel reminder) {
 		recordListInstance.addOneRecord(recordType.Reminder, reminder.getNextAlarmTime(), reminder.getDetail(), reminder.getTitle(), true);
 	}
 
-	public MedicineModel updateReminderSection(Context context, int id) {
-		MedicineModel reminderItem = null;
+	public MedReminderModel updateReminderSection(Context context, int id) {
+		MedReminderModel reminderItem = null;
 		MedReminderController mrcInstance = MedReminderController.getInstance();
 		mrcInstance.init(context);
 		if (mrcInstance.getReminderList().size() > 0) {

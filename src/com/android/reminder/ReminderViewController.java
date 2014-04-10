@@ -9,7 +9,7 @@ import java.util.Locale;
 
 import com.android.myhealthmate.R;
 import com.android.myhealthmate.Reminder;
-import com.android.reminder.MedicineModel.DurationUnit;
+import com.android.reminder.MedReminderModel.DurationUnit;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar.LayoutParams;
@@ -31,7 +31,7 @@ import android.widget.TextView;
 
 public class ReminderViewController {
 	private LinearLayout reminderSection;
-	private MedicineModel reminder;
+	private MedReminderModel reminder;
 	private TitleSection titleSec;
 	private DetailSection detailSec;
 	private EditSection editSec;
@@ -40,7 +40,7 @@ public class ReminderViewController {
 	private Reminder callbackAct;
 	private boolean isNew;
 
-	public ReminderViewController(MedicineModel reminder, Context context, MedReminderController controller,
+	public ReminderViewController(MedReminderModel reminder, Context context, MedReminderController controller,
 			Reminder reminderAct) {
 		this.reminder = reminder;
 		this.context = context;

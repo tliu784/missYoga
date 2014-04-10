@@ -13,7 +13,7 @@ public class MedReminderController {
 	private static final String FILENAME = "medreminders.obj";
 	private static MedReminderController instance = new MedReminderController();
 	private static boolean initialized = false;
-	private MedicineList reminderList = new MedicineList();
+	private MedReminderList reminderList = new MedReminderList();
 	private Context context;
 	private AlarmService alarmService;
 
@@ -27,7 +27,7 @@ public class MedReminderController {
 			alarmService = new AlarmService(context);
 			load();
 		}
-		for (MedicineModel reminder : reminderList.getReminderList()) {
+		for (MedReminderModel reminder : reminderList.getReminderList()) {
 			reminder.setNextTime();
 			if (reminder.isActive()) {
 				alarmService.setAlarm(reminder);
@@ -47,7 +47,7 @@ public class MedReminderController {
 	}
 
 	private void load() {
-		MedicineList storedEvents = (MedicineList) FileOperation.read(
+		MedReminderList storedEvents = (MedReminderList) FileOperation.read(
 				FILENAME, context);
 		if (storedEvents != null) {
 			reminderList = storedEvents;
@@ -60,18 +60,18 @@ public class MedReminderController {
 	}
 
 	public void addReminder(Date creationTime, String title, String detail,
-			int duration, MedicineModel.DurationUnit dunit, int repeat,
-			MedicineModel.DurationUnit runit) {
+			int duration, MedReminderModel.DurationUnit dunit, int repeat,
+			MedReminderModel.DurationUnit runit) {
 		reminderList.incrementalCount();
 		int id = reminderList.getCount();
-		MedicineModel newReminder = new MedicineModel(id, creationTime,
+		MedReminderModel newReminder = new MedReminderModel(id, creationTime,
 				title, detail, duration, dunit, repeat, runit);
 		reminderList.getReminderList().add(newReminder);
 		sortByNext();
 		alarmService.setAlarm(findbyid(newReminder.getId()));
 	}
 
-	public void addReminder(MedicineModel reminder) {
+	public void addReminder(MedReminderModel reminder) {
 		reminderList.incrementalCount();
 		int id = reminderList.getCount();
 		reminder.setId(id);
@@ -81,7 +81,7 @@ public class MedReminderController {
 			alarmService.setAlarm(findbyid(reminder.getId()));
 	}
 
-	public ArrayList<MedicineModel> getReminderList() {
+	public ArrayList<MedReminderModel> getReminderList() {
 		return reminderList.getReminderList();
 	}
 
@@ -91,8 +91,8 @@ public class MedReminderController {
 		sortByNext();
 	}
 
-	public MedicineModel findbyid(int id) {
-		for (MedicineModel reminder : reminderList.getReminderList()) {
+	public MedReminderModel findbyid(int id) {
+		for (MedReminderModel reminder : reminderList.getReminderList()) {
 			if (reminder.getId() == id) {
 				return reminder;
 			}
@@ -107,7 +107,7 @@ public class MedReminderController {
 
 	// must call this after update an existing reminder
 	public void activate(int reminderId) {
-		MedicineModel reminder = findbyid(reminderId);
+		MedReminderModel reminder = findbyid(reminderId);
 		Log.d("id", Integer.toString(reminderId));
 		if (reminder != null) {
 			reminder.setActive(true);
@@ -120,14 +120,14 @@ public class MedReminderController {
 	}
 
 	public void deactivate(int reminderId) {
-		MedicineModel reminder = findbyid(reminderId);
+		MedReminderModel reminder = findbyid(reminderId);
 		reminder.setActive(false);
 		alarmService.cancelAlarm(reminder);
 		sortByNext();
 	}
 
 	public void postAlarm(int reminderId) {
-		MedicineModel reminder = findbyid(reminderId);
+		MedReminderModel reminder = findbyid(reminderId);
 		reminder.setNextTime();
 		sortByNext();
 

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import com.google.gson.Gson;
 
-public class MedicineModel implements Comparable<MedicineModel>,
+public class MedReminderModel implements Comparable<MedReminderModel>,
 		Serializable {
 
 	private static final long serialVersionUID = 1571465180592233361L;
@@ -24,7 +24,7 @@ public class MedicineModel implements Comparable<MedicineModel>,
 		Day, Hour, Min, Sec;
 	}
 
-	public MedicineModel(){
+	public MedReminderModel(){
 		this.id=-1;
 		this.startTime=new Date();
 		this.title="";
@@ -37,7 +37,7 @@ public class MedicineModel implements Comparable<MedicineModel>,
 		this.active=false;
 	}
 	
-	public MedicineModel(int id, Date startTime, String title,
+	public MedReminderModel(int id, Date startTime, String title,
 			String detail, int duration, DurationUnit dunit, int repeat,
 			DurationUnit runit) {
 		this.id = id;
@@ -164,7 +164,7 @@ public class MedicineModel implements Comparable<MedicineModel>,
 	}
 
 	@Override
-	public int compareTo(MedicineModel anotherReminder) {
+	public int compareTo(MedReminderModel anotherReminder) {
 		if (this.active && (!anotherReminder.active))
 			return -1;
 		if (!this.active && anotherReminder.active)

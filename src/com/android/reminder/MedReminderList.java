@@ -3,11 +3,11 @@ package com.android.reminder;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MedicineList implements Serializable{
+public class MedReminderList implements Serializable{
 	
 	private static final long serialVersionUID = -3655329975219497567L;
 	private int count = 0;
-	private ArrayList<MedicineModel> reminderList = new ArrayList<MedicineModel>();
+	private ArrayList<MedReminderModel> reminderList = new ArrayList<MedReminderModel>();
 	
 	public int getCount() {
 		return count;
@@ -16,7 +16,7 @@ public class MedicineList implements Serializable{
 	public void incrementalCount() {
 		count++;
 	}
-	public ArrayList<MedicineModel> getReminderList() {
+	public ArrayList<MedReminderModel> getReminderList() {
 		return reminderList;
 	}
 	

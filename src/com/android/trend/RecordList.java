@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.Date;
 
 import android.content.Context;
-import com.android.reminder.MedicineModel;
-import com.android.reminder.MedicineModel.DurationUnit;
+import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.service.FileOperation;
 import com.android.trend.RecordModel.recordType;
 
@@ -97,7 +97,7 @@ public class RecordList implements Serializable {
 		int counter = 0;
 		boolean started = false;
 
-		Date afterOneHour = MedicineModel.addDuration(startTime, 1, DurationUnit.Hour);
+		Date afterOneHour = MedReminderModel.addDuration(startTime, 1, DurationUnit.Hour);
 		for (RecordModel record : recordList) {
 			if (record.getTimeStamp().compareTo(startTime) >= 0 && record.getTimeStamp().compareTo(afterOneHour) <= 0) {
 				if (!started) {

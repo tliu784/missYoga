@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import com.android.reminder.MedicineModel;
-import com.android.reminder.MedicineModel.DurationUnit;
+import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.trend.RecordModel.recordType;
 import com.jjoe64.graphview.GraphViewDataInterface;
 
@@ -30,7 +30,7 @@ public class ChartHelper {
 		double act;
 		double sleep;
 		boolean isSleep = false;
-		Date beginningTime = MedicineModel.addDuration(new Date(), (1 - count), DurationUnit.Hour);
+		Date beginningTime = MedReminderModel.addDuration(new Date(), (1 - count), DurationUnit.Hour);
 		Date timestamp = ChartHelper.toPreviousWholeHour(beginningTime);
 		for (int i = 0; i < count; i++) {
 			// need to adjust time later
@@ -43,7 +43,7 @@ public class ChartHelper {
 				isSleep = !isSleep;
 			}
 			dataset.add(new ChartPointModel(timestamp, hr, bpl, bph, act, sleep, isSleep));
-			timestamp = MedicineModel.addDuration(timestamp, 1, DurationUnit.Hour);
+			timestamp = MedReminderModel.addDuration(timestamp, 1, DurationUnit.Hour);
 		}
 		return dataset;
 
@@ -68,7 +68,7 @@ public class ChartHelper {
 			RecordModel record = new RecordModel(type, date, "this is history record" + Integer.toString(i), "Reocrd",
 					true);
 
-			date = MedicineModel.addDuration(date, -20, DurationUnit.Min);
+			date = MedReminderModel.addDuration(date, -20, DurationUnit.Min);
 			if (Math.random() > 0.7)
 				recordList.add(record);
 		}
