@@ -30,8 +30,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_profile"
-                android:text="XXX"
+                android:drawableLeft="@drawable/ic_remote_profiles"
+                android:text=" Remote Profiles"
                 android:textColor="@color/black"
                 android:textSize="@dimen/profile_text_size"
                 android:textStyle="bold" />
@@ -95,8 +95,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_profile"
-                android:text="Family Members"
+                android:drawableLeft="@drawable/ic_remote_viewers"
+                android:text=" Remote Viewers"
                 android:textColor="@color/black"
                 android:textSize="@dimen/profile_text_size"
                 android:textStyle="bold" />
@@ -166,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_profile"
-                    android:text="Family Members"
+                    android:text=" Account"
                     android:textColor="@color/black"
                     android:textSize="@dimen/profile_text_size"
                     android:textStyle="bold" />
@@ -427,14 +427,6 @@
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:clickable="true"
-                            android:text="@string/account_deactivate"
-                            android:textColor="@color/grey"
-                            android:textStyle="bold" />
                     </RelativeLayout>
 
                     <TextView
