@@ -64,12 +64,14 @@
     <style name="profile_textview">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="profile_textview_with_radiobtns">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:paddingTop">8dp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="profile_edittext">
