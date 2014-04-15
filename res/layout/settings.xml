@@ -13,9 +13,138 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <!-- start monitor section -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@drawable/textlines"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/gen_page_margin_top"
+            android:paddingLeft="@dimen/gen_page_margin_left"
+            android:paddingRight="@dimen/gen_page_margin_right"
+            android:paddingTop="@dimen/gen_page_margin_top" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_profile"
+                android:text="XXX"
+                android:textColor="@color/black"
+                android:textSize="@dimen/profile_text_size"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@color/light_grey" />
+
+            <GridLayout
+                android:id="@+id/monitor_sec"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:clickable="true"
+                    android:text="@string/email"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/monitor_status"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </GridLayout>
+        </LinearLayout>
+
+        <!-- end monitor section -->
+
+
+        <!-- start request section -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@drawable/textlines"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/gen_page_margin_top"
+            android:paddingLeft="@dimen/gen_page_margin_left"
+            android:paddingRight="@dimen/gen_page_margin_right"
+            android:paddingTop="@dimen/gen_page_margin_top" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_profile"
+                android:text="Family Members"
+                android:textColor="@color/black"
+                android:textSize="@dimen/profile_text_size"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@color/light_grey" />
+
+            <GridLayout
+                android:id="@+id/request_sec"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_name"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:clickable="true"
+                    android:text="@string/email"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/monitor_status"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </GridLayout>
+        </LinearLayout>
+        <!-- end request section -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gen_page_margin_top"
             android:background="@drawable/textlines"
             android:clickable="true"
             android:orientation="vertical"
@@ -30,9 +159,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/gen_page_margin_top"
-                android:paddingLeft="@dimen/gen_page_margin_left"
                 android:paddingRight="@dimen/gen_page_margin_right"
                 android:paddingTop="@dimen/gen_page_margin_top" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_profile"
+                    android:text="Family Members"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_text_size"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:background="@color/light_grey" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -141,7 +285,6 @@
                 android:clickable="true"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/gen_page_margin_top"
-                android:paddingLeft="@dimen/gen_page_margin_left"
                 android:paddingRight="@dimen/gen_page_margin_right"
                 android:paddingTop="@dimen/gen_page_margin_top" >
 
@@ -264,7 +407,6 @@
                 android:clickable="true"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/gen_page_margin_top"
-                android:paddingLeft="@dimen/gen_page_margin_left"
                 android:paddingRight="@dimen/gen_page_margin_right"
                 android:paddingTop="@dimen/gen_page_margin_top" >
 
@@ -376,100 +518,6 @@
 
             <!-- end of deactivate account section -->
         </LinearLayout>
-        <!-- start monitor section -->
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:background="@drawable/textlines"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/gen_page_margin_top"
-            android:paddingLeft="@dimen/gen_page_margin_left"
-            android:paddingRight="@dimen/gen_page_margin_right"
-            android:paddingTop="@dimen/gen_page_margin_top" >
-
-            <GridLayout
-                android:id="@+id/monitor_sec"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="3"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profile_name"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:clickable="true"
-                    android:text="@string/email"
-                    android:textColor="@color/grey"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/monitor_status"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </GridLayout>
-        </LinearLayout>
-        
-        <!-- end monitor section -->
-        
-        <!-- start request section -->
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:background="@drawable/textlines"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/gen_page_margin_top"
-            android:paddingLeft="@dimen/gen_page_margin_left"
-            android:paddingRight="@dimen/gen_page_margin_right"
-            android:paddingTop="@dimen/gen_page_margin_top" >
-
-            <GridLayout
-                android:id="@+id/request_sec"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="3"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profile_name"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:clickable="true"
-                    android:text="@string/email"
-                    android:textColor="@color/grey"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/monitor_status"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </GridLayout>
-        </LinearLayout>
-        <!-- end request section -->
-        
     </LinearLayout>
 
 </ScrollView>
