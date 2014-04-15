@@ -44,7 +44,7 @@
                 android:gravity="right"
                 android:text=" 11:20am 04/07/2014 "
                 android:textColor="@color/dark_grey"
-                android:textSize="@dimen/trends_text_size" 
+                android:textSize="@dimen/trends_text_size"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -114,7 +114,7 @@
                             android:gravity="center"
                             android:text=" SYSTOLIC "
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" 
+                            android:textSize="@dimen/small_font_size"
                             android:textStyle="bold" />
 
                         <TextView
@@ -142,7 +142,7 @@
                             android:gravity="center"
                             android:text="DIASTOLIC"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" 
+                            android:textSize="@dimen/small_font_size"
                             android:textStyle="bold" />
 
                         <TextView
@@ -214,7 +214,7 @@
                             android:gravity="center"
                             android:text=" REST "
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" 
+                            android:textSize="@dimen/small_font_size"
                             android:textStyle="bold" />
 
                         <TextView
@@ -242,7 +242,7 @@
                             android:gravity="center"
                             android:text="AVERAGE"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" 
+                            android:textSize="@dimen/small_font_size"
                             android:textStyle="bold" />
 
                         <TextView
@@ -324,7 +324,7 @@
                             android:gravity="center"
                             android:text=" DISTANCE "
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" 
+                            android:textSize="@dimen/small_font_size"
                             android:textStyle="bold" />
 
                         <TextView
@@ -352,7 +352,7 @@
                             android:gravity="center"
                             android:text="CALORIES"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" 
+                            android:textSize="@dimen/small_font_size"
                             android:textStyle="bold" />
 
                         <TextView
@@ -424,7 +424,7 @@
                             android:gravity="center"
                             android:text=" DEEP "
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" 
+                            android:textSize="@dimen/small_font_size"
                             android:textStyle="bold" />
 
                         <TextView
@@ -452,7 +452,7 @@
                             android:gravity="center"
                             android:text="LIGHT"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" 
+                            android:textSize="@dimen/small_font_size"
                             android:textStyle="bold" />
 
                         <TextView
@@ -480,7 +480,7 @@
                             android:gravity="center"
                             android:text="AWAKE"
                             android:textColor="@color/grey"
-                            android:textSize="@dimen/small_font_size" 
+                            android:textSize="@dimen/small_font_size"
                             android:textStyle="bold" />
 
                         <TextView
@@ -531,12 +531,46 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- recommendation section -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textlines"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/rec"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_rec"
+            android:gravity="left"
+            android:onClick="toggle_recom_box"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text=" Recommendation "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/msmall_font_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rec_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:text="Health is the level of functional or metabolic efficiency of a living organism."
+            android:textSize="16dp" />
+    </LinearLayout>
+
     <!-- reminder section -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@drawable/textlines"
         android:orientation="vertical" >
 
@@ -630,40 +664,6 @@
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <!-- recommendation section -->
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/textlines"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/rec"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:clickable="true"
-            android:drawableLeft="@drawable/ic_rec"
-            android:gravity="left"
-            android:onClick="toggle_recom_box"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text=" Recommendation "
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/msmall_font_size"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/rec_content"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:clickable="true"
-            android:text="Health is the level of functional or metabolic efficiency of a living organism."
-            android:textSize="16dp" />
     </LinearLayout>
 
     <!-- history section -->
