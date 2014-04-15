@@ -1,38 +1,75 @@
 package com.android.entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
-public class AccountModel implements Serializable{
+import com.android.recommendation.EngineInputModel.UserInfo;
+import com.android.recommendation.EngineInputModel.WeightData;
+
+public class AccountModel implements Serializable {
 	private static final long serialVersionUID = -1430163807755003319L;
 	private String username;
 	private String password;
 	private String email;
 	private String name;
 	private Date birthDate = new Date();
-	private String height = "180 cm";
-	private String weight = "60 kg";
-	private boolean Hypertension= false;
-	private boolean Diabetes= false;
-	private boolean insomnia= false;
-	private boolean cardio= false;
-	private boolean gender = false;
+	private int height = 0;
+	private int weight = 0;
+	private boolean Hypertension = false;
+	private boolean Diabetes = false;
+	private boolean insomnia = false;
+	private boolean cardio = false;
+	private boolean genderMale = false;
 	private boolean remenber = false;
 	private boolean newUser = true;
-	
-	
-	
+
 	public AccountModel() {
-		
+
 	}
-	
+
+	public UserInfo getUserInfo() {
+		UserInfo userinfo = new UserInfo();
+		{
+			userinfo.setAge(getAge());
+			if (genderMale)
+				userinfo.setGender("male");
+			else
+				userinfo.setGender("female");
+			userinfo.setCardio(cardio);
+			userinfo.setDiabetes(Diabetes);
+			userinfo.setHypertension(Hypertension);
+			userinfo.setInsomnia(insomnia);
+			userinfo.setHeight(height);
+		}
+		int weightcount = 3;
+		for (int i = 0; i < weightcount; i++) {
+			userinfo.getWeight().add(new WeightData(new Date(), 40));
+		}
+		return userinfo;
+	}
+
+	private int getAge() {
+		Calendar dob = Calendar.getInstance();
+		dob.setTime(birthDate);
+		Calendar today = Calendar.getInstance();
+		int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+		if (today.get(Calendar.MONTH) < dob.get(Calendar.MONTH)) {
+			age--;
+		} else if (today.get(Calendar.MONTH) == dob.get(Calendar.MONTH)
+				&& today.get(Calendar.DAY_OF_MONTH) < dob.get(Calendar.DAY_OF_MONTH)) {
+			age--;
+		}
+		return age;
+	}
+
 	public AccountModel(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.remenber = false;
 	}
-	
+
 	public boolean isNewUser() {
 		return newUser;
 	}
@@ -49,7 +86,6 @@ public class AccountModel implements Serializable{
 		this.name = name;
 	}
 
-
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -58,19 +94,19 @@ public class AccountModel implements Serializable{
 		this.birthDate = birthDate;
 	}
 
-	public String getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public void setHeight(String height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 
-	public String getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 
-	public void setWeight(String weight) {
+	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 
@@ -107,50 +143,51 @@ public class AccountModel implements Serializable{
 	}
 
 	public boolean isGender() {
-		return gender;
+		return genderMale;
 	}
 
 	public void setGender(boolean gender) {
-		this.gender = gender;
+		this.genderMale = gender;
 	}
 
-
-
-	public void setRemember(boolean remenber){
+	public void setRemember(boolean remenber) {
 		this.remenber = remenber;
 	}
-	
-	public boolean isRemenbered(){
+
+	public boolean isRemenbered() {
 		return this.remenber;
 	}
-	
-	public AccountModel(String username){
-		this.username=username;
+
+	public AccountModel(String username) {
+		this.username = username;
 	}
-	
-	public boolean checkLogin(String user, String pass){
-		return (username.equals(user) && password.equals(pass) );
+
+	public boolean checkLogin(String user, String pass) {
+		return (username.equals(user) && password.equals(pass));
 	}
-	
-	
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
 }

@@ -102,48 +102,70 @@ public class Profile extends Activity {
 		}
 	}
 
-	private void switchEditToView(int switcherID, int textViewID, String setText) {
+	private void switchEditToView(int switcherID, int textViewID,int editViewID, String setText) {
 
 		ViewSwitcher switcher = (ViewSwitcher) findViewById(switcherID);
 		switcher.showPrevious();// or switcher.showPrevious();
+		EditText myET = (EditText) findViewById(editViewID);
+		myET.setText(setText);
 		TextView myTV = (TextView) switcher.findViewById(textViewID);
 		myTV.setText(setText);
 	}
+	
+	private void switchEditToView(int switcherID, int textViewID,int editViewID, int setText ) {
 
+		ViewSwitcher switcher = (ViewSwitcher) findViewById(switcherID);
+		switcher.showPrevious();// or switcher.showPrevious();
+		EditText myET = (EditText) findViewById(editViewID);
+		myET.setText(Integer.toString(setText));
+		TextView myTV = (TextView) switcher.findViewById(textViewID);
+		myTV.setText(Integer.toString(setText));
+	}
+
+	
+	private void switchRadioToView(int switcherID, int textViewID,int radioBuutonID, String setText) {
+		ViewSwitcher switcher = (ViewSwitcher) findViewById(switcherID);
+		switcher.showPrevious();// or switcher.showPrevious();
+		RadioButton myET = (RadioButton) findViewById(radioBuutonID);
+		myET.setChecked(true);
+		TextView myTV = (TextView) switcher.findViewById(textViewID);
+		myTV.setText(setText);
+	}
+	
 	private void switchAllEditToView() {
 		// name
-		switchEditToView(R.id.name_switcher, R.id.txt_name, accountController.getAccount().getName());
+		switchEditToView(R.id.name_switcher, R.id.txt_name,R.id.txtbox_name, accountController.getAccount().getName());
 		// gender
 		if (accountController.getAccount().isGender())
-			switchEditToView(R.id.gender_switcher, R.id.txt_gender, "Male");
+			switchRadioToView(R.id.gender_switcher, R.id.txt_gender,R.id.radio_profile_male, "Male");
 		else
-			switchEditToView(R.id.gender_switcher, R.id.txt_gender, "Female");
+			switchRadioToView(R.id.gender_switcher, R.id.txt_gender, R.id.radio_profile_female,"Female");
 		// birthday
-		switchEditToView(R.id.dob_switcher, R.id.txt_dob, getDate(accountController.getAccount().getBirthDate()));
+		switchEditToView(R.id.dob_switcher, R.id.txt_dob,R.id.txtbox_dob, getDate(accountController.getAccount().getBirthDate()));
 		// height
-		switchEditToView(R.id.height_switcher, R.id.txt_height, accountController.getAccount().getHeight());
+		switchEditToView(R.id.height_switcher, R.id.txt_height,R.id.txtbox_height, accountController.getAccount().getHeight());
 		// weight
-		switchEditToView(R.id.weight_switcher, R.id.txt_weight, accountController.getAccount().getWeight());
+		switchEditToView(R.id.weight_switcher, R.id.txt_weight,R.id.txtbox_weight, accountController.getAccount().getWeight());
 		// setHypertension
 		if (accountController.getAccount().isHypertension())
-			switchEditToView(R.id.hypertension_switcher, R.id.txt_hypertension, "Yes");
+			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension,R.id.radio_profile_hypertension_yes, "Yes");
 		else
-			switchEditToView(R.id.hypertension_switcher, R.id.txt_hypertension, "No");
+			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension,R.id.radio_profile_hypertension_no, "No");
 		// setDiabetes
 		if (accountController.getAccount().isDiabetes())
-			switchEditToView(R.id.diabetes_switcher, R.id.txt_diabetes, "Yes");
+			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes,R.id.radio_profile_diabetes_yes, "Yes");
 		else
-			switchEditToView(R.id.diabetes_switcher, R.id.txt_diabetes, "No");
+			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes,R.id.radio_profile_diabetes_no, "No");
 		// setInsomnia
 		if (accountController.getAccount().isInsomnia())
-			switchEditToView(R.id.insomnia_switcher, R.id.txt_insomnia, "Yes");
+			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia,R.id.radio_profile_insomnia_yes, "Yes");
 		else
-			switchEditToView(R.id.insomnia_switcher, R.id.txt_insomnia, "No");
+			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia,R.id.radio_profile_insomnia_no, "No");
 		// setCardio
 		if (accountController.getAccount().isCardio())
-			switchEditToView(R.id.cardio_switcher, R.id.txt_cardio, "Yes");
+			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio,R.id.radio_profile_cardio_yes, "Yes");
 		else
-			switchEditToView(R.id.cardio_switcher, R.id.txt_cardio, "No");
+			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio,R.id.radio_profile_cardio_no, "No");
 
 	}
 
@@ -220,18 +242,28 @@ public class Profile extends Activity {
 	}
 
 	private void setHeight() {
-		this.accountController.setProfileHeight(heightEditView.getText().toString());
+		this.accountController.setProfileHeight(Integer.parseInt(heightEditView.getText().toString()));
 	}
 
 	private void setWeight() {
 
-		this.accountController.setProfileWeight(weightEditView.getText().toString());
+		this.accountController.setProfileWeight(Integer.parseInt(weightEditView.getText().toString()));
 	}
 
 	public Date toDate(String dateStr) {
 
-		SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-
+		int dateStrLenWithoutDash = 8;
+		int dateStrLenWithDash = 10;
+		
+		SimpleDateFormat inputDateFormat;
+		
+		if(dateStr.length() == dateStrLenWithoutDash)
+			inputDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
+		else if(dateStr.length() == dateStrLenWithDash)
+			inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+		else
+			return accountController.getAccount().getBirthDate();
+			
 		try {
 			Date date = inputDateFormat.parse(dateStr);
 			return date;

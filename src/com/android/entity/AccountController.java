@@ -91,12 +91,12 @@ public class AccountController {
 		save();
 	}
 
-	public void setProfileHeight(String height) {
+	public void setProfileHeight(int height) {
 		this.account.setHeight(height);
 		save();
 	}
 
-	public void setProfileWeight(String weight) {
+	public void setProfileWeight(int weight) {
 		this.account.setWeight(weight);
 		save();
 	}
