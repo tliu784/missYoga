@@ -7,8 +7,6 @@ import java.util.Date;
 import android.content.Context;
 
 import com.android.entity.HealthStatusModel;
-import com.android.reminder.MedReminderModel;
-import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.service.FileOperation;
 import com.android.trend.ChartHelper.GraphViewData;
 
@@ -69,9 +67,9 @@ public class ChartDataController {
 				if (dataset.get(i).getSleep()==ChartPointModel.SLEEP_HIGH)
 					totalSleepDeep+=duration;
 				if (dataset.get(i).getSleep()==ChartPointModel.SLEEP_MED)
-					totalSleepDeep+=duration;
+					totalSleepLight+=duration;
 				if (dataset.get(i).getSleep()==ChartPointModel.SLEEP_LOW)
-					totalSleepDeep+=duration;
+					totalSleepAwake+=duration;
 				i--;
 			}
 			while (!dataset.get(i).isSleep() && i >=0){
@@ -80,6 +78,7 @@ public class ChartDataController {
 			}
 		}else{
 			int i=index;
+			
 			while (!dataset.get(i).isSleep() && i >=0){
 				totalAct+=dataset.get(i).getAct();
 				i--;
@@ -99,7 +98,6 @@ public class ChartDataController {
 		
 		}
 			
-
 		// accumulated
 		result.setAct_calories((int) (totalAct * calperstep));
 		result.setAct_steps((int) totalAct);
