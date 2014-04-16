@@ -1,34 +1,19 @@
 package com.android.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class DeviceDataModel implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4751568213230044764L;
+public class HealthStatusModel {
 	private Date timestamp;
 	private int hr_count;
 	private int bp_systolic;
 	private int bp_diastolic;
-	private int act_distance;
-	private float act_duration;
 	private int act_calories;
 	private int act_steps;
-	private int sleep_efficiency;
 	private int sleep_minAwake;
 	private int sleep_minLight;
 	private int sleep_minDeep;
-	private int sleep_countAwake;
 
-	public DeviceDataModel() {
-	}
-	
-
-	public DeviceDataModel(Date timestamp) {
-		this.timestamp = timestamp;
+	public HealthStatusModel() {
 	}
 
 	public Date getTimestamp() {
@@ -63,22 +48,6 @@ public class DeviceDataModel implements Serializable {
 		this.bp_diastolic = bp_diastolic;
 	}
 
-	public int getAct_distance() {
-		return act_distance;
-	}
-
-	public void setAct_distance(int act_distance) {
-		this.act_distance = act_distance;
-	}
-
-	public float getAct_duration() {
-		return act_duration;
-	}
-
-	public void setAct_duration(float act_duration) {
-		this.act_duration = act_duration;
-	}
-
 	public int getAct_calories() {
 		return act_calories;
 	}
@@ -93,18 +62,6 @@ public class DeviceDataModel implements Serializable {
 
 	public void setAct_steps(int act_steps) {
 		this.act_steps = act_steps;
-	}
-
-	public int getSleep_efficiency() {
-		return sleep_efficiency;
-	}
-
-	public void setSleep_efficiency(int sleep_efficiency) {
-		this.sleep_efficiency = sleep_efficiency;
-	}
-
-	public int getSleep_minAsleep() {
-		return (sleep_minAwake+sleep_minLight+sleep_minDeep);
 	}
 
 	public int getSleep_minAwake() {
@@ -130,17 +87,5 @@ public class DeviceDataModel implements Serializable {
 	public void setSleep_minDeep(int sleep_minDeep) {
 		this.sleep_minDeep = sleep_minDeep;
 	}
-
-	public int getSleep_countAwake() {
-		return sleep_countAwake;
-	}
-
-	public void setSleep_countAwake(int sleep_countAwake) {
-		this.sleep_countAwake = sleep_countAwake;
-	}
-	
-	
-	
-	
 
 }
