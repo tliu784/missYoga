@@ -1,5 +1,4 @@
 package com.android.widget;
-
 import com.android.myhealthmate.R;
 
 import android.app.PendingIntent;
@@ -14,7 +13,6 @@ public class MyWidgetProvider extends AppWidgetProvider {
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
-
 		// initializing widget layout
 		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 
@@ -23,12 +21,13 @@ public class MyWidgetProvider extends AppWidgetProvider {
 				buildButtonPendingIntent(context));
 
 		// updating view with initial data
+	//	TextView title = (TextView) findByViewById (R.id.title);
 		remoteViews.setTextViewText(R.id.title, getTitle());
 		remoteViews.setTextViewText(R.id.desc, getDesc());
-
-		// request for widget update
+		
 		pushWidgetUpdate(context, remoteViews);
 	}
+
 
 	public static PendingIntent buildButtonPendingIntent(Context context) {
 		++MyWidgetReceiver.clickCount;
@@ -39,13 +38,13 @@ public class MyWidgetProvider extends AppWidgetProvider {
 		return PendingIntent.getBroadcast(context, 0, intent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 	}
-
+	
 	private static CharSequence getDesc() {
-		return "Sync to see some of our funniest joke collections";
+		return "This is a recommendation !!1";
 	}
 
 	private static CharSequence getTitle() {
-		return "Funny Jokes";
+		return "Recommendation";
 	}
 
 	public static void pushWidgetUpdate(Context context, RemoteViews remoteViews) {
