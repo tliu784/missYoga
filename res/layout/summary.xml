@@ -38,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
+                android:clickable="true"
                 android:text="@string/history_1week" >
             </TextView>
 
@@ -52,6 +53,7 @@
             <TextView
                 android:id="@+id/history_filter_1month"
                 style="@style/summary_tab_textbox"
+                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/history_1month" >
@@ -69,6 +71,7 @@
                 android:id="@+id/history_filter_3month"
                 style="@style/summary_tab_textbox"
                 android:layout_width="wrap_content"
+                android:clickable="true"
                 android:layout_height="wrap_content"
                 android:text="@string/history_3month" >
             </TextView>
@@ -90,6 +93,7 @@
             android:text="Heart Rate" />
 
         <LinearLayout
+            android:id="@+id/bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
