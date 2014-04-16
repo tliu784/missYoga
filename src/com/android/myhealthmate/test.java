@@ -9,6 +9,7 @@ import java.util.Date;
 
 import com.android.entity.AccountController;
 import com.android.entity.AccountModel;
+import com.android.entity.HealthStatusModel;
 import com.android.entity.ProfileModel;
 import com.android.myhealthmate.R;
 import com.android.recommendation.RemoteEngineController;
@@ -182,7 +183,8 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testRemoteProfile(ServerResponseModel.ResponseType.CHECK_REQUEST_STATUS);
+				HealthStatusModel hvs=ChartDataController.getInstance().getLastValue();
+				testText.setText(gson.toJson(hvs));
 			}
 		};
 	}

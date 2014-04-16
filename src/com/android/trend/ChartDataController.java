@@ -6,6 +6,7 @@ import java.util.Date;
 
 import android.content.Context;
 
+import com.android.entity.HealthStatusModel;
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.service.FileOperation;
@@ -45,6 +46,72 @@ public class ChartDataController {
 	public void setDataset(ArrayList<ChartPointModel> dataset) {
 		this.dataset = dataset;
 		shiftDisplayToEnd();
+	}
+
+	public HealthStatusModel getHealthStatusValue(int index) {
+		float calperstep = 0.35f;
+		HealthStatusModel result = new HealthStatusModel();
+		ChartPointModel lastPoint = dataset.get(index);
+
+		result.setBp_diastolic((int) lastPoint.getBpl());
+		result.setBp_systolic((int) lastPoint.getBph());
+		result.setHr_count((int) lastPoint.getHr());
+		double totalSleepAwake=0d;
+		double totalSleepLight=0d;
+		double totalSleepDeep=0d;
+		double totalAct=0d;
+		if (lastPoint.isSleep()){
+			int i=index;
+			while (dataset.get(i).isSleep() && i>=0){
+				int duration=30;
+				if (i>0)
+					duration=ChartHelper.calcMinBetween(dataset.get(i).getTimestamp(), dataset.get(i-1).getTimestamp());
+				if (dataset.get(i).getSleep()==ChartPointModel.SLEEP_HIGH)
+					totalSleepDeep+=duration;
+				if (dataset.get(i).getSleep()==ChartPointModel.SLEEP_MED)
+					totalSleepDeep+=duration;
+				if (dataset.get(i).getSleep()==ChartPointModel.SLEEP_LOW)
+					totalSleepDeep+=duration;
+				i--;
+			}
+			while (!dataset.get(i).isSleep() && i >=0){
+				totalAct+=dataset.get(i).getAct();
+				i--;
+			}
+		}else{
+			int i=index;
+			while (!dataset.get(i).isSleep() && i >=0){
+				totalAct+=dataset.get(i).getAct();
+				i--;
+			}
+			while (dataset.get(i).isSleep() && i>=0){
+				int duration=30;
+				if (i>0)
+					duration=ChartHelper.calcMinBetween(dataset.get(i).getTimestamp(), dataset.get(i-1).getTimestamp());
+				if (dataset.get(i).getSleep()==ChartPointModel.SLEEP_HIGH)
+					totalSleepDeep+=duration;
+				if (dataset.get(i).getSleep()==ChartPointModel.SLEEP_MED)
+					totalSleepLight+=duration;
+				if (dataset.get(i).getSleep()==ChartPointModel.SLEEP_LOW)
+					totalSleepAwake+=duration;
+				i--;
+			}
+		
+		}
+			
+
+		// accumulated
+		result.setAct_calories((int) (totalAct * calperstep));
+		result.setAct_steps((int) totalAct);
+		result.setSleep_minAwake((int) totalSleepAwake);
+		result.setSleep_minLight((int) totalSleepLight);
+		result.setSleep_minDeep((int) totalSleepDeep);
+		return result;
+
+	}
+
+	public HealthStatusModel getLastValue() {
+		return getHealthStatusValue(dataset.size() - 1);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -234,8 +301,6 @@ public class ChartDataController {
 			currentDisplayStartIndex = 0;
 		createDisplaySet();
 	}
-
-	
 
 	public int getSleepFloor() {
 		return sleepFloor;

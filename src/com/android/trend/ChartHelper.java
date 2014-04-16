@@ -21,6 +21,13 @@ public class ChartHelper {
 		c.set(Calendar.SECOND, 0);
 		return c.getTime();
 	}
+	
+	public static int calcMinBetween(Date laterDate, Date earlierDate){
+		if (earlierDate==null)
+			return 30;
+		
+		return (int)((laterDate.getTime()/60000) - (earlierDate.getTime()/60000));
+	}
 
 	public static ArrayList<ChartPointModel> createRandomData(int count) {
 		ArrayList<ChartPointModel> dataset = new ArrayList<ChartPointModel>();
