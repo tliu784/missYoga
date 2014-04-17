@@ -13,4 +13,10 @@
         android:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_new"
         android:title="@string/action_settings"/>
+   <item
+        android:id="@+id/delete_med"
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_discard"
+        android:title="@string/action_removeReminder"/>
 </menu>

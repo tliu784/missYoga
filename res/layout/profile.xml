@@ -328,6 +328,8 @@
                 android:text="@string/cancel" />
         </LinearLayout>
 
+        <!-- medicine section -->
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -340,14 +342,31 @@
             android:paddingRight="@dimen/gen_page_margin_right"
             android:paddingTop="@dimen/gen_page_margin_top" >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_remote_profiles"
-                android:text="@string/med_record"
-                android:textColor="@color/black"
-                android:textSize="@dimen/profile_text_size"
-                android:textStyle="bold" />
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_remote_profiles"
+                    android:text="@string/med_record"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_text_size"
+                    android:textStyle="bold" />
+                
+                <TextView
+                    android:id ="@+id/view_detail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor = "@color/login_btn_blue"
+                    android:text="View detail"
+                    android:clickable="true"
+                    android:gravity="right"
+                    android:textSize="@dimen/profile_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <View
                 android:layout_width="fill_parent"
@@ -360,31 +379,37 @@
                 android:id="@+id/medicine_sec"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="3"
+                android:columnCount="1"
                 android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="64dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/profile_name"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:clickable="true"
-                    android:text="@string/effect"
-                    android:textColor="@color/grey"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="84dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_name"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="64dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/time"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:text="@string/effect"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </GridLayout>
         </LinearLayout>
     </LinearLayout>

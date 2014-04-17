@@ -2,6 +2,7 @@ package com.android.myhealthmate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -11,10 +12,13 @@ import com.android.entity.AccountController;
 import com.android.entity.AddMedicineDialogPopup;
 import com.android.entity.MedicineListController;
 import com.android.entity.MedicineModel;
+import com.android.entity.medDetailPopup;
 import com.android.remoteProfile.RemoteRequestModel;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ActionBar.LayoutParams;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +29,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -53,6 +58,10 @@ public class Profile extends Activity {
 
 	private MedicineListController medicineList;
 
+	private ArrayList<TextView> deleteBtnList = new ArrayList<TextView>();
+
+	private TextView viewDetail;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,6 +81,9 @@ public class Profile extends Activity {
 		medicineSection = (GridLayout) findViewById(R.id.medicine_sec);
 		medicineList = MedicineListController.getInstance();
 
+		viewDetail = (TextView) findViewById(R.id.view_detail);
+
+		viewDetail.setOnClickListener(getViewDetailListener());
 		for (MedicineModel medModel : medicineList.getMedicineList())
 			addViewInMedSec(medModel);
 
@@ -122,24 +134,78 @@ public class Profile extends Activity {
 			newNoteDialog.show();
 			return true;
 		}
+		case R.id.delete_med: {
+			showupDeleteBtn();
+			return true;
+		}
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
 	public void addViewInMedSec(MedicineModel medModel) {
+		LinearLayout titleSection = new LinearLayout(this);
+
 		TextView nameContent = new TextView(this);
 		TextView effectContent = new TextView(this);
 		TextView timeContent = new TextView(this);
+		TextView deleteBtn = new TextView(this);
 
+		titleSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		titleSection.setClickable(true);
+		titleSection.setOrientation(LinearLayout.HORIZONTAL);
+
+		nameContent.setLayoutParams(new LayoutParams(160, LayoutParams.MATCH_PARENT));
 		nameContent.setText(medModel.getTitle());
-		medicineSection.addView(nameContent);
+		titleSection.addView(nameContent);
 
+		effectContent.setLayoutParams(new LayoutParams(260, LayoutParams.MATCH_PARENT));
 		effectContent.setText(medModel.getEffect().toString());
-		medicineSection.addView(effectContent);
+		titleSection.addView(effectContent);
 
+		timeContent.setLayoutParams(new LayoutParams(120, LayoutParams.MATCH_PARENT));
 		timeContent.setText(toDateStr(medModel));
-		medicineSection.addView(timeContent);
+		titleSection.addView(timeContent);
+
+		deleteBtn.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		deleteBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_cancel_small, 0, 0, 0);
+
+		deleteBtn.setClickable(true);
+		deleteBtn.setVisibility(View.INVISIBLE);
+		deleteBtn.setOnClickListener(getDeleteListener(medModel.getTitle()));
+		titleSection.addView(deleteBtn);
+		deleteBtnList.add(deleteBtn);
+
+		medicineSection.addView(titleSection);
+
+	}
+
+	public void showupDeleteBtn() {
+		for (TextView btn : deleteBtnList) {
+			btn.setVisibility(View.VISIBLE);
+		}
+	}
+
+	public OnClickListener getViewDetailListener() {
+
+		return new OnClickListener() {
+			public void onClick(View v) {
+				Dialog medDetailDialog = new medDetailPopup().onCreateDialog(v.getContext());
+				medDetailDialog.show();
+			}
+		};
+
+	}
+
+	public OnClickListener getDeleteListener(final String name) {
+
+		return new OnClickListener() {
+			public void onClick(View v) {
+				medicineSection.removeView((LinearLayout) v.getParent());
+				medicineList.removeMedByName(name);
+			}
+		};
+
 	}
 
 	private String toDateStr(MedicineModel medModel) {
@@ -367,6 +433,21 @@ public class Profile extends Activity {
 				accountController.setProfileNewUser(false);
 			}
 		};
+	}
+
+	public class medcineDelete extends TextView {
+
+		int index;
+
+		public medcineDelete(Context context) {
+			super(context);
+			this.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			this.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_remove, 0, 0, 0);
+			this.setVisibility(View.GONE);
+			this.setClickable(true);
+			// TODO Auto-generated constructor stub
+		}
+
 	}
 
 }

@@ -30,14 +30,21 @@ public class MedicineListController implements Serializable {
 	}
 
 	public void init(Context context) {
-		
-		if (!initialized) {		
+
+		if (!initialized) {
 			this.context = context;
-			addTestMedRecord();
+	//		addTestMedRecord();
 			load();
 			initialized = true;
 		}
 
+	}
+
+	public void removeMedByName(String name) {
+		for (MedicineModel model : medicineList) {
+			if (model.getTitle().equals(name))
+				medicineList.remove(model);
+		}
 	}
 
 	private void save() {
@@ -62,10 +69,10 @@ public class MedicineListController implements Serializable {
 		save();
 	}
 
-	public void addTestMedRecord() {
-		MedicineModel record = new MedicineModel();
-		record.setTestData();
-		addOneRecord(record);
-	}
+//	public void addTestMedRecord() {
+//		MedicineModel record = new MedicineModel();
+//		record.setTestData();
+//		addOneRecord(record);
+//	}
 
 }
