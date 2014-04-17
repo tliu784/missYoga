@@ -1,24 +1,11 @@
 package com.android.entity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 import com.android.myhealthmate.R;
-import com.android.myhealthmate.SleDetail;
-import com.android.reminder.DetailSecTextView;
-import com.android.trend.RecordModel.recordType;
 
 public class medDetailPopup extends DialogFragment {
 

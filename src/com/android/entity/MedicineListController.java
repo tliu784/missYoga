@@ -45,6 +45,7 @@ public class MedicineListController implements Serializable {
 			if (model.getTitle().equals(name))
 				medicineList.remove(model);
 		}
+		save();
 	}
 
 	private void save() {

@@ -182,7 +182,10 @@ public class Profile extends Activity {
 
 	public void showupDeleteBtn() {
 		for (TextView btn : deleteBtnList) {
-			btn.setVisibility(View.VISIBLE);
+			if (btn.getVisibility() == View.INVISIBLE)
+				btn.setVisibility(View.VISIBLE);
+			else
+				btn.setVisibility(View.INVISIBLE);
 		}
 	}
 
