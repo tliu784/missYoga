@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/gen_page_margin_top"
+    android:background="@drawable/textlines"
+    android:orientation="vertical" >
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:columnCount="2"
+        android:padding="8dip"
+        android:useDefaultMargins="true" >
+
+        <TextView
+            style="@style/profile_textview"
+            android:layout_column="0"
+            android:text="@string/med_name" />
+
+        <EditText
+            android:id="@+id/txt_med_name"
+            style="@style/profile_edittext"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+        </EditText>
+
+        <TextView
+            style="@style/profile_textview"
+            android:layout_column="0"
+            android:text="@string/description" />
+
+        <EditText
+            android:id="@+id/txt_med_des"
+            style="@style/profile_edittext"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+        </EditText>
+
+        <TextView
+            style="@style/profile_textview"
+            android:layout_column="0"
+            android:text="@string/effect" />
+
+        <Spinner
+            android:id="@+id/effect_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            style="@style/profile_textview"
+            android:layout_column="0"
+            android:text="@string/start_time" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp" >
+
+            <EditText
+                android:id="@+id/txt_start_hour"
+                style="@style/profile_edittext"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" >
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" : "
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/txt_start_min"
+                style="@style/profile_edittext"
+                android:layout_width="50dp"
+                android:layout_height="fill_parent" >
+            </EditText>
+        </LinearLayout>
+
+        <TextView
+            style="@style/profile_textview"
+            android:layout_column="0"
+            android:text="@string/repeat" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp" >
+
+            <EditText
+                android:id="@+id/txt_med_repeat"
+                style="@style/profile_edittext"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" >
+            </EditText>
+
+            <RadioGroup
+                android:id="@+id/repeat_unit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/radio_repeat_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hours" />
+
+                <RadioButton
+                    android:id="@+id/radio_repeat_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/days" />
+            </RadioGroup>
+        </LinearLayout>
+    </GridLayout>
+
+</LinearLayout>

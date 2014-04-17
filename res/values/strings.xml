@@ -66,8 +66,17 @@
     <string name="home_tag">Tag</string>
     <string name="monitor_status">Status</string>
     <string name="approval">Approve</string>
-
-      <string-array name="news_headlines">
+    <string name="med_name">Name</string>
+    <string name="description">Description</string>
+    <string name="effect">Effect</string>
+    <string name="start_time">Start time</string>
+    <string name="repeat">Repeat</string>
+    <string name="days">days</string>
+    <string name="hours">hours</string>
+    <string name="med_record">Medicine record</string>
+    <string name="time">Time</string>
+    
+    <string-array name="news_headlines">
         <item>Two brooms are getting married. Before the ceremony, the bride broom says to the groom broom, "I think I'm going to have a whisk."
 The groom broom says, How can that be possible? We havent even swept together!"</item>
         <item>A man cheats on his girlfriend named Lorraine with a girl named Clearly.
@@ -86,5 +95,5 @@ A: 45 minutes.</item>
 
 A: In a divorce, you get rid of the whole schmuck.</item>
     </string-array>
-    
+
 </resources>

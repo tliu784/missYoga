@@ -120,7 +120,7 @@ public class History extends Activity {
 				changeByPercent(historySleepLeft,historySleepMid,historySleepRight,0.33, 0.37, 0.2);
 			}
 		};
-	}
+	}	
 
 	public void changeByPercent(TextView leftView, TextView midView, TextView rightView ,double left, double mid, double right) {
 		changeOneViewByPercent(barLen, left, leftView);

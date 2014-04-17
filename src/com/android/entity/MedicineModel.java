@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.android.reminder.MedReminderModel;
+import com.android.reminder.MedReminderModel.DurationUnit;
 
 public class MedicineModel implements Serializable{
 
@@ -19,7 +20,7 @@ public class MedicineModel implements Serializable{
 	private MedReminderModel.DurationUnit runit; 
 	
 	public enum HealthEffect {
-		HR, BP, SLEEP, ACTIVITY
+		HR, BP, SLEEP, ACTIVITY,OTHERS
 	}
 	
 	public MedicineModel(){}
@@ -72,7 +73,14 @@ public class MedicineModel implements Serializable{
 		this.runit = runit;
 	}
 	
-	
+	public void setTestData(){
+		starttime = new Date();
+		title = "Aspirin";
+		description = "good for you";
+		effect = HealthEffect.ACTIVITY;
+		repeat = 6;
+		runit = DurationUnit.Hour; 
+	}
 	
 	
 

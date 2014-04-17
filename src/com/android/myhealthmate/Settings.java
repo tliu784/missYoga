@@ -1,10 +1,15 @@
 package com.android.myhealthmate;
 
 import com.android.entity.AccountController;
+import com.android.entity.AddMedicineDialogPopup;
+import com.android.reminder.ReminderViewController;
+import com.android.reminder.ReminderViewController.TitleSection;
 import com.android.remoteProfile.RemoteRequestController;
 import com.android.remoteProfile.RemoteRequestModel;
+import com.android.trend.AddNotePopupDialog;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -12,12 +17,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -53,6 +60,13 @@ public class Settings extends Activity {
 	private Button emailCancel;
 
 	private AccountController accountController;
+
+	// medicine section
+	private LinearLayout previous = null;
+	private LinearLayout previousEditContent = null;
+	private TextView previousEditButton = null;
+	private TitleSection previousTitle = null;
+	LinearLayout linearLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,17 +119,16 @@ public class Settings extends Activity {
 
 		monitorSection = (GridLayout) findViewById(R.id.monitor_sec);
 		requestSection = (GridLayout) findViewById(R.id.request_sec);
-		
+
 		for (RemoteRequestModel requestModel : RemoteRequestController.getInstance().getMinitoredRemoteUserList()) {
-				addViewInMonitorSec(requestModel);
+			addViewInMonitorSec(requestModel);
 		}
 
 		for (RemoteRequestModel requestModel : RemoteRequestController.getInstance().getViewedByRemoteUserList()) {
 			addViewInRequestSec(requestModel);
 		}
-
+		
 	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -125,15 +138,17 @@ public class Settings extends Activity {
 		return super.onCreateOptionsMenu(menu);
 
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.send_request: {
-			
+
+			return true;
 		}
-		case R.id.refresh_request: {		
-			
+		case R.id.refresh_request: {
+			return true;
 		}
 		default:
 			return super.onOptionsItemSelected(item);

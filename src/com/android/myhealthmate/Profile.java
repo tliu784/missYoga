@@ -2,12 +2,19 @@ package com.android.myhealthmate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import com.android.entity.AccountController;
+import com.android.entity.AddMedicineDialogPopup;
+import com.android.entity.MedicineListController;
+import com.android.entity.MedicineModel;
+import com.android.remoteProfile.RemoteRequestModel;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +22,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -40,6 +49,10 @@ public class Profile extends Activity {
 
 	private AccountController accountController;
 
+	private GridLayout medicineSection;
+
+	private MedicineListController medicineList;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,11 +62,18 @@ public class Profile extends Activity {
 		heightEditView = (EditText) findViewById(R.id.txtbox_height);
 		weightEditView = (EditText) findViewById(R.id.txtbox_weight);
 		nameEditView = (EditText) findViewById(R.id.txtbox_name);
+
 		genderRadioGroup = (RadioGroup) findViewById(R.id.gender);
 		cardioRadioGroup = (RadioGroup) findViewById(R.id.cardio);
 		insomniaRadioGroup = (RadioGroup) findViewById(R.id.insomnia);
 		diabetesRadioGroup = (RadioGroup) findViewById(R.id.diabetes);
 		HypertensionRadioGroup = (RadioGroup) findViewById(R.id.hypertension);
+
+		medicineSection = (GridLayout) findViewById(R.id.medicine_sec);
+		medicineList = MedicineListController.getInstance();
+
+		for (MedicineModel medModel : medicineList.getMedicineList())
+			addViewInMedSec(medModel);
 
 		accountController = AccountController.getInstance();
 
@@ -97,12 +117,41 @@ public class Profile extends Activity {
 			}
 			return true;
 		}
+		case R.id.add_medicine: {
+			Dialog newNoteDialog = new AddMedicineDialogPopup().onCreateDialog(Profile.this, this);
+			newNoteDialog.show();
+			return true;
+		}
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
-	private void switchEditToView(int switcherID, int textViewID,int editViewID, String setText) {
+	public void addViewInMedSec(MedicineModel medModel) {
+		TextView nameContent = new TextView(this);
+		TextView effectContent = new TextView(this);
+		TextView timeContent = new TextView(this);
+
+		nameContent.setText(medModel.getTitle());
+		medicineSection.addView(nameContent);
+
+		effectContent.setText(medModel.getEffect().toString());
+		medicineSection.addView(effectContent);
+
+		timeContent.setText(toDateStr(medModel));
+		medicineSection.addView(timeContent);
+	}
+
+	private String toDateStr(MedicineModel medModel) {
+		Calendar calendar = GregorianCalendar.getInstance();
+		calendar.setTime(medModel.getStarttime());
+
+		String dateStr = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY)) + ":"
+				+ Integer.toString(calendar.get(Calendar.MINUTE));
+		return dateStr;
+	}
+
+	private void switchEditToView(int switcherID, int textViewID, int editViewID, String setText) {
 
 		ViewSwitcher switcher = (ViewSwitcher) findViewById(switcherID);
 		switcher.showPrevious();// or switcher.showPrevious();
@@ -111,8 +160,8 @@ public class Profile extends Activity {
 		TextView myTV = (TextView) switcher.findViewById(textViewID);
 		myTV.setText(setText);
 	}
-	
-	private void switchEditToView(int switcherID, int textViewID,int editViewID, int setText ) {
+
+	private void switchEditToView(int switcherID, int textViewID, int editViewID, int setText) {
 
 		ViewSwitcher switcher = (ViewSwitcher) findViewById(switcherID);
 		switcher.showPrevious();// or switcher.showPrevious();
@@ -122,8 +171,7 @@ public class Profile extends Activity {
 		myTV.setText(Integer.toString(setText));
 	}
 
-	
-	private void switchRadioToView(int switcherID, int textViewID,int radioBuutonID, String setText) {
+	private void switchRadioToView(int switcherID, int textViewID, int radioBuutonID, String setText) {
 		ViewSwitcher switcher = (ViewSwitcher) findViewById(switcherID);
 		switcher.showPrevious();// or switcher.showPrevious();
 		RadioButton myET = (RadioButton) findViewById(radioBuutonID);
@@ -131,41 +179,46 @@ public class Profile extends Activity {
 		TextView myTV = (TextView) switcher.findViewById(textViewID);
 		myTV.setText(setText);
 	}
-	
+
 	private void switchAllEditToView() {
 		// name
-		switchEditToView(R.id.name_switcher, R.id.txt_name,R.id.txtbox_name, accountController.getAccount().getName());
+		switchEditToView(R.id.name_switcher, R.id.txt_name, R.id.txtbox_name, accountController.getAccount().getName());
 		// gender
 		if (accountController.getAccount().isGender())
-			switchRadioToView(R.id.gender_switcher, R.id.txt_gender,R.id.radio_profile_male, "Male");
+			switchRadioToView(R.id.gender_switcher, R.id.txt_gender, R.id.radio_profile_male, "Male");
 		else
-			switchRadioToView(R.id.gender_switcher, R.id.txt_gender, R.id.radio_profile_female,"Female");
+			switchRadioToView(R.id.gender_switcher, R.id.txt_gender, R.id.radio_profile_female, "Female");
 		// birthday
-		switchEditToView(R.id.dob_switcher, R.id.txt_dob,R.id.txtbox_dob, getDate(accountController.getAccount().getBirthDate()));
+		switchEditToView(R.id.dob_switcher, R.id.txt_dob, R.id.txtbox_dob, getDate(accountController.getAccount()
+				.getBirthDate()));
 		// height
-		switchEditToView(R.id.height_switcher, R.id.txt_height,R.id.txtbox_height, accountController.getAccount().getHeight());
+		switchEditToView(R.id.height_switcher, R.id.txt_height, R.id.txtbox_height, accountController.getAccount()
+				.getHeight());
 		// weight
-		switchEditToView(R.id.weight_switcher, R.id.txt_weight,R.id.txtbox_weight, accountController.getAccount().getWeight());
+		switchEditToView(R.id.weight_switcher, R.id.txt_weight, R.id.txtbox_weight, accountController.getAccount()
+				.getWeight());
 		// setHypertension
 		if (accountController.getAccount().isHypertension())
-			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension,R.id.radio_profile_hypertension_yes, "Yes");
+			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension, R.id.radio_profile_hypertension_yes,
+					"Yes");
 		else
-			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension,R.id.radio_profile_hypertension_no, "No");
+			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension, R.id.radio_profile_hypertension_no,
+					"No");
 		// setDiabetes
 		if (accountController.getAccount().isDiabetes())
-			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes,R.id.radio_profile_diabetes_yes, "Yes");
+			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes, R.id.radio_profile_diabetes_yes, "Yes");
 		else
-			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes,R.id.radio_profile_diabetes_no, "No");
+			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes, R.id.radio_profile_diabetes_no, "No");
 		// setInsomnia
 		if (accountController.getAccount().isInsomnia())
-			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia,R.id.radio_profile_insomnia_yes, "Yes");
+			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia, R.id.radio_profile_insomnia_yes, "Yes");
 		else
-			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia,R.id.radio_profile_insomnia_no, "No");
+			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia, R.id.radio_profile_insomnia_no, "No");
 		// setCardio
 		if (accountController.getAccount().isCardio())
-			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio,R.id.radio_profile_cardio_yes, "Yes");
+			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio, R.id.radio_profile_cardio_yes, "Yes");
 		else
-			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio,R.id.radio_profile_cardio_no, "No");
+			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio, R.id.radio_profile_cardio_no, "No");
 
 	}
 
@@ -254,16 +307,16 @@ public class Profile extends Activity {
 
 		int dateStrLenWithoutDash = 8;
 		int dateStrLenWithDash = 10;
-		
+
 		SimpleDateFormat inputDateFormat;
-		
-		if(dateStr.length() == dateStrLenWithoutDash)
+
+		if (dateStr.length() == dateStrLenWithoutDash)
 			inputDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-		else if(dateStr.length() == dateStrLenWithDash)
+		else if (dateStr.length() == dateStrLenWithDash)
 			inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 		else
 			return accountController.getAccount().getBirthDate();
-			
+
 		try {
 			Date date = inputDateFormat.parse(dateStr);
 			return date;

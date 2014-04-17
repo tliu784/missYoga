@@ -1,6 +1,7 @@
 package com.android.myhealthmate;
 
 import com.android.entity.AccountController;
+import com.android.entity.MedicineListController;
 import com.android.reminder.AlarmReceiver;
 import com.android.reminder.MedReminderController;
 import com.android.remoteProfile.BenTestClass;
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
 	private TextView textSignUp;
 	private AccountController accountController;
 	private CheckBox remenberMe;
+	private MedicineListController medicineList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,10 @@ public class MainActivity extends Activity {
 		accountController = AccountController.getInstance();
 		accountController.init(getApplicationContext());
 		accountController.setTestAccout();
+		
+		medicineList = MedicineListController.getInstance();
+		medicineList.init(getApplicationContext());
+		
 
 		if (accountController.isRemenbered()) {
 			username.setText(accountController.getAccount().getUsername());
