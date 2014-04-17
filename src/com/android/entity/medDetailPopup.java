@@ -42,7 +42,7 @@ public class medDetailPopup extends DialogFragment {
 					}
 
 				});
-		String medTextList = null;
+		String medTextList = new String();
 		for (MedicineModel model : medicineList.getInstance().getMedicineList())
 			medTextList = medTextList + model.getTitle() + ": " + model.getDescription() + "\n";
 
