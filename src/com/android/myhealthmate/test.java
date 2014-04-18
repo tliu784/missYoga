@@ -12,6 +12,7 @@ import com.android.entity.AccountModel;
 import com.android.entity.HealthStatusModel;
 import com.android.entity.ProfileModel;
 import com.android.myhealthmate.R;
+import com.android.recommendation.RecommendationController;
 import com.android.recommendation.RemoteEngineController;
 import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
@@ -162,10 +163,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				RemoteRequestController rpc = RemoteRequestController.getInstance();
-				rpc.initContext(test.this);
-				rpc.getMinitoredRemoteUserList().clear();
-				testRemoteProfile(ServerResponseModel.ResponseType.SEND_REQUEST);
+				RecommendationController.getInstance().refresh();
 			}
 		};
 	}

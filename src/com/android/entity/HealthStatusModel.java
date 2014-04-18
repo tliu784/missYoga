@@ -87,5 +87,9 @@ public class HealthStatusModel {
 	public void setSleep_minDeep(int sleep_minDeep) {
 		this.sleep_minDeep = sleep_minDeep;
 	}
+	
+	public int getSleepTotal(){
+		return (sleep_minAwake+sleep_minDeep+sleep_minLight);
+	}
 
 }

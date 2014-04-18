@@ -1,6 +1,9 @@
 package com.android.entity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import com.android.service.FileOperation;
 
@@ -19,11 +22,22 @@ public class AccountController {
 	}
 
 	public void setTestAccout() {
-		account.setEmail("ben123@gmail.com");
+		account.setEmail("benjamin.niu1990@gmail.com");
 		account.setPassword("password");
 		account.setUsername("username");
 		account.setRemember(false);
-		account.setName("Ben");
+		account.setName("Ben Niu");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.CANADA);
+		String dateInString = "31-08-1990 10:20:56";
+		Date bday = null;
+		try {
+			bday = sdf.parse(dateInString);
+		} catch (ParseException e) {
+
+		}
+		account.setBirthDate(bday);
+		account.setHeight(178);
+		account.setWeight(75);
 		save();
 	}
 
