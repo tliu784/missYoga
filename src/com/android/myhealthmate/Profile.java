@@ -94,11 +94,11 @@ public class Profile extends Activity {
 
 		cancel = (Button) findViewById(R.id.profile_cancel);
 
-		if (!accountController.getAccount().isNewUser()) {
+//		if (!accountController.getAccount().isNewUser()) {
 			submit.setVisibility(View.GONE);
 			cancel.setVisibility(View.GONE);
 			switchAllEditToView();
-		}
+//		}
 
 		submit.setOnClickListener(getSubmitListener());
 		cancel.setOnClickListener(getCancelListener());
