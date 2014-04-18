@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.android.entity.AccountController;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.ReminderViewController;
@@ -29,7 +31,9 @@ public class Reminder extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		setTitle(" Reminder");
+		
+		
 		// Context context=getApplicationContext();
 		setContentView(R.layout.reminder);
 

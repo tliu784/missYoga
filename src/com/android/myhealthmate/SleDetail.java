@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import com.android.entity.AccountController;
 import com.android.remoteProfile.BenTestClass;
 import com.android.remoteProfile.RemoteDataController;
 import com.android.remoteProfile.RemoteDataModel;
@@ -88,6 +89,7 @@ public class SleDetail extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sle_details);
+		setTitle("");
 
 		benTestClass = new BenTestClass(SleDetail.this);
 

@@ -2,6 +2,8 @@ package com.android.myhealthmate;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import com.android.entity.AccountController;
 import com.android.entity.RecomModel;
 import com.android.entity.TestingJson;
 import com.android.reminder.AlarmReceiver;
@@ -50,6 +52,7 @@ public class MainPage extends Activity implements ResponseHandler {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
+		setTitle(" Hi,"+AccountController.getInstance().getAccount().getName());
 
 		boolean fromNoti = false;
 		savedInstanceState = getIntent().getExtras();

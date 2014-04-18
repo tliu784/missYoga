@@ -1,5 +1,7 @@
 package com.android.myhealthmate;
 
+import com.android.entity.AccountController;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +44,7 @@ public class History extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.summary);
+		setTitle(" Hi,"+AccountController.getInstance().getAccount().getName());
 		oneWeekFilter = (TextView) findViewById(R.id.history_filter_1week);
 		oneMonthFilter = (TextView) findViewById(R.id.history_filter_1month);
 		threeMonthFilter = (TextView) findViewById(R.id.history_filter_3month);
@@ -103,7 +106,7 @@ public class History extends Activity {
 				Toast.makeText(v.getContext(), "clickclcickccklcic", Toast.LENGTH_SHORT).show();
 				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.35, 0.4);
 				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.15, 0.6, 0.15);
-				changeByPercent(historyActLeft,historyActMid,historyActRight,0.35, 0.4, 0.15);
+				changeByPercent(historyActLeft,historyActMid,historyActRight,0.25, 0.5, 0.15);
 				changeByPercent(historySleepLeft,historySleepMid,historySleepRight,0.23, 0.47, 0.2);
 			}
 		};
@@ -114,10 +117,10 @@ public class History extends Activity {
 		return new OnClickListener() {
 			public void onClick(View v) {
 				Toast.makeText(v.getContext(), "clickclcickccklcic", Toast.LENGTH_SHORT).show();
-				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.35, 0.35, 0.2);
-				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.3, 0.4, 0.2);
-				changeByPercent(historyActLeft,historyActMid,historyActRight,0.35, 0.4, 0.15);
-				changeByPercent(historySleepLeft,historySleepMid,historySleepRight,0.33, 0.37, 0.2);
+				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.55, 0.2);
+				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.2, 0.5, 0.2);
+				changeByPercent(historyActLeft,historyActMid,historyActRight,0.15, 0.6, 0.15);
+				changeByPercent(historySleepLeft,historySleepMid,historySleepRight,0.13, 0.57, 0.2);
 			}
 		};
 	}	
