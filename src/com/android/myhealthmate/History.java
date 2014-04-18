@@ -91,7 +91,6 @@ public class History extends Activity {
 	public OnClickListener getOneWeekFilterListener() {
 		return new OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(v.getContext(), "clickclcickccklcic", Toast.LENGTH_SHORT).show();
 				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.45, 0.3, 0.15);
 				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.2, 0.5, 0.2);
 				changeByPercent(historyActLeft,historyActMid,historyActRight,0.3, 0.4, 0.2);
@@ -103,7 +102,6 @@ public class History extends Activity {
 	public OnClickListener getThreeMonthFilterListener() {
 		return new OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(v.getContext(), "clickclcickccklcic", Toast.LENGTH_SHORT).show();
 				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.35, 0.4);
 				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.15, 0.6, 0.15);
 				changeByPercent(historyActLeft,historyActMid,historyActRight,0.25, 0.5, 0.15);
@@ -116,7 +114,6 @@ public class History extends Activity {
 	public OnClickListener getOneMonthFilterListener() {
 		return new OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(v.getContext(), "clickclcickccklcic", Toast.LENGTH_SHORT).show();
 				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.55, 0.2);
 				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.2, 0.5, 0.2);
 				changeByPercent(historyActLeft,historyActMid,historyActRight,0.15, 0.6, 0.15);
