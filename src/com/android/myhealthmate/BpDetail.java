@@ -1,11 +1,15 @@
 package com.android.myhealthmate;
 
+import com.android.reminder.AlarmReceiver;
+import com.android.service.NotificationService;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewDataInterface;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.LinearLayout;
@@ -29,6 +33,9 @@ public class BpDetail extends Activity {
 		// graph with dynamically genereated horizontal and vertical labels
 		GraphView graphView;
 
+		//ben notification test
+		new NotificationService(getApplicationContext(),"Recommendation","lalalalalalalalal");
+		
 		graphView = new LineGraphView(this // context
 				, "GraphViewDemo" // heading
 		);
