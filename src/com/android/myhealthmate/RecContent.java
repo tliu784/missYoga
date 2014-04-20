@@ -11,13 +11,14 @@ import android.widget.TextView;
 public class RecContent extends Activity {
 
 	private TextView recContent;
+	private static TextView recommendationContent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.rec_details);
 		recContent = (TextView) findViewById(R.id.rec);
-
+		recommendationContent = (TextView) findViewById(R.id.rec);
 		String fromNoti = "RecContent";
 		savedInstanceState = getIntent().getExtras();
 
@@ -39,6 +40,10 @@ public class RecContent extends Activity {
 
 		recContent.setText(content);
 
+	}
+	
+	public static void updateRecContent(String content){
+		//recommendationContent.setText(content);
 	}
 
 }

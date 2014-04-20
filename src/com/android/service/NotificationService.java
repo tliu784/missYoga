@@ -1,13 +1,7 @@
 package com.android.service;
 
-import com.android.myhealthmate.MainPage;
 import com.android.myhealthmate.R;
 import com.android.myhealthmate.RecContent;
-import com.android.reminder.AlarmService;
-import com.android.reminder.MedReminderController;
-import com.android.reminder.MedReminderModel;
-
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -22,10 +16,7 @@ public class NotificationService{
 	public static final String recNotificationState = "recNotification";
 	
 	public NotificationService(Context context,String title, String content){
-		// initialized controller
-		MedReminderController mrc = MedReminderController.getInstance();
-		mrc.init(context);
-		// get reminder via intent extra variable
+			// get reminder via intent extra variable
 	
 		NotificationManager mNM;
 		Intent toActivity = new Intent(context,RecContent.class);
