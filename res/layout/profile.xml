@@ -419,24 +419,26 @@
                     android:orientation="horizontal" >
 
                     <TextView
-                        android:layout_width="84dp"
+                        android:layout_width="110dp"
                         android:layout_height="wrap_content"
                         android:text="@string/profile_name"
+                        style="@style/profile_edittext"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="130dp"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
                         android:clickable="true"
+                        style="@style/profile_edittext"
                         android:text="@string/effect"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="64dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
+                        style="@style/profile_edittext"
                         android:text="@string/time"
                         android:textColor="@color/black"
                         android:textStyle="bold" />

@@ -156,11 +156,11 @@ public class Profile extends Activity {
 		titleSection.setClickable(true);
 		titleSection.setOrientation(LinearLayout.HORIZONTAL);
 
-		nameContent.setLayoutParams(new LayoutParams(160, LayoutParams.MATCH_PARENT));
+		nameContent.setLayoutParams(new LayoutParams(220, LayoutParams.MATCH_PARENT));
 		nameContent.setText(medModel.getTitle());
 		titleSection.addView(nameContent);
 
-		effectContent.setLayoutParams(new LayoutParams(260, LayoutParams.MATCH_PARENT));
+		effectContent.setLayoutParams(new LayoutParams(200, LayoutParams.MATCH_PARENT));
 		effectContent.setText(medModel.getEffect().toString());
 		titleSection.addView(effectContent);
 
