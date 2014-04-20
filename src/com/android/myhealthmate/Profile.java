@@ -412,10 +412,6 @@ public class Profile extends Activity {
 				setWeight();
 				setBirthDay();
 				setGender();
-				setHypertension();
-				setCardio();
-				setInsomnia();
-				setDiabetes();
 
 				switchAllEditToView();
 
