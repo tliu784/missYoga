@@ -5,20 +5,13 @@ import java.util.GregorianCalendar;
 
 import com.android.entity.AccountController;
 import com.android.entity.RecomModel;
-import com.android.entity.TestingJson;
-import com.android.reminder.AlarmReceiver;
-import com.android.reminder.AlarmService;
+import com.android.recommendation.RecommendationController;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
 import com.android.service.NotificationService;
-import com.android.service.ResponseHandler;
-import com.android.service.RestCallHandler;
 import com.android.widget.MyWidgetProvider;
-import com.google.gson.Gson;
-
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -35,7 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
-public class MainPage extends Activity implements ResponseHandler {
+public class MainPage extends Activity {
 	private TextView rec_content;
 	private MenuItem menuItem;
 	private LinearLayout hrClickView;
@@ -251,27 +244,15 @@ public class MainPage extends Activity implements ResponseHandler {
 	}
 
 	private void refresh() {
-		/*
-		 * String url = "http://healthengineherokuappcom.apiary.io/"; // String
-		 * url = "http://health-engine.herokuapp.com/"; String json =
-		 * "{\n    \"userinfo\": {\n        \"age\": 45,\n        \"gender\": \"male\",\n        \"height\": 168,\n        \"weight\": [\n            {\n                \"value\": 65.3,    //this is the data of current day\n                \"date\": \"2012-04-24\"\n            },\n            {\n                \"value\": 65.3,    // this should be average of last week\n                \"date\": \"2012-04-17\"    //by defult this should the last 7 days\n            },\n            {\n                \"value\": 65.3,    // this should be average of last month\n                \"date\": \"2012-03-24\"    //by defult this should the last 30 days\n            }\n        ],\n        \"hypertension\" : true,\n        \"diabetes\" : true,\n        \"insomnia\" : true,\n        \"cardio\" : true\n    },\n    \"activities\": [\n        {\n            \"distance\": 500,     //this is the data of current day\n            \"duration\": 7.3,\n            \"date\": \"2012-04-24\",\n            \"startTime\": \"18:20:42Z\",\n            \"steps\": 800\n        },\n        {\n            \"distance\": 1500,  // this is accumulation not average by last week\n            \"duration\": 140,\n            \"date\": \"2012-04-17\",\n            \"startTime\": \"\",    // timestamp should be empty\n            \"steps\": 1700\n        },\n        {\n            \"distance\": 12500, // this is accumulation not average by last month\n            \"duration\": 1430,\n            \"date\": \"2012-03-24\",\n            \"startTime\": \"\",   // timestamp should be empty\n            \"steps\": 49300\n        }\n    ],\n    \"sleep\": [\n        {\n            \"efficiency\": 4,    //this is the data of current day\n            \"date\": \"2012-04-24\",\n            \"startTime\": \"18:25:43Z\",\n            \"minutesAsleep\": 453,\n            \"minutesAwake\": 34,\n            \"awakeningsCount\": 8,\n            \"timeInBed\": 541\n        },\n        {\n            \"efficiency\": 4,   // this is the average of last week\n            \"date\": \"2012-04-17\",\n            \"startTime\": \"\",   // this should be empty\n            \"minutesAsleep\": 453,\n            \"minutesAwake\": 34,\n            \"awakeningsCount\": 8,\n            \"timeInBed\": 541\n        },\n        {\n            \"efficiency\": 4,  // this is the average of last month\n            \"date\": \"2012-03-24\",\n            \"startTime\": \"\",  // this should be empty\n            \"minutesAsleep\": 453,\n            \"minutesAwake\": 34,\n            \"awakeningsCount\": 8,\n            \"timeInBed\": 541\n        }\n    ],\n    \"heartBeats\": [\n        {\n            \"count\": 56,       //this is the data of current day\n            \"date\": \"2012-04-24\",\n            \"time\": \"18:23:43Z\"\n        },\n        {\n            \"count\": 60,       //this is the average of last week\n            \"date\": \"2012-04-17\",\n            \"time\": \"\"\n        },\n        {\n            \"count\": 59,      //this is the average of last month\n            \"date\": \"2012-03-24\",\n            \"time\": \"\"\n        }\n    ],\n    \"bloodPressures\": [\n        {\n            \"systolic\": 100,         //this is the data of current day\n            \"diastolic\": 71,\n            \"date\": \"2012-04-23\",\n            \"time\": \"18:23:43Z\"\n        },\n        {\n            \"systolic\": 100,         //this is the average of last week\n            \"diastolic\": 71,\n            \"date\": \"2012-04-17\",     \n            \"time\": \"\"               // timestamp should be empty\n        },\n        {\n            \"systolic\": 100,         //this is the average of last month\n            \"diastolic\": 71,\n            \"date\": \"2012-03-24\",\n            \"time\": \"\"               // timestamp should be empty\n        }\n    ]\n}"
-		 * ; // String json = TestingJson.input1; RestCallHandler rest = new
-		 * RestCallHandler(MainPage.this, url, json); rest.handleResponse();
-		 */
-
-		RecomModel somerec = new RecomModel();
-		somerec.setId(101);
-		somerec.setRecommendation("you better go to sleep right away");
-		somerec.setSeverity(3);
-		somerec.setUrl("www.areyoukiddingme.com");
-		rec_content.setText(somerec.getRecommendation());
-		updateWidgetContent(somerec.getRecommendation());
-		new NotificationService(MainPage.this, "New Recommendation", somerec.getRecommendation());
-		RecContent.updateRecContent(somerec.getRecommendation());
-		// restore to normal button
-		menuItem.collapseActionView();
-		menuItem.setActionView(null);
-
+		RecommendationController rc=RecommendationController.getInstance();
+		if (rc.getMainpage()==null)
+			rc.setMainpage(this);
+		rc.getRecom();
+	}
+	
+	public void postRefresh(RecomModel[] recomArray){
+		
+		updateRecommendations(recomArray);
 	}
 
 	public void updateWidgetContent(String recContent) {
@@ -280,33 +261,34 @@ public class MainPage extends Activity implements ResponseHandler {
 		AppWidgetManager.getInstance(this).updateAppWidget(widget, remoteViews);
 	}
 
-	private void updateRecBox(RecomModel[] recomArray) {
+	private void updateRecommendations(RecomModel[] recomArray) {
 		if (recomArray != null) {
-			rec_content.setText("");
+			String recommendationContent ="";
+			remoteViews.setTextViewText(R.id.title, "Health Recommendation");
+			
 			for (int i = 0; i < recomArray.length; i++) {
-				rec_content.append(recomArray[i].getRecommendation());
+				recommendationContent+=(recomArray[i].getRecommendation());
 				if (i < recomArray.length - 1) {
-					rec_content.append("\n");
+					recommendationContent+="\n\n";
 				}
 			}
+			//update all fields and insert records
+			remoteViews.setTextViewText(R.id.desc, recommendationContent);
+			AppWidgetManager.getInstance(this).updateAppWidget(widget, remoteViews);
+			rec_content.setText(recommendationContent);
+			
+			//add record in rec history
+			//optionally create notification
+//			new NotificationService(MainPage.this, "New Recommendation", somerec.getRecommendation());
 		} else {
 			rec_content.setText("Unable to retrieve recommendation");
 		}
-		recommendation = rec_content.getText().toString();
-		updateWidgetContent(rec_content.getText().toString());
-
+		
+		//restore refresh button
 		menuItem.collapseActionView();
 		menuItem.setActionView(null);
 	}
 
-	@Override
-	public void processResponse(String jsonResponse) {
-		Gson gson = new Gson();
-		RecomModel[] recomArray = null;
 
-		if (jsonResponse != null)
-			recomArray = gson.fromJson(jsonResponse, RecomModel[].class);
-		updateRecBox(recomArray);
-	}
 
 }

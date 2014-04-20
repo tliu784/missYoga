@@ -163,7 +163,7 @@ public class test extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				RecommendationController.getInstance().refresh();
+//				RecommendationController.getInstance().loadDemoInput();
 			}
 		};
 	}

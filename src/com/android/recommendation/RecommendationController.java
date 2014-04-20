@@ -1,43 +1,66 @@
 package com.android.recommendation;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Date;
 
 import android.util.Log;
 
 import com.android.entity.AccountController;
 import com.android.entity.HealthStatusModel;
+import com.android.entity.RecomModel;
+import com.android.myhealthmate.MainPage;
 import com.android.recommendation.EngineInputModel.ActData;
 import com.android.recommendation.EngineInputModel.BPdata;
 import com.android.recommendation.EngineInputModel.HRdata;
 import com.android.recommendation.EngineInputModel.SleepData;
 import com.android.recommendation.EngineInputModel.UserInfo;
-import com.android.recommendation.EngineInputModel.WeightData;
 import com.android.reminder.MedReminderModel;
+import com.android.service.ResponseHandler;
+import com.android.service.RestCallHandler;
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartPointModel;
 import com.google.gson.Gson;
 
-public class RecommendationController {
+public class RecommendationController implements ResponseHandler {
 
 	private UserInfo userinfo;
-	private ArrayList<ChartPointModel> existingChartPoints;
-	private ArrayList<ChartPointModel> newData;
+	// private ArrayList<ChartPointModel> existingChartPoints;
+	// private ArrayList<ChartPointModel> newData;
+	private String[] demoJson;
 	private int newDataIndex = 0;
-	private static RecommendationController instance=null;
+	private static RecommendationController instance = null;
+	private MainPage mainpage;
 
-	public static RecommendationController getInstance(){
-		if (instance==null)
-			instance=new RecommendationController();
+	public static RecommendationController getInstance() {
+		if (instance == null)
+			instance = new RecommendationController();
 		return instance;
 	}
-	
+
 	private RecommendationController() {
 		init();
 	}
 
 	private void init() {
 		userinfo = AccountController.getInstance().getAccount().getUserInfo();
+		loadDemoInput();
+	}
+
+	private void loadDemoInput() {
+		demoJson = new String[5];
+		demoJson[0] = getStringFromInputStream(RecommendationController.class
+				.getResourceAsStream("/com/android/recommendation/test_data_0.json"));
+		demoJson[1] = getStringFromInputStream(RecommendationController.class
+				.getResourceAsStream("/com/android/recommendation/test_data_1.json"));
+		demoJson[2] = getStringFromInputStream(RecommendationController.class
+				.getResourceAsStream("/com/android/recommendation/test_data_2.json"));
+		demoJson[3] = getStringFromInputStream(RecommendationController.class
+				.getResourceAsStream("/com/android/recommendation/test_data_3.json"));
+		demoJson[4] = getStringFromInputStream(RecommendationController.class
+				.getResourceAsStream("/com/android/recommendation/test_data_4.json"));
 	}
 
 	public void refresh() {
@@ -49,10 +72,35 @@ public class RecommendationController {
 		 * widget 7. display recom in app 8. add recom to chart page history
 		 * section 9. if necessary, create notification
 		 */
-		ChartPointModel point = new ChartPointModel(new Date(),80,75,120,150,ChartPointModel.SLEEP_LOW,false);
-		EngineInputModel eim=addData(point);
+		ChartPointModel point = new ChartPointModel(new Date(), 80, 75, 120, 150, ChartPointModel.SLEEP_LOW, false);
+		EngineInputModel eim = addData(point);
 		Log.d("testing", new Gson().toJson(eim));
-		
+
+	}
+
+	public void getRecom() {
+		if (newDataIndex>4){
+			newDataIndex=4;
+		}
+		String json=demoJson[newDataIndex];
+		String url = "http://health-engine.herokuapp.com/";
+		RestCallHandler rest = new RestCallHandler(this, url, json);
+		rest.handleResponse();
+		newDataIndex++;
+	}
+
+	@Override
+	public void processResponse(String jsonResponse) {
+		Gson gson = new Gson();
+		RecomModel[] recomArray = null;
+
+		if (jsonResponse != null)
+			try {
+				recomArray = gson.fromJson(jsonResponse, RecomModel[].class);
+			} catch (Exception e) {
+				return;
+			}
+		mainpage.postRefresh(recomArray);
 	}
 
 	private EngineInputModel addData(ChartPointModel point) {
@@ -63,9 +111,9 @@ public class RecommendationController {
 		ChartDataController.getInstance().getDataset().add(point);
 		ChartDataController.getInstance().shiftDisplayToEnd();
 		HealthStatusModel hsm = ChartDataController.getInstance().getLastValue();
-		Date timestamp=pointtimestamp;
+		Date timestamp = pointtimestamp;
 		for (int i = 0; i < 7; i++) {
-			//to be changed?
+			// to be changed?
 			ActData act = new ActData(timestamp, (int) (caltoduration * hsm.getAct_calories()));
 			SleepData sleep = new SleepData(timestamp, hsm.getSleepTotal());
 			HRdata hr = new HRdata(timestamp, hsm.getHr_count());
@@ -74,7 +122,7 @@ public class RecommendationController {
 			input.getBloodPressures().add(bp);
 			input.getHeartBeats().add(hr);
 			input.getSleep().add(sleep);
-			timestamp=MedReminderModel.addDuration(timestamp, -1, MedReminderModel.DurationUnit.Day);
+			timestamp = MedReminderModel.addDuration(timestamp, -1, MedReminderModel.DurationUnit.Day);
 		}
 		return input;
 
@@ -95,5 +143,43 @@ public class RecommendationController {
 		 * input.getSleep().add(sleep); } input.setUserinfo(userinfo); return
 		 * input;
 		 */
+	}
+
+	// convert InputStream to String
+	private String getStringFromInputStream(InputStream is) {
+
+		BufferedReader br = null;
+		StringBuilder sb = new StringBuilder();
+
+		String line;
+		try {
+
+			br = new BufferedReader(new InputStreamReader(is));
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return sb.toString();
+
+	}
+
+	public void setMainpage(MainPage mainpage) {
+		this.mainpage = mainpage;
+	}
+
+	public MainPage getMainpage() {
+		return mainpage;
 	}
 }
