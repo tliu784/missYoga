@@ -102,10 +102,13 @@ public class RecommendationController implements ResponseHandler {
 			}
 		}
 		if (recomArray != null) {
-			// add record in rec history
-			// optionally create notification
+
 			for (int i = 0; i < recomArray.length; i++) {
 				RecomModel somerec = recomArray[i];
+				// add record in rec history
+				// for example: recordlist.add(converted somerec);
+				
+				// optionally create notification
 				if (somerec.getId() > 900) {
 					new NotificationService(mainpage, "New Recommendation", somerec.getRecommendation());
 					break;
