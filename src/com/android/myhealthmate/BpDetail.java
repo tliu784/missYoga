@@ -34,7 +34,7 @@ public class BpDetail extends Activity {
 		GraphView graphView;
 
 		//ben notification test
-		new NotificationService(getApplicationContext(),"Recommendation","lalalalalalalalal");
+		new NotificationService(BpDetail.this,"Recommendation","lalalalalalalalal");
 		
 		graphView = new LineGraphView(this // context
 				, "GraphViewDemo" // heading

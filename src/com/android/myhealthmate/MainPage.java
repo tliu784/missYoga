@@ -10,6 +10,7 @@ import com.android.reminder.AlarmReceiver;
 import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
+import com.android.service.NotificationService;
 import com.android.service.ResponseHandler;
 import com.android.service.RestCallHandler;
 import com.android.widget.MyWidgetProvider;
@@ -44,7 +45,7 @@ public class MainPage extends Activity implements ResponseHandler {
 	private TextView rdTitle;
 	private TextView rdDate;
 	private TextView rdTime;
-
+	private String recommendation = "Recommendation";
 	private ComponentName widget;
 	private RemoteViews remoteViews;
 
@@ -52,7 +53,7 @@ public class MainPage extends Activity implements ResponseHandler {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
-		setTitle(" Hi,"+AccountController.getInstance().getAccount().getName());
+		setTitle(" Hi," + AccountController.getInstance().getAccount().getName());
 
 		boolean fromNoti = false;
 		savedInstanceState = getIntent().getExtras();
@@ -72,6 +73,7 @@ public class MainPage extends Activity implements ResponseHandler {
 		historyClickView = (TextView) findViewById(R.id.home_history);
 
 		rec_content = (TextView) findViewById(R.id.rec_content);
+		recommendation = rec_content.getText().toString();
 		rec_content.setVisibility(View.GONE);
 
 		rdTitle = (TextView) findViewById(R.id.rd_title);
@@ -94,6 +96,7 @@ public class MainPage extends Activity implements ResponseHandler {
 
 		widget = new ComponentName(this, MyWidgetProvider.class);
 		remoteViews = new RemoteViews(this.getPackageName(), R.layout.widget_layout);
+
 	}
 
 	@Override
@@ -201,7 +204,10 @@ public class MainPage extends Activity implements ResponseHandler {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainPage.this, RecContent.class));
+				Intent intent = new Intent(MainPage.this, RecContent.class);
+				intent.putExtra(NotificationService.recNotificationState, recommendation);
+				startActivity(intent);
+
 			}
 		};
 	}
@@ -274,6 +280,7 @@ public class MainPage extends Activity implements ResponseHandler {
 		} else {
 			rec_content.setText("Unable to retrieve recommendation");
 		}
+		recommendation = rec_content.getText().toString();
 		updateWidgetContent(rec_content.getText().toString());
 		menuItem.collapseActionView();
 		menuItem.setActionView(null);

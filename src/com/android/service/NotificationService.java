@@ -7,6 +7,7 @@ import com.android.reminder.AlarmService;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -16,8 +17,10 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.support.v4.app.NotificationCompat;
 
-public class NotificationService {
+public class NotificationService{
 
+	public static final String recNotificationState = "recNotification";
+	
 	public NotificationService(Context context,String title, String content){
 		// initialized controller
 		MedReminderController mrc = MedReminderController.getInstance();
@@ -26,9 +29,11 @@ public class NotificationService {
 	
 		NotificationManager mNM;
 		Intent toActivity = new Intent(context,RecContent.class);
+		toActivity.putExtra(NotificationService.recNotificationState, content);
+		toActivity.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
+		PendingIntent contentIntent = PendingIntent.getActivity(context, 133, toActivity, PendingIntent.FLAG_UPDATE_CURRENT);
 
-		PendingIntent contentIntent = PendingIntent.getActivity(context, 133, toActivity, 0);
 		mNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		NotificationCompat.Builder ntbuilder = new NotificationCompat.Builder(context);
@@ -53,7 +58,7 @@ public class NotificationService {
 
 		notification.priority = Notification.PRIORITY_MAX;
 		// notification.flags = Notification.FLAG_ONGOING_EVENT;
-
+		
 		mNM.notify(133, notification);
 	}
 	
