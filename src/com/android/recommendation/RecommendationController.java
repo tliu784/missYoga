@@ -18,6 +18,7 @@ import com.android.recommendation.EngineInputModel.HRdata;
 import com.android.recommendation.EngineInputModel.SleepData;
 import com.android.recommendation.EngineInputModel.UserInfo;
 import com.android.reminder.MedReminderModel;
+import com.android.service.NotificationService;
 import com.android.service.ResponseHandler;
 import com.android.service.RestCallHandler;
 import com.android.trend.ChartDataController;
@@ -79,10 +80,10 @@ public class RecommendationController implements ResponseHandler {
 	}
 
 	public void getRecom() {
-		if (newDataIndex>4){
-			newDataIndex=4;
+		if (newDataIndex > 4) {
+			newDataIndex = 4;
 		}
-		String json=demoJson[newDataIndex];
+		String json = demoJson[newDataIndex];
 		String url = "http://health-engine.herokuapp.com/";
 		RestCallHandler rest = new RestCallHandler(this, url, json);
 		rest.handleResponse();
@@ -94,13 +95,24 @@ public class RecommendationController implements ResponseHandler {
 		Gson gson = new Gson();
 		RecomModel[] recomArray = null;
 
-		if (jsonResponse != null)
+		if (jsonResponse != null) {
 			try {
 				recomArray = gson.fromJson(jsonResponse, RecomModel[].class);
 			} catch (Exception e) {
-				return;
 			}
-		mainpage.postRefresh(recomArray);
+		}
+		if (recomArray != null) {
+			// add record in rec history
+			// optionally create notification
+			for (int i = 0; i < recomArray.length; i++) {
+				RecomModel somerec = recomArray[i];
+				if (somerec.getId() > 900) {
+					new NotificationService(mainpage, "New Recommendation", somerec.getRecommendation());
+					break;
+				}
+			}
+			mainpage.postRefresh(recomArray);
+		}
 	}
 
 	private EngineInputModel addData(ChartPointModel point) {

@@ -272,14 +272,11 @@ public class MainPage extends Activity {
 					recommendationContent+="\n\n";
 				}
 			}
-			//update all fields and insert records
+			//update widgets and main page
 			remoteViews.setTextViewText(R.id.desc, recommendationContent);
 			AppWidgetManager.getInstance(this).updateAppWidget(widget, remoteViews);
 			rec_content.setText(recommendationContent);
-			
-			//add record in rec history
-			//optionally create notification
-//			new NotificationService(MainPage.this, "New Recommendation", somerec.getRecommendation());
+				
 		} else {
 			rec_content.setText("Unable to retrieve recommendation");
 		}
