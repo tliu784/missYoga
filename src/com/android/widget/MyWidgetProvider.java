@@ -23,11 +23,8 @@ public class MyWidgetProvider extends AppWidgetProvider {
 		// register for button event
 		remoteViews.setOnClickPendingIntent(R.id.widget_sec,
 				buildButtonPendingIntent(context));
-
-		//get the content sec
 		
 		// updating view with initial data
-	//	TextView title = (TextView) findByViewById (R.id.title);
 		remoteViews.setTextViewText(R.id.title, getTitle());
 		remoteViews.setTextViewText(R.id.desc, getDesc());
 		
@@ -36,9 +33,6 @@ public class MyWidgetProvider extends AppWidgetProvider {
 
 
 	public static PendingIntent buildButtonPendingIntent(Context context) {
-		++MyWidgetReceiver.clickCount;
-
-
 		// initiate widget update request
 		Intent toActivity = new Intent(context,RecContent.class);
 		toActivity.setAction(WidgetUtils.WIDGET_UPDATE_ACTION);
@@ -50,7 +44,7 @@ public class MyWidgetProvider extends AppWidgetProvider {
 	}
 	
 	private static CharSequence getDesc() {
-		return "This is a recommendation !!1";
+		return "This is a recommendation.";
 	}
 
 	private static CharSequence getTitle() {

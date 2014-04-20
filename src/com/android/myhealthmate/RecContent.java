@@ -4,6 +4,8 @@ import com.android.reminder.AlarmReceiver;
 import com.android.service.NotificationService;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -17,6 +19,11 @@ public class RecContent extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.rec_details);
+
+		NotificationManager mNM;
+		mNM = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+		mNM.cancel(NotificationService.recNotificationID);
+
 		recContent = (TextView) findViewById(R.id.rec);
 		recommendationContent = (TextView) findViewById(R.id.rec);
 		String fromNoti = "RecContent";

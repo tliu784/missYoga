@@ -35,7 +35,6 @@
 	        android:text="@string/sign_in_txt" 
 	        android:layout_alignParentRight="true"
 	        android:textColor="@color/sign_in_textcolor_darkblue"
-	        android:clickable="true"
 			android:onClick="SwithToSignIn"/>
    </RelativeLayout>
    
