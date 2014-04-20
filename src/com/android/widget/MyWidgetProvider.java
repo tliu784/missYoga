@@ -1,5 +1,7 @@
 package com.android.widget;
 import com.android.myhealthmate.R;
+import com.android.myhealthmate.RecContent;
+import com.android.service.NotificationService;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,8 +10,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 
 public class MyWidgetProvider extends AppWidgetProvider {
+	TextView content;
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
 			int[] appWidgetIds) {
@@ -17,9 +21,11 @@ public class MyWidgetProvider extends AppWidgetProvider {
 		RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
 
 		// register for button event
-		remoteViews.setOnClickPendingIntent(R.id.sync_button,
+		remoteViews.setOnClickPendingIntent(R.id.widget_sec,
 				buildButtonPendingIntent(context));
 
+		//get the content sec
+		
 		// updating view with initial data
 	//	TextView title = (TextView) findByViewById (R.id.title);
 		remoteViews.setTextViewText(R.id.title, getTitle());
@@ -32,11 +38,15 @@ public class MyWidgetProvider extends AppWidgetProvider {
 	public static PendingIntent buildButtonPendingIntent(Context context) {
 		++MyWidgetReceiver.clickCount;
 
+
 		// initiate widget update request
-		Intent intent = new Intent();
-		intent.setAction(WidgetUtils.WIDGET_UPDATE_ACTION);
-		return PendingIntent.getBroadcast(context, 0, intent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
+		Intent toActivity = new Intent(context,RecContent.class);
+		toActivity.setAction(WidgetUtils.WIDGET_UPDATE_ACTION);
+		toActivity.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+		return PendingIntent.getActivity(context, 133, toActivity, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
 	}
 	
 	private static CharSequence getDesc() {
