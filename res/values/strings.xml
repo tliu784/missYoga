@@ -23,7 +23,7 @@
     <string name="agree_terms">I agree to My Health Mate Terms</string>
     <string name="profile_name">Name</string>
     <string name="profile_gender">Gender</string>
-    <string name="profile_dob">Date of birth</string>
+    <string name="profile_dob">DOB</string>
     <string name="profile_height">Height</string>
     <string name="profile_weight">Weight</string>
     <string name="profile_hypertension">Hypertension</string>
@@ -73,7 +73,8 @@
     <string name="repeat">Repeat</string>
     <string name="days">days</string>
     <string name="hours">hours</string>
-    <string name="med_record">Medicine record</string>
+    <string name="med_record">Current Medication</string>
+    <string name="profile">Profile</string>
     <string name="time">Time</string>
     
     <string-array name="news_headlines">

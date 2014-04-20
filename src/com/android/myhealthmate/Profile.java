@@ -74,10 +74,10 @@ public class Profile extends Activity {
 		nameEditView = (EditText) findViewById(R.id.txtbox_name);
 
 		genderRadioGroup = (RadioGroup) findViewById(R.id.gender);
-		cardioRadioGroup = (RadioGroup) findViewById(R.id.cardio);
-		insomniaRadioGroup = (RadioGroup) findViewById(R.id.insomnia);
-		diabetesRadioGroup = (RadioGroup) findViewById(R.id.diabetes);
-		HypertensionRadioGroup = (RadioGroup) findViewById(R.id.hypertension);
+//		cardioRadioGroup = (RadioGroup) findViewById(R.id.cardio);
+//		insomniaRadioGroup = (RadioGroup) findViewById(R.id.insomnia);
+//		diabetesRadioGroup = (RadioGroup) findViewById(R.id.diabetes);
+//		HypertensionRadioGroup = (RadioGroup) findViewById(R.id.hypertension);
 
 		medicineSection = (GridLayout) findViewById(R.id.medicine_sec);
 		medicineList = MedicineListController.getInstance();
@@ -267,28 +267,28 @@ public class Profile extends Activity {
 		// weight
 		switchEditToView(R.id.weight_switcher, R.id.txt_weight, R.id.txtbox_weight, accountController.getAccount()
 				.getWeight());
-		// setHypertension
-		if (accountController.getAccount().isHypertension())
-			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension, R.id.radio_profile_hypertension_yes,
-					"Yes");
-		else
-			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension, R.id.radio_profile_hypertension_no,
-					"No");
-		// setDiabetes
-		if (accountController.getAccount().isDiabetes())
-			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes, R.id.radio_profile_diabetes_yes, "Yes");
-		else
-			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes, R.id.radio_profile_diabetes_no, "No");
-		// setInsomnia
-		if (accountController.getAccount().isInsomnia())
-			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia, R.id.radio_profile_insomnia_yes, "Yes");
-		else
-			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia, R.id.radio_profile_insomnia_no, "No");
-		// setCardio
-		if (accountController.getAccount().isCardio())
-			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio, R.id.radio_profile_cardio_yes, "Yes");
-		else
-			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio, R.id.radio_profile_cardio_no, "No");
+//		// setHypertension
+//		if (accountController.getAccount().isHypertension())
+//			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension, R.id.radio_profile_hypertension_yes,
+//					"Yes");
+//		else
+//			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension, R.id.radio_profile_hypertension_no,
+//					"No");
+//		// setDiabetes
+//		if (accountController.getAccount().isDiabetes())
+//			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes, R.id.radio_profile_diabetes_yes, "Yes");
+//		else
+//			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes, R.id.radio_profile_diabetes_no, "No");
+//		// setInsomnia
+//		if (accountController.getAccount().isInsomnia())
+//			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia, R.id.radio_profile_insomnia_yes, "Yes");
+//		else
+//			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia, R.id.radio_profile_insomnia_no, "No");
+//		// setCardio
+//		if (accountController.getAccount().isCardio())
+//			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio, R.id.radio_profile_cardio_yes, "Yes");
+//		else
+//			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio, R.id.radio_profile_cardio_no, "No");
 
 	}
 
