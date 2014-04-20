@@ -48,8 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/gen_page_margin_left"
                 android:columnCount="2"
-                android:padding="8dip"
                 android:useDefaultMargins="true" >
 
                 <TextView
@@ -69,9 +69,9 @@
                         android:layout_height="fill_parent" >
                     </EditText>
 
-                    <TextView
+                   <TextView
                         android:id="@+id/txt_name"
-                        style="@style/profile_edittext"
+                        android:textSize="24sp"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent" />
                 </ViewSwitcher>
