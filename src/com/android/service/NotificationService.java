@@ -22,10 +22,15 @@ public class NotificationService {
 		// get reminder via intent extra variable
 
 		NotificationManager mNM;
-		Intent toActivity = new Intent(context, RecContent.class);
+		final Intent toActivity = new Intent(context, RecContent.class);
 		toActivity.putExtra(NotificationService.recNotificationState, content);
-		toActivity.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		toActivity.setAction(Intent.ACTION_MAIN);
+		toActivity.addCategory(Intent.CATEGORY_LAUNCHER);
+//		toActivity.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
+		
+		
+		
 		PendingIntent recPageIntent = PendingIntent.getActivity(context, recNotificationID, toActivity,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -33,18 +38,21 @@ public class NotificationService {
 		toActivity.putExtra(AlarmReceiver.notificationState, false);
 		
 		PendingIntent mainPageIntent = PendingIntent.getActivity(context,recNotificationID, toMainPage, 
-				PendingIntent.FLAG_CANCEL_CURRENT);
+				PendingIntent.FLAG_UPDATE_CURRENT);
 
 		mNM = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+		PendingIntent noIntent = PendingIntent.getActivity(context,  0, new Intent(), 0);
 		
 		Notification notification = new Notification.Builder(context)
 				.setContentTitle(title).setContentText(content)
 				.setSmallIcon(R.drawable.ic_launcher_logo)
-				.setContentIntent(recPageIntent).setAutoCancel(true)
+				.setContentIntent(mainPageIntent).setAutoCancel(true)
 				.setStyle(new Notification.BigTextStyle().bigText(content))
 				.addAction(0, "See details", mainPageIntent)
-				.addAction(0, "Ok, got it!", mainPageIntent).build();
+				.addAction(0, "Ok got it", noIntent)
+//				.addAction(0, "Ok, got it!", mainPageIntent)
+				.build();
 
 		notification.priority = Notification.PRIORITY_MAX;
 		// notification.flags = Notification.FLAG_ONGOING_EVENT;

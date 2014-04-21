@@ -71,9 +71,7 @@ public class MainPage extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
-		NotificationManager mNM;
-		mNM = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-		mNM.cancel(NotificationService.recNotificationID);
+	
 		setTitle(AccountController.getInstance().getAccount().getName());
 
 		hrClickView = (LinearLayout) findViewById(R.id.hr);
@@ -132,6 +130,10 @@ public class MainPage extends Activity {
 		super.onResume();
 		// Refresh your stuff here
 		updateReminderSection();
+		//cancel notification
+		NotificationManager mNM;
+		mNM = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+		mNM.cancel(NotificationService.recNotificationID);
 	}
 
 	public void updateReminderSection() {

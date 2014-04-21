@@ -69,6 +69,7 @@
         </activity>
         <activity
             android:name="com.android.myhealthmate.MainPage"
+            android:launchMode="singleTop"
             android:label="@string/welcome" >
         </activity>
         <activity
