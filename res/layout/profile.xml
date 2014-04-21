@@ -11,6 +11,111 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+        
+                <!-- medicine section -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:background="@drawable/textlines"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/gen_page_margin_top"
+            android:paddingLeft="@dimen/gen_page_margin_left"
+            android:paddingRight="@dimen/gen_page_margin_right"
+            android:paddingTop="@dimen/gen_page_margin_top" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_medication"
+                    android:drawablePadding="3dp"
+                    android:text="@string/med_record"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/profile_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/view_detail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="right"
+                    android:text="View detail"
+                    android:textColor="@color/login_btn_blue"
+                    android:textSize="@dimen/profile_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@color/light_grey" />
+
+            <GridLayout
+                android:id="@+id/medicine_sec"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gen_page_margin_top"
+                android:layout_marginBottom="@dimen/gen_page_margin_bottom"
+                android:columnCount="1"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_marginBottom="@dimen/gen_page_margin_top"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_name"
+                        style="@style/profile_edittext"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:clickable="true"
+                        style="@style/profile_edittext"
+                        android:text="@string/effect"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content"
+                        style="@style/profile_edittext"
+                        android:text="@string/time"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                     <TextView
+                        android:layout_width="90dp"
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content"
+                        style="@style/profile_edittext"
+                        android:text="Reminder"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </GridLayout>
+        </LinearLayout>
+        
+        <!--  user profile section -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -362,100 +467,8 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- medicine section -->
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:background="@drawable/textlines"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/gen_page_margin_top"
-            android:paddingLeft="@dimen/gen_page_margin_left"
-            android:paddingRight="@dimen/gen_page_margin_right"
-            android:paddingTop="@dimen/gen_page_margin_top" >
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_medication"
-                    android:drawablePadding="3dp"
-                    android:text="@string/med_record"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/profile_text_size"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/view_detail"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:gravity="right"
-                    android:text="View detail"
-                    android:textColor="@color/login_btn_blue"
-                    android:textSize="@dimen/profile_text_size"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:background="@color/light_grey" />
-
-            <GridLayout
-                android:id="@+id/medicine_sec"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="1"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/profile_name"
-                        style="@style/profile_edittext"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:clickable="true"
-                        style="@style/profile_edittext"
-                        android:text="@string/effect"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        style="@style/profile_edittext"
-                        android:text="@string/time"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                     <TextView
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        style="@style/profile_edittext"
-                        android:text="Reminder"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </GridLayout>
-        </LinearLayout>
+        
     </LinearLayout>
 
 </ScrollView>
