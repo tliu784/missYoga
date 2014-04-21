@@ -79,6 +79,7 @@
                         android:layout_width="100dp"
                         android:layout_marginBottom="@dimen/gen_page_margin_top"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
                         android:text="@string/profile_name"
                         style="@style/profile_edittext"
                         android:textSize="16sp"

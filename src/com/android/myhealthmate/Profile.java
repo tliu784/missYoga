@@ -40,6 +40,7 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+
 public class Profile extends Activity {
 	private EditText nameEditView;
 	private Date birthDate;
@@ -168,21 +169,28 @@ public class Profile extends Activity {
 		TextView timeContent = new TextView(this);
 		TextView deleteBtn = new TextView(this);
 		CheckBox addReminder = new CheckBox(this);
+		
+//		final float scale = getResources().getDisplayMetrics().density;
+//		int padding_5dp = (int) (5*scale + 0.5f);
 
 		titleSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		titleSection.setClickable(true);
 		titleSection.setOrientation(LinearLayout.HORIZONTAL);
 
-		nameContent.setLayoutParams(new LayoutParams(200, LayoutParams.MATCH_PARENT));
+		nameContent.setLayoutParams(new LayoutParams(210, LayoutParams.MATCH_PARENT));
 		nameContent.setText(medModel.getTitle());
+		nameContent.setTextSize(16.0f);
+//		nameContent.setPadding(0, 0, 0, padding_5dp);
 		titleSection.addView(nameContent);
 
 		effectContent.setLayoutParams(new LayoutParams(160, LayoutParams.MATCH_PARENT));
 		effectContent.setText(medModel.getEffect().toString());
+		effectContent.setTextSize(16.0f);
 		titleSection.addView(effectContent);
 
 		timeContent.setLayoutParams(new LayoutParams(120, LayoutParams.MATCH_PARENT));
 		timeContent.setText(toDateStr(medModel));
+		timeContent.setTextSize(16.0f);
 		titleSection.addView(timeContent);
 
 		addReminder.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
