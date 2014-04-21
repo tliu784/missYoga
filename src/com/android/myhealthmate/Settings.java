@@ -10,6 +10,7 @@ import com.android.trend.AddNotePopupDialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -58,6 +59,7 @@ public class Settings extends Activity {
 	private Button passwordCancel;
 	private Button emailSave;
 	private Button emailCancel;
+	private Button logout;
 
 	private AccountController accountController;
 
@@ -110,6 +112,7 @@ public class Settings extends Activity {
 		passwordCancel = (Button) findViewById(R.id.settings_pwd_cancel);
 		emailSave = (Button) findViewById(R.id.settings_account_save);
 		emailCancel = (Button) findViewById(R.id.settings_account_cancel);
+		logout = (Button) findViewById(R.id.exit_app);
 
 		userNameSave.setOnClickListener(getNameSaveBtnListener());
 		userNameCancel.setOnClickListener(getNameCancelBtnListener());
@@ -117,6 +120,7 @@ public class Settings extends Activity {
 		passwordCancel.setOnClickListener(getPwdCancelBtnListener());
 		emailSave.setOnClickListener(getAccountSaveBtnListener());
 		emailCancel.setOnClickListener(getAccountCancelBtnListener());
+		logout.setOnClickListener(getLogOutBtnListener());
 
 		monitorSection = (GridLayout) findViewById(R.id.monitor_sec);
 		requestSection = (GridLayout) findViewById(R.id.request_sec);
@@ -128,7 +132,7 @@ public class Settings extends Activity {
 		for (RemoteRequestModel requestModel : RemoteRequestController.getInstance().getViewedByRemoteUserList()) {
 			addViewInRequestSec(requestModel);
 		}
-		
+
 	}
 
 	@Override
@@ -290,6 +294,42 @@ public class Settings extends Activity {
 				emailEditSec.setVisibility(View.GONE);
 			}
 		};
+	}
+
+	public OnClickListener getLogOutBtnListener() {
+		return new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				finish();
+				AppExit();
+				System.exit(0);
+
+				
+				/*
+				 * int pid = android.os.Process.myPid();=====> use this if you
+				 * want to kill your activity. But its not a good one to do.
+				 * android.os.Process.killProcess(pid);
+				 */
+				// android.os.Process.killProcess(android.os.Process.myPid());
+				// System.exit(1);
+			}
+		};
+	}
+
+	public void AppExit() {
+
+		this.finish();
+		Intent intent = new Intent(Intent.ACTION_MAIN);
+		intent.addCategory(Intent.CATEGORY_HOME);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+
+		
+//		 int pid = android.os.Process.myPid();//=====> use this if you want to kill your activity. But its not a good one to do.
+//		 android.os.Process.killProcess(pid);
+		
+
 	}
 
 	public OnClickListener getNameSecListener() {
