@@ -1,8 +1,10 @@
 package com.android.myhealthmate;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import com.android.entity.AccountController;
 import com.android.entity.HealthStatusModel;
@@ -63,6 +65,7 @@ public class MainPage extends Activity {
 	private TextView sleepdeep;
 	private TextView sleeplight;
 	private TextView sleepawake;
+	private TextView updateTime;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +123,7 @@ public class MainPage extends Activity {
 		sleepdeep = (TextView) findViewById(R.id.sleep_deep_content);
 		sleeplight = (TextView) findViewById(R.id.sleep_light_content);
 		sleepawake = (TextView) findViewById(R.id.sleep_awake_content);
+		updateTime = (TextView) findViewById(R.id.home_current_time);
 
 	}
 
@@ -325,6 +329,11 @@ public class MainPage extends Activity {
 		sleepdeep.setText(deeptext);
 		sleeplight.setText(lighttext);
 		sleepawake.setText(awaketext);
+	}
+	
+	public void updateTime(Date timestamp){
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mma MM/dd/yyyy", Locale.CANADA);
+		updateTime.setText(sdf.format(timestamp));
 	}
 
 	public void updateWidgetContent(String recContent) {

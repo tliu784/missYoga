@@ -98,6 +98,7 @@ public class RecommendationController implements ResponseHandler {
 		if (eim != null) {
 			HealthStatusModel hsm = eim.getHealthStatus();
 			mainpage.updateHealthStatus(hsm);
+			mainpage.updateTime(new Date());
 		}
 		String url = "http://health-engine.herokuapp.com/";
 		RestCallHandler rest = new RestCallHandler(this, url, json);
