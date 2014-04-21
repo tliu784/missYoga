@@ -84,10 +84,21 @@ public class RecommendationController implements ResponseHandler {
 	}
 
 	public void getRecom() {
+		Gson gson = new Gson();
 		if (newDataIndex > 4) {
 			newDataIndex = 4;
 		}
 		String json = demoJson[newDataIndex];
+		EngineInputModel eim = null;
+		try {
+			eim = gson.fromJson(json, EngineInputModel.class);
+		} catch (Exception e) {
+		}
+
+		if (eim != null) {
+			HealthStatusModel hsm = eim.getHealthStatus();
+			mainpage.updateHealthStatus(hsm);
+		}
 		String url = "http://health-engine.herokuapp.com/";
 		RestCallHandler rest = new RestCallHandler(this, url, json);
 		rest.handleResponse();
@@ -111,7 +122,8 @@ public class RecommendationController implements ResponseHandler {
 				RecomModel somerec = recomArray[i];
 				// add record in rec history
 				// for example: recordlist.add(converted somerec);
-				recordListController.addOneRecord(recordType.Recommendation, new Date(), somerec.getRecommendation(), toSeverityLevel(somerec.getSeverity()), false);
+				recordListController.addOneRecord(recordType.Recommendation, new Date(), somerec.getRecommendation(),
+						toSeverityLevel(somerec.getSeverity()), false);
 				// optionally create notification
 				if (somerec.getId() > 900) {
 					new NotificationService(mainpage, "New Recommendation", somerec.getRecommendation());
@@ -122,15 +134,15 @@ public class RecommendationController implements ResponseHandler {
 		}
 	}
 
-	private String toSeverityLevel(int level){
-		if(level==1 || level==2)
+	private String toSeverityLevel(int level) {
+		if (level == 1 || level == 2)
 			return "Low";
-		else if(level == 3)
+		else if (level == 3)
 			return "Medium";
 		else
 			return "High";
 	}
-	
+
 	private EngineInputModel addData(ChartPointModel point) {
 		double caltoduration = 0.1;
 		EngineInputModel input = new EngineInputModel();

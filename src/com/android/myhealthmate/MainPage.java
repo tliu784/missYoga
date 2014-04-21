@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import com.android.entity.AccountController;
+import com.android.entity.HealthStatusModel;
 import com.android.entity.RecomModel;
 import com.android.recommendation.RecommendationController;
 import com.android.reminder.MedReminderController;
@@ -51,6 +52,18 @@ public class MainPage extends Activity {
 	private RemoteViews remoteViews;
 	private Button homeTagBtn;
 	private EditText homeTagTxt;
+	
+	//health status fields
+	private TextView bpsys;
+	private TextView bpdia;
+	private TextView hrlast;
+	private TextView hravg;
+	private TextView actsteps;
+	private TextView actcal;
+	private TextView sleepdeep;
+	private TextView sleeplight;
+	private TextView sleepawake;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,6 +109,17 @@ public class MainPage extends Activity {
 
 		widget = new ComponentName(this, MyWidgetProvider.class);
 		remoteViews = new RemoteViews(this.getPackageName(), R.layout.widget_layout);
+		
+		//health status fields
+		bpsys = (TextView) findViewById(R.id.bp_systolic_content);
+		bpdia = (TextView) findViewById(R.id.bp_diastolic_content);
+		hrlast = (TextView) findViewById(R.id.hr_last_content);
+		hravg = (TextView) findViewById(R.id.hr_average_content);
+		actsteps = (TextView) findViewById(R.id.act_distance_content);
+		actcal = (TextView) findViewById(R.id.act_calories_content);
+		sleepdeep = (TextView) findViewById(R.id.sleep_deep_content);
+		sleeplight = (TextView) findViewById(R.id.sleep_light_content);
+		sleepawake = (TextView) findViewById(R.id.sleep_awake_content);
 
 	}
 
@@ -279,6 +303,28 @@ public class MainPage extends Activity {
 	public void postRefresh(RecomModel[] recomArray) {
 
 		updateRecommendations(recomArray);
+	}
+	
+	public void updateHealthStatus(HealthStatusModel hsm){
+		bpsys.setText(Integer.toString(hsm.getBp_systolic()));
+		bpdia.setText(Integer.toString(hsm.getBp_diastolic()));
+		hravg.setText(Integer.toString(hsm.getHr_count()));
+		int adj = (int) (Math.random()*5);
+		if (Math.random()>0.4){
+			adj = 0 - adj;
+		}
+		hrlast.setText(Integer.toString(hsm.getHr_count()+adj));
+		actsteps.setText(Integer.toString(hsm.getAct_steps()));
+		actcal.setText(Integer.toString(hsm.getAct_calories()));
+		float deephr=hsm.getSleep_minDeep()/60f;
+		float lighthr=hsm.getSleep_minLight()/60f;
+		float awakehr=hsm.getSleep_minAwake()/60f;
+		String deeptext = String.format("%.1f", deephr);
+		String lighttext = String.format("%.1f", lighthr);
+		String awaketext = String.format("%.1f", awakehr);
+		sleepdeep.setText(deeptext);
+		sleeplight.setText(lighttext);
+		sleepawake.setText(awaketext);
 	}
 
 	public void updateWidgetContent(String recContent) {

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import com.android.entity.HealthStatusModel;
+
 public class EngineInputModel {
 
 	private ArrayList<ActData> activities = new ArrayList<ActData>();
@@ -12,8 +14,27 @@ public class EngineInputModel {
 	private ArrayList<HRdata> heartBeats = new ArrayList<HRdata>();
 	private ArrayList<SleepData> sleep = new ArrayList<SleepData>();
 	private UserInfo userinfo;
-	
-		
+
+	public HealthStatusModel getHealthStatus(){
+		double caltoduration = 0.1d;
+		double calperstep = 0.35d;
+		HealthStatusModel hsm  = new HealthStatusModel();
+		hsm.setHr_count(heartBeats.get(0).count);
+		hsm.setBp_diastolic(bloodPressures.get(0).diastolic);
+		hsm.setBp_systolic(bloodPressures.get(0).systolic);
+		int duration = activities.get(0).duration;
+		int calories=(int) (duration/caltoduration);
+		hsm.setAct_calories(calories);
+		hsm.setAct_steps((int) (calories/calperstep));
+		double awakepct=0.1;
+		double lightpct=0.6;
+		double deeppct=0.3;
+		hsm.setSleep_minAwake((int) (awakepct*sleep.get(0).minutesAsleep)); 
+		hsm.setSleep_minLight((int) (lightpct*sleep.get(0).minutesAsleep));
+		hsm.setSleep_minDeep((int) (deeppct*sleep.get(0).minutesAsleep));
+		return hsm;
+	}
+
 	public ArrayList<ActData> getActivities() {
 		return activities;
 	}
@@ -93,15 +114,15 @@ public class EngineInputModel {
 	}
 
 	public static class WeightData extends Base {
-		int value;
+		double value;
 
 		public WeightData(Date timestamp, int value) {
 			super(timestamp);
 			this.value = value;
 		}
 	}
-	
-	public static class UserInfo{
+
+	public static class UserInfo {
 		int age;
 		boolean cardio;
 		boolean diabetes;
@@ -110,59 +131,71 @@ public class EngineInputModel {
 		boolean insomnia;
 		int height;
 		ArrayList<WeightData> weight = new ArrayList<WeightData>();
-		
-		
-		
+
 		public int getHeight() {
 			return height;
 		}
+
 		public void setHeight(int height) {
 			this.height = height;
 		}
+
 		public int getAge() {
 			return age;
 		}
+
 		public void setAge(int age) {
 			this.age = age;
 		}
+
 		public boolean isCardio() {
 			return cardio;
 		}
+
 		public void setCardio(boolean cardio) {
 			this.cardio = cardio;
 		}
+
 		public boolean isDiabetes() {
 			return diabetes;
 		}
+
 		public void setDiabetes(boolean diabetes) {
 			this.diabetes = diabetes;
 		}
+
 		public String getGender() {
 			return gender;
 		}
+
 		public void setGender(String gender) {
 			this.gender = gender;
 		}
+
 		public boolean isHypertension() {
 			return hypertension;
 		}
+
 		public void setHypertension(boolean hypertension) {
 			this.hypertension = hypertension;
 		}
+
 		public boolean isInsomnia() {
 			return insomnia;
 		}
+
 		public void setInsomnia(boolean insomnia) {
 			this.insomnia = insomnia;
 		}
+
 		public ArrayList<WeightData> getWeight() {
 			return weight;
 		}
+
 		public void setWeight(ArrayList<WeightData> weight) {
 			this.weight = weight;
 		}
 
-			
 	}
 
 	public static class Base {
