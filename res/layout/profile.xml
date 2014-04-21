@@ -17,7 +17,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/textlines"
             android:orientation="vertical"
-            android:paddingBottom="10dp"
             android:paddingLeft="@dimen/gen_page_margin_top"
             android:paddingRight="@dimen/gen_page_margin_top" >
 
@@ -47,10 +46,10 @@
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/gen_page_margin_left"
-                android:columnCount="2"
-                android:useDefaultMargins="true" >
+            	android:layout_marginTop="@dimen/gen_page_margin_left"
+                android:columnCount="2">
 
                 <TextView
                     style="@style/profile_textview"
@@ -71,7 +70,7 @@
 
                    <TextView
                         android:id="@+id/txt_name"
-                        android:textSize="24sp"
+                        android:textSize="16sp"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent" />
                 </ViewSwitcher>
@@ -109,6 +108,7 @@
 
                     <TextView
                         android:id="@+id/txt_gender"
+                        android:textSize="16sp"
                         style="@style/profile_edittext"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent" />
@@ -133,6 +133,7 @@
 
                     <TextView
                         android:id="@+id/txt_dob"
+                        android:textSize="16sp"
                         style="@style/profile_edittext"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent" />
@@ -157,6 +158,7 @@
 
                     <TextView
                         android:id="@+id/txt_height"
+                        android:textSize="16sp"
                         style="@style/profile_edittext"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent" />
@@ -181,6 +183,7 @@
 
                     <TextView
                         android:id="@+id/txt_weight"
+                        android:textSize="16sp"
                         style="@style/profile_edittext"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent" />
@@ -333,7 +336,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="10dp" >
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp">
 
                 <Button
                     android:id="@+id/profile_submit"
