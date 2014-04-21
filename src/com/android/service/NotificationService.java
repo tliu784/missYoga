@@ -43,7 +43,7 @@ public class NotificationService {
 				.setSmallIcon(R.drawable.ic_launcher_logo)
 				.setContentIntent(recPageIntent).setAutoCancel(true)
 				.setStyle(new Notification.BigTextStyle().bigText(content))
-				.addAction(0, "See details", recPageIntent)
+				.addAction(0, "See details", mainPageIntent)
 				.addAction(0, "Ok, got it!", mainPageIntent).build();
 
 		notification.priority = Notification.PRIORITY_MAX;

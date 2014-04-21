@@ -1,6 +1,8 @@
 package com.android.widget;
+import com.android.myhealthmate.MainPage;
 import com.android.myhealthmate.R;
 import com.android.myhealthmate.RecContent;
+import com.android.reminder.AlarmReceiver;
 import com.android.service.NotificationService;
 
 import android.app.PendingIntent;
@@ -37,8 +39,12 @@ public class MyWidgetProvider extends AppWidgetProvider {
 		Intent toActivity = new Intent(context,RecContent.class);
 		toActivity.setAction(WidgetUtils.WIDGET_UPDATE_ACTION);
 		toActivity.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		
+		Intent toMainPage = new Intent(context, MainPage.class);
+		toActivity.putExtra(AlarmReceiver.notificationState, false);
+		
 
-		return PendingIntent.getActivity(context, 133, toActivity, PendingIntent.FLAG_UPDATE_CURRENT);
+		return PendingIntent.getActivity(context, 133, toMainPage, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
 	}
