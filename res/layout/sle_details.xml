@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -348,17 +349,7 @@
                 android:textStyle="bold" >
             </TextView>
 
-            <TextView
-                android:id="@+id/category_filter_button"
-                android:layout_width="wrap_content"
-                android:layout_height="25dip"
-                android:gravity="right"
-                android:maxLines="1"
-                android:paddingRight="10dp"
-                android:scrollbars="vertical"
-                android:textSize="16dp"
-                android:textStyle="bold" >
-            </TextView>
+         
 
             <!-- filters -->
 
@@ -367,9 +358,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginLeft="80dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="5dp"
-                android:columnCount="7"
+                android:columnCount="9"
                 android:orientation="horizontal"
                 android:padding="5dp" >
 
@@ -398,12 +389,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:drawableLeft="@drawable/ic_action_event"
                     android:gravity="center"
                     android:maxLines="1"
                     android:paddingLeft="8dp"
                     android:scrollbars="vertical"
-                    android:text=""
+                    android:text="Note"
                     android:textSize="14dp"
                     android:textStyle="bold" >
                 </TextView>
@@ -415,16 +405,15 @@
                     android:background="@color/black" />
 
                 <TextView
-                    android:id="@+id/rec_event_filter"
+                    android:id="@+id/low_rec_event_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:drawableLeft="@drawable/ic_rec"
                     android:gravity="center"
                     android:maxLines="1"
                     android:paddingLeft="8dp"
                     android:scrollbars="vertical"
-                    android:text=""
+                    android:text="Low"
                     android:textSize="14dp"
                     android:textStyle="bold" >
                 </TextView>
@@ -435,17 +424,35 @@
                     android:layout_marginLeft="5dp"
                     android:background="@color/black" />
 
-                <TextView
-                    android:id="@+id/reminder_event_filter"
+                 <TextView
+                    android:id="@+id/med_rec_event_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:drawableLeft="@drawable/ic_action_alarms_small"
                     android:gravity="center"
                     android:maxLines="1"
                     android:paddingLeft="8dp"
                     android:scrollbars="vertical"
-                    android:text=""
+                    android:text="Medium"
+                    android:textSize="14dp"
+                    android:textStyle="bold" >
+                </TextView>
+                 <View
+                    android:layout_width="1dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/black" />
+
+                 <TextView
+                    android:id="@+id/High_rec_event_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="8dp"
+                    android:scrollbars="vertical"
+                    android:text="High"
                     android:textSize="14dp"
                     android:textStyle="bold" >
                 </TextView>

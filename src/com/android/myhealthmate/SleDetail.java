@@ -75,10 +75,10 @@ public class SleDetail extends FragmentActivity {
 	private RecordList recordListInstance;
 	int[] oldstartEndLong = { 0, 0, 0 };
 	private TextView filterAll;
-	private TextView filterReminder;
-	private TextView filterRec;
+	private TextView filterLowRec;
+	private TextView filterHighRec;
 	private TextView filterNote;
-	private TextView filterBtn;
+	private TextView filterMedRec;
 	private GridLayout filterArea;
 	private Button trendTagBtn;
 	private EditText trendTagTxt;
@@ -105,8 +105,9 @@ public class SleDetail extends FragmentActivity {
 		titleTextView = (TextView) findViewById(R.id.detail_title_text);
 
 		filterAll = (TextView) findViewById(R.id.all_event_filter);
-		filterReminder = (TextView) findViewById(R.id.reminder_event_filter);
-		filterRec = (TextView) findViewById(R.id.rec_event_filter);
+		filterLowRec = (TextView) findViewById(R.id.low_rec_event_filter);
+		filterMedRec = (TextView) findViewById(R.id.med_rec_event_filter);
+		filterHighRec = (TextView) findViewById(R.id.High_rec_event_filter);
 		filterNote = (TextView) findViewById(R.id.note_event_filter);
 //		filterBtn = (TextView) findViewById(R.id.category_filter_button);
 		filterArea = (GridLayout) findViewById(R.id.filter_area);
@@ -248,8 +249,11 @@ public class SleDetail extends FragmentActivity {
 
 		filterAll.setOnClickListener(getFilterAllClickListener());
 		filterNote.setOnClickListener(getFilterNoteClickListener());
-		filterReminder.setOnClickListener(getFilterReminderClickListener());
-		filterRec.setOnClickListener(getFilterRecClickListener());
+
+		filterMedRec.setOnClickListener(getFilterMediumRecClickListener());
+		filterHighRec.setOnClickListener(getFilterHighRecClickListener());
+		filterLowRec.setOnClickListener(getFilterLowRecClickListener());
+		
 //		filterBtn.setOnClickListener(getFilterBtnClickListener());
 //		filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
 
@@ -430,15 +434,36 @@ public class SleDetail extends FragmentActivity {
 		};
 	}
 
-	private OnClickListener getFilterRecClickListener() {
+	private OnClickListener getFilterLowRecClickListener() {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				displayRecommendationEvent();
+				displayLowRecommendationEvent();
 			}
 		};
 	}
 
+
+	private OnClickListener getFilterMediumRecClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				displayMediumRecommendationEvent();
+			}
+		};
+	}
+	
+
+	private OnClickListener getFilterHighRecClickListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				displayHighRecommendationEvent();
+			}
+		};
+	}
+	
+	
 	private OnClickListener getFilterNoteClickListener() {
 		return new OnClickListener() {
 			@Override
@@ -458,11 +483,33 @@ public class SleDetail extends FragmentActivity {
 			i++;
 		}
 	}
+	
+	
 
-	private void displayRecommendationEvent() {
+	private void displayLowRecommendationEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
-			if (record.getType().equals(recordType.Recommendation))
+			if (record.getType().equals(recordType.Recommendation)&&record.getTitle().equalsIgnoreCase("Low"))
+				recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
+			else
+				recordViewList.get(i).getLayout().setVisibility(View.GONE);
+			i++;
+		}
+	}
+	private void displayMediumRecommendationEvent() {
+		int i = 0;
+		for (RecordModel record : recordList) {
+			if (record.getType().equals(recordType.Recommendation)&&record.getTitle().equalsIgnoreCase("Medium"))
+				recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
+			else
+				recordViewList.get(i).getLayout().setVisibility(View.GONE);
+			i++;
+		}
+	}	
+	private void displayHighRecommendationEvent() {
+		int i = 0;
+		for (RecordModel record : recordList) {
+			if (record.getType().equals(recordType.Recommendation)&&record.getTitle().equalsIgnoreCase("High"))
 				recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
 			else
 				recordViewList.get(i).getLayout().setVisibility(View.GONE);
