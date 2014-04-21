@@ -18,16 +18,14 @@
             android:id="@+id/txtHello"
             android:layout_width="fill_parent"
             android:layout_height="25dp"
+            android:background="@drawable/reminder_sec_header"
             android:ellipsize="marquee"
+            android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:gravity="center"
-            android:text="Health is the level of functional or metabolic efficiency of a living organism. In humans, it is the general condition of a person's mind and body, usually meaning to be free from illness, injury or pain."
-            android:textColor="#ffffff" 
-            android:background="@drawable/reminder_sec_header"/>
-        
-                    
+            android:text="Health is the level of functional or metabolic efficiency of a living organism. In humans, it is the general condition of a person&apos;s mind and body, usually meaning to be free from illness, injury or pain."
+            android:textColor="#ffffff" />
     </LinearLayout>
 
 </ScrollView>
