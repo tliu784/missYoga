@@ -80,8 +80,8 @@ public class SleDetail extends FragmentActivity {
 	private TextView filterNote;
 	private TextView filterMedRec;
 	private GridLayout filterArea;
-	private Button trendTagBtn;
-	private EditText trendTagTxt;
+//	private Button trendTagBtn;
+//	private EditText trendTagTxt;
 	private int itemPosition= 0;
 
 	ArrayList<String> itemList;
@@ -111,11 +111,12 @@ public class SleDetail extends FragmentActivity {
 		filterNote = (TextView) findViewById(R.id.note_event_filter);
 //		filterBtn = (TextView) findViewById(R.id.category_filter_button);
 		filterArea = (GridLayout) findViewById(R.id.filter_area);
-		trendTagBtn = (Button) findViewById(R.id.trends_tag_btn);
-		trendTagTxt = (EditText) findViewById(R.id.trends_tag_txt);
-
+//		trendTagBtn = (Button) findViewById(R.id.trends_tag_btn);
+//		trendTagTxt = (EditText) findViewById(R.id.trends_tag_txt);
+//		trendTagBtn.setOnClickListener(getTag());
+		
 		remoteDataController = RemoteDataController.getInstance();
-		trendTagBtn.setOnClickListener(getTag());
+		
 		initNavigationBar();
 		initChart();
 		setupChartListeners();
@@ -135,23 +136,23 @@ public class SleDetail extends FragmentActivity {
 			}
 		});
 	}
-
-	private OnClickListener getTag() {
-		return new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (trendTagTxt.getText().toString() != null) {
-					RecordList.getInstance().addOneRecord(recordType.Note, new Date(), trendTagTxt.getText().toString(),
-							"Note", false);
-					Toast.makeText(v.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
-					trendTagTxt.setText("");
-					refreshPageByUserName(userList.getItem(0).toString());
-				}else{
-					Toast.makeText(v.getContext(), "Tag cannot be empty", Toast.LENGTH_SHORT).show();
-				}
-			}
-		};
-	}
+//
+//	private OnClickListener getTag() {
+//		return new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				if (trendTagTxt.getText().toString() != null) {
+//					RecordList.getInstance().addOneRecord(recordType.Note, new Date(), trendTagTxt.getText().toString(),
+//							"Note", false);
+//					Toast.makeText(v.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
+//					trendTagTxt.setText("");
+//					refreshPageByUserName(userList.getItem(0).toString());
+//				}else{
+//					Toast.makeText(v.getContext(), "Tag cannot be empty", Toast.LENGTH_SHORT).show();
+//				}
+//			}
+//		};
+//	}
 	
 	private void refreshPageByUserName(String name) {
 		RemoteDataModel selectedUserRemoteData = remoteDataController.getDataModelByName(name);

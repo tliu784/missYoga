@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -12,7 +11,7 @@
     <FrameLayout
         android:id="@+id/chart_area_all"
         android:layout_width="fill_parent"
-        android:layout_height="340dip"
+        android:layout_height="300dip"
         android:background="@drawable/textlines"
         android:orientation="vertical"
         android:paddingLeft="5dp"
@@ -284,7 +283,7 @@
             </LinearLayout>
         </LinearLayout>
         <!-- tag section -->
-
+        <!--
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -318,6 +317,7 @@
                 android:paddingTop="2dp"
                 android:text="@string/home_tag" />
         </LinearLayout>
+        -->
     </FrameLayout>
     <!-- notes section -->
 
@@ -342,14 +342,12 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:paddingLeft="10dp"
-                android:scrollbars="vertical"
                 android:paddingTop="5dp"
+                android:scrollbars="vertical"
                 android:text="Event List"
                 android:textSize="16dp"
                 android:textStyle="bold" >
             </TextView>
-
-         
 
             <!-- filters -->
 
@@ -375,7 +373,7 @@
                     android:paddingLeft="8dp"
                     android:text="ALL "
                     android:textSize="16dp"
-                    android:textStyle="bold">
+                    android:textStyle="bold" >
                 </TextView>
 
                 <View
@@ -424,7 +422,7 @@
                     android:layout_marginLeft="5dp"
                     android:background="@color/black" />
 
-                 <TextView
+                <TextView
                     android:id="@+id/med_rec_event_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -437,13 +435,14 @@
                     android:textSize="14dp"
                     android:textStyle="bold" >
                 </TextView>
-                 <View
+
+                <View
                     android:layout_width="1dp"
                     android:layout_height="25dp"
                     android:layout_marginLeft="5dp"
                     android:background="@color/black" />
 
-                 <TextView
+                <TextView
                     android:id="@+id/High_rec_event_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
