@@ -2,6 +2,8 @@ package com.android.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import android.content.Context;
 
 import com.android.entity.MedicineModel.HealthEffect;
@@ -43,10 +45,20 @@ public class MedicineListController implements Serializable {
 	}
 
 	public void removeMedByName(String name) {
-		for (MedicineModel model : medicineList) {
-			if (model.getTitle().equals(name))
-				medicineList.remove(model);
+		Iterator<MedicineModel> iter = medicineList.iterator();
+
+		while (iter.hasNext()) {
+		    MedicineModel model = iter.next();
+
+		    if (model.getTitle().equals(name))
+				iter.remove();
 		}
+		
+		
+//		for (MedicineModel model : medicineList) {
+//			if (model.getTitle().equals(name))
+//				medicineList.remove(model);
+//		}
 		save();
 	}
 

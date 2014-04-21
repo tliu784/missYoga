@@ -61,15 +61,15 @@ public class RecommendationController implements ResponseHandler {
 	private void loadDemoInput() {
 		demoJson = new String[5];
 		demoJson[0] = getStringFromInputStream(RecommendationController.class
-				.getResourceAsStream("/com/android/recommendation/test_data_0.json"));
+				.getResourceAsStream("/com/android/recommendation/test_data_0.json")); //no recommendation
 		demoJson[1] = getStringFromInputStream(RecommendationController.class
-				.getResourceAsStream("/com/android/recommendation/test_data_1.json"));
+				.getResourceAsStream("/com/android/recommendation/test_data_1.json")); //high bp, lack of sleep
 		demoJson[2] = getStringFromInputStream(RecommendationController.class
-				.getResourceAsStream("/com/android/recommendation/test_data_2.json"));
+				.getResourceAsStream("/com/android/recommendation/test_data_2.json")); //high bp / lack of exercise
 		demoJson[3] = getStringFromInputStream(RecommendationController.class
-				.getResourceAsStream("/com/android/recommendation/test_data_3.json"));
+				.getResourceAsStream("/com/android/recommendation/test_data_3.json")); // very high bp
 		demoJson[4] = getStringFromInputStream(RecommendationController.class
-				.getResourceAsStream("/com/android/recommendation/test_data_4.json"));
+				.getResourceAsStream("/com/android/recommendation/test_data_4.json")); //high hr and lack of exercise
 	}
 
 	public void refresh() {
