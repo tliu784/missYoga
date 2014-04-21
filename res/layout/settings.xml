@@ -513,6 +513,7 @@
         <Button
             android:id="@+id/exit_app"
             style="@style/btnStyleSettings"
+            android:layout_marginTop="@dimen/gen_page_margin_bottom"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/settings_save_btn_height"
              android:layout_weight="1"
