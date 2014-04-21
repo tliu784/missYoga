@@ -65,6 +65,7 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:paddingRight">20dp</item>
     </style>
 
     <style name="profile_textview_with_radiobtns">
