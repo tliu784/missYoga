@@ -21,17 +21,18 @@ public class FileOperation {
 	 * @return object can be type casted
 	 */
 	public static boolean save(Object obj, String dest, Context context) {
-		FileOutputStream fos;
-		ObjectOutputStream oos;
-		try {
-			fos = context.openFileOutput(dest, Context.MODE_PRIVATE);
-			oos = new ObjectOutputStream(fos);
-			oos.writeObject((Object) obj);
-			oos.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		
+//		FileOutputStream fos;
+//		ObjectOutputStream oos;
+//		try {
+//			fos = context.openFileOutput(dest, Context.MODE_PRIVATE);
+//			oos = new ObjectOutputStream(fos);
+//			oos.writeObject((Object) obj);
+//			oos.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		return true;
 	}
