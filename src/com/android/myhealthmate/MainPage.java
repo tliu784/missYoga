@@ -135,23 +135,29 @@ public class MainPage extends Activity {
 		NotificationManager mNM;
 		mNM = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 		mNM.cancel(NotificationService.recNotificationID);
-
+		RecomModel[] recom = null;
 		if (RecContent.handleMedicine) {
 			if (RecContent.medicineMissed) {
-				RecomModel[] recom = new RecomModel[1];
+				recom = new RecomModel[1];
 				recom[0] = new RecomModel(RecContent.getMed(), false);
-				updateRecommendations(recom);
+
 				RecContent.medicineMissed = false;
 			} else {
-				updateRecommendations(RecContent.getOriginalRecs());
-				for (RecomModel rec: RecContent.getOriginalRecs()){
-					RecordList.getInstance().   
-					addOneRecord(recordType.Recommendation, new Date(), //date to be changed
-							rec.getRecommendation(), RecommendationController.getInstance().toSeverityLevel(rec.getSeverity()), false);
-				}
+				recom = RecContent.getOriginalRecs();
 			}
+			if (recom != null) {
+				updateRecommendations(recom);
+				for (RecomModel rec : recom) {
+					RecordList.getInstance().addOneRecord(recordType.Recommendation,
+							new Date(), // date to be changed
+							rec.getRecommendation(),
+							RecommendationController.getInstance().toSeverityLevel(rec.getSeverity()), false);
+				}
+
+			}
+			RecContent.resetFlags();
 		}
-		RecContent.resetFlags();
+
 	}
 
 	public void updateReminderSection() {
