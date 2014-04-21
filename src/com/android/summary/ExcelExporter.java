@@ -22,6 +22,7 @@ public class ExcelExporter {
 	private String filename = "terry_excel.xls";
 	private WritableWorkbook workbook;
 	private WritableSheet dataSheet;
+	private WritableSheet infoSheet;
 	private ChartDataController chartData;
 	private File exlFile = null;
 
@@ -37,8 +38,8 @@ public class ExcelExporter {
 		} catch (IOException e) {
 			return false;
 		}
-
-		dataSheet = workbook.createSheet("First", 0);
+		infoSheet  = workbook.createSheet("User Info", 0);
+		dataSheet = workbook.createSheet("Data", 1);
 		return true;
 	}
 
@@ -72,7 +73,11 @@ public class ExcelExporter {
 
 	public File export() {
 		try {
-
+			//write info
+			int inforow=0;
+			Label NameTitle = new Label(inforow,0,"Name");
+			
+			//write data
 			String[] titles = { "Timestamp", "Heart Rate", "Systolic", "Diastolic", "Activity", "Sleep", "is Sleep" };
 			createTitles(titles, 0, 0, dataSheet);
 			ArrayList<ChartPointModel> chartpoints = chartData.getDataset();

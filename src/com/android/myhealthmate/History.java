@@ -1,6 +1,12 @@
 package com.android.myhealthmate;
 
+import java.io.File;
+
 import com.android.entity.AccountController;
+import com.android.entity.AccountModel;
+import com.android.service.EmailSender;
+import com.android.summary.ExcelExporter;
+import com.android.trend.ChartDataController;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -37,6 +43,9 @@ public class History extends Activity {
 	private TextView historySleepLeft;
 	private TextView historySleepMid;
 	private TextView historySleepRight;
+	
+	private Button exportToExcelbtn;
+	private Button shartbtn;
 	
 	int barLen;
 	
@@ -77,6 +86,29 @@ public class History extends Activity {
 		oneWeekFilter.setOnClickListener(getOneWeekFilterListener());
 		oneMonthFilter.setOnClickListener(getOneMonthFilterListener());
 		threeMonthFilter.setOnClickListener(getThreeMonthFilterListener());
+		
+		exportToExcelbtn = (Button) findViewById(R.id.history_export);
+		shartbtn =(Button) findViewById(R.id.history_share);
+		
+		exportToExcelbtn.setOnClickListener(getExportListener());
+	}
+	
+	
+	public OnClickListener getExportListener() {
+		return new OnClickListener() {
+			public void onClick(View v) {
+				
+				
+				File attachment = new ExcelExporter(ChartDataController.getInstance()).export();
+				EmailSender email=new EmailSender(History.this);
+				AccountModel acc =AccountController.getInstance().getAccount(); 
+				email.setToEmail(acc.getEmail());
+				email.setSubject(acc.getName()+"'s Health Record");
+				email.setBodyText("Please find the heatlh status record in the attachment\n Sent from MyHealthMate \n");
+				email.setAttachment(attachment);
+				email.send();
+			}
+		};
 	}
 	
 	
