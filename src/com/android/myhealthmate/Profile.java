@@ -13,6 +13,8 @@ import com.android.entity.AddMedicineDialogPopup;
 import com.android.entity.MedicineListController;
 import com.android.entity.MedicineModel;
 import com.android.entity.medDetailPopup;
+import com.android.reminder.MedReminderController;
+import com.android.reminder.MedReminderModel;
 import com.android.remoteProfile.RemoteRequestModel;
 
 import android.app.Activity;
@@ -27,6 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -35,6 +38,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class Profile extends Activity {
 	private EditText nameEditView;
@@ -62,11 +66,15 @@ public class Profile extends Activity {
 
 	private TextView viewDetail;
 
+	private MedReminderController mrcInstance = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile);
 		setTitle(AccountController.getInstance().getAccount().getName());
+
+		mrcInstance = getReminders();
 
 		birthDateEditView = (EditText) findViewById(R.id.txtbox_dob);
 		heightEditView = (EditText) findViewById(R.id.txtbox_height);
@@ -74,10 +82,11 @@ public class Profile extends Activity {
 		nameEditView = (EditText) findViewById(R.id.txtbox_name);
 
 		genderRadioGroup = (RadioGroup) findViewById(R.id.gender);
-//		cardioRadioGroup = (RadioGroup) findViewById(R.id.cardio);
-//		insomniaRadioGroup = (RadioGroup) findViewById(R.id.insomnia);
-//		diabetesRadioGroup = (RadioGroup) findViewById(R.id.diabetes);
-//		HypertensionRadioGroup = (RadioGroup) findViewById(R.id.hypertension);
+		// cardioRadioGroup = (RadioGroup) findViewById(R.id.cardio);
+		// insomniaRadioGroup = (RadioGroup) findViewById(R.id.insomnia);
+		// diabetesRadioGroup = (RadioGroup) findViewById(R.id.diabetes);
+		// HypertensionRadioGroup = (RadioGroup)
+		// findViewById(R.id.hypertension);
 
 		medicineSection = (GridLayout) findViewById(R.id.medicine_sec);
 		medicineList = MedicineListController.getInstance();
@@ -94,11 +103,11 @@ public class Profile extends Activity {
 
 		cancel = (Button) findViewById(R.id.profile_cancel);
 
-//		if (!accountController.getAccount().isNewUser()) {
-			submit.setVisibility(View.GONE);
-			cancel.setVisibility(View.GONE);
-			switchAllEditToView();
-//		}
+		// if (!accountController.getAccount().isNewUser()) {
+		submit.setVisibility(View.GONE);
+		cancel.setVisibility(View.GONE);
+		switchAllEditToView();
+		// }
 
 		submit.setOnClickListener(getSubmitListener());
 		cancel.setOnClickListener(getCancelListener());
@@ -111,6 +120,13 @@ public class Profile extends Activity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.profile_menu, menu);
 		return super.onCreateOptionsMenu(menu);
+
+	}
+
+	private MedReminderController getReminders() {
+		MedReminderController instance = MedReminderController.getInstance();
+		instance.init(getApplicationContext());
+		return instance;
 
 	}
 
@@ -144,13 +160,14 @@ public class Profile extends Activity {
 		}
 	}
 
-	public void addViewInMedSec(MedicineModel medModel) {
+	public void addViewInMedSec(final MedicineModel medModel) {
 		LinearLayout titleSection = new LinearLayout(this);
 
 		TextView nameContent = new TextView(this);
 		TextView effectContent = new TextView(this);
 		TextView timeContent = new TextView(this);
 		TextView deleteBtn = new TextView(this);
+		CheckBox addReminder = new CheckBox(this);
 
 		titleSection.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 		titleSection.setClickable(true);
@@ -167,6 +184,35 @@ public class Profile extends Activity {
 		timeContent.setLayoutParams(new LayoutParams(120, LayoutParams.MATCH_PARENT));
 		timeContent.setText(toDateStr(medModel));
 		titleSection.addView(timeContent);
+
+		addReminder.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+		if (medModel.isReminder())
+			addReminder.setChecked(true);
+		else
+			addReminder.setChecked(false);
+		titleSection.addView(addReminder);
+
+		addReminder.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if (isChecked) {
+					Date creationTime = medModel.getStarttime();
+					String title = medModel.getTitle();
+					String detail = medModel.getDescription();
+					int duration = 1000;
+					MedReminderModel.DurationUnit dunit = MedReminderModel.DurationUnit.Day;
+					int repeat = medModel.getRepeat();
+					MedReminderModel.DurationUnit runit = medModel.getRunit();
+					medicineList.setReminderByTitle(title, true);
+					mrcInstance.addReminder(creationTime, title, detail, duration, dunit, repeat, runit);
+
+				} else {
+					medicineList.setReminderByTitle(medModel.getTitle(), false);
+					mrcInstance.removeReminder(medModel.getTitle());
+				}
+			}
+		});
 
 		deleteBtn.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		deleteBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_cancel_small, 0, 0, 0);
@@ -267,28 +313,36 @@ public class Profile extends Activity {
 		// weight
 		switchEditToView(R.id.weight_switcher, R.id.txt_weight, R.id.txtbox_weight, accountController.getAccount()
 				.getWeight());
-//		// setHypertension
-//		if (accountController.getAccount().isHypertension())
-//			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension, R.id.radio_profile_hypertension_yes,
-//					"Yes");
-//		else
-//			switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension, R.id.radio_profile_hypertension_no,
-//					"No");
-//		// setDiabetes
-//		if (accountController.getAccount().isDiabetes())
-//			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes, R.id.radio_profile_diabetes_yes, "Yes");
-//		else
-//			switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes, R.id.radio_profile_diabetes_no, "No");
-//		// setInsomnia
-//		if (accountController.getAccount().isInsomnia())
-//			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia, R.id.radio_profile_insomnia_yes, "Yes");
-//		else
-//			switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia, R.id.radio_profile_insomnia_no, "No");
-//		// setCardio
-//		if (accountController.getAccount().isCardio())
-//			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio, R.id.radio_profile_cardio_yes, "Yes");
-//		else
-//			switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio, R.id.radio_profile_cardio_no, "No");
+		// // setHypertension
+		// if (accountController.getAccount().isHypertension())
+		// switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension,
+		// R.id.radio_profile_hypertension_yes,
+		// "Yes");
+		// else
+		// switchRadioToView(R.id.hypertension_switcher, R.id.txt_hypertension,
+		// R.id.radio_profile_hypertension_no,
+		// "No");
+		// // setDiabetes
+		// if (accountController.getAccount().isDiabetes())
+		// switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes,
+		// R.id.radio_profile_diabetes_yes, "Yes");
+		// else
+		// switchRadioToView(R.id.diabetes_switcher, R.id.txt_diabetes,
+		// R.id.radio_profile_diabetes_no, "No");
+		// // setInsomnia
+		// if (accountController.getAccount().isInsomnia())
+		// switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia,
+		// R.id.radio_profile_insomnia_yes, "Yes");
+		// else
+		// switchRadioToView(R.id.insomnia_switcher, R.id.txt_insomnia,
+		// R.id.radio_profile_insomnia_no, "No");
+		// // setCardio
+		// if (accountController.getAccount().isCardio())
+		// switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio,
+		// R.id.radio_profile_cardio_yes, "Yes");
+		// else
+		// switchRadioToView(R.id.cardio_switcher, R.id.txt_cardio,
+		// R.id.radio_profile_cardio_no, "No");
 
 	}
 

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import com.android.entity.MedicineListController;
 import com.android.myhealthmate.R;
 import com.android.myhealthmate.Reminder;
 import com.android.reminder.MedReminderModel.DurationUnit;
@@ -249,6 +250,7 @@ public class ReminderViewController {
 					reminderSection.removeView(titleSec.titleSection);
 					reminderSection.removeView(detailSec.detailSection);
 					reminderSection.removeView(editSec.editSection);
+					MedicineListController.getInstance().setReminderByTitle(reminder.getTitle(),false);
 					mrcInstance.removeReminder(reminder.getId());
 				}
 			});

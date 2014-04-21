@@ -8,6 +8,14 @@ import com.android.reminder.MedReminderModel.DurationUnit;
 
 public class MedicineModel implements Serializable{
 
+	public boolean isReminder() {
+		return reminder;
+	}
+
+	public void setReminder(boolean reminder) {
+		this.reminder = reminder;
+	}
+
 	/**
 	 * 
 	 */
@@ -17,6 +25,7 @@ public class MedicineModel implements Serializable{
 	private String description;
 	private HealthEffect effect;
 	private int repeat;
+	private boolean reminder;
 	private MedReminderModel.DurationUnit runit; 
 	
 	public enum HealthEffect {
@@ -79,6 +88,7 @@ public class MedicineModel implements Serializable{
 		description = "good for you";
 		effect = HealthEffect.ACTIVITY;
 		repeat = 6;
+		reminder= false;
 		runit = DurationUnit.Hour; 
 	}
 	

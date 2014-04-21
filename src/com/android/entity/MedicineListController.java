@@ -48,7 +48,7 @@ public class MedicineListController implements Serializable {
 		save();
 	}
 
-	private void save() {
+	public void save() {
 		FileOperation.save(medicineList, FILENAME, context);
 
 	}
@@ -67,6 +67,14 @@ public class MedicineListController implements Serializable {
 
 	public void addOneRecord(MedicineModel record) {
 		medicineList.add(record);
+		save();
+	}
+	
+	public void setReminderByTitle(String title,boolean isReminder){
+		for (MedicineModel model : medicineList) {
+			if (model.getTitle().equals(title))
+				model.setReminder(isReminder);
+		}
 		save();
 	}
 

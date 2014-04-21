@@ -90,6 +90,13 @@ public class MedReminderController {
 		reminderList.getReminderList().remove(findbyid(id));
 		sortByNext();
 	}
+	
+
+	public void removeReminder(String title) {
+		deactivate(findbyTitle(title).getId());
+		reminderList.getReminderList().remove(findbyTitle(title));
+		sortByNext();
+	}
 
 	public MedReminderModel findbyid(int id) {
 		for (MedReminderModel reminder : reminderList.getReminderList()) {
@@ -100,6 +107,16 @@ public class MedReminderController {
 		return null;
 	}
 
+	public MedReminderModel findbyTitle(String title) {
+		for (MedReminderModel reminder : reminderList.getReminderList()) {
+			if (reminder.getTitle().equals(title) ) {
+				return reminder;
+			}
+		}
+		return null;
+	}
+	
+	
 	private void sortByNext() {
 		Collections.sort(reminderList.getReminderList());
 		save();
