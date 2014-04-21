@@ -59,16 +59,30 @@ public class RecommendationController implements ResponseHandler {
 	}
 
 	private void loadDemoInput() {
-		demoJson = new String[5];
+//		demoJson = new String[5];
+//		demoJson[0] = getStringFromInputStream(RecommendationController.class
+//				.getResourceAsStream("/com/android/recommendation/test_data_0.json")); //no recommendation
+//		demoJson[1] = getStringFromInputStream(RecommendationController.class
+//				.getResourceAsStream("/com/android/recommendation/test_data_1.json")); //high bp, lack of sleep
+//		demoJson[2] = getStringFromInputStream(RecommendationController.class
+//				.getResourceAsStream("/com/android/recommendation/test_data_2.json")); //high bp / lack of exercise
+//		demoJson[3] = getStringFromInputStream(RecommendationController.class
+//				.getResourceAsStream("/com/android/recommendation/test_data_3.json")); //
+//		demoJson[4] = getStringFromInputStream(RecommendationController.class
+//				.getResourceAsStream("/com/android/recommendation/test_data_4.json")); //high hr and lack of exercise
+		
+		demoJson = new String[6];
 		demoJson[0] = getStringFromInputStream(RecommendationController.class
 				.getResourceAsStream("/com/android/recommendation/test_data_0.json")); //no recommendation
 		demoJson[1] = getStringFromInputStream(RecommendationController.class
-				.getResourceAsStream("/com/android/recommendation/test_data_1.json")); //high bp, lack of sleep
-		demoJson[2] = getStringFromInputStream(RecommendationController.class
 				.getResourceAsStream("/com/android/recommendation/test_data_2.json")); //high bp / lack of exercise
+		demoJson[2] = getStringFromInputStream(RecommendationController.class
+				.getResourceAsStream("/com/android/recommendation/test_data_1.json")); //high bp, lack of sleep
 		demoJson[3] = getStringFromInputStream(RecommendationController.class
-				.getResourceAsStream("/com/android/recommendation/test_data_3.json")); // very high bp
+				.getResourceAsStream("/com/android/recommendation/test_data_1.json")); //high bp, lack of sleep
 		demoJson[4] = getStringFromInputStream(RecommendationController.class
+				.getResourceAsStream("/com/android/recommendation/test_data_1.json")); //high bp, lack of sleep
+		demoJson[5] = getStringFromInputStream(RecommendationController.class
 				.getResourceAsStream("/com/android/recommendation/test_data_4.json")); //high hr and lack of exercise
 	}
 
@@ -89,8 +103,8 @@ public class RecommendationController implements ResponseHandler {
 
 	public void getRecom() {
 		Gson gson = new Gson();
-		if (newDataIndex > 4) {
-			newDataIndex = 4;
+		if (newDataIndex > 5) {
+			newDataIndex = 5;
 		}
 		String json = demoJson[newDataIndex];
 		EngineInputModel eim = null;
