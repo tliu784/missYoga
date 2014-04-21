@@ -10,9 +10,12 @@ import android.util.Log;
 
 import com.android.entity.AccountController;
 import com.android.entity.HealthStatusModel;
+import com.android.entity.MedicineListController;
+import com.android.entity.MedicineModel;
 import com.android.entity.MedicineModel.HealthEffect;
 import com.android.entity.RecomModel;
 import com.android.myhealthmate.MainPage;
+import com.android.myhealthmate.RecContent;
 import com.android.recommendation.EngineInputModel.ActData;
 import com.android.recommendation.EngineInputModel.BPdata;
 import com.android.recommendation.EngineInputModel.HRdata;
@@ -112,7 +115,7 @@ public class RecommendationController implements ResponseHandler {
 		boolean alreadynoti = false;
 		Gson gson = new Gson();
 		RecomModel[] recomArray = null;
-
+		boolean modifiedRec = false;
 		if (jsonResponse != null) {
 			try {
 				recomArray = gson.fromJson(jsonResponse, RecomModel[].class);
@@ -125,25 +128,41 @@ public class RecommendationController implements ResponseHandler {
 				RecomModel somerec = recomArray[i];
 				// add record in rec history
 				// for example: recordlist.add(converted somerec);
-				recordListController.addOneRecord(recordType.Recommendation, new Date(), somerec.getRecommendation(),
-						toSeverityLevel(somerec.getSeverity()), false);
+
 				// check missed medicine
 				HealthEffect he = HealthEffect.BP;
-				if (getRecType(somerec).equals(he)) {
-					if (!alreadynoti) {
-						new NotificationService(mainpage, "New Recommendation", somerec.getRecommendation(), true);
-						alreadynoti = true;
+				MedicineModel missedMed = MedicineListController.getInstance().existMedicine(he);
+				if (missedMed != null) {
+					if (getRecType(somerec).equals(missedMed.getEffect())) {
+						if (!alreadynoti) {
+							RecContent.setMed(missedMed);
+							RecContent.handleMedicine=true;
+							new NotificationService(mainpage, "New Recommendation", missedMed.getMissedText(true), true);
+							alreadynoti = true;
+							modifiedRec = true;
+						}
+					} else {
+
 					}
 				}
-
 				// optionally create notification
 				if (somerec.getId() > 900 && (!alreadynoti)) {
 					new NotificationService(mainpage, "New Recommendation", somerec.getRecommendation(), false);
-					alreadynoti=true;
+					alreadynoti = true;
 				}
 
+				if (!modifiedRec)
+					recordListController.addOneRecord(recordType.Recommendation, new Date(),
+							somerec.getRecommendation(), toSeverityLevel(somerec.getSeverity()), false);
+
 			}
-			mainpage.postRefresh(recomArray);
+			if (modifiedRec) {
+				RecomModel[] recom = new RecomModel[1];
+				recom[0] = new RecomModel(RecContent.getMed(),true); //question
+				RecContent.setOriginalRecs(recomArray);
+				mainpage.postRefresh(recom);
+			} else
+				mainpage.postRefresh(recomArray);
 		}
 	}
 
@@ -154,7 +173,7 @@ public class RecommendationController implements ResponseHandler {
 		return HealthEffect.OTHERS;
 	}
 
-	private String toSeverityLevel(int level) {
+	public String toSeverityLevel(int level) {
 		if (level == 1 || level == 2)
 			return "Low";
 		else if (level == 3)

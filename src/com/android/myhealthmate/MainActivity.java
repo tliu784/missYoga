@@ -93,6 +93,7 @@ public class MainActivity extends Activity {
 		MedReminderController.getInstance().init(getApplicationContext());
 		AccountController.getInstance().init(getApplicationContext());
 		RemoteRequestController.getInstance().initContext(getApplicationContext());
+		MedicineListController.getInstance().init(getApplicationContext());
 		
 		//create requestModel test data
 		RemoteRequestController.getInstance().createTestData();

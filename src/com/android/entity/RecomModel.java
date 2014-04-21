@@ -1,6 +1,8 @@
 package com.android.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 
@@ -13,6 +15,18 @@ public class RecomModel implements Serializable{
 	private String recommendation;
 	private String url;
 	private int severity;
+	
+	public RecomModel(){
+		
+	}
+	
+	public RecomModel(MedicineModel missedMed, boolean isQuestion){
+		String recommendation=missedMed.getMissedText(isQuestion);
+		this.id=1001;
+		this.url="";
+		this.recommendation=recommendation;
+		this.severity=5;
+	}
 	
 	public int getSeverity() {
 		return severity;

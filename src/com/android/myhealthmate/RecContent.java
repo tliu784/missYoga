@@ -1,5 +1,7 @@
 package com.android.myhealthmate;
 
+import com.android.entity.MedicineModel;
+import com.android.entity.RecomModel;
 import com.android.reminder.AlarmReceiver;
 import com.android.service.NotificationService;
 
@@ -15,6 +17,32 @@ public class RecContent extends Activity {
 	private TextView recContent;
 	private static TextView recommendationContent;
 	public static boolean medicineMissed=false;
+	public static boolean handleMedicine=false;
+	private static MedicineModel missedMed;
+	private static RecomModel[] originalRecs;
+	
+	public static void setMed(MedicineModel med){
+		missedMed=med;
+	}
+	
+	public static MedicineModel getMed(){
+		return missedMed;
+	}
+	
+	public static void resetFlags(){
+		medicineMissed=false;
+		handleMedicine=false;
+	}
+	
+	
+	public static RecomModel[] getOriginalRecs() {
+		return originalRecs;
+	}
+
+	public static void setOriginalRecs(RecomModel[] originalRecs) {
+		RecContent.originalRecs = originalRecs;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,7 +52,7 @@ public class RecContent extends Activity {
 		mNM = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 		mNM.cancel(NotificationService.recNotificationID);
 
-		//switch to main activity
+		//switch to main activity when click forget
 		medicineMissed=true;
 		Intent openMainPage= new Intent(RecContent.this, MainPage.class);
         openMainPage.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

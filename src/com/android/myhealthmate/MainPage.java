@@ -55,8 +55,8 @@ public class MainPage extends Activity {
 	private RemoteViews remoteViews;
 	private Button homeTagBtn;
 	private EditText homeTagTxt;
-	
-	//health status fields
+
+	// health status fields
 	private TextView bpsys;
 	private TextView bpdia;
 	private TextView hrlast;
@@ -67,12 +67,12 @@ public class MainPage extends Activity {
 	private TextView sleeplight;
 	private TextView sleepawake;
 	private TextView updateTime;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
-	
+
 		setTitle(AccountController.getInstance().getAccount().getName());
 
 		hrClickView = (LinearLayout) findViewById(R.id.hr);
@@ -111,8 +111,8 @@ public class MainPage extends Activity {
 
 		widget = new ComponentName(this, MyWidgetProvider.class);
 		remoteViews = new RemoteViews(this.getPackageName(), R.layout.widget_layout);
-		
-		//health status fields
+
+		// health status fields
 		bpsys = (TextView) findViewById(R.id.bp_systolic_content);
 		bpdia = (TextView) findViewById(R.id.bp_diastolic_content);
 		hrlast = (TextView) findViewById(R.id.hr_last_content);
@@ -125,26 +125,33 @@ public class MainPage extends Activity {
 		updateTime = (TextView) findViewById(R.id.home_current_time);
 
 	}
-	
 
-	
 	@Override
 	public void onResume() { // After a pause OR at startup
 		super.onResume();
 		// Refresh your stuff here
 		updateReminderSection();
-		//cancel notification
+		// cancel notification
 		NotificationManager mNM;
 		mNM = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 		mNM.cancel(NotificationService.recNotificationID);
-		
-		if (RecContent.medicineMissed){
-			Log.d("hey","missed");
-			RecContent.medicineMissed=false;
-		}else{
-			Log.d("hey","nani?");
+
+		if (RecContent.handleMedicine) {
+			if (RecContent.medicineMissed) {
+				RecomModel[] recom = new RecomModel[1];
+				recom[0] = new RecomModel(RecContent.getMed(), false);
+				updateRecommendations(recom);
+				RecContent.medicineMissed = false;
+			} else {
+				updateRecommendations(RecContent.getOriginalRecs());
+				for (RecomModel rec: RecContent.getOriginalRecs()){
+					RecordList.getInstance().   
+					addOneRecord(recordType.Recommendation, new Date(), //date to be changed
+							rec.getRecommendation(), RecommendationController.getInstance().toSeverityLevel(rec.getSeverity()), false);
+				}
+			}
 		}
-		
+		RecContent.resetFlags();
 	}
 
 	public void updateReminderSection() {
@@ -196,7 +203,7 @@ public class MainPage extends Activity {
 							"Note", false);
 					Toast.makeText(v.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
 					homeTagTxt.setText("");
-				}else{
+				} else {
 					Toast.makeText(v.getContext(), "Tag cannot be empty", Toast.LENGTH_SHORT).show();
 				}
 			}
@@ -321,21 +328,21 @@ public class MainPage extends Activity {
 
 		updateRecommendations(recomArray);
 	}
-	
-	public void updateHealthStatus(HealthStatusModel hsm){
+
+	public void updateHealthStatus(HealthStatusModel hsm) {
 		bpsys.setText(Integer.toString(hsm.getBp_systolic()));
 		bpdia.setText(Integer.toString(hsm.getBp_diastolic()));
 		hravg.setText(Integer.toString(hsm.getHr_count()));
-		int adj = (int) (Math.random()*5);
-		if (Math.random()>0.4){
+		int adj = (int) (Math.random() * 5);
+		if (Math.random() > 0.4) {
 			adj = 0 - adj;
 		}
-		hrlast.setText(Integer.toString(hsm.getHr_count()+adj));
+		hrlast.setText(Integer.toString(hsm.getHr_count() + adj));
 		actsteps.setText(Integer.toString(hsm.getAct_steps()));
 		actcal.setText(Integer.toString(hsm.getAct_calories()));
-		float deephr=hsm.getSleep_minDeep()/60f;
-		float lighthr=hsm.getSleep_minLight()/60f;
-		float awakehr=hsm.getSleep_minAwake()/60f;
+		float deephr = hsm.getSleep_minDeep() / 60f;
+		float lighthr = hsm.getSleep_minLight() / 60f;
+		float awakehr = hsm.getSleep_minAwake() / 60f;
 		String deeptext = String.format("%.1f", deephr);
 		String lighttext = String.format("%.1f", lighthr);
 		String awaketext = String.format("%.1f", awakehr);
@@ -343,8 +350,8 @@ public class MainPage extends Activity {
 		sleeplight.setText(lighttext);
 		sleepawake.setText(awaketext);
 	}
-	
-	public void updateTime(Date timestamp){
+
+	public void updateTime(Date timestamp) {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mma MM/dd/yyyy", Locale.CANADA);
 		updateTime.setText(sdf.format(timestamp));
 	}
