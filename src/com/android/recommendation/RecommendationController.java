@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.android.entity.AccountController;
 import com.android.entity.HealthStatusModel;
+import com.android.entity.MedicineModel.HealthEffect;
 import com.android.entity.RecomModel;
 import com.android.myhealthmate.MainPage;
 import com.android.recommendation.EngineInputModel.ActData;
@@ -108,6 +109,7 @@ public class RecommendationController implements ResponseHandler {
 
 	@Override
 	public void processResponse(String jsonResponse) {
+		boolean alreadynoti = false;
 		Gson gson = new Gson();
 		RecomModel[] recomArray = null;
 
@@ -125,14 +127,31 @@ public class RecommendationController implements ResponseHandler {
 				// for example: recordlist.add(converted somerec);
 				recordListController.addOneRecord(recordType.Recommendation, new Date(), somerec.getRecommendation(),
 						toSeverityLevel(somerec.getSeverity()), false);
-				// optionally create notification
-				if (somerec.getId() > 900) {
-					new NotificationService(mainpage, "New Recommendation", somerec.getRecommendation());
-					break;
+				// check missed medicine
+				HealthEffect he = HealthEffect.BP;
+				if (getRecType(somerec).equals(he)) {
+					if (!alreadynoti) {
+						new NotificationService(mainpage, "New Recommendation", somerec.getRecommendation(), true);
+						alreadynoti = true;
+					}
 				}
+
+				// optionally create notification
+				if (somerec.getId() > 900 && (!alreadynoti)) {
+					new NotificationService(mainpage, "New Recommendation", somerec.getRecommendation(), false);
+					alreadynoti=true;
+				}
+
 			}
 			mainpage.postRefresh(recomArray);
 		}
+	}
+
+	private HealthEffect getRecType(RecomModel somerec) {
+		if (somerec.getId() >= 200 && somerec.getId() < 300) {
+			return HealthEffect.BP;
+		}
+		return HealthEffect.OTHERS;
 	}
 
 	private String toSeverityLevel(int level) {

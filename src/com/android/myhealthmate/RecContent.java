@@ -14,7 +14,7 @@ public class RecContent extends Activity {
 
 	private TextView recContent;
 	private static TextView recommendationContent;
-
+	public static boolean medicineMissed=false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,15 +24,23 @@ public class RecContent extends Activity {
 		mNM = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 		mNM.cancel(NotificationService.recNotificationID);
 
-		recContent = (TextView) findViewById(R.id.rec);
-		recommendationContent = (TextView) findViewById(R.id.rec);
-		String fromNoti = "RecContent";
-		savedInstanceState = getIntent().getExtras();
-
-		if (getIntent().getStringExtra(NotificationService.recNotificationState) != null) {
-			fromNoti = savedInstanceState.getString(NotificationService.recNotificationState);
-			setRecContent(fromNoti);
-		}
+		//switch to main activity
+		medicineMissed=true;
+		Intent openMainPage= new Intent(RecContent.this, MainPage.class);
+        openMainPage.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(openMainPage);
+		finish();
+		
+		
+//		recContent = (TextView) findViewById(R.id.rec);
+//		recommendationContent = (TextView) findViewById(R.id.rec);
+//		String fromNoti = "RecContent";
+//		savedInstanceState = getIntent().getExtras();
+//
+//		if (getIntent().getStringExtra(NotificationService.recNotificationState) != null) {
+//			fromNoti = savedInstanceState.getString(NotificationService.recNotificationState);
+//			setRecContent(fromNoti);
+//		}
 	}
 
 	public void onNewIntent(Intent intent) {

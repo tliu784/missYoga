@@ -3,6 +3,8 @@ package com.android.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import android.content.Context;
+
+import com.android.entity.MedicineModel.HealthEffect;
 import com.android.service.FileOperation;
 
 public class MedicineListController implements Serializable {
@@ -33,7 +35,7 @@ public class MedicineListController implements Serializable {
 
 		if (!initialized) {
 			this.context = context;
-	//		addTestMedRecord();
+			// addTestMedRecord();
 			load();
 			initialized = true;
 		}
@@ -69,8 +71,8 @@ public class MedicineListController implements Serializable {
 		medicineList.add(record);
 		save();
 	}
-	
-	public void setReminderByTitle(String title,boolean isReminder){
+
+	public void setReminderByTitle(String title, boolean isReminder) {
 		for (MedicineModel model : medicineList) {
 			if (model.getTitle().equals(title))
 				model.setReminder(isReminder);
@@ -78,10 +80,19 @@ public class MedicineListController implements Serializable {
 		save();
 	}
 
-//	public void addTestMedRecord() {
-//		MedicineModel record = new MedicineModel();
-//		record.setTestData();
-//		addOneRecord(record);
-//	}
+	public MedicineModel existMedicine(HealthEffect effect) {
+		for (MedicineModel medicine : medicineList) {
+			if (medicine.getEffect().equals(effect)) {
+				return medicine;
+			}
+		}
+		return null;
+	}
+
+	// public void addTestMedRecord() {
+	// MedicineModel record = new MedicineModel();
+	// record.setTestData();
+	// addOneRecord(record);
+	// }
 
 }

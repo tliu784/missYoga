@@ -24,6 +24,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -124,7 +125,9 @@ public class MainPage extends Activity {
 		updateTime = (TextView) findViewById(R.id.home_current_time);
 
 	}
+	
 
+	
 	@Override
 	public void onResume() { // After a pause OR at startup
 		super.onResume();
@@ -134,6 +137,14 @@ public class MainPage extends Activity {
 		NotificationManager mNM;
 		mNM = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 		mNM.cancel(NotificationService.recNotificationID);
+		
+		if (RecContent.medicineMissed){
+			Log.d("hey","missed");
+			RecContent.medicineMissed=false;
+		}else{
+			Log.d("hey","nani?");
+		}
+		
 	}
 
 	public void updateReminderSection() {

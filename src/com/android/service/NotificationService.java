@@ -18,7 +18,8 @@ public class NotificationService {
 	public static final String recNotificationState = "recNotification";
 	public static final int recNotificationID = 133;
 
-	public NotificationService(Context context, String title, String content) {
+	
+	public NotificationService(Context context, String title, String content, boolean forgetMedicine) {
 		// get reminder via intent extra variable
 
 		NotificationManager mNM;
@@ -37,6 +38,8 @@ public class NotificationService {
 		Intent toMainPage = new Intent(context, MainPage.class);
 		toActivity.putExtra(AlarmReceiver.notificationState, false);
 		
+	
+		
 		PendingIntent mainPageIntent = PendingIntent.getActivity(context,recNotificationID, toMainPage, 
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -44,15 +47,29 @@ public class NotificationService {
 
 		PendingIntent noIntent = PendingIntent.getActivity(context,  0, new Intent(), 0);
 		
-		Notification notification = new Notification.Builder(context)
+		String leftbuttontext="See details";
+		String rightbuttontext="Ok, got it";
+	
+	
+		
+		
+		
+		Notification.Builder nb = new Notification.Builder(context)
 				.setContentTitle(title).setContentText(content)
 				.setSmallIcon(R.drawable.ic_launcher_logo)
 				.setContentIntent(mainPageIntent).setAutoCancel(true)
-				.setStyle(new Notification.BigTextStyle().bigText(content))
-				.addAction(0, "See details", mainPageIntent)
-				.addAction(0, "Ok got it", noIntent)
-//				.addAction(0, "Ok, got it!", mainPageIntent)
-				.build();
+				.setStyle(new Notification.BigTextStyle().bigText(content));
+		if (forgetMedicine){
+			leftbuttontext="Yes, I did";
+			rightbuttontext="Oops, I forgot";
+			nb.addAction(0, leftbuttontext, mainPageIntent)
+			  .addAction(0, rightbuttontext, recPageIntent);
+		}else{
+				nb
+				.addAction(0, leftbuttontext, mainPageIntent)
+				.addAction(0, rightbuttontext, noIntent);
+		}
+		Notification notification = nb.build();
 
 		notification.priority = Notification.PRIORITY_MAX;
 		// notification.flags = Notification.FLAG_ONGOING_EVENT;
