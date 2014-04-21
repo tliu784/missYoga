@@ -325,6 +325,7 @@
         android:id="@+id/history_area"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gen_page_margin_top"
         android:background="@drawable/textlines"
         android:orientation="vertical"
         android:paddingLeft="5dp"
@@ -356,8 +357,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="18dp"
                 android:columnCount="9"
                 android:orientation="horizontal"
                 android:padding="5dp" >
@@ -371,7 +371,7 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:paddingLeft="8dp"
-                    android:text="ALL "
+                    android:text="All "
                     android:textSize="16dp"
                     android:textStyle="bold" >
                 </TextView>
@@ -386,6 +386,7 @@
                     android:id="@+id/note_event_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/chart_tab_textbox"
                     android:clickable="true"
                     android:gravity="center"
                     android:maxLines="1"
@@ -406,6 +407,7 @@
                     android:id="@+id/low_rec_event_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/chart_tab_textbox"
                     android:clickable="true"
                     android:gravity="center"
                     android:maxLines="1"
@@ -426,6 +428,7 @@
                     android:id="@+id/med_rec_event_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/chart_tab_textbox"
                     android:clickable="true"
                     android:gravity="center"
                     android:maxLines="1"
@@ -446,6 +449,7 @@
                     android:id="@+id/High_rec_event_filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/chart_tab_textbox"
                     android:clickable="true"
                     android:gravity="center"
                     android:maxLines="1"
@@ -470,6 +474,7 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/gen_page_margin_top"
+                android:layout_marginBottom="@dimen/gen_page_margin_bottom"
                 android:orientation="vertical" >
             </LinearLayout>
         </ScrollView>
