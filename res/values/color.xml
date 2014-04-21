@@ -5,6 +5,9 @@
     <color name="grey">#A4A4A4</color>
     <color name="medium_grey">#b2b2b2</color>
     <color name="white">#FFFFFF</color>
+    <color name="widget_white">#fcfcfc</color>
+    <color name="widget_black">#424242</color>
+    <color name="widget_blue">#0073cf</color>
     <color name="light_grey">#D8D8D8</color>
     <color name="slight_grey">#E6E6E6</color>
     <color name="inner_grey">#fafafa</color>
@@ -17,5 +20,6 @@
     <color name="green">#01DF01</color>
     <color name="red">#DF0101</color>
     <color name="highlight_titleSec_blue">#CCFFFF</color>
-    <color name="detail_section_color">#CAD9E9</color>    
+    <color name="detail_section_color">#CAD9E9</color>  
+      
 </resources>
