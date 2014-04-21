@@ -128,7 +128,6 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="165"
-                                android:textColor="@color/red"
                                 android:textSize="@dimen/dsmall_font_size"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -328,7 +327,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="DISTANCE"
+                                android:text="STEPS"
                                 android:textColor="@color/grey"
                                 android:textSize="@dimen/small_font_size"
                                 android:textStyle="bold" />
@@ -415,7 +414,7 @@
                         android:orientation="horizontal" >
 
                         <LinearLayout
-                            android:layout_width="43dp"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="@dimen/gen_page_margin_left"
@@ -444,7 +443,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="43dp"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginRight="@dimen/gen_page_margin_right"
@@ -472,7 +471,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="43dp"
+                            android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginRight="@dimen/gen_page_margin_right"
