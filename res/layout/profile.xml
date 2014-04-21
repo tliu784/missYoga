@@ -442,6 +442,13 @@
                         android:text="@string/time"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
+                     <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        style="@style/profile_edittext"
+                        android:text="Reminder"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </GridLayout>
         </LinearLayout>

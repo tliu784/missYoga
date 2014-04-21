@@ -23,6 +23,8 @@ import com.android.service.ResponseHandler;
 import com.android.service.RestCallHandler;
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartPointModel;
+import com.android.trend.RecordList;
+import com.android.trend.RecordModel.recordType;
 import com.google.gson.Gson;
 
 public class RecommendationController implements ResponseHandler {
@@ -34,6 +36,7 @@ public class RecommendationController implements ResponseHandler {
 	private int newDataIndex = 0;
 	private static RecommendationController instance = null;
 	private MainPage mainpage;
+	private RecordList recordListController;
 
 	public static RecommendationController getInstance() {
 		if (instance == null)
@@ -47,6 +50,7 @@ public class RecommendationController implements ResponseHandler {
 
 	private void init() {
 		userinfo = AccountController.getInstance().getAccount().getUserInfo();
+		recordListController = RecordList.getInstance();
 		loadDemoInput();
 	}
 
@@ -107,7 +111,7 @@ public class RecommendationController implements ResponseHandler {
 				RecomModel somerec = recomArray[i];
 				// add record in rec history
 				// for example: recordlist.add(converted somerec);
-				
+				recordListController.addOneRecord(recordType.Recommendation, new Date(), somerec.getRecommendation(), toSeverityLevel(somerec.getSeverity()), false);
 				// optionally create notification
 				if (somerec.getId() > 900) {
 					new NotificationService(mainpage, "New Recommendation", somerec.getRecommendation());
@@ -118,6 +122,15 @@ public class RecommendationController implements ResponseHandler {
 		}
 	}
 
+	private String toSeverityLevel(int level){
+		if(level==1 || level==2)
+			return "Low";
+		else if(level == 3)
+			return "Medium";
+		else
+			return "High";
+	}
+	
 	private EngineInputModel addData(ChartPointModel point) {
 		double caltoduration = 0.1;
 		EngineInputModel input = new EngineInputModel();

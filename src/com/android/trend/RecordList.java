@@ -69,6 +69,7 @@ public class RecordList implements Serializable {
 
 	public void addOneRecord(recordType type, Date date, String content, String title, boolean miss) {
 		recordList.add(new RecordModel(type, date, content, title, miss));
+		sortByNext();
 		save();
 	}
 

@@ -1,6 +1,7 @@
 package com.android.myhealthmate;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import com.android.entity.AccountController;
@@ -9,6 +10,8 @@ import com.android.recommendation.RecommendationController;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
 import com.android.service.NotificationService;
+import com.android.trend.RecordList;
+import com.android.trend.RecordModel.recordType;
 import com.android.widget.MyWidgetProvider;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -24,9 +27,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainPage extends Activity {
 	private TextView rec_content;
@@ -43,7 +49,8 @@ public class MainPage extends Activity {
 	private String recommendation = "Recommendation";
 	private ComponentName widget;
 	private RemoteViews remoteViews;
-
+	private Button homeTagBtn;
+	private EditText homeTagTxt;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,8 +59,6 @@ public class MainPage extends Activity {
 		mNM = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 		mNM.cancel(NotificationService.recNotificationID);
 		setTitle(AccountController.getInstance().getAccount().getName());
-
-	
 
 		hrClickView = (LinearLayout) findViewById(R.id.hr);
 		bpClickView = (LinearLayout) findViewById(R.id.bp);
@@ -70,6 +75,9 @@ public class MainPage extends Activity {
 		rdDate = (TextView) findViewById(R.id.rd_date);
 		rdTime = (TextView) findViewById(R.id.rd_time);
 
+		homeTagBtn = (Button) findViewById(R.id.home_tag_btn);
+		homeTagTxt = (EditText) findViewById(R.id.home_tag_txt);
+
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE
 				| ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -83,6 +91,8 @@ public class MainPage extends Activity {
 		rdClickView.setOnClickListener(getRdClickListener());
 		rec_content.setOnClickListener(getRecClickListener());
 		historyClickView.setOnClickListener(getHistoryClickListener());
+
+		homeTagBtn.setOnClickListener(getTag());
 
 		widget = new ComponentName(this, MyWidgetProvider.class);
 		remoteViews = new RemoteViews(this.getPackageName(), R.layout.widget_layout);
@@ -132,6 +142,22 @@ public class MainPage extends Activity {
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(MainPage.this, test.class));
+			}
+		};
+	}
+
+	private OnClickListener getTag() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (homeTagTxt.getText().toString() != null) {
+					RecordList.getInstance().addOneRecord(recordType.Note, new Date(), homeTagTxt.getText().toString(),
+							"Note", false);
+					Toast.makeText(v.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
+					homeTagTxt.setText("");
+				}else{
+					Toast.makeText(v.getContext(), "Tag cannot be empty", Toast.LENGTH_SHORT).show();
+				}
 			}
 		};
 	}
@@ -244,14 +270,14 @@ public class MainPage extends Activity {
 	}
 
 	private void refresh() {
-		RecommendationController rc=RecommendationController.getInstance();
-		if (rc.getMainpage()==null)
+		RecommendationController rc = RecommendationController.getInstance();
+		if (rc.getMainpage() == null)
 			rc.setMainpage(this);
 		rc.getRecom();
 	}
-	
-	public void postRefresh(RecomModel[] recomArray){
-		
+
+	public void postRefresh(RecomModel[] recomArray) {
+
 		updateRecommendations(recomArray);
 	}
 
@@ -263,29 +289,27 @@ public class MainPage extends Activity {
 
 	private void updateRecommendations(RecomModel[] recomArray) {
 		if (recomArray != null) {
-			String recommendationContent ="";
+			String recommendationContent = "";
 			remoteViews.setTextViewText(R.id.title, "Health Recommendation");
-			
+
 			for (int i = 0; i < recomArray.length; i++) {
-				recommendationContent+=(recomArray[i].getRecommendation());
+				recommendationContent += (recomArray[i].getRecommendation());
 				if (i < recomArray.length - 1) {
-					recommendationContent+="\n\n";
+					recommendationContent += "\n\n";
 				}
 			}
-			//update widgets and main page
+			// update widgets and main page
 			remoteViews.setTextViewText(R.id.desc, recommendationContent);
 			AppWidgetManager.getInstance(this).updateAppWidget(widget, remoteViews);
 			rec_content.setText(recommendationContent);
-				
+
 		} else {
 			rec_content.setText("Unable to retrieve recommendation");
 		}
-		
-		//restore refresh button
+
+		// restore refresh button
 		menuItem.collapseActionView();
 		menuItem.setActionView(null);
 	}
-
-
 
 }

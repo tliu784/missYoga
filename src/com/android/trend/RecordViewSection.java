@@ -30,15 +30,16 @@ public class RecordViewSection {
 	recordType type;
 	boolean miss;
 
-	
-	
-	public RecordViewSection(Context context, recordType type, Date date, String content,boolean miss, String title) {
+	public RecordViewSection(Context context, recordType type, Date date, String content, boolean miss, String title) {
 		this.contentLayout = new LinearLayout(context);
 		this.line = new TextView(context);
 		this.layout = new LinearLayout(context);
 		this.type = type;
 		this.titleType = new TextView(context);
-		this.titleType.setText(type.toString()+"-"+title);
+		if (!type.equals(recordType.Note))
+			this.titleType.setText(type.toString() + "-" + title);
+		else
+			this.titleType.setText(title);
 		this.icon = new TextView(context);
 		this.time = new TextView(context);
 		setTime(date);
@@ -61,8 +62,6 @@ public class RecordViewSection {
 		setLine();
 		setContentLayout();
 	}
-	
-
 
 	private void addTitleLayout() {
 		int padding = 5;
@@ -73,7 +72,7 @@ public class RecordViewSection {
 		icon.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		icon.setPadding(padding, 0, padding, 0);
 		setIcon();
-		
+
 		titleType.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
 		titleType.setGravity(Gravity.CENTER_VERTICAL);
 		titleType.setPadding(padding, 0, padding, 0);
@@ -98,22 +97,19 @@ public class RecordViewSection {
 		layout.addView(titleLayout);
 	}
 
-	
-	private void setIcon(){
-		
-		if(type.equals(recordType.Reminder) && miss)
+	private void setIcon() {
+
+		if (type.equals(recordType.Reminder) && miss)
 			icon.setBackgroundResource(R.drawable.ic_action_alarms_small);
-		else if(type.equals(recordType.Reminder)&& (!miss))
+		else if (type.equals(recordType.Reminder) && (!miss))
 			icon.setBackgroundResource(R.drawable.ic_action_alarms_light);
-		else if(type.equals(recordType.Note))
+		else if (type.equals(recordType.Note))
 			icon.setBackgroundResource(R.drawable.ic_action_event);
-		else if(type.equals(recordType.Recommendation))
+		else if (type.equals(recordType.Recommendation))
 			icon.setBackgroundResource(R.drawable.ic_action_about);
-	
+
 	}
-	
-	
-	
+
 	private void setLine() {
 		line.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
 		line.setBackgroundColor(context.getResources().getColor(R.color.grey));
@@ -166,12 +162,12 @@ public class RecordViewSection {
 	public void setLayout(LinearLayout layout) {
 		this.layout = layout;
 	}
-	
-	public void setHighLight(){
+
+	public void setHighLight() {
 		layout.setBackgroundResource(R.drawable.highlight_select_title_section);
 	}
-	
-	public void disableHighLight(){
+
+	public void disableHighLight() {
 		layout.setBackgroundResource(R.drawable.textlines);
 	}
 }
