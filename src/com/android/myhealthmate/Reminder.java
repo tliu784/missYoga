@@ -31,9 +31,7 @@ public class Reminder extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(" Reminder");
-		
-		
+		setTitle(AccountController.getInstance().getAccount().getName());
 		// Context context=getApplicationContext();
 		setContentView(R.layout.reminder);
 

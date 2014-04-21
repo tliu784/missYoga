@@ -72,6 +72,7 @@ public class Settings extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
+		setTitle(AccountController.getInstance().getAccount().getName());
 		// the display part
 
 		accountController = AccountController.getInstance();

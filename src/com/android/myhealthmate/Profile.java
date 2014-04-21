@@ -66,7 +66,7 @@ public class Profile extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.profile);
-		setTitle(" Hi,"+AccountController.getInstance().getAccount().getName());
+		setTitle(AccountController.getInstance().getAccount().getName());
 
 		birthDateEditView = (EditText) findViewById(R.id.txtbox_dob);
 		heightEditView = (EditText) findViewById(R.id.txtbox_height);
