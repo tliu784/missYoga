@@ -127,6 +127,47 @@ public class ChartHelper {
 
 	}
 
+	public static ArrayList<ChartPointModel> createReasonableRandomData(int days) {
+		ArrayList<ChartPointModel> dataset = new ArrayList<ChartPointModel>();
+		double hr;
+		double bpl;
+		double bph;
+		double act;
+		double sleep;
+		boolean isSleep = false;
+		Calendar calendar = new GregorianCalendar();
+		Date beginningTime = MedReminderModel.addDuration(new Date(), (1 - days), DurationUnit.Day);
+		Date timestamp = ChartHelper.toPreviousWholeHour(beginningTime);
+		Date now = new Date();
+		while (timestamp.compareTo(now) < 0) {
+			// need to adjust time later
+
+			calendar.setTime(timestamp);
+			int hourofday = calendar.get(Calendar.HOUR_OF_DAY);
+			if (hourofday >= 1 && hourofday < 6)
+				isSleep = true;
+			else
+				isSleep = false;
+			double sleepmarkdown = 0.8;
+			double raw = Math.random();
+			if (isSleep) {
+				raw = raw * sleepmarkdown;
+			}
+			hr = ChartHelper.getSingleRandomData(65, 140, raw);
+			bpl = ChartHelper.getSingleRandomData(40, 100, raw);
+			bph = ChartHelper.getSingleRandomData(70, 190, raw);
+			while (bph <= bpl) {
+				bph = ChartHelper.getSingleRandomData(70, 190, raw);
+			}
+			act = ChartHelper.getSingleRandomData(10, 500, raw);
+			sleep = ChartHelper.getSleepRandomData();
+
+			dataset.add(new ChartPointModel(timestamp, hr, bpl, bph, act, sleep, isSleep));
+			timestamp = MedReminderModel.addDuration(timestamp, 1, DurationUnit.Hour);
+		}
+		return dataset;
+	}
+
 	public static void recordListGenerator(ArrayList<RecordModel> recordList) {
 		recordList.clear();
 		Date date = new Date();
@@ -163,6 +204,17 @@ public class ChartHelper {
 	public static double getSingleRandomData(double min, double max) {
 		double raw = Math.random();
 		double result = min + raw * (max - min);
+		return result;
+	}
+
+	private static double getSingleRandomData(double min, double max, double raw) {
+		double adj = (Math.random() - 0.5);
+		double result = min + raw * (max - min);
+		result = result + result * adj;
+		if (result > max)
+			result = max;
+		if (result < min)
+			result = min;
 		return result;
 	}
 
