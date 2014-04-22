@@ -556,7 +556,9 @@
                 android:id="@+id/rec"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
                 android:clickable="true"
                 android:drawableLeft="@drawable/ic_rec"
                 android:gravity="left"
@@ -565,7 +567,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/msmall_font_size"
                 android:textStyle="bold" />
-
 
             <TextView
                 android:id="@+id/rec_content"
@@ -600,20 +601,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
                     android:drawableLeft="@drawable/ic_calendar"
                     android:text=" Reminder "
-                    android:layout_marginBottom="5dp"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/msmall_font_size"
                     android:textStyle="bold" />
 
-                <TextView
+<!--                 <TextView
                     android:id="@+id/rd_type"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text=" medicine "
-                    android:textColor="@color/grey" />
+                    android:text=" Current Medication "
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" /> -->
             </LinearLayout>
 
             <View
@@ -625,7 +627,7 @@
                 android:id="@+id/rd"
                 style="@style/contentfield"
                 android:layout_width="fill_parent"
-                android:layout_height="70sp"
+                android:layout_height="45sp"
                 android:clickable="true"
                 android:orientation="horizontal"
                 android:paddingTop="@dimen/activity_vertical_margin"
@@ -634,49 +636,57 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="5dp"
                     android:orientation="vertical" >
 
-                    <TextView
+                    <!--
+                         <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text=" TASK "
                         android:textColor="@color/grey"
                         android:textSize="16sp" />
+                    -->
 
                     <TextView
                         android:id="@+id/rd_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="2dp"
                         android:gravity="center"
                         android:text=" ASPRIN "
-                        android:textSize="@dimen/msmall_font_size"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:id="@+id/rd_date"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text=" 09/11/2014 "
-                        android:textColor="@color/grey"
-                        android:textSize="18sp" />
+                    android:layout_marginLeft="115dp"
+                    android:orientation="horizontal" >
 
                     <TextView
                         android:id="@+id/rd_time"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
                         android:text=" 11:20 AM "
                         android:textColor="@color/grey"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" 
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/rd_date"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text=" 09/11/2014 "
+                        android:textColor="@color/grey"
+                        android:textSize="14sp" 
+                        android:textStyle="bold"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -701,7 +711,7 @@
                 android:drawableLeft="@drawable/ic_history"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:text=" Summary "
+                android:text=" Health Stats Summary "
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/msmall_font_size"
                 android:textStyle="bold" />
