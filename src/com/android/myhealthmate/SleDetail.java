@@ -44,7 +44,8 @@ import android.widget.Toast;
 
 public class SleDetail extends FragmentActivity {
 	// date helper
-	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM-dd-yyyy HH:mm ", Locale.CANADA);
+	SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM-dd-yyyy HH:mm ",
+			Locale.CANADA);
 
 	// views & buttons
 	private TextView titleTextView;
@@ -80,9 +81,9 @@ public class SleDetail extends FragmentActivity {
 	private TextView filterNote;
 	private TextView filterMedRec;
 	private GridLayout filterArea;
-//	private Button trendTagBtn;
-//	private EditText trendTagTxt;
-	private int itemPosition= 0;
+	// private Button trendTagBtn;
+	// private EditText trendTagTxt;
+	private int itemPosition = 0;
 
 	ArrayList<String> itemList;
 	ArrayAdapter<String> userList;
@@ -109,14 +110,14 @@ public class SleDetail extends FragmentActivity {
 		filterMedRec = (TextView) findViewById(R.id.med_rec_event_filter);
 		filterHighRec = (TextView) findViewById(R.id.High_rec_event_filter);
 		filterNote = (TextView) findViewById(R.id.note_event_filter);
-//		filterBtn = (TextView) findViewById(R.id.category_filter_button);
+		// filterBtn = (TextView) findViewById(R.id.category_filter_button);
 		filterArea = (GridLayout) findViewById(R.id.filter_area);
-//		trendTagBtn = (Button) findViewById(R.id.trends_tag_btn);
-//		trendTagTxt = (EditText) findViewById(R.id.trends_tag_txt);
-//		trendTagBtn.setOnClickListener(getTag());
-		
+		// trendTagBtn = (Button) findViewById(R.id.trends_tag_btn);
+		// trendTagTxt = (EditText) findViewById(R.id.trends_tag_txt);
+		// trendTagBtn.setOnClickListener(getTag());
+
 		remoteDataController = RemoteDataController.getInstance();
-		
+
 		initNavigationBar();
 		initChart();
 		setupChartListeners();
@@ -127,35 +128,45 @@ public class SleDetail extends FragmentActivity {
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		userList = loadUser();
-		actionBar.setListNavigationCallbacks(userList, new OnNavigationListener() {
-			// Get the same strings provided for the drop-down's ArrayAdapter
-			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-				refreshPageByUserName(userList.getItem(itemPosition).toString());
-				Toast.makeText(SleDetail.this, userList.getItem(itemPosition).toString(), Toast.LENGTH_SHORT).show();
-				return false;
-			}
-		});
+		actionBar.setListNavigationCallbacks(userList,
+				new OnNavigationListener() {
+					// Get the same strings provided for the drop-down's
+					// ArrayAdapter
+					public boolean onNavigationItemSelected(int itemPosition,
+							long itemId) {
+						refreshPageByUserName(userList.getItem(itemPosition)
+								.toString());
+						Toast.makeText(SleDetail.this,
+								userList.getItem(itemPosition).toString(),
+								Toast.LENGTH_SHORT).show();
+						return false;
+					}
+				});
 	}
-//
-//	private OnClickListener getTag() {
-//		return new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				if (trendTagTxt.getText().toString() != null) {
-//					RecordList.getInstance().addOneRecord(recordType.Note, new Date(), trendTagTxt.getText().toString(),
-//							"Note", false);
-//					Toast.makeText(v.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
-//					trendTagTxt.setText("");
-//					refreshPageByUserName(userList.getItem(0).toString());
-//				}else{
-//					Toast.makeText(v.getContext(), "Tag cannot be empty", Toast.LENGTH_SHORT).show();
-//				}
-//			}
-//		};
-//	}
-	
+
+	//
+	// private OnClickListener getTag() {
+	// return new OnClickListener() {
+	// @Override
+	// public void onClick(View v) {
+	// if (trendTagTxt.getText().toString() != null) {
+	// RecordList.getInstance().addOneRecord(recordType.Note, new Date(),
+	// trendTagTxt.getText().toString(),
+	// "Note", false);
+	// Toast.makeText(v.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
+	// trendTagTxt.setText("");
+	// refreshPageByUserName(userList.getItem(0).toString());
+	// }else{
+	// Toast.makeText(v.getContext(), "Tag cannot be empty",
+	// Toast.LENGTH_SHORT).show();
+	// }
+	// }
+	// };
+	// }
+
 	private void refreshPageByUserName(String name) {
-		RemoteDataModel selectedUserRemoteData = remoteDataController.getDataModelByName(name);
+		RemoteDataModel selectedUserRemoteData = remoteDataController
+				.getDataModelByName(name);
 		chartData.setDataset(selectedUserRemoteData.getHealthdata());
 		chartView.refreshChart();
 		refreshHistorySection(selectedUserRemoteData.getEventdata());
@@ -164,14 +175,17 @@ public class SleDetail extends FragmentActivity {
 		currentX = (int) chartData.getDisplaySetLen() / 2;
 		chartView.moveVto(currentX);
 		displayValues();
-		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
+		scrollHistorySection(chartData.getDisplayDataSet().get(currentX)
+				.getTimestamp());
 	}
 
 	private ArrayAdapter<String> loadUser() {
 		itemList = new ArrayList<String>();
 		for (RemoteDataModel user : remoteDataController.getDataList())
 			itemList.add(user.getOwnerName());
-		userList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList);
+		userList = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, android.R.id.text1,
+				itemList);
 		return userList;
 	}
 
@@ -188,21 +202,22 @@ public class SleDetail extends FragmentActivity {
 		SearchView searchView = (SearchView) searchViewItem.getActionView();
 		searchView.setIconifiedByDefault(true);
 
-		MenuItemCompat.setOnActionExpandListener(searchViewItem, new MenuItemCompat.OnActionExpandListener() {
+		MenuItemCompat.setOnActionExpandListener(searchViewItem,
+				new MenuItemCompat.OnActionExpandListener() {
 
-			@Override
-			public boolean onMenuItemActionCollapse(MenuItem item) {
-				displayAllEvent();
-				return true;
-			}
+					@Override
+					public boolean onMenuItemActionCollapse(MenuItem item) {
+						displayAllEvent();
+						return true;
+					}
 
-			@Override
-			public boolean onMenuItemActionExpand(MenuItem item) {
+					@Override
+					public boolean onMenuItemActionExpand(MenuItem item) {
 
-				return true;
-			}
+						return true;
+					}
 
-		});
+				});
 
 		SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
 			public boolean onQueryTextChange(String newText) {
@@ -227,7 +242,8 @@ public class SleDetail extends FragmentActivity {
 
 		switch (item.getItemId()) {
 		case R.id.add_note: {
-			Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(SleDetail.this, getCurrentPoint());
+			Dialog newNoteDialog = new AddNotePopupDialog().onCreateDialog(
+					SleDetail.this, getCurrentPoint());
 			newNoteDialog.show();
 			return true;
 		}
@@ -254,21 +270,24 @@ public class SleDetail extends FragmentActivity {
 		filterMedRec.setOnClickListener(getFilterMediumRecClickListener());
 		filterHighRec.setOnClickListener(getFilterHighRecClickListener());
 		filterLowRec.setOnClickListener(getFilterLowRecClickListener());
-		
-//		filterBtn.setOnClickListener(getFilterBtnClickListener());
-//		filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
+
+		// filterBtn.setOnClickListener(getFilterBtnClickListener());
+		// filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
 
 	}
 
-	public void refreshHistorySection(ArrayList<RecordModel> remoteUserRecordList) {
+	public void refreshHistorySection(
+			ArrayList<RecordModel> remoteUserRecordList) {
 		recordViewList.clear();
 		recordLayout.removeAllViewsInLayout();
 		recordListInstance.sortByNext();
 		for (RecordModel record : remoteUserRecordList) {
-			RecordViewSection rvsection = new RecordViewSection(SleDetail.this, record.getType(),
-					record.getTimeStamp(), record.getContent(), record.isMissed(), record.getTitle());
+			RecordViewSection rvsection = new RecordViewSection(SleDetail.this,
+					record.getType(), record.getTimeStamp(),
+					record.getContent(), record.isMissed(), record.getTitle());
 			recordViewList.add(rvsection);
-			rvsection.getLayout().setOnClickListener(getHistorySectionClickListener());
+			rvsection.getLayout().setOnClickListener(
+					getHistorySectionClickListener());
 			recordLayout.addView(rvsection.getLayout());
 		}
 
@@ -276,7 +295,8 @@ public class SleDetail extends FragmentActivity {
 
 	private void initChart() {
 		if (chartView == null)
-			chartView = new ChartViewController(SleDetail.this, hrSection, actSection);
+			chartView = new ChartViewController(SleDetail.this, hrSection,
+					actSection);
 		chartData = chartView.getChartDataController();
 		pointCount = chartView.getPointCount();
 		currentX = pointCount - 1;
@@ -401,21 +421,21 @@ public class SleDetail extends FragmentActivity {
 		}
 	}
 
-//	private OnClickListener getFilterBtnClickListener() {
-//		return new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				if (filterArea.getVisibility() == View.GONE) {
-//					filterArea.setVisibility(View.VISIBLE);
-//					filterBtn.setBackgroundResource(R.drawable.ic_action_expand);
-//				} else {
-//					filterArea.setVisibility(View.GONE);
-//					filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
-//				}
-//
-//			}
-//		};
-//	}
+	// private OnClickListener getFilterBtnClickListener() {
+	// return new OnClickListener() {
+	// @Override
+	// public void onClick(View v) {
+	// if (filterArea.getVisibility() == View.GONE) {
+	// filterArea.setVisibility(View.VISIBLE);
+	// filterBtn.setBackgroundResource(R.drawable.ic_action_expand);
+	// } else {
+	// filterArea.setVisibility(View.GONE);
+	// filterBtn.setBackgroundResource(R.drawable.ic_action_next_item);
+	// }
+	//
+	// }
+	// };
+	// }
 
 	private OnClickListener getFilterAllClickListener() {
 		return new OnClickListener() {
@@ -444,7 +464,6 @@ public class SleDetail extends FragmentActivity {
 		};
 	}
 
-
 	private OnClickListener getFilterMediumRecClickListener() {
 		return new OnClickListener() {
 			@Override
@@ -453,7 +472,6 @@ public class SleDetail extends FragmentActivity {
 			}
 		};
 	}
-	
 
 	private OnClickListener getFilterHighRecClickListener() {
 		return new OnClickListener() {
@@ -463,8 +481,7 @@ public class SleDetail extends FragmentActivity {
 			}
 		};
 	}
-	
-	
+
 	private OnClickListener getFilterNoteClickListener() {
 		return new OnClickListener() {
 			@Override
@@ -484,33 +501,36 @@ public class SleDetail extends FragmentActivity {
 			i++;
 		}
 	}
-	
-	
 
 	private void displayLowRecommendationEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
-			if (record.getType().equals(recordType.Recommendation)&&record.getTitle().equalsIgnoreCase("Low"))
+			if (record.getType().equals(recordType.Recommendation)
+					&& record.getTitle().equalsIgnoreCase("Low"))
 				recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
 			else
 				recordViewList.get(i).getLayout().setVisibility(View.GONE);
 			i++;
 		}
 	}
+
 	private void displayMediumRecommendationEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
-			if (record.getType().equals(recordType.Recommendation)&&record.getTitle().equalsIgnoreCase("Medium"))
+			if (record.getType().equals(recordType.Recommendation)
+					&& record.getTitle().equalsIgnoreCase("Medium"))
 				recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
 			else
 				recordViewList.get(i).getLayout().setVisibility(View.GONE);
 			i++;
 		}
-	}	
+	}
+
 	private void displayHighRecommendationEvent() {
 		int i = 0;
 		for (RecordModel record : recordList) {
-			if (record.getType().equals(recordType.Recommendation)&&record.getTitle().equalsIgnoreCase("High"))
+			if (record.getType().equals(recordType.Recommendation)
+					&& record.getTitle().equalsIgnoreCase("High"))
 				recordViewList.get(i).getLayout().setVisibility(View.VISIBLE);
 			else
 				recordViewList.get(i).getLayout().setVisibility(View.GONE);
@@ -530,7 +550,8 @@ public class SleDetail extends FragmentActivity {
 	}
 
 	private void displayValues() {
-		ChartPointModel currentPoint = chartData.getDisplayDataSet().get(currentX);
+		ChartPointModel currentPoint = chartData.getDisplayDataSet().get(
+				currentX);
 		TextView hrText = (TextView) findViewById(R.id.chart_values_hr);
 		TextView bpHighText = (TextView) findViewById(R.id.chart_values_bp_high);
 		TextView bpText = (TextView) findViewById(R.id.chart_values_bp);
@@ -576,7 +597,8 @@ public class SleDetail extends FragmentActivity {
 		chartView.refreshChart();
 		chartView.moveVto(currentX);
 		displayValues();
-		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
+		scrollHistorySection(chartData.getDisplayDataSet().get(currentX)
+				.getTimestamp());
 	}
 
 	private void shiftChart(Date timestamp) {
@@ -595,7 +617,8 @@ public class SleDetail extends FragmentActivity {
 			currentX = newX;
 		}
 		displayValues();
-		scrollHistorySection(chartData.getDisplayDataSet().get(currentX).getTimestamp());
+		scrollHistorySection(chartData.getDisplayDataSet().get(currentX)
+				.getTimestamp());
 	}
 
 	public static void addHistorySection(RecordViewSection recordView, int index) {
@@ -604,16 +627,20 @@ public class SleDetail extends FragmentActivity {
 
 	private void scrollHistorySection(Date selectedTime) {
 		int[] startEndLong = recordListInstance.getOneHourRecord(selectedTime);
-		scrolView.scrollTo(0, recordLayout.getChildAt(startEndLong[0]).getTop());
+		scrolView
+				.scrollTo(0, recordLayout.getChildAt(startEndLong[0]).getTop());
 
 		if (oldstartEndLong[2] != 0) {
-			for (int i = oldstartEndLong[0]; i < oldstartEndLong[0] + oldstartEndLong[2]; i++) {
-				recordViewList.get(i).disableHighLight();
+			for (int i = oldstartEndLong[0]; i < oldstartEndLong[0]
+					+ oldstartEndLong[2]; i++) {
+				if (i >= 0 && i < recordViewList.size())
+					recordViewList.get(i).disableHighLight();
 			}
 		}
 
 		for (int i = startEndLong[0]; i < startEndLong[0] + startEndLong[2]; i++) {
-			recordViewList.get(i).setHighLight();
+			if (i >= 0 && i < recordViewList.size())
+				recordViewList.get(i).setHighLight();
 		}
 
 		oldstartEndLong = startEndLong;
