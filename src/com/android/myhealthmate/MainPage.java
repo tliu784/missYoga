@@ -384,7 +384,7 @@ public class MainPage extends Activity {
 				}
 				// update widgets and main page
 				String widgetText=mostImportant.getRecommendation();
-				widgetText+="\n\n(and "+(recomArray.length-1)+" more...";
+				widgetText+="\n\n(and "+(recomArray.length-1)+" more...)";
 				remoteViews.setTextViewText(R.id.desc, widgetText);
 				AppWidgetManager.getInstance(this).updateAppWidget(widget, remoteViews);
 				rec_content.setText(recommendationContent);
