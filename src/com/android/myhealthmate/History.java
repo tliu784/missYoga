@@ -53,7 +53,7 @@ public class History extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.summary);
-		setTitle(" Hi,"+AccountController.getInstance().getAccount().getName());
+		setTitle(AccountController.getInstance().getAccount().getName());
 		oneWeekFilter = (TextView) findViewById(R.id.history_filter_1week);
 		oneMonthFilter = (TextView) findViewById(R.id.history_filter_1month);
 		threeMonthFilter = (TextView) findViewById(R.id.history_filter_3month);
