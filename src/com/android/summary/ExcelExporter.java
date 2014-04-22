@@ -2,7 +2,12 @@ package com.android.summary;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+
+import com.android.entity.AccountController;
+import com.android.entity.AccountModel;
 import com.android.service.FileOperation;
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartPointModel;
@@ -19,7 +24,7 @@ import jxl.write.biff.RowsExceededException;
 
 public class ExcelExporter {
 
-	private String filename = "terry_excel.xls";
+	private String filename = "Health_Record.xls";
 	private WritableWorkbook workbook;
 	private WritableSheet dataSheet;
 	private WritableSheet infoSheet;
@@ -38,7 +43,7 @@ public class ExcelExporter {
 		} catch (IOException e) {
 			return false;
 		}
-		infoSheet  = workbook.createSheet("User Info", 0);
+		infoSheet = workbook.createSheet("User Info", 0);
 		dataSheet = workbook.createSheet("Data", 1);
 		return true;
 	}
@@ -72,41 +77,81 @@ public class ExcelExporter {
 	}
 
 	public File export() {
+		SimpleDateFormat dobsdf = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.CANADA);
+
 		try {
-			//write info
-			int inforow=0;
-			Label NameTitle = new Label(inforow,0,"Name");
-			
-			//write data
+			// write info
+			AccountModel acc = AccountController.getInstance().getAccount();
+			int inforow = 0;
+			Label NameTitle = new Label(inforow, 0, "Name");
+			inforow++;
+			Label GenderTitle = new Label(inforow, 0, "Gender");
+			inforow++;
+			Label DobTitle = new Label(inforow, 0, "Date of Birth");
+			inforow++;
+			Label HeightTitle = new Label(inforow, 0, "Height");
+			inforow++;
+			Label WeightTitle = new Label(inforow, 0, "Weight");
+			inforow++;
+			inforow = 0;
+			Label Name = new Label(inforow, 1, acc.getName());
+			inforow++;
+			String gender = "Male";
+			if (acc.isGender())
+				gender = "Male";
+			else
+				gender = "Female";
+			Label Gender = new Label(inforow, 1, gender);
+			inforow++;
+			Label Dob = new Label(inforow, 1, dobsdf.format(acc.getBirthDate()));
+			inforow++;
+			Number Height = new Number(inforow, 1, acc.getHeight());
+			inforow++;
+			Number Weight = new Number(inforow, 1, acc.getWeight());
+			inforow++;
+
+			infoSheet.addCell(NameTitle);
+			infoSheet.addCell(Name);
+			infoSheet.addCell(GenderTitle);
+			infoSheet.addCell(Gender);
+			infoSheet.addCell(DobTitle);
+			infoSheet.addCell(Dob);
+			infoSheet.addCell(HeightTitle);
+			infoSheet.addCell(Height);
+			infoSheet.addCell(WeightTitle);
+			infoSheet.addCell(Weight);
+			// write data
 			String[] titles = { "Timestamp", "Heart Rate", "Systolic", "Diastolic", "Activity", "Sleep", "is Sleep" };
 			createTitles(titles, 0, 0, dataSheet);
 			ArrayList<ChartPointModel> chartpoints = chartData.getDataset();
 			int row = 1;
-			int col =0;
+			int col = 0;
 			for (ChartPointModel point : chartpoints) {
-				DateTime ts = new DateTime(col, row, point.getTimestamp());
+				Label ts = new Label(col, row, sdf.format(point.getTimestamp()));
 				col++;
-				Number hr = new Number(col, row, point.getHr());
+				Number hr = new Number(col, row, (int) point.getHr());
 				col++;
-				Number bph = new Number(col, row, point.getBph());
+				Number bph = new Number(col, row, (int) point.getBph());
 				col++;
-				Number bpl = new Number(col, row, point.getBpl());
+				Number bpl = new Number(col, row, (int) point.getBpl());
 				col++;
-				Number act = new Number(col, row, point.getAct());
+				Number act = new Number(col, row, (int) point.getAct());
 				col++;
-				Number sleep = new Number(col, row, point.getSleep());
+				Label sleep = new Label(col, row, ChartPointModel.getSleepText(point.getSleep()));
 				col++;
-				Boolean isSleep = new Boolean(col, row, point.isSleep());
-				col=0; //reset
+
+				col = 0; // reset
 				row++;
 				dataSheet.addCell(ts);
 				dataSheet.addCell(hr);
 				dataSheet.addCell(bph);
 				dataSheet.addCell(bpl);
-				dataSheet.addCell(act);
-				dataSheet.addCell(sleep);
-				dataSheet.addCell(isSleep);
-				
+				if (point.isSleep())
+					dataSheet.addCell(sleep);
+				else
+					dataSheet.addCell(act);
+
 			}
 
 			// Write and close the workbook

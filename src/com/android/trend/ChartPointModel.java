@@ -28,7 +28,15 @@ public class ChartPointModel implements Comparable<ChartPointModel>{
 		this.isSleep = isSleep;
 	}
 	
-	
+	public static String getSleepText(double sleep){
+		if (sleep==SLEEP_LOW)
+			return "Awake";
+		if (sleep==SLEEP_MED)
+			return "Light";
+		if (sleep==SLEEP_HIGH)
+			return "Deep";
+		return "";
+	}
 	
 	public boolean isSleep(){
 		return isSleep;
