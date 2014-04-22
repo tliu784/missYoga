@@ -16,7 +16,7 @@ public class EngineInputModel {
 	private UserInfo userinfo;
 
 	public HealthStatusModel getHealthStatus(){
-		double caltoduration = 0.1d;
+		double caltoduration = 0.05d;
 		double calperstep = 0.35d;
 		HealthStatusModel hsm  = new HealthStatusModel();
 		hsm.setHr_count(heartBeats.get(0).count);
