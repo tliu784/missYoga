@@ -101,14 +101,8 @@ public class AddMedicineDialogPopup extends DialogFragment {
 		medModel.setTitle(medName.getText().toString());
 		medModel.setDescription(medDes.getText().toString());
 		medModel.setRepeat(Integer.parseInt(repeat.getText().toString()));
-		SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm", Locale.CANADA);
 		String timetext=hour.getText().toString() + ":" + min.getText().toString();
-		Date starttime=null;
-		try {
-			starttime=timeformat.parse(timetext);
-		}catch(Exception e){
-			
-		}
+		Date starttime=toDate(timetext);
 		if (starttime!=null){
 			medModel.setStarttime(starttime);
 			medicineList.addOneRecord(medModel);
