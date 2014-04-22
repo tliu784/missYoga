@@ -84,31 +84,31 @@ public class ExcelExporter {
 			// write info
 			AccountModel acc = AccountController.getInstance().getAccount();
 			int inforow = 0;
-			Label NameTitle = new Label(inforow, 0, "Name");
+			Label NameTitle = new Label(0, inforow, "Name");
 			inforow++;
-			Label GenderTitle = new Label(inforow, 0, "Gender");
+			Label GenderTitle = new Label(0, inforow, "Gender");
 			inforow++;
-			Label DobTitle = new Label(inforow, 0, "Date of Birth");
+			Label DobTitle = new Label(0, inforow, "Date of Birth");
 			inforow++;
-			Label HeightTitle = new Label(inforow, 0, "Height");
+			Label HeightTitle = new Label(0, inforow, "Height");
 			inforow++;
-			Label WeightTitle = new Label(inforow, 0, "Weight");
+			Label WeightTitle = new Label(0, inforow, "Weight");
 			inforow++;
 			inforow = 0;
-			Label Name = new Label(inforow, 1, acc.getName());
+			Label Name = new Label(1, inforow, acc.getName());
 			inforow++;
 			String gender = "Male";
 			if (acc.isGender())
 				gender = "Male";
 			else
 				gender = "Female";
-			Label Gender = new Label(inforow, 1, gender);
+			Label Gender = new Label(1, inforow, gender);
 			inforow++;
-			Label Dob = new Label(inforow, 1, dobsdf.format(acc.getBirthDate()));
+			Label Dob = new Label(1, inforow, dobsdf.format(acc.getBirthDate()));
 			inforow++;
-			Number Height = new Number(inforow, 1, acc.getHeight());
+			Number Height = new Number(1, inforow, acc.getHeight());
 			inforow++;
-			Number Weight = new Number(inforow, 1, acc.getWeight());
+			Number Weight = new Number(1, inforow, acc.getWeight());
 			inforow++;
 
 			infoSheet.addCell(NameTitle);
@@ -122,7 +122,7 @@ public class ExcelExporter {
 			infoSheet.addCell(WeightTitle);
 			infoSheet.addCell(Weight);
 			// write data
-			String[] titles = { "Timestamp", "Heart Rate", "Systolic", "Diastolic", "Activity", "Sleep", "is Sleep" };
+			String[] titles = { "Timestamp", "Heart Rate", "Systolic", "Diastolic", "Activity", "Sleep" };
 			createTitles(titles, 0, 0, dataSheet);
 			ArrayList<ChartPointModel> chartpoints = chartData.getDataset();
 			int row = 1;
