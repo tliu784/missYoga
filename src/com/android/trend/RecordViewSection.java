@@ -164,10 +164,10 @@ public class RecordViewSection {
 	}
 
 	public void setHighLight() {
-		layout.setBackgroundResource(R.drawable.highlight_select_title_section);
+		titleLayout.setBackgroundResource(R.drawable.highlight_select_title_section);
 	}
 
 	public void disableHighLight() {
-		layout.setBackgroundResource(R.drawable.textlines);
+		titleLayout.setBackgroundResource(R.drawable.textlines);
 	}
 }
