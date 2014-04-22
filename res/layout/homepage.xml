@@ -127,7 +127,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="165"
+                                android:text="123"
                                 android:textSize="@dimen/dsmall_font_size"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -155,7 +155,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="115"
+                                android:text="94"
                                 android:textSize="@dimen/dsmall_font_size"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -255,7 +255,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="90"
+                                android:text="84"
                                 android:textSize="@dimen/dsmall_font_size"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -337,7 +337,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="2165"
+                                android:text="6718"
                                 android:textSize="@dimen/dsmall_font_size"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -365,7 +365,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="230"
+                                android:text="185"
                                 android:textSize="@dimen/dsmall_font_size"
                                 android:textStyle="bold" />
                         </LinearLayout>
