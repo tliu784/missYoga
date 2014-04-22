@@ -370,20 +370,25 @@ public class MainPage extends Activity {
 
 	private void updateRecommendations(RecomModel[] recomArray) {
 		if (recomArray != null) {
-			String recommendationContent = "";
-			remoteViews.setTextViewText(R.id.title, "Health Recommendation");
-
-			for (int i = 0; i < recomArray.length; i++) {
-				recommendationContent += (recomArray[i].getRecommendation());
-				if (i < recomArray.length - 1) {
-					recommendationContent += "\n\n";
+			if (recomArray.length > 0) {
+				String recommendationContent = "";
+				remoteViews.setTextViewText(R.id.title, "Health Recommendation");
+				RecomModel mostImportant = recomArray[0];
+				for (int i = 0; i < recomArray.length; i++) {
+					recommendationContent += (recomArray[i].getRecommendation());
+					if (i < recomArray.length - 1) {
+						recommendationContent += "\n\n";
+					}
+					if (recomArray[i].getId()>900)
+						mostImportant=recomArray[i];
 				}
+				// update widgets and main page
+				String widgetText=mostImportant.getRecommendation();
+				widgetText+="\n\n(and "+(recomArray.length-1)+" more...";
+				remoteViews.setTextViewText(R.id.desc, widgetText);
+				AppWidgetManager.getInstance(this).updateAppWidget(widget, remoteViews);
+				rec_content.setText(recommendationContent);
 			}
-			// update widgets and main page
-			remoteViews.setTextViewText(R.id.desc, recommendationContent);
-			AppWidgetManager.getInstance(this).updateAppWidget(widget, remoteViews);
-			rec_content.setText(recommendationContent);
-
 		} else {
 			rec_content.setText("Unable to retrieve recommendation");
 		}
