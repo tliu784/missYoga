@@ -55,33 +55,20 @@ public class RemoteRequestController {
 		remoteUserList.clear();
 		if (remoteUserList.size() == 0) {
 
-			RemoteRequestModel model1 = new RemoteRequestModel("terry@gmail.com", accountEmail);
+			RemoteRequestModel model1 = new RemoteRequestModel("daddy@gmail.com", accountEmail);
 			model1.setRequestorName("Ben");
 			model1.setApproved(true);
-			model1.setOwnerName("Terry");
+			model1.setOwnerName("Mr. Niu");
 
 			remoteUserList.add(model1);
 
-			RemoteRequestModel model2 = new RemoteRequestModel("nicole@gmail.com", accountEmail);
-			model2.setApproved(true);
-			model2.setRequestorName("Ben");
-			model2.setOwnerName("Nicole");
-			remoteUserList.add(model2);
-			
-
-			RemoteRequestModel model3 = new RemoteRequestModel(accountEmail,"terry@gmail.com" );
-			model3.setRequestorName("Terry");
+			RemoteRequestModel model3 = new RemoteRequestModel(accountEmail, "daughter@gmail.com");
+			model3.setRequestorName("Lit.Ben");
 			model3.setApproved(true);
 			model3.setOwnerName("Ben");
 
 			remoteUserList.add(model3);
 
-			RemoteRequestModel model4 = new RemoteRequestModel(accountEmail , "nicole@gmail.com");
-			model4.setApproved(true);
-			model4.setRequestorName("Nicole");
-			model4.setOwnerName("Ben");
-			remoteUserList.add(model4);
-			
 			save();
 		}
 	}
@@ -119,8 +106,8 @@ public class RemoteRequestController {
 		RestCallHandler checkRequestStatus = new RestCallHandler(handler, url, content);
 		checkRequestStatus.handleResponse();
 	}
-	
-	public void approve_request(RemoteRequestModel request){
+
+	public void approve_request(RemoteRequestModel request) {
 		request.setApproved(true);
 		String content = gson.toJson(request);
 		ApproveRequestResponseHandler handler = new ApproveRequestResponseHandler(request);
@@ -257,43 +244,42 @@ public class RemoteRequestController {
 					if (responseRequest != null)
 						approved = responseRequest.isApproved();
 				}
-			if (approved){
-				//do something tell user request has been approved
+			if (approved) {
+				// do something tell user request has been approved
 				request.setApproved(approved);
 				Log.d("check status", "approved");
-			}else{
-				//do nothing 
+			} else {
+				// do nothing
 				Log.d("check status", "not approved");
 			}
 		}
 
 	}
-	
-	class ApproveRequestResponseHandler implements ResponseHandler{
+
+	class ApproveRequestResponseHandler implements ResponseHandler {
 		private RemoteRequestModel request;
 
 		// make sure pass in the pointer to the request in the remoteUserList;
 		public ApproveRequestResponseHandler(RemoteRequestModel request) {
 			this.request = request;
-			
+
 		}
-		
-		
+
 		@Override
 		public void processResponse(String response) {
 			ServerResponseModel serverResponse = gson.fromJson(response, ServerResponseModel.class);
 			if (serverResponse.getType() == ServerResponseModel.ResponseType.APPROVE_REQUEST)
-				if (serverResponse.isSuccessful()){
+				if (serverResponse.isSuccessful()) {
 					request.setApproved(true);
-					//update UI set approved
-					Log.d("approve request","yeah");
-					Log.d("list",gson.toJson(remoteUserList));
-				}else{
+					// update UI set approved
+					Log.d("approve request", "yeah");
+					Log.d("list", gson.toJson(remoteUserList));
+				} else {
 					request.setApproved(false);
 				}
-			
+
 		}
-		
+
 	}
 
 }

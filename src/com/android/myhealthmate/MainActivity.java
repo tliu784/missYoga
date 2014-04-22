@@ -101,12 +101,12 @@ public class MainActivity extends Activity {
 //		ChartDataController.getInstance().setDataset(ChartHelper.createRandomData(200));
 		ChartDataController.getInstance().setDataset(ChartHelper.createReasonableRandomData(5));
 //		ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
-		RecordList.getInstance().setRecordList(ChartHelper.recordListGenerator());
+		RecordList.getInstance().setRecordList(ChartHelper.recordListGenerator( ChartDataController.getInstance().getDataset()));
 		RemoteDataController.getInstance().init();
 		
 		//create dataModel test data
-		RemoteDataController.getInstance().getDataList().add(BenTestClass.generateRemoteData("terry@gmail", "Terry"));
-		RemoteDataController.getInstance().getDataList().add(BenTestClass.generateRemoteData("nicole@gmail", "Nicole"));
+		RemoteDataController.getInstance().getDataList().add(BenTestClass.generateRemoteData("daddy@gmail", "Daddy"));
+		
 	}
 
 	private OnCheckedChangeListener getRemenberMeCheckBoxListener() {

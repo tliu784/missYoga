@@ -192,12 +192,12 @@ public class test extends Activity {
 			@Override
 			public void onClick(View v) {
 //				ChartDataController.getInstance().createRandomData(50);
-				ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
-				RemoteDataController rdc = RemoteDataController.getInstance();
-				rdc.init();
-	//			rdc.upload();
-				RemoteRequestModel request = new RemoteRequestModel("ben123@gmail.com","terry123@gmail.com");
-				rdc.download(request);
+//				ChartHelper.recordListGenerator(RecordList.getInstance().getRecordList());
+//				RemoteDataController rdc = RemoteDataController.getInstance();
+//				rdc.init();
+//	//			rdc.upload();
+//				RemoteRequestModel request = new RemoteRequestModel("ben123@gmail.com","terry123@gmail.com");
+//				rdc.download(request);
 				
 			}
 		};

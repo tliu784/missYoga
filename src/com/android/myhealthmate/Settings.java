@@ -187,7 +187,7 @@ public class Settings extends Activity {
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				// TODO Auto-generated method stub
 				if (isChecked) {
-					Toast.makeText(getApplicationContext(), requestModel.getOwnerName(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "Approved", Toast.LENGTH_SHORT).show();
 					// do something
 					requestModel.setApproved(true);
 				} else {

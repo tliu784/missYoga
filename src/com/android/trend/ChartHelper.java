@@ -13,10 +13,9 @@ import com.jjoe64.graphview.GraphViewDataInterface;
 
 public class ChartHelper {
 
-	public static ArrayList<RecordModel> recordListGenerator() {
+	public static ArrayList<RecordModel> recordListGenerator(ArrayList<ChartPointModel> dataset) {
 
 		ArrayList<RecordModel> recordList = new ArrayList<RecordModel>();
-		ArrayList<ChartPointModel> dataset = ChartDataController.getInstance().getDataset();
 
 		String[] bptips = { "Dark chocolate may help lower blood pressure.",
 				"Drink tea instead of coffee may help lower blood pressure.",
@@ -168,30 +167,7 @@ public class ChartHelper {
 		return dataset;
 	}
 
-	public static void recordListGenerator(ArrayList<RecordModel> recordList) {
-		recordList.clear();
-		Date date = new Date();
-
-		for (int i = 0; i < 100; i++) {
-			recordType type = null;
-			double x = Math.random();
-			if (x < 0.3) {
-				type = recordType.Note;
-			} else if (x < 0.6) {
-				type = recordType.Recommendation;
-			} else {
-				type = recordType.Reminder;
-			}
-
-			RecordModel record = new RecordModel(type, date, "this is history record" + Integer.toString(i), "Reocrd",
-					true);
-
-			date = MedReminderModel.addDuration(date, -20, DurationUnit.Min);
-			if (Math.random() > 0.7)
-				recordList.add(record);
-		}
-	}
-
+	
 	public static GraphViewData[] createGraphViewData(double[] data) {
 		// implement a simple x value
 		GraphViewData[] graphData = new GraphViewData[data.length];

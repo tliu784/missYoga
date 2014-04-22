@@ -22,9 +22,10 @@ public class AccountController {
 	}
 
 	public void setTestAccout() {
-		account.setEmail("benjamin.niu1990@gmail.com");
+		account.setEmail("nicoleyu2003@gmail.com");
 		account.setPassword("password");
 		account.setUsername("username");
+		account.setGender(true);
 		account.setRemember(false);
 		account.setName("Ben Niu");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.CANADA);

@@ -10,6 +10,7 @@ import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.trend.ChartDataController;
 import com.android.trend.ChartHelper;
+import com.android.trend.ChartPointModel;
 import com.android.trend.RecordList;
 import com.android.trend.RecordModel;
 import com.android.trend.RecordModel.recordType;
@@ -68,9 +69,10 @@ public class BenTestClass {
 		data.setOwnerName(name);
 		// chart data
 
-		data.setHealthdata(ChartHelper.createRandomData(200));
+		ArrayList<ChartPointModel> remoteData=ChartHelper.createReasonableRandomData(6);
+		data.setHealthdata(remoteData);
 		// event data
-		data.setEventdata(recordListGenerator(200));
+		data.setEventdata(ChartHelper.recordListGenerator(remoteData));
 		return data;
 	}
 
