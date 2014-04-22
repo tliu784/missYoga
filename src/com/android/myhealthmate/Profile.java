@@ -108,6 +108,15 @@ public class Profile extends Activity {
 		submit.setVisibility(View.GONE);
 		cancel.setVisibility(View.GONE);
 		switchAllEditToView();
+		
+		switchAllEditToView();
+		if (submit.getVisibility() == View.GONE) {
+			submit.setVisibility(View.VISIBLE);
+			cancel.setVisibility(View.VISIBLE);
+		} else {
+			submit.setVisibility(View.GONE);
+			cancel.setVisibility(View.GONE);
+		}
 		// }
 
 		submit.setOnClickListener(getSubmitListener());
