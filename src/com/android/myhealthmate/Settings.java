@@ -35,6 +35,7 @@ public class Settings extends Activity {
 	private LinearLayout nameSec;
 	private LinearLayout nameEditSec;
 	private LinearLayout passwordSec;
+	private LinearLayout remoteProfiles;
 
 	private LinearLayout passwordEditSec;
 	private LinearLayout emailSec;
@@ -124,6 +125,8 @@ public class Settings extends Activity {
 
 		monitorSection = (GridLayout) findViewById(R.id.monitor_sec);
 		requestSection = (GridLayout) findViewById(R.id.request_sec);
+		remoteProfiles = (LinearLayout) findViewById(R.id.settings_remote_profiles);
+		remoteProfiles.setOnClickListener(getRemoteProfileListener());
 
 		for (RemoteRequestModel requestModel : RemoteRequestController.getInstance().getMinitoredRemoteUserList()) {
 			addViewInMonitorSec(requestModel);
@@ -133,6 +136,15 @@ public class Settings extends Activity {
 			addViewInRequestSec(requestModel);
 		}
 
+	}
+
+	private OnClickListener getRemoteProfileListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(Settings.this, SleDetail.class));
+			}
+		};
 	}
 
 	@Override
@@ -305,7 +317,6 @@ public class Settings extends Activity {
 				AppExit();
 				System.exit(0);
 
-				
 				/*
 				 * int pid = android.os.Process.myPid();=====> use this if you
 				 * want to kill your activity. But its not a good one to do.
@@ -325,10 +336,9 @@ public class Settings extends Activity {
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 
-		
-//		 int pid = android.os.Process.myPid();//=====> use this if you want to kill your activity. But its not a good one to do.
-//		 android.os.Process.killProcess(pid);
-		
+		// int pid = android.os.Process.myPid();//=====> use this if you want to
+		// kill your activity. But its not a good one to do.
+		// android.os.Process.killProcess(pid);
 
 	}
 
