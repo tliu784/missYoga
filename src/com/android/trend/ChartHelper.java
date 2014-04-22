@@ -126,7 +126,7 @@ public class ChartHelper {
 
 	}
 
-	public static ArrayList<ChartPointModel> createReasonableRandomData(int days) {
+	public static ArrayList<ChartPointModel> createReasonableRandomData(int days, int sleepstart, int sleepend) {
 		ArrayList<ChartPointModel> dataset = new ArrayList<ChartPointModel>();
 		double hr;
 		double bpl;
@@ -143,7 +143,7 @@ public class ChartHelper {
 
 			calendar.setTime(timestamp);
 			int hourofday = calendar.get(Calendar.HOUR_OF_DAY);
-			if (hourofday >= 1 && hourofday < 6)
+			if (hourofday >= sleepstart && hourofday < sleepend)
 				isSleep = true;
 			else
 				isSleep = false;

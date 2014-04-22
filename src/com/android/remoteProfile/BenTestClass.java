@@ -69,7 +69,7 @@ public class BenTestClass {
 		data.setOwnerName(name);
 		// chart data
 
-		ArrayList<ChartPointModel> remoteData=ChartHelper.createReasonableRandomData(6);
+		ArrayList<ChartPointModel> remoteData=ChartHelper.createReasonableRandomData(6,0,8);
 		data.setHealthdata(remoteData);
 		// event data
 		data.setEventdata(ChartHelper.recordListGenerator(remoteData));
