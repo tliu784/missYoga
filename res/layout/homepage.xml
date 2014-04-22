@@ -699,7 +699,7 @@
                 android:drawableLeft="@drawable/ic_history"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:text=" History "
+                android:text=" Summary "
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/msmall_font_size"
                 android:textStyle="bold" />
