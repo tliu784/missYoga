@@ -172,7 +172,7 @@ public class SleDetail extends FragmentActivity {
 		refreshHistorySection(selectedUserRemoteData.getEventdata());
 		recordList = selectedUserRemoteData.getEventdata();
 		recordListInstance.setRecordList(recordList);
-		currentX = (int) chartData.getDisplaySetLen() / 2;
+		currentX =  chartData.getDisplayDataSet().size()-1;
 		chartView.moveVto(currentX);
 		displayValues();
 		scrollHistorySection(chartData.getDisplayDataSet().get(currentX)

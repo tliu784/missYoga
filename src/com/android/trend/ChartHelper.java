@@ -5,12 +5,77 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import com.android.recommendation.RecommendationController;
 import com.android.reminder.MedReminderModel;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.trend.RecordModel.recordType;
 import com.jjoe64.graphview.GraphViewDataInterface;
 
 public class ChartHelper {
+
+	public static ArrayList<RecordModel> recordListGenerator() {
+
+		ArrayList<RecordModel> recordList = new ArrayList<RecordModel>();
+		ArrayList<ChartPointModel> dataset = ChartDataController.getInstance().getDataset();
+
+		String[] bptips = { "Dark chocolate may help lower blood pressure.",
+				"Drink tea instead of coffee may help lower blood pressure.",
+				"Flaxseeds may help lower blood pressure.",
+				"Reducing sodium in your diet may help lower blood pressure.",
+				"Limiting the amount of alcohol you drink may help lower blood pressure.",
+				"Avoiding tobacco products and secondhand smoke may help lower blood pressure." };
+		String[] hrtips = { "Do aerobic exercise regularly on a gradually increased basis.",
+				"Reduce stress where possible.", "Practise deep breath regularly." };
+		for (ChartPointModel point : dataset) {
+			if (point.isHighBP() && Math.random() > 0.9) {
+				// add high bp
+				int level = (int) Math.round(getSingleRandomData(1, 5));
+				String title = RecommendationController.getInstance().toSeverityLevel(level);
+				String recomText = "Your blood pressure is high. ";
+				recomText += getRandomString(bptips);
+				RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(), recomText, title,
+						false);
+				recordList.add(record);
+			}
+			if (point.isHighHR() && Math.random() > 0.9) {
+				// add high hr
+				int level = (int) Math.round(getSingleRandomData(1, 5));
+				String title = RecommendationController.getInstance().toSeverityLevel(level);
+				String recomText = "Your heartrate is high. ";
+				recomText += getRandomString(hrtips);
+				RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(), recomText, title,
+						false);
+				recordList.add(record);
+			}
+			if (Math.random() > 0.9 && (!point.isSleep())) {
+				// add note
+				if (point.isHighAct()) {
+					String noteText = "Hit the gym!";
+
+					RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(), noteText,
+							"Note", false);
+					recordList.add(record);
+				}
+				
+				if (point.isLowAct()) {
+					String noteText = "Do some readings";
+
+					RecordModel record = new RecordModel(recordType.Note, point.getTimestamp(), noteText,
+							"Note", false);
+					recordList.add(record);
+				}
+				
+			}
+		}
+
+
+		return recordList;
+	}
+
+	private static String getRandomString(String[] list) {
+		int index = (int) Math.round(getSingleRandomData(0, list.length - 1));
+		return list[index];
+	}
 
 	public static Date toPreviousWholeHour(Date d) {
 		Calendar c = new GregorianCalendar();
@@ -21,12 +86,12 @@ public class ChartHelper {
 		c.set(Calendar.SECOND, 0);
 		return c.getTime();
 	}
-	
-	public static int calcMinBetween(Date laterDate, Date earlierDate){
-		if (earlierDate==null)
+
+	public static int calcMinBetween(Date laterDate, Date earlierDate) {
+		if (earlierDate == null)
 			return 30;
-		
-		return (int)((laterDate.getTime()/60000) - (earlierDate.getTime()/60000));
+
+		return (int) ((laterDate.getTime() / 60000) - (earlierDate.getTime() / 60000));
 	}
 
 	public static ArrayList<ChartPointModel> createRandomData(int count) {
@@ -54,9 +119,8 @@ public class ChartHelper {
 		}
 		return dataset;
 
-		
 	}
-	
+
 	public static void recordListGenerator(ArrayList<RecordModel> recordList) {
 		recordList.clear();
 		Date date = new Date();
