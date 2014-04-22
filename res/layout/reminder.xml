@@ -14,7 +14,7 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:scrollbars="vertical" >
 
-        <TextView
+<!--         <TextView
             android:id="@+id/txtHello"
             android:layout_width="fill_parent"
             android:layout_height="25dp"
@@ -25,7 +25,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:text="Health is the level of functional or metabolic efficiency of a living organism. In humans, it is the general condition of a person&apos;s mind and body, usually meaning to be free from illness, injury or pain."
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff" /> -->
     </LinearLayout>
 
 </ScrollView>
