@@ -181,7 +181,10 @@ public class RecommendationController implements ResponseHandler {
 	}
 
 	private HealthEffect getRecType(RecomModel somerec) {
-		if (somerec.getId() >= 200 && somerec.getId() < 300) {
+		boolean containHighBP = false;
+		String lowerrec=somerec.getRecommendation().toLowerCase();
+		containHighBP=(lowerrec.contains("high") && lowerrec.contains("blood pressure"));
+		if ((somerec.getId() >= 200 && somerec.getId() < 300)|| containHighBP){
 			return HealthEffect.BP;
 		}
 		return HealthEffect.OTHERS;

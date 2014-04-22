@@ -79,7 +79,11 @@ public class AddMedicineDialogPopup extends DialogFragment {
 				.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						profileAct.addViewInMedSec(addMedicineModel());
+						MedicineModel med = addMedicineModel();
+						if (med!=null)
+							profileAct.addViewInMedSec(addMedicineModel());
+						else
+							Toast.makeText(context, "Incorrect Time Format", Toast.LENGTH_SHORT).show();
 					}
 				}).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 					@Override
@@ -98,9 +102,22 @@ public class AddMedicineDialogPopup extends DialogFragment {
 		medModel.setTitle(medName.getText().toString());
 		medModel.setDescription(medDes.getText().toString());
 		medModel.setRepeat(Integer.parseInt(repeat.getText().toString()));
-		medModel.setStarttime(toDate(hour.getText().toString() + ":" + min.getText().toString()));
-		medicineList.addOneRecord(medModel);
-		return medModel;
+		SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm", Locale.CANADA);
+		String timetext=hour.getText().toString() + ":" + min.getText().toString();
+		Date starttime=null;
+		try {
+			starttime=timeformat.parse(timetext);
+		}catch(Exception e){
+			
+		}
+		if (starttime!=null){
+			medModel.setStarttime(starttime);
+			medicineList.addOneRecord(medModel);
+			return medModel;
+		}
+//		medModel.setStarttime(toDate(hour.getText().toString() + ":" + min.getText().toString()));
+
+		return null;
 	}
 
 	public Date toDate(String dateStr) {

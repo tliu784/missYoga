@@ -33,7 +33,7 @@ public class ChartHelper {
 					if (point.isHighAct()) {
 						String noteText = "Hit the gym!";
 
-						RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(), noteText,
+						RecordModel record = new RecordModel(recordType.Note, point.getTimestamp(), noteText,
 								"Note", false);
 						reasonableHighAct = true;
 						recordList.add(record);
