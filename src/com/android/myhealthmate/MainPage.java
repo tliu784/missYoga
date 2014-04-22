@@ -123,7 +123,7 @@ public class MainPage extends Activity {
 		sleeplight = (TextView) findViewById(R.id.sleep_light_content);
 		sleepawake = (TextView) findViewById(R.id.sleep_awake_content);
 		updateTime = (TextView) findViewById(R.id.home_current_time);
-		
+
 		updateReminderSection();
 
 	}
@@ -178,7 +178,7 @@ public class MainPage extends Activity {
 			rdTitle.setText(reminder.getTitle());
 			SimpleDateFormat dateformat = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
 			SimpleDateFormat timeformat = new SimpleDateFormat("hh:mm a", Locale.CANADA);
-			Date nexttime=reminder.getNextAlarmTime();
+			Date nexttime = reminder.getNextAlarmTime();
 			rdDate.setText(dateformat.format(nexttime));
 			rdTime.setText(timeformat.format(nexttime));
 
@@ -378,12 +378,13 @@ public class MainPage extends Activity {
 					if (i < recomArray.length - 1) {
 						recommendationContent += "\n\n";
 					}
-					if (recomArray[i].getId()>900)
-						mostImportant=recomArray[i];
+					if (recomArray[i].getId() > 900)
+						mostImportant = recomArray[i];
 				}
 				// update widgets and main page
-				String widgetText=mostImportant.getRecommendation();
-				widgetText+="\n\n(Read "+(recomArray.length-1)+" more...)";
+				String widgetText = mostImportant.getRecommendation();
+				if (recomArray.length > 1)
+					widgetText += "\n\n(Read " + (recomArray.length - 1) + " more...)";
 				remoteViews.setTextViewText(R.id.desc, widgetText);
 				AppWidgetManager.getInstance(this).updateAppWidget(widget, remoteViews);
 				rec_content.setText(recommendationContent);
