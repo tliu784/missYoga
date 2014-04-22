@@ -9,6 +9,7 @@ import com.android.summary.ExcelExporter;
 import com.android.trend.ChartDataController;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +46,7 @@ public class History extends Activity {
 	private TextView historySleepRight;
 	
 	private Button exportToExcelbtn;
-	private Button shartbtn;
+	private Button sharebtn;
 	//number section
 	private TextView hrAvg;
 	private TextView hrMin;
@@ -104,9 +105,10 @@ public class History extends Activity {
 		threeMonthFilter.setOnClickListener(getThreeMonthFilterListener());
 		
 		exportToExcelbtn = (Button) findViewById(R.id.history_export);
-		shartbtn =(Button) findViewById(R.id.history_share);
+		sharebtn =(Button) findViewById(R.id.history_share);
 		
 		exportToExcelbtn.setOnClickListener(getExportListener());
+		sharebtn.setOnClickListener(getShartListener());
 		
 		hrAvg = (TextView) findViewById(R.id.history_hr_average);
 		hrMin = (TextView) findViewById(R.id.history_hr_min);
@@ -126,6 +128,15 @@ public class History extends Activity {
 	}
 	
 	
+	private OnClickListener getShartListener() {
+		return new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(History.this, Settings.class));
+			}
+		};
+	}
+
 	private void setHistoryDataOneWeek(){
 		hrAvg.setText("Avg: 87");
 		hrMin.setText("Min: 67");
