@@ -194,7 +194,7 @@ public class MainPage extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainPage.this, test.class));
+				startActivity(new Intent(MainPage.this, SleDetail.class));
 			}
 		};
 	}
@@ -237,7 +237,7 @@ public class MainPage extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainPage.this, BpDetail.class));
+				startActivity(new Intent(MainPage.this, SleDetail.class));
 			}
 		};
 	}
@@ -246,7 +246,7 @@ public class MainPage extends Activity {
 		return new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(MainPage.this, SignIn.class));
+				startActivity(new Intent(MainPage.this, SleDetail.class));
 			}
 		};
 	}
