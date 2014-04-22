@@ -46,6 +46,22 @@ public class History extends Activity {
 	
 	private Button exportToExcelbtn;
 	private Button shartbtn;
+	//number section
+	private TextView hrAvg;
+	private TextView hrMin;
+	private TextView hrMax;
+	
+	private TextView bpAvg;
+	private TextView bpMin;
+	private TextView bpMax;
+	
+	private TextView actAvg;
+	private TextView actMin;
+	private TextView actMax;
+	
+	private TextView sleepAvg;
+	private TextView sleepMin;
+	private TextView sleepMax;
 	
 	int barLen;
 	
@@ -91,8 +107,81 @@ public class History extends Activity {
 		shartbtn =(Button) findViewById(R.id.history_share);
 		
 		exportToExcelbtn.setOnClickListener(getExportListener());
+		
+		hrAvg = (TextView) findViewById(R.id.history_hr_average);
+		hrMin = (TextView) findViewById(R.id.history_hr_min);
+		hrMax = (TextView) findViewById(R.id.history_hr_max);
+		
+		bpAvg = (TextView) findViewById(R.id.history_bp_average);
+		bpMin = (TextView) findViewById(R.id.history_bp_min);
+		bpMax = (TextView) findViewById(R.id.history_bp_max);
+		
+		actAvg = (TextView) findViewById(R.id.history_act_average);
+		actMin = (TextView) findViewById(R.id.history_act_min);
+		actMax = (TextView) findViewById(R.id.history_act_max);
+		
+		sleepAvg = (TextView) findViewById(R.id.history_sleep_average);
+		sleepMin = (TextView) findViewById(R.id.history_sleep_min);
+		sleepMax = (TextView) findViewById(R.id.history_sleep_max);
 	}
 	
+	
+	private void setHistoryDataOneWeek(){
+		hrAvg.setText("Avg: 87");
+		hrMin.setText("Min: 67");
+		hrMax.setText("Max: 122");
+		
+		bpAvg.setText("Avg: 100/119");
+		bpMin.setText("Min: 67/90");
+		bpMax.setText("Max: 122/156");
+		
+		actAvg.setText("Avg: 7011");
+		actMin.setText("Min: 2310");
+		actMax.setText("Max: 12210");
+		
+		sleepAvg.setText("Avg: 7.6");
+		sleepMin.setText("Min: 3.5");
+		sleepMax.setText("Max: 12.0");
+		
+	}
+	
+	private void setHistoryDataOneMonth(){
+		hrAvg.setText("Avg: 85");
+		hrMin.setText("Min: 70");
+		hrMax.setText("Max: 92");
+		
+		bpAvg.setText("Avg: 98/104");
+		bpMin.setText("Min: 80/92");
+		bpMax.setText("Max: 102/132");
+		
+		actAvg.setText("Avg: 7217");
+		actMin.setText("Min: 1310");
+		actMax.setText("Max: 9754");
+		
+		sleepAvg.setText("Avg: 6.9");
+		sleepMin.setText("Min: 4.2");
+		sleepMax.setText("Max: 13.5");
+		
+	}
+	
+	private void setHistoryDataThreeMonth(){
+		hrAvg.setText("Avg: 80");
+		hrMin.setText("Min: 77");
+		hrMax.setText("Max: 89");
+		
+		bpAvg.setText("Avg: 98/104");
+		bpMin.setText("Min: 66/92");
+		bpMax.setText("Max: 98/122");
+		
+		actAvg.setText("Avg: 5419");
+		actMin.setText("Min: 2510");
+		actMax.setText("Max: 10030");
+		
+		sleepAvg.setText("Avg: 7.4");
+		sleepMin.setText("Min: 2.5");
+		sleepMax.setText("Max: 14.0");
+		
+	}
 	
 	public OnClickListener getExportListener() {
 		return new OnClickListener() {
@@ -123,10 +212,25 @@ public class History extends Activity {
 	public OnClickListener getOneWeekFilterListener() {
 		return new OnClickListener() {
 			public void onClick(View v) {
-				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.45, 0.3, 0.15);
+				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.5, 0.25);
 				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.2, 0.5, 0.2);
 				changeByPercent(historyActLeft,historyActMid,historyActRight,0.3, 0.4, 0.2);
 				changeByPercent(historySleepLeft,historySleepMid,historySleepRight,0.13, 0.57, 0.2);
+				
+				setHistoryDataOneWeek();
+			}
+		};
+	}
+	
+	public OnClickListener getOneMonthFilterListener() {
+		return new OnClickListener() {
+			public void onClick(View v) {
+				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.55, 0.20);
+				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.2, 0.5, 0.2);
+				changeByPercent(historyActLeft,historyActMid,historyActRight,0.15, 0.6, 0.15);
+				changeByPercent(historySleepLeft,historySleepMid,historySleepRight,0.13, 0.57, 0.2);
+				
+				setHistoryDataOneMonth();
 			}
 		};
 	}
@@ -134,25 +238,15 @@ public class History extends Activity {
 	public OnClickListener getThreeMonthFilterListener() {
 		return new OnClickListener() {
 			public void onClick(View v) {
-				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.35, 0.4);
+				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.60, 0.15);
 				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.15, 0.6, 0.15);
 				changeByPercent(historyActLeft,historyActMid,historyActRight,0.25, 0.5, 0.15);
 				changeByPercent(historySleepLeft,historySleepMid,historySleepRight,0.23, 0.47, 0.2);
+				
+				setHistoryDataThreeMonth();
 			}
 		};
 	}
-
-
-	public OnClickListener getOneMonthFilterListener() {
-		return new OnClickListener() {
-			public void onClick(View v) {
-				changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.55, 0.2);
-				changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.2, 0.5, 0.2);
-				changeByPercent(historyActLeft,historyActMid,historyActRight,0.15, 0.6, 0.15);
-				changeByPercent(historySleepLeft,historySleepMid,historySleepRight,0.13, 0.57, 0.2);
-			}
-		};
-	}	
 
 	public void changeByPercent(TextView leftView, TextView midView, TextView rightView ,double left, double mid, double right) {
 		changeOneViewByPercent(barLen, left, leftView);
