@@ -27,47 +27,53 @@ public class ChartHelper {
 		String[] hrtips = { "Do aerobic exercise regularly on a gradually increased basis.",
 				"Reduce stress where possible.", "Practise deep breath regularly." };
 		for (ChartPointModel point : dataset) {
-			if (point.isHighBP() && Math.random() > 0.9) {
-				// add high bp
-				int level = (int) Math.round(getSingleRandomData(1, 5));
-				String title = RecommendationController.getInstance().toSeverityLevel(level);
-				String recomText = "Your blood pressure is high. ";
-				recomText += getRandomString(bptips);
-				RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(), recomText, title,
-						false);
-				recordList.add(record);
-			}
-			if (point.isHighHR() && Math.random() > 0.9) {
-				// add high hr
-				int level = (int) Math.round(getSingleRandomData(1, 5));
-				String title = RecommendationController.getInstance().toSeverityLevel(level);
-				String recomText = "Your heartrate is high. ";
-				recomText += getRandomString(hrtips);
-				RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(), recomText, title,
-						false);
-				recordList.add(record);
-			}
-			if (Math.random() > 0.9 && (!point.isSleep())) {
-				// add note
-				if (point.isHighAct()) {
-					String noteText = "Hit the gym!";
+			boolean reasonableHighAct = false;
+			if (!point.isSleep()) {
+				if (Math.random() > 0.9) {
+					// add note
+					if (point.isHighAct()) {
+						String noteText = "Hit the gym!";
 
-					RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(), noteText,
-							"Note", false);
-					recordList.add(record);
-				}
-				
-				if (point.isLowAct()) {
-					String noteText = "Do some readings";
+						RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(), noteText,
+								"Note", false);
+						reasonableHighAct = true;
+						recordList.add(record);
+					}
 
-					RecordModel record = new RecordModel(recordType.Note, point.getTimestamp(), noteText,
-							"Note", false);
-					recordList.add(record);
+					if (point.isLowAct()) {
+						String noteText = "Do some readings";
+
+						RecordModel record = new RecordModel(recordType.Note, point.getTimestamp(), noteText, "Note",
+								false);
+						recordList.add(record);
+					}
+
 				}
-				
+
+				if (!reasonableHighAct) {
+					if (point.isHighBP() && Math.random() > 0.9) {
+						// add high bp
+						int level = (int) Math.round(getSingleRandomData(1, 5));
+						String title = RecommendationController.getInstance().toSeverityLevel(level);
+						String recomText = "Your blood pressure is high. ";
+						recomText += getRandomString(bptips);
+						RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(),
+								recomText, title, false);
+						recordList.add(record);
+					}
+					if (point.isHighHR() && Math.random() > 0.9) {
+						// add high hr
+						int level = (int) Math.round(getSingleRandomData(1, 5));
+						String title = RecommendationController.getInstance().toSeverityLevel(level);
+						String recomText = "Your heartrate is high. ";
+						recomText += getRandomString(hrtips);
+						RecordModel record = new RecordModel(recordType.Recommendation, point.getTimestamp(),
+								recomText, title, false);
+						recordList.add(record);
+					}
+				}
 			}
 		}
-
 
 		return recordList;
 	}
