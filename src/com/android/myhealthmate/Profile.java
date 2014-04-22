@@ -15,8 +15,6 @@ import com.android.entity.MedicineModel;
 import com.android.entity.medDetailPopup;
 import com.android.reminder.MedReminderController;
 import com.android.reminder.MedReminderModel;
-import com.android.remoteProfile.RemoteRequestModel;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ActionBar.LayoutParams;

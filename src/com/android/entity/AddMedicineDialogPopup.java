@@ -25,7 +25,6 @@ import android.widget.Toast;
 import com.android.entity.MedicineModel.HealthEffect;
 import com.android.myhealthmate.Profile;
 import com.android.myhealthmate.R;
-import com.android.myhealthmate.Settings;
 import com.android.reminder.MedReminderModel.DurationUnit;
 import com.android.trend.RecordList;
 
@@ -81,7 +80,7 @@ public class AddMedicineDialogPopup extends DialogFragment {
 					public void onClick(DialogInterface dialog, int id) {
 						MedicineModel med = addMedicineModel();
 						if (med!=null)
-							profileAct.addViewInMedSec(addMedicineModel());
+							profileAct.addViewInMedSec(med);
 						else
 							Toast.makeText(context, "Incorrect Time Format", Toast.LENGTH_SHORT).show();
 					}
