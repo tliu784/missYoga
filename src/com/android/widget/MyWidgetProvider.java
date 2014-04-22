@@ -50,7 +50,7 @@ public class MyWidgetProvider extends AppWidgetProvider {
 	}
 	
 	private static CharSequence getDesc() {
-		return "This is a recommendation.";
+		return "Enjoy your day!";
 	}
 
 	private static CharSequence getTitle() {

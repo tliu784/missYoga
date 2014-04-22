@@ -35,8 +35,8 @@ public class Reminder extends Activity {
 		// Context context=getApplicationContext();
 		setContentView(R.layout.reminder);
 
-		TextView tv = (TextView) findViewById(R.id.txtHello);
-		tv.setSelected(true);
+//		TextView tv = (TextView) findViewById(R.id.txtHello);
+//		tv.setSelected(true);
 
 		linearLayout = (LinearLayout) findViewById(R.id.reminder_item);
 		mrcInstance = getReminders();

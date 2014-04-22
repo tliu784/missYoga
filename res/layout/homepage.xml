@@ -561,20 +561,21 @@
                 android:drawableLeft="@drawable/ic_rec"
                 android:gravity="left"
                 android:onClick="toggle_recom_box"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
                 android:text=" Recommendation "
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/msmall_font_size"
                 android:textStyle="bold" />
 
+
             <TextView
                 android:id="@+id/rec_content"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:clickable="true"
-                android:text="Health is the level of functional or metabolic efficiency of a living organism."
+                android:text="Enjoy your day!"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -601,6 +602,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_calendar"
                     android:text=" Reminder "
+                    android:layout_marginBottom="5dp"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/msmall_font_size"
                     android:textStyle="bold" />
