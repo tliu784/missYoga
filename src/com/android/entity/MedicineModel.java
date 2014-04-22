@@ -43,6 +43,16 @@ public class MedicineModel implements Serializable{
 	public void setStarttime(Date starttime) {
 		this.starttime = starttime;
 	}
+	
+	public Date getLastTime(){
+		Date now = new Date();
+		Date missedTime=starttime;
+		while (missedTime.compareTo(now)<0){
+			missedTime=MedReminderModel.addDuration(missedTime, repeat, runit);
+		}
+		missedTime=MedReminderModel.addDuration(missedTime, (0-repeat), runit);
+		return missedTime;
+	}
 
 	public String getTitle() {
 		return title;
@@ -119,7 +129,7 @@ public class MedicineModel implements Serializable{
 						+" is abnormal, did you take "
 						+this.title
 						+" at "
-						+sdf.format(getStarttime())
+						+sdf.format(getLastTime())
 						+" ?";
 		if (!isQuestion){
 			question=		"Your "
@@ -127,7 +137,7 @@ public class MedicineModel implements Serializable{
 					+" is abnormal, it might be because of you didn't take "
 					+this.title
 					+" at "
-					+sdf.format(getStarttime())
+					+sdf.format(getLastTime())
 					+".";
 		}
 		return question;

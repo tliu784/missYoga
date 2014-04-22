@@ -123,6 +123,8 @@ public class MainPage extends Activity {
 		sleeplight = (TextView) findViewById(R.id.sleep_light_content);
 		sleepawake = (TextView) findViewById(R.id.sleep_awake_content);
 		updateTime = (TextView) findViewById(R.id.home_current_time);
+		
+		updateReminderSection();
 
 	}
 
@@ -174,15 +176,12 @@ public class MainPage extends Activity {
 
 		if (reminder != null) {
 			rdTitle.setText(reminder.getTitle());
-			Calendar calendar = GregorianCalendar.getInstance();
-			calendar.setTime(reminder.getNextAlarmTime());
+			SimpleDateFormat dateformat = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
+			SimpleDateFormat timeformat = new SimpleDateFormat("hh:mm a", Locale.CANADA);
+			Date nexttime=reminder.getNextAlarmTime();
+			rdDate.setText(dateformat.format(nexttime));
+			rdTime.setText(timeformat.format(nexttime));
 
-			rdDate.setText(Integer.toString(calendar.get(Calendar.MONTH)) + "/"
-					+ Integer.toString(calendar.get(Calendar.DAY_OF_MONTH)) + "/"
-					+ Integer.toString(calendar.get(Calendar.YEAR)));
-
-			rdTime.setText(Integer.toString(calendar.get(Calendar.HOUR_OF_DAY)) + ":"
-					+ Integer.toString(calendar.get(Calendar.MINUTE)));
 		} else {
 			rdTitle.setText("No Task");
 			rdDate.setText("");

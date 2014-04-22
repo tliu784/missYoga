@@ -2,7 +2,9 @@ package com.android.entity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
@@ -102,14 +104,20 @@ public class AddMedicineDialogPopup extends DialogFragment {
 	}
 
 	public Date toDate(String dateStr) {
-
+		Calendar calendar = new GregorianCalendar();
 		SimpleDateFormat inputDateFormat;
-
+		Date now = new Date();
+		calendar.setTime(now);
+		int year       = calendar.get(Calendar.YEAR);
+		int month      = calendar.get(Calendar.MONTH); 
+		int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 		inputDateFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
 		try {
 			Date date = inputDateFormat.parse(dateStr);
-			return date;
+			calendar.setTime(date);
+			calendar.set(year, month, dayOfMonth);
+			return calendar.getTime();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			Toast.makeText(context, "time format is incorrect", Toast.LENGTH_SHORT).show();

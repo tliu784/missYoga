@@ -40,7 +40,7 @@ public class Reminder extends Activity {
 
 		linearLayout = (LinearLayout) findViewById(R.id.reminder_item);
 		mrcInstance = getReminders();
-		addTestReminders(mrcInstance);
+	
 
 		createReminderSections();
 	}

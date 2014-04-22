@@ -213,7 +213,11 @@ public class Profile extends Activity {
 					int repeat = medModel.getRepeat();
 					MedReminderModel.DurationUnit runit = medModel.getRunit();
 					medicineList.setReminderByTitle(title, true);
-					mrcInstance.addReminder(creationTime, title, detail, duration, dunit, repeat, runit);
+					MedReminderModel reminder = new MedReminderModel(0,creationTime, title, detail, duration, dunit, repeat, runit);
+					reminder.setAlways();
+					reminder.setActive(true);
+					mrcInstance.addReminder(reminder);
+					
 
 				} else {
 					medicineList.setReminderByTitle(medModel.getTitle(), false);
