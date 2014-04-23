@@ -98,7 +98,7 @@ public class History extends Activity {
 		historySleepMid = (TextView) findViewById(R.id.history_sleep_mid);
 		historySleepRight = (TextView) findViewById(R.id.history_sleep_right);
 		
-		setOneWeekLayout();
+		
 		
 		oneWeekFilter.setOnClickListener(getOneWeekFilterListener());
 		oneMonthFilter.setOnClickListener(getOneMonthFilterListener());
@@ -125,6 +125,7 @@ public class History extends Activity {
 		sleepAvg = (TextView) findViewById(R.id.history_sleep_average);
 		sleepMin = (TextView) findViewById(R.id.history_sleep_min);
 		sleepMax = (TextView) findViewById(R.id.history_sleep_max);
+		setOneWeekLayout();
 	}
 	
 	
@@ -213,10 +214,11 @@ public class History extends Activity {
 	
 	
 	public void setOneWeekLayout(){
-		changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.45, 0.3, 0.15);
+		changeByPercent(historyHrLeft,historyHrMid,historyHrRight,0.15, 0.5, 0.25);
 		changeByPercent(historyBpLeft,historyBpMid,historyBpRight,0.2, 0.5, 0.2);
 		changeByPercent(historyActLeft,historyActMid,historyActRight,0.3, 0.4, 0.2);
 		changeByPercent(historySleepLeft,historySleepMid,historySleepRight,0.13, 0.57, 0.2);
+		setHistoryDataOneWeek();
 	}
 	
 	
